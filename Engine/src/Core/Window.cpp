@@ -52,6 +52,8 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
 
     glfwSwapInterval(1);
 
+    while (true) {}
+
     while (!glfwWindowShouldClose(m_Window))
     {
         UpdateWindow(m_Window);

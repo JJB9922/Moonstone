@@ -1,6 +1,8 @@
 #ifndef CORE_H
 #define CORE_H
 
+#include "mspch.h"
+
 #define MS_ENABLE_ASSERTS
 
 #ifdef MS_ENABLE_ASSERTS

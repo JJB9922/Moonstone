@@ -1,7 +1,11 @@
 #ifndef MSPCH_H
 #define MSPCH_H
 
+#include <algorithm>
+#include <functional>
 #include <iostream>
-#include <memory.h>
+#include <memory>
+#include <string>
+#include <unordered_map>
 
 #endif // MSPCH_H

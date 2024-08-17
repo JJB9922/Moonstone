@@ -20,6 +20,10 @@ set(SRC_CORE_DIR ${CMAKE_SOURCE_DIR}/src/Core/)
 file(GLOB_RECURSE SRC_CORE_FILES
     "${SRC_CORE_DIR}/*.cpp"
     "${SRC_CORE_DIR}/Include/*.h"
+
+    "${SRC_CORE_DIR}/Events/*.cpp"
+    "${SRC_CORE_DIR}/Events/Include/*.h"
+
 )
 
 file(GLOB GLOBAL_FILES
@@ -36,6 +40,7 @@ add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})
 target_include_directories(Moonstone PUBLIC
     ${GLOBALS_DIR}
     ${SRC_CORE_DIR}
+    ${SRC_CORE_EVENTS_DIR}
     vendor/glfw
 )
 

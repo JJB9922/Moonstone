@@ -4,8 +4,6 @@
 #include "Core/Include/Core.h"
 #include "Core/Include/Window.h"
 
-#include <memory>
-
 namespace Moonstone
 {
 
