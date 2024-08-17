@@ -35,6 +35,12 @@ class EventManager : public IEventManager
         void Dispatch() override
         {
             ReportNumberOfEventListeners();
+
+            if (!m_Event)
+            {
+                MS_ERROR("no event/s found for the event manager to dispatch");
+                return;
+            }
             for (auto* listener : m_Listeners)
             {
                 listener->onEvent(m_Event);
@@ -44,7 +50,7 @@ class EventManager : public IEventManager
         void ReportNumberOfEventListeners()
         {
             std::stringstream ss;
-            ss << "dispatcher reported " << m_Listeners.size() << "listeners";
+            ss << "dispatcher reported " << m_Listeners.size() << " listeners";
             MS_INFO(ss.str());
         }
 

@@ -32,7 +32,7 @@ class EventListener : public IEventListener
         void LogOnEvent()
         {
             std::stringstream ss;
-            ss << "event triggered: " << m_Event->GetEventID() << '\n';
+            ss << "event triggered: " << m_Event->GetEventID();
             MS_INFO(ss.str());
         }
 

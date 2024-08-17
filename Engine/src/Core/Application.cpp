@@ -29,6 +29,8 @@ void Application::Run()
     std::shared_ptr<Event>         startupEvent  = std::make_shared<Event>("StartupEvent");
 
     eventListener->onEvent(startupEvent);
+    eventMgr->Dispatch();
+    eventListener->DetachEvent();
 
     // End Testing Event System
 
