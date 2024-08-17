@@ -37,6 +37,7 @@ class Window
 
     private:
         void        InitializeWindow(const WindowProperties &windowProperties);
+        void        SetupWindowCallbacks(GLFWwindow *window);
         void        TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
         void        UpdateWindow(GLFWwindow *window);

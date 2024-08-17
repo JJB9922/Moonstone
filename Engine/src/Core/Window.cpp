@@ -57,6 +57,10 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
         MS_ERROR("window initialization failed");
     }
 
+    glfwSetWindowUserPointer(m_Window, &m_WindowData);
+
+    SetupWindowCallbacks(m_Window);
+
     glfwMakeContextCurrent(m_Window);
 
     // TODO - Abstract for OpenGL and GLAD: gladLoadGL(glfwGetProcAddress);
@@ -71,6 +75,11 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     }
 
     TerminateWindow();
+}
+
+void Window::SetupWindowCallbacks(GLFWwindow *window)
+{
+    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {});
 }
 
 void Window::UpdateWindow(GLFWwindow *window)

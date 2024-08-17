@@ -9,4 +9,6 @@
 #include <string>
 #include <unordered_map>
 
+#include <typeindex>
+
 #endif // MSPCH_H
