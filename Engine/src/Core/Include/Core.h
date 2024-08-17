@@ -10,7 +10,9 @@
     {                                                                                              \
         if (!(x))                                                                                  \
         {                                                                                          \
-            std::cerr << "assert failed: " << __VA_ARGS__ << '\n';                                 \
+            std::stringstream ss;                                                                  \
+            ss << "assert failed: " << __VA_ARGS__ << '\n';                                        \
+            MS_ERROR(ss.str());                                                                    \
             __builtin_trap();                                                                      \
         }                                                                                          \
     }

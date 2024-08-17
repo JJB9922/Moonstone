@@ -6,6 +6,8 @@ namespace Moonstone
 namespace Core
 {
 
+std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
+
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
     , Width(Width)
@@ -28,12 +30,21 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     m_WindowData.windowProperties.Width  = windowProperties.Width;
     m_WindowData.windowProperties.Height = windowProperties.Height;
 
-    std::cout << "creating window" << '\n';
     glfwSetErrorCallback(ReportGLFWError);
 
     if (!glfwInit())
     {
-        std::cerr << "glfw initialisation failed" << '\n';
+        MS_ERROR("glfw initialization failed");
+    }
+
+    {
+        // Logging window details
+        std::stringstream ss;
+        ss << "creating window: " << m_WindowData.windowProperties.Title << " - "
+           << m_WindowData.windowProperties.Width << " x " << m_WindowData.windowProperties.Height
+           << '\n';
+
+        MS_INFO(ss.str());
     }
 
     m_Window = glfwCreateWindow((int) m_WindowData.windowProperties.Width,
@@ -43,7 +54,7 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
                                 nullptr);
     if (!m_Window)
     {
-        std::cerr << "window initialisation failed" << '\n';
+        MS_ERROR("window initialization failed");
     }
 
     glfwMakeContextCurrent(m_Window);
@@ -70,7 +81,9 @@ void Window::UpdateWindow(GLFWwindow *window)
 
 void Window::ReportGLFWError(int error, const char *description)
 {
-    std::cerr << "Error: " << description << '\n';
+    std::stringstream ss;
+    ss << "error: " << description << '\n';
+    MS_ERROR(ss.str());
 }
 
 void Window::TerminateWindow()

@@ -1,6 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "Core/Include/Logger.h"
 #include "mspch.h"
 #include <GLFW/glfw3.h>
 

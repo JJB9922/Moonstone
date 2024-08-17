@@ -4,11 +4,11 @@
 
 int main()
 {
-    auto logger = Moonstone::Core::CreateLoggerInstance();
-    auto app = Moonstone::Core::CreateApplicationInstance();
+    Moonstone::Core::Logger::Init();
+    MS_INFO("application started successfully");
 
+    auto app = Moonstone::Core::CreateApplicationInstance();
     app->Run();
 
     delete app;
-    delete logger;
 }
