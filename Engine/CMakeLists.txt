@@ -26,6 +26,9 @@ file(GLOB GLOBAL_FILES
     "${GLOBALS_DIR}/*.h"
 )
 
+# Add vendor subdirectories
+add_subdirectory(vendor/glfw)
+
 # Create the Moonstone library
 add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})
 
@@ -33,7 +36,11 @@ add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})
 target_include_directories(Moonstone PUBLIC
     ${GLOBALS_DIR}
     ${SRC_CORE_DIR}
+    vendor/glfw
 )
+
+# Link libraries to Moonstone
+target_link_libraries(Moonstone PUBLIC glfw)
 
 # Define the executable
 add_executable(MoonstoneApp "${SRC_CORE_DIR}/EntryPoint.cpp")

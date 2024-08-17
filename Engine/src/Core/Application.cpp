@@ -1,5 +1,5 @@
 #include "Include/Application.h"
-#include "Core/Include/Core.h"
+
 #include "mspch.h"
 
 namespace Moonstone
@@ -17,9 +17,15 @@ Application::Application()
     }
 
     s_ApplicationInstance = this;
+
+    m_Window = std::unique_ptr<Window>(Window::CreateWindow());
+    glfwMakeContextCurrent(m_Window);
 }
 
-void Application::Run() { std::cout << "Application has been run!" << '\n'; }
+void Application::Run()
+{
+    while (true) {}
+}
 
 Application* CreateApplicationInstance() { return new Application(); }
 

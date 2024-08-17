@@ -1,6 +1,11 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "Core/Include/Core.h"
+#include "Core/Include/Window.h"
+
+#include <memory>
+
 namespace Moonstone
 {
 
@@ -18,7 +23,8 @@ public:
     inline static Application& GetApplicationInstance() { return *s_ApplicationInstance; }
 
 private:
-    static Application* s_ApplicationInstance;
+    static Application*         s_ApplicationInstance;
+    std::unique_ptr<GLFWwindow> m_Window;
 };
 
 Application* CreateApplicationInstance();
