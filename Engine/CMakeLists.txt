@@ -32,6 +32,7 @@ file(GLOB GLOBAL_FILES
 
 # Add vendor subdirectories
 add_subdirectory(vendor/glfw)
+add_subdirectory(vendor/spdlog)
 
 # Create the Moonstone library
 add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})
@@ -42,10 +43,12 @@ target_include_directories(Moonstone PUBLIC
     ${SRC_CORE_DIR}
     ${SRC_CORE_EVENTS_DIR}
     vendor/glfw
+    vendor/spdlog
 )
 
 # Link libraries to Moonstone
 target_link_libraries(Moonstone PUBLIC glfw)
+target_link_libraries(Moonstone PRIVATE spdlog::spdlog)
 
 # Define the executable
 add_executable(MoonstoneApp "${SRC_CORE_DIR}/EntryPoint.cpp")

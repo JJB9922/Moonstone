@@ -1,12 +1,14 @@
 #include "mspch.h"
 
-#include "Include/Application.h"
+#include "Core/Include/Application.h"
 
 int main()
 {
-    std::cout << "Entry Point Hit" << '\n';
-
+    auto logger = Moonstone::Core::CreateLoggerInstance();
     auto app = Moonstone::Core::CreateApplicationInstance();
+
     app->Run();
+
     delete app;
+    delete logger;
 }
