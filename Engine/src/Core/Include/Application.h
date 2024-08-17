@@ -23,8 +23,8 @@ public:
     inline static Application& GetApplicationInstance() { return *s_ApplicationInstance; }
 
 private:
-    static Application*         s_ApplicationInstance;
-    std::unique_ptr<GLFWwindow> m_Window;
+    static Application*     s_ApplicationInstance;
+    std::unique_ptr<Window> m_Window;
 };
 
 Application* CreateApplicationInstance();

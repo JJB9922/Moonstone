@@ -45,6 +45,25 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     {
         std::cerr << "window initialisation failed" << '\n';
     }
+
+    glfwMakeContextCurrent(m_Window);
+
+    // TODO - Abstract for OpenGL and GLAD: gladLoadGL(glfwGetProcAddress);
+
+    glfwSwapInterval(1);
+
+    while (!glfwWindowShouldClose(m_Window))
+    {
+        UpdateWindow(m_Window);
+    }
+
+    TerminateWindow();
+}
+
+void Window::UpdateWindow(GLFWwindow *window)
+{
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 }
 
 void Window::ReportGLFWError(int error, const char *description)
@@ -58,6 +77,7 @@ void Window::TerminateWindow()
     {
         glfwDestroyWindow(m_Window);
     }
+
     glfwTerminate();
 }
 

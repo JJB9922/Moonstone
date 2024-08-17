@@ -19,7 +19,6 @@ Application::Application()
     s_ApplicationInstance = this;
 
     m_Window = std::unique_ptr<Window>(Window::CreateWindow());
-    glfwMakeContextCurrent(m_Window);
 }
 
 void Application::Run()

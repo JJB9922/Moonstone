@@ -38,6 +38,7 @@ class Window
         void        InitializeWindow(const WindowProperties &windowProperties);
         void        TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
+        void        UpdateWindow(GLFWwindow *window);
 
     private:
         WindowData  m_WindowData;
