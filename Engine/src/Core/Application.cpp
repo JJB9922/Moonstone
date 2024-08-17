@@ -1,5 +1,6 @@
 #include "Include/Application.h"
 
+#include "Core/Events/Include/EventListener.h"
 #include "mspch.h"
 
 namespace Moonstone
@@ -19,7 +20,20 @@ Application::Application()
     s_ApplicationInstance = this;
 }
 
-void Application::Run() { m_Window = std::unique_ptr<Window>(Window::CreateWindow()); }
+void Application::Run()
+{
+    // Testing Event System
+
+    std::unique_ptr<EventManager>  eventMgr      = std::make_unique<EventManager>();
+    std::unique_ptr<EventListener> eventListener = std::make_unique<EventListener>(*eventMgr);
+    std::shared_ptr<Event>         startupEvent  = std::make_shared<Event>("StartupEvent");
+
+    eventListener->onEvent(startupEvent);
+
+    // End Testing Event System
+
+    m_Window = std::unique_ptr<Window>(Window::CreateWindow());
+}
 
 Application* CreateApplicationInstance() { return new Application(); }
 
