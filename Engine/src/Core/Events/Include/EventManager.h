@@ -23,7 +23,7 @@ class IEventManager
 class EventManager : public IEventManager
 {
     public:
-        virtual ~EventManager() { MS_INFO("eventmanager destroyed"); }
+        virtual ~EventManager() = default;
 
         void AddListener(IEventListener* listener) override { m_Listeners.push_back(listener); }
         void RemoveListener(IEventListener* listener) override
@@ -36,14 +36,9 @@ class EventManager : public IEventManager
         {
             ReportNumberOfEventListeners();
 
-            if (!m_Event)
-            {
-                MS_ERROR("no event/s found for the event manager to dispatch");
-                return;
-            }
             for (auto* listener : m_Listeners)
             {
-                listener->onEvent(m_Event);
+                listener->onEvent();
             }
         }
 
@@ -56,7 +51,6 @@ class EventManager : public IEventManager
 
     private:
         std::vector<IEventListener*> m_Listeners;
-        std::shared_ptr<Event>       m_Event;
 };
 
 } // namespace Core

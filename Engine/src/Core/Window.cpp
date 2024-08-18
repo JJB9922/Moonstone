@@ -7,6 +7,7 @@ namespace Core
 {
 
 std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
+std::unique_ptr<EventManager>   eventMgr = std::make_unique<EventManager>();
 
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
@@ -70,22 +71,54 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     while (true) {}
 
     while (!glfwWindowShouldClose(m_Window))
+
     {
-        UpdateWindow(m_Window);
+        glfwSwapBuffers(m_Window);
+        glfwPollEvents();
     }
 
     TerminateWindow();
 }
 
-void Window::SetupWindowCallbacks(GLFWwindow *window)
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {});
+    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+        MS_INFO("KEY PRESSED");
 }
 
-void Window::UpdateWindow(GLFWwindow *window)
+void Window::SetupWindowCallbacks(GLFWwindow *window)
 {
-    glfwSwapBuffers(window);
-    glfwPollEvents();
+    glfwSetWindowCloseCallback(m_Window,
+                               [](GLFWwindow *window)
+                               {
+                                   std::shared_ptr<WindowCloseEvent> event
+                                       = std::make_shared<WindowCloseEvent>("WindowCloseEvent");
+
+                                   std::unique_ptr<EventListener<WindowCloseEvent>> eventListener
+                                       = std::make_unique<EventListener<WindowCloseEvent>>(*eventMgr,
+                                                                                           event);
+
+                                   eventMgr->Dispatch();
+                                   eventListener->DetachEvent();
+                               });
+
+    glfwSetWindowSizeCallback(
+        m_Window,
+        [](GLFWwindow *window, int width, int height)
+        {
+            WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
+
+            std::shared_ptr<WindowResizeEvent> event
+                = std::make_shared<WindowResizeEvent>("WindowCloseEvent",
+                                                      data.windowProperties.Width,
+                                                      data.windowProperties.Height);
+
+            std::unique_ptr<EventListener<WindowResizeEvent>> eventListener
+                = std::make_unique<EventListener<WindowResizeEvent>>(*eventMgr, event);
+
+            eventMgr->Dispatch();
+            eventListener->DetachEvent();
+        });
 }
 
 void Window::ReportGLFWError(int error, const char *description)

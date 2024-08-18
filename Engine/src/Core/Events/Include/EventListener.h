@@ -10,34 +10,41 @@ namespace Moonstone
 namespace Core
 {
 
+template<typename EventType>
 class EventListener : public IEventListener
 {
     public:
-        EventListener(EventManager& eventManager)
+        EventListener(EventManager& eventManager, std::shared_ptr<EventType> event)
             : m_EventManager(eventManager)
         {
+            this->m_Event = event;
             this->m_EventManager.AddListener(this);
         }
 
         virtual ~EventListener() = default;
 
-        void onEvent(std::shared_ptr<Event> event) override
+        void onEvent() override
         {
-            m_Event = event;
             LogOnEvent();
+            m_Event->Handled(true);
         }
 
-        void DetachEvent() { m_EventManager.RemoveListener(this); }
+        void DetachEvent()
+        {
+            m_Event = nullptr;
+            m_EventManager.RemoveListener(this);
+        }
 
         void LogOnEvent()
         {
+            std::string       eventID = m_Event->GetEventID();
             std::stringstream ss;
-            ss << "event triggered: " << m_Event->GetEventID();
+            ss << "event triggered: " << eventID;
             MS_INFO(ss.str());
         }
 
     private:
-        std::shared_ptr<Event> m_Event;
+        std::shared_ptr<EventType> m_Event;
         EventManager& m_EventManager;
 };
 

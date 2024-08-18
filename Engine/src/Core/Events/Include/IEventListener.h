@@ -2,7 +2,6 @@
 #define IEVENTLISTENER_H
 
 #include "Core/Events/Include/Event.h"
-#include "Core/Include/Core.h"
 
 namespace Moonstone
 {
@@ -14,7 +13,7 @@ class IEventListener
 {
     public:
         virtual ~IEventListener()                = default;
-        virtual void onEvent(std::shared_ptr<Event> event) = 0;
+        virtual void onEvent()                   = 0;
 };
 
 } // namespace Core

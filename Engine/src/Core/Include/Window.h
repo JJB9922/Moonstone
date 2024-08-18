@@ -1,6 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "Core/Events/Include/EventListener.h"
+#include "Core/Events/Include/WindowEvent.h"
 #include "Core/Include/Logger.h"
 #include "mspch.h"
 #include <GLFW/glfw3.h>
@@ -36,11 +38,10 @@ class Window
         static Window *CreateWindow(const WindowProperties &windowProperties = WindowProperties());
 
     private:
-        void        InitializeWindow(const WindowProperties &windowProperties);
-        void        SetupWindowCallbacks(GLFWwindow *window);
-        void        TerminateWindow();
+        inline void InitializeWindow(const WindowProperties &windowProperties);
+        inline void SetupWindowCallbacks(GLFWwindow *window);
+        inline void TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
-        void        UpdateWindow(GLFWwindow *window);
 
     private:
         WindowData  m_WindowData;

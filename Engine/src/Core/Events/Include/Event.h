@@ -22,15 +22,13 @@ namespace Core
 class Event
 {
     public:
-        Event(const std::string eventID)
-            : m_EventID(eventID)
-        {
-        }
-
         inline virtual std::string GetEventID() const { return m_EventID; }
+        inline virtual void        Handled(bool handled) { m_Handled = handled; }
+        inline virtual bool        IsHandled() const { return m_Handled; }
 
     private:
         std::string m_EventID;
+        bool        m_Handled;
 };
 
 } // namespace Core
