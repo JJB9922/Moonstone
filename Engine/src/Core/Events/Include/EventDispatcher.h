@@ -12,6 +12,12 @@ namespace Core
 class EventDispatcher
 {
     public:
+        static EventDispatcher& GetInstance()
+        {
+            static EventDispatcher instance;
+            return instance;
+        }
+
         using Callback = std::function<void(std::shared_ptr<Event>)>;
 
         void Subscribe(const std::type_index& eventType, Callback callback)
@@ -33,6 +39,11 @@ class EventDispatcher
                 }
             }
         }
+
+    private:
+        EventDispatcher();
+        EventDispatcher(const EventDispatcher&)            = delete;
+        EventDispatcher& operator=(const EventDispatcher&) = delete;
 
     private:
         std::unordered_map<std::type_index, std::vector<Callback>> m_Subscribers;

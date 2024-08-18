@@ -4,6 +4,7 @@
 #include "Core/Include/Logger.h"
 #include "Events/Include/EventQueue.h"
 #include "Events/Include/InputEvents.h"
+#include "Events/Include/WindowEvents.h"
 #include "mspch.h"
 #include <GLFW/glfw3.h>
 
@@ -42,11 +43,13 @@ class Window
         static void ReportGLFWError(int error, const char *description);
         void        InitializeWindow(const WindowProperties &windowProperties);
         void        SetupWindowCallbacks(GLFWwindow *window);
+        void        SetupInputCallbacks(GLFWwindow *window);
         void        SetupInitEvents();
 
     private:
         WindowData  m_WindowData;
-        GLFWwindow *m_Window;
+        GLFWwindow                 *m_Window;
+        std::vector<std::type_info> m_SubscribedWindowEvents;
 };
 
 } // namespace Core

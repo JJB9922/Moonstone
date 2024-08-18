@@ -12,10 +12,11 @@ namespace Core
 class EventQueue
 {
     public:
-        EventQueue(EventDispatcher& dispatcher)
-            : m_Dispatcher(dispatcher)
+        static EventQueue& GetInstance()
         {
-        }
+            static EventQueue instance(GetInstanceDispatcher());
+            return instance;
+        };
 
         void enqueue(std::shared_ptr<Event> event) { m_EventQueue.push(std::move(event)); }
         void process()
@@ -29,6 +30,15 @@ class EventQueue
         }
 
     private:
+        EventQueue(EventDispatcher& dispatcher)
+            : m_Dispatcher(dispatcher)
+        {
+        }
+        EventQueue(const EventQueue&)            = delete;
+        EventQueue& operator=(const EventQueue&) = delete;
+
+        static EventDispatcher& GetInstanceDispatcher() { return EventDispatcher::GetInstance(); }
+
         std::queue<std::shared_ptr<Event>> m_EventQueue;
         EventDispatcher&                   m_Dispatcher;
 };

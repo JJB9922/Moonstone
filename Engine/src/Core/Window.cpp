@@ -6,9 +6,9 @@ namespace Moonstone
 namespace Core
 {
 
-std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
-EventDispatcher                 dispatcher;
-EventQueue                      eventQueue(dispatcher);
+Moonstone::Core::EventDispatcher &eventDispatcher = Moonstone::Core::EventDispatcher::GetInstance();
+Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue::GetInstance();
+std::shared_ptr<spdlog::logger>   logger          = Logger::GetLoggerInstance();
 
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
@@ -63,6 +63,7 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     glfwMakeContextCurrent(m_Window);
 
     SetupWindowCallbacks(m_Window);
+    SetupInputCallbacks(m_Window);
     SetupInitEvents();
 
     // TODO - Abstract for OpenGL and GLAD: gladLoadGL(glfwGetProcAddress);
@@ -72,16 +73,14 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     while (!glfwWindowShouldClose(m_Window))
 
     {
-        eventQueue.process();
-
         glfwSwapBuffers(m_Window);
         glfwPollEvents();
-    }
 
-    TerminateWindow();
+        eventQueue.process();
+    }
 }
 
-void Window::SetupWindowCallbacks(GLFWwindow *window)
+void Window::SetupInputCallbacks(GLFWwindow *window)
 {
     glfwSetKeyCallback(m_Window,
                        [](GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -91,34 +90,48 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                            eventQueue->enqueue(event);
                        });
 
-    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window) {});
+    glfwSetMouseButtonCallback(m_Window,
+                               [](GLFWwindow *window, int button, int action, int mods)
+                               {
+                                   auto  event      = std::make_shared<MouseButtonPressEvent>(button, action);
+                                   auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                                   eventQueue->enqueue(event);
+                               });
 
-    glfwSetWindowSizeCallback(m_Window,
-                              [](GLFWwindow *window, int width, int height) {
+    glfwSetScrollCallback(m_Window,
+                          [](GLFWwindow *window, double xOffset, double yOffset)
+                          {
+                              auto  event      = std::make_shared<MouseScrollEvent>(xOffset, yOffset);
+                              auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                              eventQueue->enqueue(event);
+                          });
 
-                              });
+    glfwSetCursorPosCallback(m_Window,
+                             [](GLFWwindow *window, double xPosition, double yPosition)
+                             {
+                                 auto  event      = std::make_shared<MouseMoveEvent>(xPosition, yPosition);
+                                 auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                                 eventQueue->enqueue(event);
+                             });
 }
 
-void Window::SetupInitEvents()
+void Window::SetupWindowCallbacks(GLFWwindow *window)
 {
-    dispatcher.Subscribe(typeid(KeyPressEvent),
-                         [](std::shared_ptr<Event> event)
-                         {
-                             auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
-                             int  key      = keyEvent->GetKeyCode();
-                             int  action   = keyEvent->getAction();
+    glfwSetWindowCloseCallback(m_Window,
+                               [](GLFWwindow *window)
+                               {
+                                   auto  event      = std::make_shared<WindowCloseEvent>();
+                                   auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                                   eventQueue->enqueue(event);
+                               });
 
-                             switch (action)
-                             {
-                                 case GLFW_PRESS:
-                                     MS_DEBUG("key pressed");
-                                     break;
-                                 case GLFW_RELEASE:
-                                     break;
-                                 case GLFW_REPEAT:
-                                     break;
-                             }
-                         });
+    glfwSetWindowSizeCallback(m_Window,
+                              [](GLFWwindow *window, int width, int height)
+                              {
+                                  auto  event      = std::make_shared<WindowResizeEvent>(width, height);
+                                  auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                                  eventQueue->enqueue(event);
+                              });
 }
 
 void Window::ReportGLFWError(int error, const char *description)
@@ -130,12 +143,116 @@ void Window::ReportGLFWError(int error, const char *description)
 
 void Window::TerminateWindow()
 {
+    for (auto &event : m_SubscribedWindowEvents)
+    {
+        eventDispatcher.Unsubscribe(event);
+    }
+
     if (m_Window)
     {
         glfwDestroyWindow(m_Window);
     }
 
     glfwTerminate();
+}
+
+void Window::SetupInitEvents()
+{
+    eventDispatcher.Subscribe(typeid(KeyPressEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
+                                  int  key      = keyEvent->GetKeyCode();
+                                  int  action   = keyEvent->GetAction();
+
+                                  std::stringstream ss;
+                                  ss << "key press event: " << action << " - " << key;
+
+                                  switch (action)
+                                  {
+                                      case GLFW_PRESS:
+                                          MS_DEBUG(ss.str());
+                                          break;
+                                      case GLFW_RELEASE:
+                                          MS_DEBUG(ss.str());
+                                          break;
+                                      case GLFW_REPEAT:
+                                          MS_DEBUG(ss.str());
+                                          break;
+                                  }
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(KeyPressEvent));
+
+    eventDispatcher.Subscribe(typeid(MouseButtonPressEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto btnEvent = std::static_pointer_cast<MouseButtonPressEvent>(event);
+                                  int  btn      = btnEvent->GetButton();
+                                  int  action   = btnEvent->GetAction();
+
+                                  std::stringstream ss;
+                                  ss << "mouse button press event: " << action << " - " << btn;
+
+                                  switch (action)
+                                  {
+                                      case GLFW_PRESS:
+                                          MS_DEBUG(ss.str());
+                                          break;
+                                      case GLFW_RELEASE:
+                                          MS_DEBUG(ss.str());
+                                          break;
+                                  }
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(MouseButtonPressEvent));
+
+    eventDispatcher.Subscribe(typeid(MouseScrollEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto scrollEvent = std::static_pointer_cast<MouseScrollEvent>(event);
+                                  int  xOffset     = scrollEvent->GetXOffset();
+                                  int  yOffset     = scrollEvent->GetYOffset();
+
+                                  std::stringstream ss;
+                                  ss << "mouse scroll event: " << "x " << xOffset << " / y " << yOffset;
+                                  MS_DEBUG(ss.str());
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(MouseScrollEvent));
+
+    eventDispatcher.Subscribe(typeid(MouseMoveEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto   moveEvent = std::static_pointer_cast<MouseMoveEvent>(event);
+                                  double xPosition = moveEvent->GetXPosition();
+                                  double yPosition = moveEvent->GetYPosition();
+
+                                  std::stringstream ss;
+                                  ss << "mouse move event: " << "x " << xPosition << " / y " << yPosition;
+                                  MS_LOUD_DEBUG(ss.str());
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(MouseMoveEvent));
+
+    eventDispatcher.Subscribe(typeid(WindowCloseEvent),
+                              [](std::shared_ptr<Event> event) { MS_DEBUG("window close event"); });
+
+    m_SubscribedWindowEvents.push_back(typeid(WindowCloseEvent));
+
+    eventDispatcher.Subscribe(typeid(WindowResizeEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto resizeEvent = std::static_pointer_cast<WindowResizeEvent>(event);
+                                  int  width       = resizeEvent->GetWidth();
+                                  int  height      = resizeEvent->GetHeight();
+
+                                  std::stringstream ss;
+                                  ss << "window resize event: " << width << " x " << height;
+                                  MS_DEBUG(ss.str());
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(WindowResizeEvent));
 }
 
 } // namespace Core
