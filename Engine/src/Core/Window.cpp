@@ -132,6 +132,22 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                                   auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
                                   eventQueue->enqueue(event);
                               });
+
+    glfwSetWindowIconifyCallback(m_Window,
+                                 [](GLFWwindow *window, int minimized)
+                                 {
+                                     auto  event      = std::make_shared<WindowMinimizeEvent>(minimized);
+                                     auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                                     eventQueue->enqueue(event);
+                                 });
+
+    glfwSetWindowFocusCallback(m_Window,
+                               [](GLFWwindow *window, int focused)
+                               {
+                                   auto  event      = std::make_shared<WindowFocusEvent>(focused);
+                                   auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                                   eventQueue->enqueue(event);
+                               });
 }
 
 void Window::ReportGLFWError(int error, const char *description)
@@ -253,6 +269,32 @@ void Window::SetupInitEvents()
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowResizeEvent));
+
+    eventDispatcher.Subscribe(typeid(WindowMinimizeEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto minimizeEvent = std::static_pointer_cast<WindowMinimizeEvent>(event);
+                                  int  minimized     = minimizeEvent->IsMinimized();
+
+                                  std::stringstream ss;
+                                  ss << "window minimize event: " << minimized;
+                                  MS_DEBUG(ss.str());
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(WindowMinimizeEvent));
+
+    eventDispatcher.Subscribe(typeid(WindowFocusEvent),
+                              [](std::shared_ptr<Event> event)
+                              {
+                                  auto focusEvent = std::static_pointer_cast<WindowFocusEvent>(event);
+                                  int  focused    = focusEvent->IsFocused();
+
+                                  std::stringstream ss;
+                                  ss << "window focus event: " << focused;
+                                  MS_DEBUG(ss.str());
+                              });
+
+    m_SubscribedWindowEvents.push_back(typeid(WindowFocusEvent));
 }
 
 } // namespace Core
