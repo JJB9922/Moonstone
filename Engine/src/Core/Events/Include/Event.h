@@ -3,16 +3,6 @@
 
 #include "Core/Include/Core.h"
 
-/**
- *
- * Event system built using the Observer design pattern
- * 
- * Event Instances = Event
- * Observer = Subscriber = EventListener
- * Subject = Publisher = EventManager
- *
- */
-
 namespace Moonstone
 {
 
@@ -22,13 +12,11 @@ namespace Core
 class Event
 {
     public:
-        inline virtual std::string GetEventID() const { return m_EventID; }
-        inline virtual void        Handled(bool handled) { m_Handled = handled; }
-        inline virtual bool        IsHandled() const { return m_Handled; }
+        virtual ~Event() = default;
 
-    private:
-        std::string m_EventID;
-        bool        m_Handled;
+        virtual std::type_index GetEventType() const = 0;
+
+        static std::size_t HashId(const std::string& name) { return std::hash<std::string>{}(name); }
 };
 
 } // namespace Core

@@ -7,7 +7,8 @@ namespace Core
 {
 
 std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
-std::unique_ptr<EventManager>   eventMgr = std::make_unique<EventManager>();
+EventDispatcher                 dispatcher;
+EventQueue                      eventQueue(dispatcher);
 
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
@@ -58,21 +59,21 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
         MS_ERROR("window initialization failed");
     }
 
-    glfwSetWindowUserPointer(m_Window, &m_WindowData);
+    glfwSetWindowUserPointer(m_Window, &eventQueue);
+    glfwMakeContextCurrent(m_Window);
 
     SetupWindowCallbacks(m_Window);
-
-    glfwMakeContextCurrent(m_Window);
+    SetupInitEvents();
 
     // TODO - Abstract for OpenGL and GLAD: gladLoadGL(glfwGetProcAddress);
 
     glfwSwapInterval(1);
 
-    while (true) {}
-
     while (!glfwWindowShouldClose(m_Window))
 
     {
+        eventQueue.process();
+
         glfwSwapBuffers(m_Window);
         glfwPollEvents();
     }
@@ -80,45 +81,44 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     TerminateWindow();
 }
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_E && action == GLFW_PRESS)
-        MS_INFO("KEY PRESSED");
-}
-
 void Window::SetupWindowCallbacks(GLFWwindow *window)
 {
-    glfwSetWindowCloseCallback(m_Window,
-                               [](GLFWwindow *window)
-                               {
-                                   std::shared_ptr<WindowCloseEvent> event
-                                       = std::make_shared<WindowCloseEvent>("WindowCloseEvent");
+    glfwSetKeyCallback(m_Window,
+                       [](GLFWwindow *window, int key, int scancode, int action, int mods)
+                       {
+                           auto  event      = std::make_shared<KeyPressEvent>(key, action);
+                           auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
+                           eventQueue->enqueue(event);
+                       });
 
-                                   std::unique_ptr<EventListener<WindowCloseEvent>> eventListener
-                                       = std::make_unique<EventListener<WindowCloseEvent>>(*eventMgr,
-                                                                                           event);
+    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window) {});
 
-                                   eventMgr->Dispatch();
-                                   eventListener->DetachEvent();
-                               });
+    glfwSetWindowSizeCallback(m_Window,
+                              [](GLFWwindow *window, int width, int height) {
 
-    glfwSetWindowSizeCallback(
-        m_Window,
-        [](GLFWwindow *window, int width, int height)
-        {
-            WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
+                              });
+}
 
-            std::shared_ptr<WindowResizeEvent> event
-                = std::make_shared<WindowResizeEvent>("WindowCloseEvent",
-                                                      data.windowProperties.Width,
-                                                      data.windowProperties.Height);
+void Window::SetupInitEvents()
+{
+    dispatcher.Subscribe(typeid(KeyPressEvent),
+                         [](std::shared_ptr<Event> event)
+                         {
+                             auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
+                             int  key      = keyEvent->GetKeyCode();
+                             int  action   = keyEvent->getAction();
 
-            std::unique_ptr<EventListener<WindowResizeEvent>> eventListener
-                = std::make_unique<EventListener<WindowResizeEvent>>(*eventMgr, event);
-
-            eventMgr->Dispatch();
-            eventListener->DetachEvent();
-        });
+                             switch (action)
+                             {
+                                 case GLFW_PRESS:
+                                     MS_DEBUG("key pressed");
+                                     break;
+                                 case GLFW_RELEASE:
+                                     break;
+                                 case GLFW_REPEAT:
+                                     break;
+                             }
+                         });
 }
 
 void Window::ReportGLFWError(int error, const char *description)

@@ -5,10 +5,10 @@
 #include <functional>
 #include <iostream>
 #include <memory>
+#include <queue>
 #include <sstream>
 #include <string>
-#include <unordered_map>
-
 #include <typeindex>
+#include <unordered_map>
 
 #endif // MSPCH_H
