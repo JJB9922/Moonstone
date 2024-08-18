@@ -2,6 +2,7 @@
 #define EVENTDISPATCHER_H
 
 #include "Core/Events/Include/Event.h"
+#include "Core/Include/Logger.h"
 
 namespace Moonstone
 {
@@ -25,7 +26,14 @@ class EventDispatcher
             m_Subscribers[eventType].push_back(std::move(callback));
         }
 
-        void Unsubscribe(const std::type_index& eventType) { m_Subscribers.erase(eventType); }
+        void Unsubscribe(const std::type_index& eventType)
+        {
+            std::stringstream ss;
+            ss << "unsubscribing " << eventType.name();
+
+            MS_DEBUG(ss.str());
+            m_Subscribers.erase(eventType);
+        }
 
         void Dispatch(std::shared_ptr<Event> event) const
         {

@@ -48,8 +48,8 @@ class Window
 
     private:
         WindowData  m_WindowData;
-        GLFWwindow                 *m_Window;
-        std::vector<std::type_info> m_SubscribedWindowEvents;
+        GLFWwindow                  *m_Window;
+        std::vector<std::type_index> m_SubscribedWindowEvents;
 };
 
 } // namespace Core
