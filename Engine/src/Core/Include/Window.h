@@ -3,12 +3,12 @@
 
 #include "Core/Include/LayerStack.h"
 #include "Core/Include/Logger.h"
+#include "Core/Layers/Include/BaseLayers.h"
 #include "Events/Include/EventQueue.h"
 #include "Events/Include/InputEvents.h"
 #include "Events/Include/WindowEvents.h"
 #include "Tools/ImGui/Include/ImGuiLayer.h"
 #include "mspch.h"
-#include <GLFW/glfw3.h>
 
 namespace Moonstone
 {
@@ -45,15 +45,6 @@ class Window
         void PushOverlay(Layer *overlay);
         void PopOverlay(Layer *overlay);
 
-        static GLFWwindow *GetMainWindow()
-        {
-            if (s_MainWindow)
-            {
-                return s_MainWindow->m_Window;
-            }
-            return nullptr;
-        }
-
     private:
         inline void TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
@@ -72,7 +63,6 @@ class Window
         Tools::ImGuiLayer           *m_ImGuiLayer;
         WindowData                   m_WindowData;
         GLFWwindow                  *m_Window;
-        static Window               *s_MainWindow;
         std::vector<std::type_index> m_SubscribedWindowEvents;
 };
 

@@ -1,6 +1,5 @@
 #include "Include/ImGuiLayer.h"
 
-#include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
@@ -14,11 +13,20 @@ namespace Tools
 
 ImGuiLayer::ImGuiLayer()
     : Layer("ImGuiLayer")
+    , m_Window(nullptr)
 {
 }
 
+void ImGuiLayer::SetWindow(GLFWwindow* window) { m_Window = window; }
+
 void ImGuiLayer::OnAttach()
 {
+    if (!m_Window)
+    {
+        MS_ERROR("imgui cannot get the glfw window");
+        return;
+    }
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
@@ -29,12 +37,10 @@ void ImGuiLayer::OnAttach()
 
     ImGui::StyleColorsClassic();
 
-    GLFWwindow* window = static_cast<GLFWwindow*>(Core::Window::GetMainWindow());
-
     // ToDo: Abstract this out for Vulks
 
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 460");
+    ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+    ImGui_ImplOpenGL3_Init("#version 430");
 }
 
 void ImGuiLayer::OnDetach()
@@ -49,9 +55,6 @@ void ImGuiLayer::Start()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-
-    // ToDo: Probably remove this
-    ImGui::ShowDebugLogWindow();
 }
 
 void ImGuiLayer::End()

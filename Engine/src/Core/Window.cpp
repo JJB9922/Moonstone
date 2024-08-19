@@ -10,8 +10,6 @@ Moonstone::Core::EventDispatcher &eventDispatcher = Moonstone::Core::EventDispat
 Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue::GetInstance();
 std::shared_ptr<spdlog::logger>   logger          = Logger::GetLoggerInstance();
 
-Window *Window::s_MainWindow = nullptr;
-
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
     , Width(Width)
@@ -24,12 +22,6 @@ Window *Window::CreateWindow(const WindowProperties &windowProperties) { return 
 Window::Window(const WindowProperties &windowProperties)
 {
     InitializeWindow(windowProperties);
-
-    if (!s_MainWindow)
-    {
-        s_MainWindow = this;
-    }
-
     StartWindow();
 }
 
@@ -70,7 +62,12 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     if (!glfwInit())
     {
         MS_ERROR("glfw initialization failed");
+        return;
     }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); // Change to match your GL version
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     {
         // Logging window details
@@ -90,18 +87,21 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     if (!m_Window)
     {
         MS_ERROR("window initialization failed");
+        glfwTerminate();
+        return;
     }
-
-    InitializeImGui();
 
     glfwSetWindowUserPointer(m_Window, &eventQueue);
     glfwMakeContextCurrent(m_Window);
 
+    SetupInitEvents();
     SetupWindowCallbacks(m_Window);
     SetupInputCallbacks(m_Window);
-    SetupInitEvents();
 
-    // TODO - Abstract for OpenGL and GLAD: gladLoadGL(glfwGetProcAddress);
+    InitializeImGui();
+
+    // TODO - Abstract for OpenGL and GLAD:
+    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
     glfwSwapInterval(1);
 }
@@ -109,7 +109,10 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
 void Window::InitializeImGui()
 {
     m_ImGuiLayer = new Tools::ImGuiLayer();
+    m_ImGuiLayer->SetWindow(m_Window);
     PushOverlay(m_ImGuiLayer);
+
+    PushLayer(new ExampleLayer);
 }
 
 void Window::SetupInputCallbacks(GLFWwindow *window)

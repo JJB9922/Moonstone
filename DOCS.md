@@ -211,3 +211,54 @@ for (auto &event : m_SubscribedWindowEvents)
 Alternatively, this can be done manually with `eventDispatcher.Unsubscribe(typeid(KeyPressEvent));`
 
 At the moment, the event bus just unsubscribes anything and everything with the provided type id - this is fine for now, but might need to be changed later if more granular event management is required.
+
+# ImGui
+
+ImGui makes use of a custom layer system set up for UI elements within Moonstone.
+
+Adding a new ImGui layer is simple. In `Core/Layers/Include`, find or create the layer category you're adding. In this example, I'll add a simple text panel - so I'll pick the existing `BaseLayers.h` file.
+
+Within this file, create a new class that inherits Layer. This class will contain 3 things:
+- A constructor that initialises with the layer name.
+- An `OnUpdate()` function.
+- An `OnImGuiRender()` function that implements your UI.
+
+For example:
+
+```BaseLayers.h
+
+class ExampleLayer : public Layer 
+{
+	public:
+        ExampleLayer()
+            : Layer("Example")
+        {
+        }
+
+        void OnUpdate() override {}
+
+        virtual void OnImGuiRender() override
+        {
+            ImGui::Begin("Moonstone");
+            ImGui::Text("Moonstone");
+            ImGui::End();
+        };
+}
+
+```
+
+That's it - now just push your layer with PushLayer(new {Layer}). Where you decide to do this isn't too important, as long as the order of the program is logical, i.e. not trying to push layers before the layer stack is initialised etc. In this example, I will push the layer at the end of the `InitializeImGui` function in the `Window` class, since I want it to appear as soon as the window is initialised.
+
+```Window.cpp
+
+void Window::InitializeImGui()
+{
+    m_ImGuiLayer = new Tools::ImGuiLayer();
+    m_ImGuiLayer->SetWindow(m_Window);
+    PushOverlay(m_ImGuiLayer);
+
+    PushLayer(new ExampleLayer);
+}
+
+```
+

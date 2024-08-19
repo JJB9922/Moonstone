@@ -25,6 +25,9 @@ file(GLOB_RECURSE SRC_CORE_FILES
     "${SRC_CORE_DIR}/Events/*.cpp"
     "${SRC_CORE_DIR}/Events/Include/*.h"
 
+    "${SRC_CORE_DIR}/Layers/*.cpp"
+    "${SRC_CORE_DIR}/Layers/Include/*.h"
+
     "${SRC_TOOLS_DIR}/*/*.cpp"
     "${SRC_TOOLS_DIR}/*/Include/*h"
 )
@@ -41,9 +44,11 @@ add_subdirectory(vendor/glad)
 # Static libraries
 # ImGui
 set (IMGUI_PATH "vendor/imgui")
+include_directories(${CMAKE_SOURCE_DIR}/vendor/imgui)
 
 file(GLOB IMGUI_SOURCES
-    ${IMGUI_PATH}/*.cpp ${IMGUI_PATH}/*.h
+    ${IMGUI_PATH}/*.cpp a
+    ${IMGUI_PATH}/*.h
 
     ${IMGUI_PATH}/backends/imgui_impl_glfw.h
     ${IMGUI_PATH}/backends/imgui_impl_glfw.cpp
@@ -66,8 +71,8 @@ target_include_directories(Moonstone PUBLIC
     ${SRC_CORE_EVENTS_DIR}
     ${SRC_TOOLS_DIR}
     vendor/glfw
-    vendor/spdlog
-    vendor/glad
+    vendor/spdlog/include
+    vendor/glad/include
 )
 
 # Link libraries to Moonstone
