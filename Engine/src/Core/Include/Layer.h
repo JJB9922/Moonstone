@@ -21,8 +21,6 @@ class Layer
         virtual void OnUpdate() {}
         virtual void OnImGuiRender() {}
 
-        virtual void OnEvent(Event &event) {}
-
         inline const std::string &GetLayerName() const { return m_LayerName; }
 
     private:

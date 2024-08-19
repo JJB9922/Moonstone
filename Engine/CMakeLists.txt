@@ -36,6 +36,25 @@ file(GLOB GLOBAL_FILES
 # Add vendor subdirectories
 add_subdirectory(vendor/glfw)
 add_subdirectory(vendor/spdlog)
+add_subdirectory(vendor/glad)
+
+# Static libraries
+# ImGui
+set (IMGUI_PATH "vendor/imgui")
+
+file(GLOB IMGUI_SOURCES
+    ${IMGUI_PATH}/*.cpp ${IMGUI_PATH}/*.h
+
+    ${IMGUI_PATH}/backends/imgui_impl_glfw.h
+    ${IMGUI_PATH}/backends/imgui_impl_glfw.cpp
+    ${IMGUI_PATH}/backends/imgui_impl_opengl3.h
+    ${IMGUI_PATH}/backends/imgui_impl_opengl3.cpp
+    ${IMGUI_PATH}/backends/imgui_impl_vulkan.h
+    ${IMGUI_PATH}/backends/imgui_impl_vulkan.cpp
+)
+
+add_library("ImGui" STATIC ${IMGUI_SOURCES})
+target_include_directories("ImGui" PUBLIC ${IMGUI_PATH} ${IMGUI_PATH}/backends)
 
 # Create the Moonstone library
 add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})
@@ -48,11 +67,11 @@ target_include_directories(Moonstone PUBLIC
     ${SRC_TOOLS_DIR}
     vendor/glfw
     vendor/spdlog
+    vendor/glad
 )
 
 # Link libraries to Moonstone
-target_link_libraries(Moonstone PUBLIC glfw)
-target_link_libraries(Moonstone PRIVATE spdlog::spdlog)
+target_link_libraries(Moonstone PRIVATE glfw ImGui spdlog::spdlog glad)
 
 # Define the executable
 add_executable(MoonstoneApp "${SRC_CORE_DIR}/EntryPoint.cpp")

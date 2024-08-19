@@ -10,6 +10,8 @@ Moonstone::Core::EventDispatcher &eventDispatcher = Moonstone::Core::EventDispat
 Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue::GetInstance();
 std::shared_ptr<spdlog::logger>   logger          = Logger::GetLoggerInstance();
 
+Window *Window::s_MainWindow = nullptr;
+
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
     , Width(Width)
@@ -17,14 +19,45 @@ WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsi
 {
 }
 
-Window *Window::CreateWindow(const WindowProperties &windowProperties)
+Window *Window::CreateWindow(const WindowProperties &windowProperties) { return new Window(windowProperties); }
+
+Window::Window(const WindowProperties &windowProperties)
 {
-    return new Window(windowProperties);
+    InitializeWindow(windowProperties);
+
+    if (!s_MainWindow)
+    {
+        s_MainWindow = this;
+    }
+
+    StartWindow();
 }
 
-Window::Window(const WindowProperties &windowProperties) { InitializeWindow(windowProperties); }
-
 Window::~Window() { TerminateWindow(); }
+
+void Window::StartWindow()
+{
+    while (!glfwWindowShouldClose(m_Window))
+
+    {
+        glfwSwapBuffers(m_Window);
+        glfwPollEvents();
+
+        for (Layer *layer : m_LayerStack)
+        {
+            layer->OnUpdate();
+        }
+
+        m_ImGuiLayer->Start();
+        for (Layer *layer : m_LayerStack)
+        {
+            layer->OnImGuiRender();
+        }
+        m_ImGuiLayer->End();
+
+        eventQueue.process();
+    }
+}
 
 void Window::InitializeWindow(const WindowProperties &windowProperties)
 {
@@ -59,6 +92,8 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
         MS_ERROR("window initialization failed");
     }
 
+    InitializeImGui();
+
     glfwSetWindowUserPointer(m_Window, &eventQueue);
     glfwMakeContextCurrent(m_Window);
 
@@ -69,15 +104,12 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     // TODO - Abstract for OpenGL and GLAD: gladLoadGL(glfwGetProcAddress);
 
     glfwSwapInterval(1);
+}
 
-    while (!glfwWindowShouldClose(m_Window))
-
-    {
-        glfwSwapBuffers(m_Window);
-        glfwPollEvents();
-
-        eventQueue.process();
-    }
+void Window::InitializeImGui()
+{
+    m_ImGuiLayer = new Tools::ImGuiLayer();
+    PushOverlay(m_ImGuiLayer);
 }
 
 void Window::SetupInputCallbacks(GLFWwindow *window)
@@ -296,6 +328,22 @@ void Window::SetupInitEvents()
 
     m_SubscribedWindowEvents.push_back(typeid(WindowFocusEvent));
 }
+
+void Window::PushLayer(Layer *layer)
+{
+    m_LayerStack.PushLayer(layer);
+    layer->OnAttach();
+}
+
+void Window::PopLayer(Layer *layer) { m_LayerStack.PopLayer(layer); }
+
+void Window::PushOverlay(Layer *layer)
+{
+    m_LayerStack.PushOverlay(layer);
+    layer->OnAttach();
+}
+
+void Window::PopOverlay(Layer *overlay) { m_LayerStack.PopOverlay(overlay); }
 
 } // namespace Core
 

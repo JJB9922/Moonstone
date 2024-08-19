@@ -23,7 +23,6 @@ public:
 
 private:
     static Application*     s_ApplicationInstance;
-    std::unique_ptr<Window> m_Window;
 };
 
 Application* CreateApplicationInstance();

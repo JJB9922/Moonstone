@@ -7,3 +7,6 @@
 [submodule "Engine/vendor/imgui"]
 	path = Engine/vendor/imgui
 	url = https://github.com/ocornut/imgui.git
+	branch = docking
+[submodule "vendor/imgui"]
+	branch = docking

@@ -1,10 +1,12 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "Core/Include/LayerStack.h"
 #include "Core/Include/Logger.h"
 #include "Events/Include/EventQueue.h"
 #include "Events/Include/InputEvents.h"
 #include "Events/Include/WindowEvents.h"
+#include "Tools/ImGui/Include/ImGuiLayer.h"
 #include "mspch.h"
 #include <GLFW/glfw3.h>
 
@@ -38,17 +40,39 @@ class Window
 
         static Window *CreateWindow(const WindowProperties &windowProperties = WindowProperties());
 
+        void PushLayer(Layer *layer);
+        void PopLayer(Layer *layer);
+        void PushOverlay(Layer *overlay);
+        void PopOverlay(Layer *overlay);
+
+        static GLFWwindow *GetMainWindow()
+        {
+            if (s_MainWindow)
+            {
+                return s_MainWindow->m_Window;
+            }
+            return nullptr;
+        }
+
     private:
         inline void TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
-        void        InitializeWindow(const WindowProperties &windowProperties);
+
+        void InitializeWindow(const WindowProperties &windowProperties);
+        void InitializeImGui();
+
+        void StartWindow();
+
         void        SetupWindowCallbacks(GLFWwindow *window);
         void        SetupInputCallbacks(GLFWwindow *window);
         void        SetupInitEvents();
 
     private:
-        WindowData  m_WindowData;
+        LayerStack                   m_LayerStack;
+        Tools::ImGuiLayer           *m_ImGuiLayer;
+        WindowData                   m_WindowData;
         GLFWwindow                  *m_Window;
+        static Window               *s_MainWindow;
         std::vector<std::type_index> m_SubscribedWindowEvents;
 };
 

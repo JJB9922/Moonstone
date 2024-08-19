@@ -18,7 +18,7 @@ Application::Application()
     s_ApplicationInstance = this;
 }
 
-void Application::Run() { m_Window = std::unique_ptr<Window>(Window::CreateWindow()); }
+void Application::Run() { Window::CreateWindow(); }
 
 Application* CreateApplicationInstance() { return new Application(); }
 
