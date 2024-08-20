@@ -417,6 +417,8 @@ void Window::SetupInitEvents()
                                   int  width       = resizeEvent->GetWidth();
                                   int  height      = resizeEvent->GetHeight();
 
+                                  // ToDo : Don't forget this abstraction
+                                  glViewport(0, 0, width, height);
                                   MS_DEBUG("window resize event: {0}x{1}", width, height);
                               });
 
