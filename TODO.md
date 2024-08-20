@@ -14,7 +14,7 @@
 
 **Windowing System**
 
-- [x] Implement cross-platform window creation (using GLFW, SDL, or WinAPI).
+- [x] Implement cross-platform window creation (using GLFW).
 - [x] Set up basic window events (resize, close, focus).
 
 **Event System**
@@ -41,13 +41,13 @@
 
 **Graphics Initialization**
 
-- [ ] Set up a graphics API (OpenGL, Vulkan, DirectX).
+- [ ] Set up a graphics API (OpenGL, Vulkam).
 
 - [ ] Create a rendering context and initialize the API.
 
 **Basic 2D/3D Rendering**
 
-- [ ] Implement a basic rendering pipeline.
+- [ ] a basic rendering pipeline.
 
 - [ ] Create a system for rendering 2D sprites and simple 3D objects.
 
