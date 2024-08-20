@@ -4,6 +4,9 @@
 #include "Core/Include/Logger.h"
 #include "mspch.h"
 
+#define MS_OPENGL
+//#define MS_VULKAN
+
 #define MS_ENABLE_ASSERTS
 
 #ifdef MS_ENABLE_ASSERTS
