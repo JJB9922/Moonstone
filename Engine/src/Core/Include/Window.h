@@ -9,6 +9,7 @@
 #include "Events/Include/WindowEvents.h"
 #include "Renderer/Include/GraphicsContext.h"
 #include "Renderer/Include/GraphicsContextRouter.h"
+#include "Renderer/Include/RendererCommand.h"
 #include "Tools/ImGui/Include/ImGuiLayer.h"
 #include "mspch.h"
 
@@ -73,7 +74,7 @@ class Window
         GLFWwindow                  *m_Window;
         std::vector<std::type_index> m_SubscribedWindowEvents;
         Renderer::GraphicsContext   *m_GraphicsContext;
-        GLColor                      m_WindowColor;
+        glm::vec4                    m_WindowColor;
 };
 
 } // namespace Core

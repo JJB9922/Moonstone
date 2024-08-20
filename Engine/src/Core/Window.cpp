@@ -41,8 +41,8 @@ void Window::StartWindow()
     while (!glfwWindowShouldClose(m_Window))
 
     {
-        glClearColor(m_WindowColor.r, m_WindowColor.g, m_WindowColor.b, m_WindowColor.a);
-        glClear(GL_COLOR_BUFFER_BIT);
+        Renderer::RendererCommand::ClearColor(m_WindowColor);
+        Renderer::RendererCommand::Clear();
 
         RenderLayers();
 

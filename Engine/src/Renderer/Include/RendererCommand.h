@@ -12,7 +12,9 @@ namespace Renderer
 class RendererCommand
 {
     public:
-        RendererCommand();
+        inline static void ClearColor(const glm::vec4 &color) { s_RendererAPI->ClearColor(color); }
+
+        inline static void Clear() { s_RendererAPI->Clear(); }
 
     private:
         static RendererAPI *s_RendererAPI;
