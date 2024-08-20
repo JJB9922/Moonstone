@@ -21,37 +21,49 @@ Window *Window::CreateWindow(const WindowProperties &windowProperties) { return 
 
 Window::Window(const WindowProperties &windowProperties)
 {
-    InitializeWindow(windowProperties);
+    bool success = InitializeWindow(windowProperties);
+    if (!success)
+    {
+        MS_ERROR("could not initialize window");
+        TerminateWindow();
+        return;
+    }
+
     StartWindow();
 }
 
-Window::~Window() { TerminateWindow(); }
+Window::~Window() { glfwTerminate(); }
 
 void Window::StartWindow()
 {
     while (!glfwWindowShouldClose(m_Window))
 
     {
+        RenderLayers();
+
         glfwSwapBuffers(m_Window);
         glfwPollEvents();
-
-        for (Layer *layer : m_LayerStack)
-        {
-            layer->OnUpdate();
-        }
-
-        m_ImGuiLayer->Start();
-        for (Layer *layer : m_LayerStack)
-        {
-            layer->OnImGuiRender();
-        }
-        m_ImGuiLayer->End();
 
         eventQueue.process();
     }
 }
 
-void Window::InitializeWindow(const WindowProperties &windowProperties)
+void Window::RenderLayers()
+{
+    for (Layer *layer : m_LayerStack)
+    {
+        layer->OnUpdate();
+    }
+
+    m_ImGuiLayer->Start();
+    for (Layer *layer : m_LayerStack)
+    {
+        layer->OnImGuiRender();
+    }
+    m_ImGuiLayer->End();
+}
+
+bool Window::InitializeWindow(const WindowProperties &windowProperties)
 {
     m_WindowData.windowProperties.Title  = windowProperties.Title;
     m_WindowData.windowProperties.Width  = windowProperties.Width;
@@ -62,7 +74,7 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     if (!glfwInit())
     {
         MS_ERROR("glfw initialization failed");
-        return;
+        return false;
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -84,8 +96,7 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     if (!m_Window)
     {
         MS_ERROR("window initialization failed");
-        glfwTerminate();
-        return;
+        return false;
     }
 
     glfwSetWindowUserPointer(m_Window, &eventQueue);
@@ -95,11 +106,20 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     SetupInputCallbacks(m_Window);
 
     m_GraphicsContext = Renderer::GraphicsContextRouter::GetContext(m_Window);
+
+    if (!m_GraphicsContext)
+    {
+        MS_ERROR("graphics context could not be set");
+        return false;
+    }
+
     m_GraphicsContext->Init();
 
     InitializeImGui();
 
     glfwSwapInterval(1);
+
+    return true;
 }
 
 void Window::InitializeImGui()
@@ -190,17 +210,15 @@ void Window::ReportGLFWError(int error, const char *description)
 
 void Window::TerminateWindow()
 {
-    for (auto &event : m_SubscribedWindowEvents)
-    {
-        eventDispatcher.Unsubscribe(event);
-    }
-
     if (m_Window)
     {
         glfwDestroyWindow(m_Window);
     }
 
-    glfwTerminate();
+    for (auto &event : m_SubscribedWindowEvents)
+    {
+        eventDispatcher.Unsubscribe(event);
+    }
 }
 
 void Window::SetupInitEvents()
@@ -273,7 +291,11 @@ void Window::SetupInitEvents()
     m_SubscribedWindowEvents.push_back(typeid(MouseMoveEvent));
 
     eventDispatcher.Subscribe(typeid(WindowCloseEvent),
-                              [](std::shared_ptr<Event> event) { MS_DEBUG("window close event"); });
+                              [this](std::shared_ptr<Event> event)
+                              {
+                                  MS_DEBUG("window close event");
+                                  TerminateWindow();
+                              });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowCloseEvent));
 

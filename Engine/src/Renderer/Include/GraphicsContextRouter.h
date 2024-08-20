@@ -25,7 +25,7 @@ class GraphicsContextRouter
             }
             else if (API == RendererAPI::API::Vulkan)
             {
-                MS_ERROR("vulkan not yet supported");
+                MS_ERROR("vulkan not yet supported - switch to a different Renderer API");
                 return nullptr;
             }
 

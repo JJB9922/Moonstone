@@ -51,10 +51,11 @@ class Window
         inline void TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
 
-        void InitializeWindow(const WindowProperties &windowProperties);
+        bool InitializeWindow(const WindowProperties &windowProperties);
         void InitializeImGui();
 
         void StartWindow();
+        void RenderLayers();
 
         void        SetupWindowCallbacks(GLFWwindow *window);
         void        SetupInputCallbacks(GLFWwindow *window);
