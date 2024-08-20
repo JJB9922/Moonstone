@@ -39,6 +39,9 @@ void Window::StartWindow()
     while (!glfwWindowShouldClose(m_Window))
 
     {
+        glClearColor(0.7f, 0.75f, 0.78f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         RenderLayers();
 
         glfwSwapBuffers(m_Window);
@@ -128,7 +131,10 @@ void Window::InitializeImGui()
     m_ImGuiLayer->SetWindow(m_Window);
     PushOverlay(m_ImGuiLayer);
 
-    PushLayer(new ExampleLayer);
+    auto exampleLayer = new ExampleLayer;
+    exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::Exit, [this]() { TerminateWindow(); });
+
+    PushLayer(exampleLayer);
 }
 
 void Window::SetupInputCallbacks(GLFWwindow *window)
