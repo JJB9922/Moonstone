@@ -29,6 +29,8 @@ Window::Window(const WindowProperties &windowProperties)
         return;
     }
 
+    m_WindowColor = {0.7f, 0.75f, 0.78f, 1.0f};
+
     StartWindow();
 }
 
@@ -39,7 +41,7 @@ void Window::StartWindow()
     while (!glfwWindowShouldClose(m_Window))
 
     {
-        glClearColor(0.7f, 0.75f, 0.78f, 1.0f);
+        glClearColor(m_WindowColor.r, m_WindowColor.g, m_WindowColor.b, m_WindowColor.a);
         glClear(GL_COLOR_BUFFER_BIT);
 
         RenderLayers();
@@ -133,6 +135,15 @@ void Window::InitializeImGui()
 
     auto exampleLayer = new ExampleLayer;
     exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::Exit, [this]() { TerminateWindow(); });
+    exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::ApplyBGColor,
+                                 [this, exampleLayer]()
+                                 {
+                                     auto color      = exampleLayer->GetBGColor();
+                                     m_WindowColor.r = color.x;
+                                     m_WindowColor.g = color.y;
+                                     m_WindowColor.b = color.z;
+                                     m_WindowColor.a = color.w;
+                                 });
 
     PushLayer(exampleLayer);
 }

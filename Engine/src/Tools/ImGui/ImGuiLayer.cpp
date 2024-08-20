@@ -36,6 +36,8 @@ void ImGuiLayer::OnAttach()
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
     ImGui::StyleColorsClassic();
+    //ImGui::StyleColorsDark();
+    //ImGui::StyleColorsLight();
 
     // ToDo: Abstract this out for Vulks
 

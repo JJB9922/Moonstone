@@ -18,6 +18,11 @@ namespace Moonstone
 namespace Core
 {
 
+struct GLColor
+{
+        float r, g, b, a;
+};
+
 struct WindowProperties
 {
         std::string Title;
@@ -68,6 +73,7 @@ class Window
         GLFWwindow                  *m_Window;
         std::vector<std::type_index> m_SubscribedWindowEvents;
         Renderer::GraphicsContext   *m_GraphicsContext;
+        GLColor                      m_WindowColor;
 };
 
 } // namespace Core
