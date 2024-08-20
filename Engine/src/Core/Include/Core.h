@@ -1,6 +1,7 @@
 #ifndef CORE_H
 #define CORE_H
 
+#include "Core/Include/Logger.h"
 #include "mspch.h"
 
 #define MS_ENABLE_ASSERTS

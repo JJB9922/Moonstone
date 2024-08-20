@@ -15,6 +15,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Prepare source files
 set(GLOBALS_DIR ${CMAKE_SOURCE_DIR}/src/)
 set(SRC_CORE_DIR ${CMAKE_SOURCE_DIR}/src/Core/)
+set(SRC_RENDERER_DIR ${CMAKE_SOURCE_DIR}/src/Renderer/)
 set(SRC_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/Tools/)
 
 # Glob source files
@@ -30,6 +31,14 @@ file(GLOB_RECURSE SRC_CORE_FILES
 
     "${SRC_TOOLS_DIR}/*/*.cpp"
     "${SRC_TOOLS_DIR}/*/Include/*h"
+
+    "${SRC_RENDERER_DIR}/*.cpp"
+    "${SRC_RENDERER_DIR}/Include/*h"
+
+    "${SRC_RENDERER_DIR}/*/*.cpp"
+    "${SRC_RENDERER_DIR}/*/Include/*h"
+
+
 )
 
 file(GLOB GLOBAL_FILES
@@ -68,7 +77,7 @@ add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})
 target_include_directories(Moonstone PUBLIC
     ${GLOBALS_DIR}
     ${SRC_CORE_DIR}
-    ${SRC_CORE_EVENTS_DIR}
+    ${SRC_RENDERER_DIR}
     ${SRC_TOOLS_DIR}
     vendor/glfw
     vendor/spdlog/include

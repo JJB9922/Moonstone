@@ -66,17 +66,14 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); // Change to match your GL version
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     {
-        // Logging window details
-        std::stringstream ss;
-        ss << "creating window: " << m_WindowData.windowProperties.Title << " - "
-           << m_WindowData.windowProperties.Width << " x " << m_WindowData.windowProperties.Height
-           << '\n';
-
-        MS_INFO(ss.str());
+        MS_INFO("creating window: {0} - {1}x{2}",
+                m_WindowData.windowProperties.Title,
+                m_WindowData.windowProperties.Width,
+                m_WindowData.windowProperties.Height);
     }
 
     m_Window = glfwCreateWindow((int) m_WindowData.windowProperties.Width,
@@ -92,16 +89,15 @@ void Window::InitializeWindow(const WindowProperties &windowProperties)
     }
 
     glfwSetWindowUserPointer(m_Window, &eventQueue);
-    glfwMakeContextCurrent(m_Window);
 
     SetupInitEvents();
     SetupWindowCallbacks(m_Window);
     SetupInputCallbacks(m_Window);
 
-    InitializeImGui();
+    m_GraphicsContext = Renderer::GraphicsContextRouter::GetContext(m_Window);
+    m_GraphicsContext->Init();
 
-    // TODO - Abstract for OpenGL and GLAD:
-    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    InitializeImGui();
 
     glfwSwapInterval(1);
 }
@@ -216,19 +212,16 @@ void Window::SetupInitEvents()
                                   int  key      = keyEvent->GetKeyCode();
                                   int  action   = keyEvent->GetAction();
 
-                                  std::stringstream ss;
-                                  ss << "key press event: " << action << " - " << key;
-
                                   switch (action)
                                   {
                                       case GLFW_PRESS:
-                                          MS_DEBUG(ss.str());
+                                          MS_DEBUG("key press event: {0} - {1}", action, key);
                                           break;
                                       case GLFW_RELEASE:
-                                          MS_DEBUG(ss.str());
+                                          MS_DEBUG("key release event: {0} - {1}", action, key);
                                           break;
                                       case GLFW_REPEAT:
-                                          MS_DEBUG(ss.str());
+                                          MS_DEBUG("key repeat event: {0} - {1}", action, key);
                                           break;
                                   }
                               });
@@ -242,16 +235,13 @@ void Window::SetupInitEvents()
                                   int  btn      = btnEvent->GetButton();
                                   int  action   = btnEvent->GetAction();
 
-                                  std::stringstream ss;
-                                  ss << "mouse button press event: " << action << " - " << btn;
-
                                   switch (action)
                                   {
                                       case GLFW_PRESS:
-                                          MS_DEBUG(ss.str());
+                                          MS_DEBUG("mouse button press event: {0} - {1}", action, btn);
                                           break;
                                       case GLFW_RELEASE:
-                                          MS_DEBUG(ss.str());
+                                          MS_DEBUG("mouse button release event: {0} - {1}", action, btn);
                                           break;
                                   }
                               });
@@ -265,9 +255,7 @@ void Window::SetupInitEvents()
                                   int  xOffset     = scrollEvent->GetXOffset();
                                   int  yOffset     = scrollEvent->GetYOffset();
 
-                                  std::stringstream ss;
-                                  ss << "mouse scroll event: " << "x " << xOffset << " / y " << yOffset;
-                                  MS_DEBUG(ss.str());
+                                  MS_DEBUG("mouse scroll event: x{0}, y{1}", xOffset, yOffset);
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(MouseScrollEvent));
@@ -279,9 +267,7 @@ void Window::SetupInitEvents()
                                   double xPosition = moveEvent->GetXPosition();
                                   double yPosition = moveEvent->GetYPosition();
 
-                                  std::stringstream ss;
-                                  ss << "mouse move event: " << "x " << xPosition << " / y " << yPosition;
-                                  MS_LOUD_DEBUG(ss.str());
+                                  MS_LOUD_DEBUG("mouse move event: x{0}, y{1}", xPosition, yPosition);
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(MouseMoveEvent));
@@ -298,9 +284,7 @@ void Window::SetupInitEvents()
                                   int  width       = resizeEvent->GetWidth();
                                   int  height      = resizeEvent->GetHeight();
 
-                                  std::stringstream ss;
-                                  ss << "window resize event: " << width << " x " << height;
-                                  MS_DEBUG(ss.str());
+                                  MS_DEBUG("window resize event: {0}x{1}", width, height);
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowResizeEvent));
@@ -311,9 +295,7 @@ void Window::SetupInitEvents()
                                   auto minimizeEvent = std::static_pointer_cast<WindowMinimizeEvent>(event);
                                   int  minimized     = minimizeEvent->IsMinimized();
 
-                                  std::stringstream ss;
-                                  ss << "window minimize event: " << minimized;
-                                  MS_DEBUG(ss.str());
+                                  MS_DEBUG("window minimize event: {0}", minimized);
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowMinimizeEvent));
@@ -324,9 +306,7 @@ void Window::SetupInitEvents()
                                   auto focusEvent = std::static_pointer_cast<WindowFocusEvent>(event);
                                   int  focused    = focusEvent->IsFocused();
 
-                                  std::stringstream ss;
-                                  ss << "window focus event: " << focused;
-                                  MS_DEBUG(ss.str());
+                                  MS_DEBUG("window focus event: {0}", focused);
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowFocusEvent));

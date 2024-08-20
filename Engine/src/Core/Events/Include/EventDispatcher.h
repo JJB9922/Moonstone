@@ -28,10 +28,7 @@ class EventDispatcher
 
         void Unsubscribe(const std::type_index& eventType)
         {
-            std::stringstream ss;
-            ss << "unsubscribing " << eventType.name();
-
-            MS_DEBUG(ss.str());
+            MS_DEBUG("unsubscribing {0}", eventType.name());
             m_Subscribers.erase(eventType);
         }
 
