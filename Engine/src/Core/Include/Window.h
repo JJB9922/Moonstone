@@ -57,6 +57,7 @@ class Window
         inline void TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
 
+        void InitializeTestRenderData();
         bool InitializeWindow(const WindowProperties &windowProperties);
         void InitializeImGui();
 

@@ -10,6 +10,9 @@ Moonstone::Core::EventDispatcher &eventDispatcher = Moonstone::Core::EventDispat
 Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue::GetInstance();
 std::shared_ptr<spdlog::logger>   logger          = Logger::GetLoggerInstance();
 
+// ToDo: do this properly
+unsigned int shaderProgram, VBO, VAO;
+
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
     , Width(Width)
@@ -31,10 +34,94 @@ Window::Window(const WindowProperties &windowProperties)
 
     m_WindowColor = {0.7f, 0.75f, 0.78f, 1.0f};
 
+    InitializeTestRenderData();
     StartWindow();
 }
 
 Window::~Window() { glfwTerminate(); }
+
+void Window::InitializeTestRenderData()
+{
+    auto vertexShaderSrc = R"(
+                          #version 330 core
+                          layout (location = 0) in vec3 aPos;
+                          
+                          void main()
+                          {
+                              gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+                          }
+                          
+                          )";
+
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    glShaderSource(vertexShader, 1, &vertexShaderSrc, NULL);
+    glCompileShader(vertexShader);
+
+    int  success;
+    char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        MS_ERROR("vertex shader failed to compile: {0}", infoLog);
+    }
+
+    auto fragmentShaderSrc = R"(
+
+        #version 330 core
+        out vec4 FragColor;
+
+        void main()
+        {
+            FragColor = vec4(0.83f, 0.52f, 0.95f, 1.0f);
+        }
+                          
+                          )";
+
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSrc, NULL);
+    glCompileShader(fragmentShader);
+
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        MS_ERROR("fragment shader failed to compile: {0}", infoLog);
+    }
+
+    shaderProgram = glCreateProgram();
+
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+        MS_ERROR("shader program failed to link: {0}", infoLog);
+    }
+
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    float vertices[] = {-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f};
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
 
 void Window::StartWindow()
 {
@@ -44,8 +131,11 @@ void Window::StartWindow()
         Renderer::RendererCommand::ClearColor(m_WindowColor);
         Renderer::RendererCommand::Clear();
 
-        RenderLayers();
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
+        RenderLayers();
         glfwSwapBuffers(m_Window);
         glfwPollEvents();
 
@@ -227,6 +317,10 @@ void Window::ReportGLFWError(int error, const char *description)
 
 void Window::TerminateWindow()
 {
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
+
     if (m_Window)
     {
         glfwDestroyWindow(m_Window);
@@ -250,13 +344,13 @@ void Window::SetupInitEvents()
                                   switch (action)
                                   {
                                       case GLFW_PRESS:
-                                          MS_DEBUG("key press event: {0} - {1}", action, key);
+                                          MS_LOUD_DEBUG("key press event: {0} - {1}", action, key);
                                           break;
                                       case GLFW_RELEASE:
-                                          MS_DEBUG("key release event: {0} - {1}", action, key);
+                                          MS_LOUD_DEBUG("key release event: {0} - {1}", action, key);
                                           break;
                                       case GLFW_REPEAT:
-                                          MS_DEBUG("key repeat event: {0} - {1}", action, key);
+                                          MS_LOUD_DEBUG("key repeat event: {0} - {1}", action, key);
                                           break;
                                   }
                               });
@@ -273,10 +367,10 @@ void Window::SetupInitEvents()
                                   switch (action)
                                   {
                                       case GLFW_PRESS:
-                                          MS_DEBUG("mouse button press event: {0} - {1}", action, btn);
+                                          MS_LOUD_DEBUG("mouse button press event: {0} - {1}", action, btn);
                                           break;
                                       case GLFW_RELEASE:
-                                          MS_DEBUG("mouse button release event: {0} - {1}", action, btn);
+                                          MS_LOUD_DEBUG("mouse button release event: {0} - {1}", action, btn);
                                           break;
                                   }
                               });
@@ -345,7 +439,7 @@ void Window::SetupInitEvents()
                                   auto focusEvent = std::static_pointer_cast<WindowFocusEvent>(event);
                                   int  focused    = focusEvent->IsFocused();
 
-                                  MS_DEBUG("window focus event: {0}", focused);
+                                  MS_LOUD_DEBUG("window focus event: {0}", focused);
                               });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowFocusEvent));
