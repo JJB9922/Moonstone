@@ -17,6 +17,7 @@ set(GLOBALS_DIR ${CMAKE_SOURCE_DIR}/src/)
 set(SRC_CORE_DIR ${CMAKE_SOURCE_DIR}/src/Core/)
 set(SRC_RENDERER_DIR ${CMAKE_SOURCE_DIR}/src/Renderer/)
 set(SRC_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/Tools/)
+set(SHADER_DIR ${CMAKE_SOURCE_DIR}/src/Shaders/)
 
 # Glob source files
 file(GLOB_RECURSE SRC_CORE_FILES
@@ -37,6 +38,9 @@ file(GLOB_RECURSE SRC_CORE_FILES
 
     "${SRC_RENDERER_DIR}/*/*.cpp"
     "${SRC_RENDERER_DIR}/*/Include/*h"
+
+    "${SHADER_DIR}/*.cpp"
+    "${SHADER_DIR}/Include/*.h"
 
 
 )
@@ -80,6 +84,7 @@ target_include_directories(Moonstone PUBLIC
     ${SRC_CORE_DIR}
     ${SRC_RENDERER_DIR}
     ${SRC_TOOLS_DIR}
+    ${SHADERS_DIR}
     vendor/glfw
     vendor/spdlog/include
     vendor/glad/include

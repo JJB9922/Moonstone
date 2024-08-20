@@ -35,6 +35,13 @@ class ExampleLayer : public Layer
 
         virtual void OnImGuiRender() override
         {
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            ImGui::SetNextWindowPos({0, 0});
+            ImGui::SetNextWindowSize({300, 250});
+
             ImGui::Begin("Moonstone");
             ImGui::Text("Moonstone");
 

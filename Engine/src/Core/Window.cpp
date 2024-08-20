@@ -42,21 +42,8 @@ Window::~Window() { glfwTerminate(); }
 
 void Window::InitializeTestRenderData()
 {
-    auto vertexShaderSrc = R"(
-                          #version 330 core
-
-                            in vec2 position;
-                            in vec3 color;
-
-                            out vec3 Color;
-                          
-                          void main()
-                          {
-                              Color = color;
-                              gl_Position = vec4(position, 0.0, 1.0);
-                          }
-                          
-                          )";
+    auto vertexShaderSrc   = Renderer::BasicVertexShader::GetBasicVertexShaderSrc();
+    auto fragmentShaderSrc = Renderer::BasicFragmentShader::GetBasicFragmentShaderSrc();
 
     unsigned int vertexShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -73,21 +60,6 @@ void Window::InitializeTestRenderData()
         MS_ERROR("vertex shader failed to compile: {0}", infoLog);
         return;
     }
-
-    auto fragmentShaderSrc = R"(
-
-        #version 330 core
-
-        in vec3 Color;
-
-        out vec4 outColor;
-
-        void main()
-        {
-            outColor = vec4(Color, 1.0f);
-        }
-                          
-                          )";
 
     unsigned int fragmentShader;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);

@@ -10,6 +10,7 @@
 #include "Renderer/Include/GraphicsContext.h"
 #include "Renderer/Include/GraphicsContextRouter.h"
 #include "Renderer/Include/RendererCommand.h"
+#include "Shaders/Include/BasicShaders.h"
 #include "Tools/ImGui/Include/ImGuiLayer.h"
 #include "mspch.h"
 
