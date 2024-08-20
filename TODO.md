@@ -71,11 +71,11 @@
 
 **ImGui Setup**
 
-- [ ] Integrate ImGui into the engine.
+- [x] Integrate ImGui into the engine.
 
-- [ ] Set up an ImGui context and initialization code.
+- [x] Set up an ImGui context and initialization code.
 
-- [ ] Implement a basic ImGui rendering pipeline (hook into your existing rendering loop).
+- [x] Implement a basic ImGui rendering pipeline (hook into your existing rendering loop).
 
 **Debug UI with ImGui**
 
