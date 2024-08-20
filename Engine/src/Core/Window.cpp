@@ -44,11 +44,16 @@ void Window::InitializeTestRenderData()
 {
     auto vertexShaderSrc = R"(
                           #version 330 core
-                          layout (location = 0) in vec3 aPos;
+
+                            in vec2 position;
+                            in vec3 color;
+
+                            out vec3 Color;
                           
                           void main()
                           {
-                              gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+                              Color = color;
+                              gl_Position = vec4(position, 0.0, 1.0);
                           }
                           
                           )";
@@ -66,16 +71,20 @@ void Window::InitializeTestRenderData()
     {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
         MS_ERROR("vertex shader failed to compile: {0}", infoLog);
+        return;
     }
 
     auto fragmentShaderSrc = R"(
 
         #version 330 core
-        out vec4 FragColor;
+
+        in vec3 Color;
+
+        out vec4 outColor;
 
         void main()
         {
-            FragColor = vec4(0.83f, 0.52f, 0.95f, 1.0f);
+            outColor = vec4(Color, 1.0f);
         }
                           
                           )";
@@ -90,6 +99,7 @@ void Window::InitializeTestRenderData()
     {
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
         MS_ERROR("fragment shader failed to compile: {0}", infoLog);
+        return;
     }
 
     shaderProgram = glCreateProgram();
@@ -103,12 +113,13 @@ void Window::InitializeTestRenderData()
     {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
         MS_ERROR("shader program failed to link: {0}", infoLog);
+        return;
     }
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    float vertices[] = {-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f};
+    float vertices[] = {-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 1.0f};
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
@@ -116,8 +127,13 @@ void Window::InitializeTestRenderData()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
-    glEnableVertexAttribArray(0);
+    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+    glEnableVertexAttribArray(posAttrib);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
+
+    GLint colAttrib = glGetAttribLocation(shaderProgram, "color");
+    glEnableVertexAttribArray(colAttrib);
+    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (2 * sizeof(float)));
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);

@@ -22,7 +22,7 @@ void Logger::Init()
         std::cout << "log initialisation failed: " << ex.what() << '\n';
     }
 
-    s_Logger = spdlog::stdout_logger_mt("MOONSTONE");
+    s_Logger = spdlog::stdout_color_mt("MOONSTONE");
     s_Logger->set_level(spdlog::level::trace);
 }
 

@@ -1,5 +1,6 @@
 #include "Include/RendererCommand.h"
 #include "Renderer/OpenGL/Include/OpenGLRendererAPI.h"
+#include "Renderer/Vulkan/Include/VulkanRendererAPI.h"
 
 namespace Moonstone
 {
