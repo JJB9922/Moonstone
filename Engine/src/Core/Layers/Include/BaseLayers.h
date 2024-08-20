@@ -16,7 +16,8 @@ class ExampleLayer : public Layer
         enum class ButtonID
         {
             Exit,
-            ApplyBGColor
+            ApplyBGColor,
+            ToggleWireframe
         };
 
         using ButtonCallback = std::function<void()>;
@@ -77,6 +78,13 @@ class ExampleLayer : public Layer
                 m_BtnCallbacks[ButtonID::ApplyBGColor]();
 
                 MS_DEBUG("background colour changed: r({0}), g({1}), b({2})", color.x, color.y, color.z);
+            }
+
+            ImGui::Text("Renderer:");
+
+            if (ImGui::Button("Toggle Wireframe", ImVec2(150, 40)) && m_BtnCallbacks[ButtonID::ToggleWireframe])
+            {
+                m_BtnCallbacks[ButtonID::ToggleWireframe]();
             }
 
             ImGui::End();

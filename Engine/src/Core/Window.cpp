@@ -11,7 +11,7 @@ Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue:
 std::shared_ptr<spdlog::logger>   logger          = Logger::GetLoggerInstance();
 
 // ToDo: do this properly
-unsigned int shaderProgram, VBO, VAO;
+unsigned int shaderProgram, VBO, VAO, EBO;
 
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
@@ -63,6 +63,7 @@ void Window::InitializeTestRenderData()
 
     unsigned int fragmentShader;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
     glShaderSource(fragmentShader, 1, &fragmentShaderSrc, NULL);
     glCompileShader(fragmentShader);
 
@@ -91,23 +92,58 @@ void Window::InitializeTestRenderData()
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    float vertices[] = {-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 1.0f};
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    float vertices[] = {-0.5f,
+                        -0.5f,
+                        0.0f,
 
+                        -0.25f,
+                        0.0f,
+                        0.0f,
+
+                        0.0f,
+                        -0.5f,
+                        0.0f,
+
+                        0.5f,
+                        -0.5f,
+                        0.0f,
+
+                        0.25f,
+                        0.0f,
+                        0.0f,
+
+                        0.0f,
+                        0.5f,
+                        0.0f
+
+    };
+
+    unsigned indices[] = {0,
+                          1,
+                          2,
+
+                          2,
+                          3,
+                          4,
+
+                          1,
+                          4,
+                          5};
+
+    glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
+
+    glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
-    glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    GLint colAttrib = glGetAttribLocation(shaderProgram, "color");
-    glEnableVertexAttribArray(colAttrib);
-    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (2 * sizeof(float)));
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(0);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
 
@@ -119,9 +155,10 @@ void Window::StartWindow()
         Renderer::RendererCommand::ClearColor(m_WindowColor);
         Renderer::RendererCommand::Clear();
 
+        glPolygonMode(GL_FRONT_AND_BACK, m_GLPolygonMode);
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
 
         RenderLayers();
         glfwSwapBuffers(m_Window);
@@ -221,6 +258,18 @@ void Window::InitializeImGui()
                                      m_WindowColor.g = color.y;
                                      m_WindowColor.b = color.z;
                                      m_WindowColor.a = color.w;
+                                 });
+    exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::ToggleWireframe,
+                                 [this]()
+                                 {
+                                     if (m_GLPolygonMode == GL_LINE)
+                                     {
+                                         m_GLPolygonMode = GL_FILL;
+                                     }
+                                     else
+                                     {
+                                         m_GLPolygonMode = GL_LINE;
+                                     }
                                  });
 
     PushLayer(exampleLayer);

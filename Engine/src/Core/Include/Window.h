@@ -77,6 +77,7 @@ class Window
         std::vector<std::type_index> m_SubscribedWindowEvents;
         Renderer::GraphicsContext   *m_GraphicsContext;
         glm::vec4                    m_WindowColor;
+        int                          m_GLPolygonMode;
 };
 
 } // namespace Core
