@@ -8,10 +8,8 @@ namespace Core
 
 Moonstone::Core::EventDispatcher &eventDispatcher = Moonstone::Core::EventDispatcher::GetInstance();
 Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue::GetInstance();
-std::shared_ptr<spdlog::logger>   logger          = Logger::GetLoggerInstance();
 
-// ToDo: do this properly
-unsigned int shaderProgram, VBO, VAO, EBO;
+std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
 
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
@@ -33,154 +31,15 @@ Window::Window(const WindowProperties &windowProperties)
     }
 
     m_WindowColor = {0.7f, 0.75f, 0.78f, 1.0f};
-
-    InitializeTestRenderData();
-    StartWindow();
 }
 
 Window::~Window() { glfwTerminate(); }
 
-void Window::InitializeTestRenderData()
+void Window::UpdateWindow(GLFWwindow *window)
 {
-    auto vertexShaderSrc   = Renderer::BasicVertexShader::GetBasicVertexShaderSrc();
-    auto fragmentShaderSrc = Renderer::BasicFragmentShader::GetBasicFragmentShaderSrc();
-
-    unsigned int vertexShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    glShaderSource(vertexShader, 1, &vertexShaderSrc, NULL);
-    glCompileShader(vertexShader);
-
-    int  success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        MS_ERROR("vertex shader failed to compile: {0}", infoLog);
-        return;
-    }
-
-    unsigned int fragmentShader;
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    glShaderSource(fragmentShader, 1, &fragmentShaderSrc, NULL);
-    glCompileShader(fragmentShader);
-
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        MS_ERROR("fragment shader failed to compile: {0}", infoLog);
-        return;
-    }
-
-    shaderProgram = glCreateProgram();
-
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success)
-    {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        MS_ERROR("shader program failed to link: {0}", infoLog);
-        return;
-    }
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    float vertices[] = {-0.5f,
-                        -0.5f,
-                        0.0f,
-
-                        -0.25f,
-                        0.0f,
-                        0.0f,
-
-                        0.0f,
-                        -0.5f,
-                        0.0f,
-
-                        0.5f,
-                        -0.5f,
-                        0.0f,
-
-                        0.25f,
-                        0.0f,
-                        0.0f,
-
-                        0.0f,
-                        0.5f,
-                        0.0f
-
-    };
-
-    unsigned indices[] = {0,
-                          1,
-                          2,
-
-                          2,
-                          3,
-                          4,
-
-                          1,
-                          4,
-                          5};
-
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
-    glEnableVertexAttribArray(0);
-
-    glBindVertexArray(0);
-}
-
-void Window::StartWindow()
-{
-    while (!glfwWindowShouldClose(m_Window))
-
-    {
-        Renderer::RendererCommand::ClearColor(m_WindowColor);
-        Renderer::RendererCommand::Clear();
-
-        glPolygonMode(GL_FRONT_AND_BACK, m_GLPolygonMode);
-        glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
-
-        RenderLayers();
-        glfwSwapBuffers(m_Window);
-        glfwPollEvents();
-
-        eventQueue.process();
-    }
-}
-
-void Window::RenderLayers()
-{
-    for (Layer *layer : m_LayerStack)
-    {
-        layer->OnUpdate();
-    }
-
-    m_ImGuiLayer->Start();
-    for (Layer *layer : m_LayerStack)
-    {
-        layer->OnImGuiRender();
-    }
-    m_ImGuiLayer->End();
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+    eventQueue.process();
 }
 
 bool Window::InitializeWindow(const WindowProperties &windowProperties)
@@ -234,45 +93,23 @@ bool Window::InitializeWindow(const WindowProperties &windowProperties)
     }
 
     m_GraphicsContext->Init();
-
-    InitializeImGui();
-
-    glfwSwapInterval(1);
+    SetVSync(true);
 
     return true;
 }
 
-void Window::InitializeImGui()
+void Window::SetVSync(bool vSyncEnabled)
 {
-    m_ImGuiLayer = new Tools::ImGuiLayer();
-    m_ImGuiLayer->SetWindow(m_Window);
-    PushOverlay(m_ImGuiLayer);
+    if (vSyncEnabled)
+    {
+        glfwSwapInterval(1);
+    }
+    else
+    {
+        glfwSwapInterval(0);
+    }
 
-    auto exampleLayer = new ExampleLayer;
-    exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::Exit, [this]() { TerminateWindow(); });
-    exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::ApplyBGColor,
-                                 [this, exampleLayer]()
-                                 {
-                                     auto color      = exampleLayer->GetBGColor();
-                                     m_WindowColor.r = color.x;
-                                     m_WindowColor.g = color.y;
-                                     m_WindowColor.b = color.z;
-                                     m_WindowColor.a = color.w;
-                                 });
-    exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::ToggleWireframe,
-                                 [this]()
-                                 {
-                                     if (m_GLPolygonMode == GL_LINE)
-                                     {
-                                         m_GLPolygonMode = GL_FILL;
-                                     }
-                                     else
-                                     {
-                                         m_GLPolygonMode = GL_LINE;
-                                     }
-                                 });
-
-    PushLayer(exampleLayer);
+    m_WindowData.VSync = vSyncEnabled;
 }
 
 void Window::SetupInputCallbacks(GLFWwindow *window)
@@ -354,10 +191,6 @@ void Window::ReportGLFWError(int error, const char *description)
 
 void Window::TerminateWindow()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
-
     if (m_Window)
     {
         glfwDestroyWindow(m_Window);
@@ -483,22 +316,6 @@ void Window::SetupInitEvents()
 
     m_SubscribedWindowEvents.push_back(typeid(WindowFocusEvent));
 }
-
-void Window::PushLayer(Layer *layer)
-{
-    m_LayerStack.PushLayer(layer);
-    layer->OnAttach();
-}
-
-void Window::PopLayer(Layer *layer) { m_LayerStack.PopLayer(layer); }
-
-void Window::PushOverlay(Layer *layer)
-{
-    m_LayerStack.PushOverlay(layer);
-    layer->OnAttach();
-}
-
-void Window::PopOverlay(Layer *overlay) { m_LayerStack.PopOverlay(overlay); }
 
 } // namespace Core
 

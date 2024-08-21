@@ -48,36 +48,28 @@ class Window
         virtual ~Window();
 
         static Window *CreateWindow(const WindowProperties &windowProperties = WindowProperties());
+        void           TerminateWindow();
+        static void    UpdateWindow(GLFWwindow *window);
 
-        void PushLayer(Layer *layer);
-        void PopLayer(Layer *layer);
-        void PushOverlay(Layer *overlay);
-        void PopOverlay(Layer *overlay);
+    public:
+        glm::vec4   m_WindowColor;
+        int         m_GLPolygonMode;
+        GLFWwindow *m_Window;
 
     private:
-        inline void TerminateWindow();
         static void ReportGLFWError(int error, const char *description);
 
-        void InitializeTestRenderData();
         bool InitializeWindow(const WindowProperties &windowProperties);
-        void InitializeImGui();
-
-        void StartWindow();
-        void RenderLayers();
 
         void        SetupWindowCallbacks(GLFWwindow *window);
         void        SetupInputCallbacks(GLFWwindow *window);
         void        SetupInitEvents();
+        void        SetVSync(bool vSyncEnabled);
 
     private:
-        LayerStack                   m_LayerStack;
-        Tools::ImGuiLayer           *m_ImGuiLayer;
         WindowData                   m_WindowData;
-        GLFWwindow                  *m_Window;
         std::vector<std::type_index> m_SubscribedWindowEvents;
         Renderer::GraphicsContext   *m_GraphicsContext;
-        glm::vec4                    m_WindowColor;
-        int                          m_GLPolygonMode;
 };
 
 } // namespace Core
