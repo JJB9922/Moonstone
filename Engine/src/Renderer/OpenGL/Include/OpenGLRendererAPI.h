@@ -12,13 +12,6 @@ namespace Renderer
 class OpenGLRendererAPI : public RendererAPI
 {
     public:
-        /**
- * @brief Sets the clear color for the OpenGL context.
- *
- * Configures the color that will be used when clearing the color buffer.
- *
- * @param color A glm::vec4 representing the RGBA color to set.
- */
         virtual void ClearColor(const glm::vec4& color) override;
         virtual void Clear() override;
         virtual void InitVertexShader(unsigned& vertexShader, const char* vertexShaderSrc) override;
