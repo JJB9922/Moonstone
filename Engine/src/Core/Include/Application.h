@@ -4,6 +4,7 @@
 #include "Core/Include/Core.h"
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
+#include "Renderer/Include/Shader.h"
 
 namespace Moonstone
 {

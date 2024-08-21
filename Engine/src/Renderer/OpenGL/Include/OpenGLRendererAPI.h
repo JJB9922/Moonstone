@@ -29,6 +29,12 @@ class OpenGLRendererAPI : public RendererAPI
         virtual void SetPolygonMode(DataType polygonMode) override;
 
         virtual void Cleanup(unsigned& VAO, unsigned& VBO, unsigned& shaderProgram) override;
+
+        virtual void UseProgram(unsigned& ID) override;
+
+        virtual void SetUniformBool(const unsigned& ID, const std::string& name, bool value) override;
+        virtual void SetUniformInt(const unsigned& ID, const std::string& name, bool value) override;
+        virtual void SetUniformFloat(const unsigned& ID, const std::string& name, bool value) override;
 };
 
 } // namespace Renderer

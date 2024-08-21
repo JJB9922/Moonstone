@@ -2,6 +2,8 @@
 
 #include <glad/glad.h>
 
+#include <GLFW/glfw3.h>
+
 namespace Moonstone
 {
 
@@ -163,9 +165,14 @@ void OpenGLRendererAPI::InitElementBuffer(unsigned &EBO, unsigned *indices, size
  */
 void OpenGLRendererAPI::InitVertexAttributes()
 {
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
     glBindVertexArray(0);
+    glBindVertexArray(1);
 };
 
 /**
@@ -178,9 +185,13 @@ void OpenGLRendererAPI::InitVertexAttributes()
  */
 void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
 {
+    float timeValue           = glfwGetTime();
+    float greenValue          = (sin(timeValue) / 2.0f) + 0.5f;
+    int   vertexColorLocation = glGetUniformLocation(shaderProgram, "gColor");
     glUseProgram(shaderProgram);
+    glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 };
 
 /**
@@ -221,6 +232,27 @@ void OpenGLRendererAPI::Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderPr
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);
 }
+
+/**
+ * @brief Use the shader program
+ * @param ID
+ */
+void OpenGLRendererAPI::UseProgram(unsigned &ID) { glUseProgram(ID); }
+
+void OpenGLRendererAPI::SetUniformBool(const unsigned &ID, const std::string &name, bool value)
+{
+    glUniform1i(glad_glGetUniformLocation(ID, name.c_str()), (int) value);
+};
+
+void OpenGLRendererAPI::SetUniformInt(const unsigned &ID, const std::string &name, bool value)
+{
+    glUniform1i(glad_glGetUniformLocation(ID, name.c_str()), value);
+};
+
+void OpenGLRendererAPI::SetUniformFloat(const unsigned &ID, const std::string &name, bool value)
+{
+    glUniform1f(glad_glGetUniformLocation(ID, name.c_str()), value);
+};
 
 } // namespace Renderer
 

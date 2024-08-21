@@ -54,6 +54,12 @@ class RendererAPI
 
         virtual void Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderProgram) = 0;
 
+        virtual void UseProgram(unsigned &ID) = 0;
+
+        virtual void SetUniformBool(const unsigned &ID, const std::string &name, bool value)  = 0;
+        virtual void SetUniformInt(const unsigned &ID, const std::string &name, bool value)   = 0;
+        virtual void SetUniformFloat(const unsigned &ID, const std::string &name, bool value) = 0;
+
     private:
         /**
         * @brief Static member representing the current RendererAPI.

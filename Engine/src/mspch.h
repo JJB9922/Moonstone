@@ -2,6 +2,8 @@
 #define MSPCH_H
 
 #include <algorithm>
+#include <filesystem>
+#include <fstream>
 #include <functional>
 #include <iostream>
 #include <memory>

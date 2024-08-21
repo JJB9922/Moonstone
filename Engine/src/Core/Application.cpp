@@ -43,6 +43,11 @@ void Application::Run()
 
     unsigned shaderProgram, VBO, VAO, EBO;
     InitializeTestRenderData(shaderProgram, VBO, VAO, EBO);
+
+    // ToDo: Fix this abomination
+    std::string      vertexShaderPath   = std::string(SHADER_DIR) + "/vshader.vs";
+    std::string      fragmentShaderPath = std::string(SHADER_DIR) + "/fshader.fs";
+    Renderer::Shader shader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
     InitializeImGui();
 
     while (m_Running)
@@ -50,6 +55,8 @@ void Application::Run()
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
+        shader.Use();
+        shader.SetFloat("someUniform", 1.0f);
         Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
 
         RenderLayers();
@@ -194,51 +201,41 @@ void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay);
  */
 void Application::InitializeTestRenderData(unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO)
 {
-    auto vertexShaderSrc   = Renderer::BasicVertexShader::GetBasicVertexShaderSrc();
-    auto fragmentShaderSrc = Renderer::BasicFragmentShader::GetBasicFragmentShaderSrc();
+    float vertices[] = {
+        -0.5f,
+        -0.5f,
+        0.0f,
+        1.0f,
+        0.0f,
+        0.0f,
 
-    float vertices[] = {-0.5f,
-                        -0.5f,
-                        0.0f,
+        0.5f,
+        -0.5f,
+        0.0f,
+        0.0f,
+        1.0f,
+        0.0f,
 
-                        -0.25f,
-                        0.0f,
-                        0.0f,
-
-                        0.0f,
-                        -0.5f,
-                        0.0f,
-
-                        0.5f,
-                        -0.5f,
-                        0.0f,
-
-                        0.25f,
-                        0.0f,
-                        0.0f,
-
-                        0.0f,
-                        0.5f,
-                        0.0f
-
+        0.0f,
+        0.5f,
+        0.0f,
+        0.0f,
+        0.0f,
+        1.0f,
     };
 
-    unsigned indices[] = {0,
-                          1,
-                          2,
+    unsigned indices[] = {
+        0,
+        1,
+        2,
+    };
 
-                          2,
-                          3,
-                          4,
-
-                          1,
-                          4,
-                          5};
-
+    /*
     unsigned vertexShader, fragmentShader;
     Renderer::RendererCommand::InitVertexShader(vertexShader, vertexShaderSrc);
     Renderer::RendererCommand::InitFragmentShader(fragmentShader, fragmentShaderSrc);
     Renderer::RendererCommand::InitShaderProgram(shaderProgram, vertexShader, fragmentShader);
+        */
 
     Renderer::RendererCommand::InitVertexArray(VAO);
     Renderer::RendererCommand::InitVertexBuffer(VBO, vertices, sizeof(vertices));

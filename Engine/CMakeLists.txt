@@ -108,3 +108,6 @@ target_include_directories(MoonstoneApp PRIVATE
 
 # Set up PCHs for the executable
 target_precompile_headers(MoonstoneApp PRIVATE ${CMAKE_SOURCE_DIR}/src/mspch.h)
+
+# Custom Dirs
+add_definitions(-DSHADER_DIR="${CMAKE_SOURCE_DIR}/src/Renderer/Shaders")

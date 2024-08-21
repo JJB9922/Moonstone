@@ -62,6 +62,23 @@ class RendererCommand
             s_RendererAPI->Cleanup(VAO, VBO, shaderProgram);
         };
 
+        inline static void UseProgram(unsigned &ID) { s_RendererAPI->UseProgram(ID); }
+
+        inline static void SetUniformBool(const unsigned &ID, const std::string &name, bool value)
+        {
+            s_RendererAPI->SetUniformBool(ID, name, value);
+        };
+
+        inline static void SetUniformInt(const unsigned &ID, const std::string &name, bool value)
+        {
+            s_RendererAPI->SetUniformInt(ID, name, value);
+        };
+
+        inline static void SetUniformFloat(const unsigned &ID, const std::string &name, bool value)
+        {
+            s_RendererAPI->SetUniformFloat(ID, name, value);
+        };
+
     private:
         /**
         * @brief Pointer to the RendererAPI instance.
