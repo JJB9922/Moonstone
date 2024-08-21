@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Moonstone</b></li><li class="navelem"><b>Core</b></li><li class="navelem"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceMoonstone.html">Moonstone</a></li><li class="navelem"><a class="el" href="namespaceMoonstone_1_1Core.html">Core</a></li><li class="navelem"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -98,49 +98,270 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Moonstone::Core::EventDispatcher Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages event subscriptions and dispatches events to subscribed callbacks.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="EventDispatcher_8h_source.html">EventDispatcher.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a6995dcad9bbee6886aa82d49c45ec959" id="r_a6995dcad9bbee6886aa82d49c45ec959"><td class="memItemLeft" align="right" valign="top"><a id="a6995dcad9bbee6886aa82d49c45ec959" name="a6995dcad9bbee6886aa82d49c45ec959"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Callback</b> = std::function&lt;void(std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a>&gt;)&gt;</td></tr>
+<tr class="memitem:a6995dcad9bbee6886aa82d49c45ec959" id="r_a6995dcad9bbee6886aa82d49c45ec959"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6995dcad9bbee6886aa82d49c45ec959">Callback</a> = std::function&lt;void(std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a>&gt;)&gt;</td></tr>
 <tr class="separator:a6995dcad9bbee6886aa82d49c45ec959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5cc2a6b18a6aff2520a8cdbee4e29160" id="r_a5cc2a6b18a6aff2520a8cdbee4e29160"><td class="memItemLeft" align="right" valign="top"><a id="a5cc2a6b18a6aff2520a8cdbee4e29160" name="a5cc2a6b18a6aff2520a8cdbee4e29160"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Subscribe</b> (const std::type_index &amp;eventType, Callback callback)</td></tr>
+<tr class="memitem:a5cc2a6b18a6aff2520a8cdbee4e29160" id="r_a5cc2a6b18a6aff2520a8cdbee4e29160"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5cc2a6b18a6aff2520a8cdbee4e29160">Subscribe</a> (const std::type_index &amp;eventType, <a class="el" href="#a6995dcad9bbee6886aa82d49c45ec959">Callback</a> callback)</td></tr>
 <tr class="separator:a5cc2a6b18a6aff2520a8cdbee4e29160"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4e5f17ab71a991a58b972cded61d200" id="r_aa4e5f17ab71a991a58b972cded61d200"><td class="memItemLeft" align="right" valign="top"><a id="aa4e5f17ab71a991a58b972cded61d200" name="aa4e5f17ab71a991a58b972cded61d200"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Unsubscribe</b> (const std::type_index &amp;eventType)</td></tr>
+<tr class="memitem:aa4e5f17ab71a991a58b972cded61d200" id="r_aa4e5f17ab71a991a58b972cded61d200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4e5f17ab71a991a58b972cded61d200">Unsubscribe</a> (const std::type_index &amp;eventType)</td></tr>
 <tr class="separator:aa4e5f17ab71a991a58b972cded61d200"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44f5b2fa58db901bc1cce21306710b64" id="r_a44f5b2fa58db901bc1cce21306710b64"><td class="memItemLeft" align="right" valign="top"><a id="a44f5b2fa58db901bc1cce21306710b64" name="a44f5b2fa58db901bc1cce21306710b64"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Dispatch</b> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt; event) const</td></tr>
+<tr class="memitem:a44f5b2fa58db901bc1cce21306710b64" id="r_a44f5b2fa58db901bc1cce21306710b64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44f5b2fa58db901bc1cce21306710b64">Dispatch</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt; event) const</td></tr>
 <tr class="separator:a44f5b2fa58db901bc1cce21306710b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a4c19802abec0e68ae6b6dd76aa147f8f" id="r_a4c19802abec0e68ae6b6dd76aa147f8f"><td class="memItemLeft" align="right" valign="top"><a id="a4c19802abec0e68ae6b6dd76aa147f8f" name="a4c19802abec0e68ae6b6dd76aa147f8f"></a>
-static <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetInstance</b> ()</td></tr>
+<tr class="memitem:a4c19802abec0e68ae6b6dd76aa147f8f" id="r_a4c19802abec0e68ae6b6dd76aa147f8f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c19802abec0e68ae6b6dd76aa147f8f">GetInstance</a> ()</td></tr>
 <tr class="separator:a4c19802abec0e68ae6b6dd76aa147f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a34365c88cd02bdf193aadbe203ec28cf" id="r_a34365c88cd02bdf193aadbe203ec28cf"><td class="memItemLeft" align="right" valign="top"><a id="a34365c88cd02bdf193aadbe203ec28cf" name="a34365c88cd02bdf193aadbe203ec28cf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EventDispatcher</b> (const <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;)=delete</td></tr>
+<tr class="memitem:ab9ced709f43ff0f2deba16f79b466f2d" id="r_ab9ced709f43ff0f2deba16f79b466f2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9ced709f43ff0f2deba16f79b466f2d">EventDispatcher</a> ()</td></tr>
+<tr class="separator:ab9ced709f43ff0f2deba16f79b466f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34365c88cd02bdf193aadbe203ec28cf" id="r_a34365c88cd02bdf193aadbe203ec28cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34365c88cd02bdf193aadbe203ec28cf">EventDispatcher</a> (const <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;)=delete</td></tr>
 <tr class="separator:a34365c88cd02bdf193aadbe203ec28cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf489383a5550d91480a36d3cb41dd8" id="r_a8cf489383a5550d91480a36d3cb41dd8"><td class="memItemLeft" align="right" valign="top"><a id="a8cf489383a5550d91480a36d3cb41dd8" name="a8cf489383a5550d91480a36d3cb41dd8"></a>
-<a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;)=delete</td></tr>
+<tr class="memitem:a8cf489383a5550d91480a36d3cb41dd8" id="r_a8cf489383a5550d91480a36d3cb41dd8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8cf489383a5550d91480a36d3cb41dd8">operator=</a> (const <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;)=delete</td></tr>
 <tr class="separator:a8cf489383a5550d91480a36d3cb41dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a776e8b028a2da5a9d5ff1af1b7ad83ff" id="r_a776e8b028a2da5a9d5ff1af1b7ad83ff"><td class="memItemLeft" align="right" valign="top"><a id="a776e8b028a2da5a9d5ff1af1b7ad83ff" name="a776e8b028a2da5a9d5ff1af1b7ad83ff"></a>
-std::unordered_map&lt; std::type_index, std::vector&lt; Callback &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_Subscribers</b></td></tr>
+<tr class="memitem:a776e8b028a2da5a9d5ff1af1b7ad83ff" id="r_a776e8b028a2da5a9d5ff1af1b7ad83ff"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::type_index, std::vector&lt; <a class="el" href="#a6995dcad9bbee6886aa82d49c45ec959">Callback</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a776e8b028a2da5a9d5ff1af1b7ad83ff">m_Subscribers</a></td></tr>
 <tr class="separator:a776e8b028a2da5a9d5ff1af1b7ad83ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages event subscriptions and dispatches events to subscribed callbacks. </p>
+<p>The <code><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html" title="Manages event subscriptions and dispatches events to subscribed callbacks.">EventDispatcher</a></code> class follows the singleton pattern to ensure a single instance is used throughout the application. It maintains a map of event types to their corresponding callbacks. Events are dispatched to all callbacks subscribed to their type. The class supports subscribing to, unsubscribing from, and dispatching events. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a6995dcad9bbee6886aa82d49c45ec959" name="a6995dcad9bbee6886aa82d49c45ec959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6995dcad9bbee6886aa82d49c45ec959">&#9670;&#160;</a></span>Callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a6995dcad9bbee6886aa82d49c45ec959">Moonstone::Core::EventDispatcher::Callback</a> = std::function&lt;void(std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a>&gt;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab9ced709f43ff0f2deba16f79b466f2d" name="ab9ced709f43ff0f2deba16f79b466f2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9ced709f43ff0f2deba16f79b466f2d">&#9670;&#160;</a></span>EventDispatcher() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Moonstone::Core::EventDispatcher::EventDispatcher </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34365c88cd02bdf193aadbe203ec28cf" name="a34365c88cd02bdf193aadbe203ec28cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34365c88cd02bdf193aadbe203ec28cf">&#9670;&#160;</a></span>EventDispatcher() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Moonstone::Core::EventDispatcher::EventDispatcher </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a44f5b2fa58db901bc1cce21306710b64" name="a44f5b2fa58db901bc1cce21306710b64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f5b2fa58db901bc1cce21306710b64">&#9670;&#160;</a></span>Dispatch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::EventDispatcher::Dispatch </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c19802abec0e68ae6b6dd76aa147f8f" name="a4c19802abec0e68ae6b6dd76aa147f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c19802abec0e68ae6b6dd76aa147f8f">&#9670;&#160;</a></span>GetInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp; Moonstone::Core::EventDispatcher::GetInstance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cf489383a5550d91480a36d3cb41dd8" name="a8cf489383a5550d91480a36d3cb41dd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cf489383a5550d91480a36d3cb41dd8">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp; Moonstone::Core::EventDispatcher::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5cc2a6b18a6aff2520a8cdbee4e29160" name="a5cc2a6b18a6aff2520a8cdbee4e29160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cc2a6b18a6aff2520a8cdbee4e29160">&#9670;&#160;</a></span>Subscribe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::EventDispatcher::Subscribe </td>
+          <td>(</td>
+          <td class="paramtype">const std::type_index &amp;</td>          <td class="paramname"><span class="paramname"><em>eventType</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a6995dcad9bbee6886aa82d49c45ec959">Callback</a></td>          <td class="paramname"><span class="paramname"><em>callback</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4e5f17ab71a991a58b972cded61d200" name="aa4e5f17ab71a991a58b972cded61d200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e5f17ab71a991a58b972cded61d200">&#9670;&#160;</a></span>Unsubscribe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::EventDispatcher::Unsubscribe </td>
+          <td>(</td>
+          <td class="paramtype">const std::type_index &amp;</td>          <td class="paramname"><span class="paramname"><em>eventType</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a776e8b028a2da5a9d5ff1af1b7ad83ff" name="a776e8b028a2da5a9d5ff1af1b7ad83ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a776e8b028a2da5a9d5ff1af1b7ad83ff">&#9670;&#160;</a></span>m_Subscribers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::type_index, std::vector&lt;<a class="el" href="#a6995dcad9bbee6886aa82d49c45ec959">Callback</a>&gt; &gt; Moonstone::Core::EventDispatcher::m_Subscribers</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Core/Events/Include/<a class="el" href="EventDispatcher_8h_source.html">EventDispatcher.h</a></li>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Core/Events/<b>EventDispatcher.cpp</b></li>
+<li>Engine/src/Core/Events/Include/<a class="el" href="EventDispatcher_8h_source.html">EventDispatcher.h</a></li>
+<li>Engine/src/Core/Events/<a class="el" href="EventDispatcher_8cpp.html">EventDispatcher.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

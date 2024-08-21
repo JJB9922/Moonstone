@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Moonstone: /home/Jj/Documents/Projects/Moonstone/Engine/src/Core/Include/Layer.h Source File</title>
+<title>Moonstone: Engine/src/Core/Include/Layer.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,13 +91,13 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Layer.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LAYER_H</span></div>
+<a href="Layer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LAYER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define LAYER_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Core/Events/Include/Event.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Core/Include/Core.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Event_8h.html">Core/Events/Include/Event.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Core_8h.html">Core/Include/Core.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>Moonstone</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceMoonstone.html">Moonstone</a></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>Core</div>
@@ -107,18 +107,18 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <a class="code hl_class" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a>(<span class="keyword">const</span> std::string &amp;name = <span class="stringliteral">&quot;Layer&quot;</span>);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classMoonstone_1_1Core_1_1Layer.html">~Layer</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#a4be149911c9fded3b439018851c4c258">Layer</a>(<span class="keyword">const</span> std::string &amp;name = <span class="stringliteral">&quot;Layer&quot;</span>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#a6ab0400a54de93b9d610f61591901f3d">   17</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#a6ab0400a54de93b9d610f61591901f3d">~Layer</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnAttach() {}</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnDetach() {}</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnUpdate() {}</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnImGuiRender() {}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#aaeac8d10a303bdfe244b94aabb461e37">   19</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#aaeac8d10a303bdfe244b94aabb461e37">OnAttach</a>() {}</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#a5c75737df648e0ce663268a5eb12432c">   20</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#a5c75737df648e0ce663268a5eb12432c">OnDetach</a>() {}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#aa0201b4eb03bd0367a5772f636a4d559">   21</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#aa0201b4eb03bd0367a5772f636a4d559">OnUpdate</a>() {}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#a34eb8ef39b82453068317e1c5473b6cc">   22</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#a34eb8ef39b82453068317e1c5473b6cc">OnImGuiRender</a>() {}</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">inline</span> <span class="keyword">const</span> std::string &amp;GetLayerName()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_LayerName; }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#aaaa6b612ba1aa117b5343ea88baa7b61">   24</a></span>        <span class="keyword">inline</span> <span class="keyword">const</span> std::string &amp;<a class="code hl_function" href="classMoonstone_1_1Core_1_1Layer.html#aaaa6b612ba1aa117b5343ea88baa7b61">GetLayerName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classMoonstone_1_1Core_1_1Layer.html#ac5b7f6f5bac456921db22530e7ae5fe6">m_LayerName</a>; }</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        std::string m_LayerName;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Layer.html#ac5b7f6f5bac456921db22530e7ae5fe6">   27</a></span>        std::string <a class="code hl_variable" href="classMoonstone_1_1Core_1_1Layer.html#ac5b7f6f5bac456921db22530e7ae5fe6">m_LayerName</a>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
 </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
@@ -127,7 +127,18 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>} <span class="comment">// namespace Moonstone</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// LAYER_H</span></div>
+<div class="ttc" id="aCore_8h_html"><div class="ttname"><a href="Core_8h.html">Core.h</a></div></div>
+<div class="ttc" id="aEvent_8h_html"><div class="ttname"><a href="Event_8h.html">Event.h</a></div></div>
 <div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html">Moonstone::Core::Layer</a></div><div class="ttdef"><b>Definition</b> Layer.h:14</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_a34eb8ef39b82453068317e1c5473b6cc"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#a34eb8ef39b82453068317e1c5473b6cc">Moonstone::Core::Layer::OnImGuiRender</a></div><div class="ttdeci">virtual void OnImGuiRender()</div><div class="ttdef"><b>Definition</b> Layer.h:22</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_a4be149911c9fded3b439018851c4c258"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#a4be149911c9fded3b439018851c4c258">Moonstone::Core::Layer::Layer</a></div><div class="ttdeci">Layer(const std::string &amp;name=&quot;Layer&quot;)</div><div class="ttdoc">Constructs a Layer instance.</div><div class="ttdef"><b>Definition</b> Layer.cpp:16</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_a5c75737df648e0ce663268a5eb12432c"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#a5c75737df648e0ce663268a5eb12432c">Moonstone::Core::Layer::OnDetach</a></div><div class="ttdeci">virtual void OnDetach()</div><div class="ttdef"><b>Definition</b> Layer.h:20</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_a6ab0400a54de93b9d610f61591901f3d"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#a6ab0400a54de93b9d610f61591901f3d">Moonstone::Core::Layer::~Layer</a></div><div class="ttdeci">virtual ~Layer()=default</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_aa0201b4eb03bd0367a5772f636a4d559"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#aa0201b4eb03bd0367a5772f636a4d559">Moonstone::Core::Layer::OnUpdate</a></div><div class="ttdeci">virtual void OnUpdate()</div><div class="ttdef"><b>Definition</b> Layer.h:21</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_aaaa6b612ba1aa117b5343ea88baa7b61"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#aaaa6b612ba1aa117b5343ea88baa7b61">Moonstone::Core::Layer::GetLayerName</a></div><div class="ttdeci">const std::string &amp; GetLayerName() const</div><div class="ttdef"><b>Definition</b> Layer.h:24</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_aaeac8d10a303bdfe244b94aabb461e37"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#aaeac8d10a303bdfe244b94aabb461e37">Moonstone::Core::Layer::OnAttach</a></div><div class="ttdeci">virtual void OnAttach()</div><div class="ttdef"><b>Definition</b> Layer.h:19</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Layer_html_ac5b7f6f5bac456921db22530e7ae5fe6"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Layer.html#ac5b7f6f5bac456921db22530e7ae5fe6">Moonstone::Core::Layer::m_LayerName</a></div><div class="ttdeci">std::string m_LayerName</div><div class="ttdef"><b>Definition</b> Layer.h:27</div></div>
+<div class="ttc" id="anamespaceMoonstone_html"><div class="ttname"><a href="namespaceMoonstone.html">Moonstone</a></div><div class="ttdef"><b>Definition</b> Application.cpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

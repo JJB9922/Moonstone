@@ -83,37 +83,173 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Moonstone</b></li><li class="navelem"><b>Core</b></li><li class="navelem"><a class="el" href="classMoonstone_1_1Core_1_1Logger.html">Logger</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceMoonstone.html">Moonstone</a></li><li class="navelem"><a class="el" href="namespaceMoonstone_1_1Core.html">Core</a></li><li class="navelem"><a class="el" href="classMoonstone_1_1Core_1_1Logger.html">Logger</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classMoonstone_1_1Core_1_1Logger-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Moonstone::Core::Logger Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Logger_8h_source.html">Logger.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4e1269c3163f0c2880dba72d2832ce48" id="r_a4e1269c3163f0c2880dba72d2832ce48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e1269c3163f0c2880dba72d2832ce48">Logger</a> ()=default</td></tr>
+<tr class="separator:a4e1269c3163f0c2880dba72d2832ce48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31ec4d7654b37ebcd7e54577330d5249" id="r_a31ec4d7654b37ebcd7e54577330d5249"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31ec4d7654b37ebcd7e54577330d5249">~Logger</a> ()=default</td></tr>
+<tr class="separator:a31ec4d7654b37ebcd7e54577330d5249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aabbc56c6dab873d1334ae5748f054267" id="r_aabbc56c6dab873d1334ae5748f054267"><td class="memItemLeft" align="right" valign="top"><a id="aabbc56c6dab873d1334ae5748f054267" name="aabbc56c6dab873d1334ae5748f054267"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Init</b> ()</td></tr>
+<tr class="memitem:aabbc56c6dab873d1334ae5748f054267" id="r_aabbc56c6dab873d1334ae5748f054267"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabbc56c6dab873d1334ae5748f054267">Init</a> ()</td></tr>
+<tr class="memdesc:aabbc56c6dab873d1334ae5748f054267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the logging system.  <br /></td></tr>
 <tr class="separator:aabbc56c6dab873d1334ae5748f054267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4de8e6e3f07a584f44c6bd66b98093d3" id="r_a4de8e6e3f07a584f44c6bd66b98093d3"><td class="memItemLeft" align="right" valign="top"><a id="a4de8e6e3f07a584f44c6bd66b98093d3" name="a4de8e6e3f07a584f44c6bd66b98093d3"></a>
-static std::shared_ptr&lt; spdlog::logger &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetLoggerInstance</b> ()</td></tr>
+<tr class="memitem:a4de8e6e3f07a584f44c6bd66b98093d3" id="r_a4de8e6e3f07a584f44c6bd66b98093d3"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; spdlog::logger &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4de8e6e3f07a584f44c6bd66b98093d3">GetLoggerInstance</a> ()</td></tr>
 <tr class="separator:a4de8e6e3f07a584f44c6bd66b98093d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:a849ef3f0f7ae732d7784d16b84e5a3fa" id="r_a849ef3f0f7ae732d7784d16b84e5a3fa"><td class="memItemLeft" align="right" valign="top"><a id="a849ef3f0f7ae732d7784d16b84e5a3fa" name="a849ef3f0f7ae732d7784d16b84e5a3fa"></a>
-static std::shared_ptr&lt; spdlog::logger &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>s_Logger</b></td></tr>
+<tr class="memitem:a849ef3f0f7ae732d7784d16b84e5a3fa" id="r_a849ef3f0f7ae732d7784d16b84e5a3fa"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; spdlog::logger &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a849ef3f0f7ae732d7784d16b84e5a3fa">s_Logger</a></td></tr>
 <tr class="separator:a849ef3f0f7ae732d7784d16b84e5a3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4e1269c3163f0c2880dba72d2832ce48" name="a4e1269c3163f0c2880dba72d2832ce48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e1269c3163f0c2880dba72d2832ce48">&#9670;&#160;</a></span>Logger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Moonstone::Core::Logger::Logger </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a31ec4d7654b37ebcd7e54577330d5249" name="a31ec4d7654b37ebcd7e54577330d5249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ec4d7654b37ebcd7e54577330d5249">&#9670;&#160;</a></span>~Logger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Moonstone::Core::Logger::~Logger </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4de8e6e3f07a584f44c6bd66b98093d3" name="a4de8e6e3f07a584f44c6bd66b98093d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4de8e6e3f07a584f44c6bd66b98093d3">&#9670;&#160;</a></span>GetLoggerInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::shared_ptr&lt; spdlog::logger &gt; &amp; Moonstone::Core::Logger::GetLoggerInstance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabbc56c6dab873d1334ae5748f054267" name="aabbc56c6dab873d1334ae5748f054267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabbc56c6dab873d1334ae5748f054267">&#9670;&#160;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Logger::Init </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the logging system. </p>
+<p>Sets up the logger instance and prepares the logging system for use. It must be called before any logging happens. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a849ef3f0f7ae732d7784d16b84e5a3fa" name="a849ef3f0f7ae732d7784d16b84e5a3fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a849ef3f0f7ae732d7784d16b84e5a3fa">&#9670;&#160;</a></span>s_Logger</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; spdlog::logger &gt; Moonstone::Core::Logger::s_Logger</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Core/Include/<a class="el" href="Logger_8h_source.html">Logger.h</a></li>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Core/<b>Logger.cpp</b></li>
+<li>Engine/src/Core/Include/<a class="el" href="Logger_8h_source.html">Logger.h</a></li>
+<li>Engine/src/Core/<a class="el" href="Logger_8cpp.html">Logger.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Moonstone</b></li><li class="navelem"><b>Core</b></li><li class="navelem"><a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceMoonstone.html">Moonstone</a></li><li class="navelem"><a class="el" href="namespaceMoonstone_1_1Core.html">Core</a></li><li class="navelem"><a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -95,47 +95,254 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Moonstone::Core::Layer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Layer_8h_source.html">Layer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Moonstone::Core::Layer:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classMoonstone_1_1Core_1_1Layer.png" usemap="#Moonstone::Core::Layer_map" alt=""/>
   <map id="Moonstone::Core::Layer_map" name="Moonstone::Core::Layer_map">
-<area href="classMoonstone_1_1Core_1_1ExampleLayer.html" alt="Moonstone::Core::ExampleLayer" shape="rect" coords="0,56,194,80"/>
+<area href="classMoonstone_1_1Core_1_1ExampleLayer.html" title="A layer that provides a user interface with buttons and color editing options using ImGui." alt="Moonstone::Core::ExampleLayer" shape="rect" coords="0,56,194,80"/>
 <area href="classMoonstone_1_1Tools_1_1ImGuiLayer.html" alt="Moonstone::Tools::ImGuiLayer" shape="rect" coords="204,56,398,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4be149911c9fded3b439018851c4c258" id="r_a4be149911c9fded3b439018851c4c258"><td class="memItemLeft" align="right" valign="top"><a id="a4be149911c9fded3b439018851c4c258" name="a4be149911c9fded3b439018851c4c258"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Layer</b> (const std::string &amp;name=&quot;Layer&quot;)</td></tr>
+<tr class="memitem:a4be149911c9fded3b439018851c4c258" id="r_a4be149911c9fded3b439018851c4c258"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4be149911c9fded3b439018851c4c258">Layer</a> (const std::string &amp;name=&quot;Layer&quot;)</td></tr>
+<tr class="memdesc:a4be149911c9fded3b439018851c4c258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a> instance.  <br /></td></tr>
 <tr class="separator:a4be149911c9fded3b439018851c4c258"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeac8d10a303bdfe244b94aabb461e37" id="r_aaeac8d10a303bdfe244b94aabb461e37"><td class="memItemLeft" align="right" valign="top"><a id="aaeac8d10a303bdfe244b94aabb461e37" name="aaeac8d10a303bdfe244b94aabb461e37"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnAttach</b> ()</td></tr>
+<tr class="memitem:a6ab0400a54de93b9d610f61591901f3d" id="r_a6ab0400a54de93b9d610f61591901f3d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ab0400a54de93b9d610f61591901f3d">~Layer</a> ()=default</td></tr>
+<tr class="separator:a6ab0400a54de93b9d610f61591901f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeac8d10a303bdfe244b94aabb461e37" id="r_aaeac8d10a303bdfe244b94aabb461e37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaeac8d10a303bdfe244b94aabb461e37">OnAttach</a> ()</td></tr>
 <tr class="separator:aaeac8d10a303bdfe244b94aabb461e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c75737df648e0ce663268a5eb12432c" id="r_a5c75737df648e0ce663268a5eb12432c"><td class="memItemLeft" align="right" valign="top"><a id="a5c75737df648e0ce663268a5eb12432c" name="a5c75737df648e0ce663268a5eb12432c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnDetach</b> ()</td></tr>
+<tr class="memitem:a5c75737df648e0ce663268a5eb12432c" id="r_a5c75737df648e0ce663268a5eb12432c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c75737df648e0ce663268a5eb12432c">OnDetach</a> ()</td></tr>
 <tr class="separator:a5c75737df648e0ce663268a5eb12432c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0201b4eb03bd0367a5772f636a4d559" id="r_aa0201b4eb03bd0367a5772f636a4d559"><td class="memItemLeft" align="right" valign="top"><a id="aa0201b4eb03bd0367a5772f636a4d559" name="aa0201b4eb03bd0367a5772f636a4d559"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnUpdate</b> ()</td></tr>
+<tr class="memitem:aa0201b4eb03bd0367a5772f636a4d559" id="r_aa0201b4eb03bd0367a5772f636a4d559"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0201b4eb03bd0367a5772f636a4d559">OnUpdate</a> ()</td></tr>
 <tr class="separator:aa0201b4eb03bd0367a5772f636a4d559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34eb8ef39b82453068317e1c5473b6cc" id="r_a34eb8ef39b82453068317e1c5473b6cc"><td class="memItemLeft" align="right" valign="top"><a id="a34eb8ef39b82453068317e1c5473b6cc" name="a34eb8ef39b82453068317e1c5473b6cc"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnImGuiRender</b> ()</td></tr>
+<tr class="memitem:a34eb8ef39b82453068317e1c5473b6cc" id="r_a34eb8ef39b82453068317e1c5473b6cc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34eb8ef39b82453068317e1c5473b6cc">OnImGuiRender</a> ()</td></tr>
 <tr class="separator:a34eb8ef39b82453068317e1c5473b6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaa6b612ba1aa117b5343ea88baa7b61" id="r_aaaa6b612ba1aa117b5343ea88baa7b61"><td class="memItemLeft" align="right" valign="top"><a id="aaaa6b612ba1aa117b5343ea88baa7b61" name="aaaa6b612ba1aa117b5343ea88baa7b61"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetLayerName</b> () const</td></tr>
+<tr class="memitem:aaaa6b612ba1aa117b5343ea88baa7b61" id="r_aaaa6b612ba1aa117b5343ea88baa7b61"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaa6b612ba1aa117b5343ea88baa7b61">GetLayerName</a> () const</td></tr>
 <tr class="separator:aaaa6b612ba1aa117b5343ea88baa7b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ac5b7f6f5bac456921db22530e7ae5fe6" id="r_ac5b7f6f5bac456921db22530e7ae5fe6"><td class="memItemLeft" align="right" valign="top"><a id="ac5b7f6f5bac456921db22530e7ae5fe6" name="ac5b7f6f5bac456921db22530e7ae5fe6"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_LayerName</b></td></tr>
+<tr class="memitem:ac5b7f6f5bac456921db22530e7ae5fe6" id="r_ac5b7f6f5bac456921db22530e7ae5fe6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5b7f6f5bac456921db22530e7ae5fe6">m_LayerName</a></td></tr>
 <tr class="separator:ac5b7f6f5bac456921db22530e7ae5fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4be149911c9fded3b439018851c4c258" name="a4be149911c9fded3b439018851c4c258"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be149911c9fded3b439018851c4c258">&#9670;&#160;</a></span>Layer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Moonstone::Core::Layer::Layer </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>layerName</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;Layer&quot;</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a> instance. </p>
+<p>Initializes the layer with the specified name.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">layerName</td><td>The name of the layer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6ab0400a54de93b9d610f61591901f3d" name="a6ab0400a54de93b9d610f61591901f3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab0400a54de93b9d610f61591901f3d">&#9670;&#160;</a></span>~Layer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Moonstone::Core::Layer::~Layer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaaa6b612ba1aa117b5343ea88baa7b61" name="aaaa6b612ba1aa117b5343ea88baa7b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaa6b612ba1aa117b5343ea88baa7b61">&#9670;&#160;</a></span>GetLayerName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; Moonstone::Core::Layer::GetLayerName </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaeac8d10a303bdfe244b94aabb461e37" name="aaeac8d10a303bdfe244b94aabb461e37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeac8d10a303bdfe244b94aabb461e37">&#9670;&#160;</a></span>OnAttach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Core::Layer::OnAttach </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html#a0410256f4760ffc76bc20f3733d50c4b">Moonstone::Tools::ImGuiLayer</a>.</p>
+
+</div>
+</div>
+<a id="a5c75737df648e0ce663268a5eb12432c" name="a5c75737df648e0ce663268a5eb12432c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c75737df648e0ce663268a5eb12432c">&#9670;&#160;</a></span>OnDetach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Core::Layer::OnDetach </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html#a7c7c042a500435c0a790d870aa6541fe">Moonstone::Tools::ImGuiLayer</a>.</p>
+
+</div>
+</div>
+<a id="a34eb8ef39b82453068317e1c5473b6cc" name="a34eb8ef39b82453068317e1c5473b6cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34eb8ef39b82453068317e1c5473b6cc">&#9670;&#160;</a></span>OnImGuiRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Core::Layer::OnImGuiRender </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classMoonstone_1_1Core_1_1ExampleLayer.html#ad0c6e579313a104694672b56adc154d2">Moonstone::Core::ExampleLayer</a>, and <a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html#a9a66444148a4f94f7e088afda077203e">Moonstone::Tools::ImGuiLayer</a>.</p>
+
+</div>
+</div>
+<a id="aa0201b4eb03bd0367a5772f636a4d559" name="aa0201b4eb03bd0367a5772f636a4d559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0201b4eb03bd0367a5772f636a4d559">&#9670;&#160;</a></span>OnUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Core::Layer::OnUpdate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classMoonstone_1_1Core_1_1ExampleLayer.html#a279a9e139731aede0e105d8f77a93273">Moonstone::Core::ExampleLayer</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac5b7f6f5bac456921db22530e7ae5fe6" name="ac5b7f6f5bac456921db22530e7ae5fe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5b7f6f5bac456921db22530e7ae5fe6">&#9670;&#160;</a></span>m_LayerName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Moonstone::Core::Layer::m_LayerName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Core/Include/<a class="el" href="Layer_8h_source.html">Layer.h</a></li>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Core/<b>Layer.cpp</b></li>
+<li>Engine/src/Core/Include/<a class="el" href="Layer_8h_source.html">Layer.h</a></li>
+<li>Engine/src/Core/<a class="el" href="Layer_8cpp.html">Layer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

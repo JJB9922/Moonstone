@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Moonstone</b></li><li class="navelem"><b>Renderer</b></li><li class="navelem"><a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">GraphicsContextRouter</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceMoonstone.html">Moonstone</a></li><li class="navelem"><a class="el" href="namespaceMoonstone_1_1Renderer.html">Renderer</a></li><li class="navelem"><a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">GraphicsContextRouter</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -94,15 +94,48 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Moonstone::Renderer::GraphicsContextRouter Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A factory class that provides the appropriate graphics context based on the selected rendering API.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GraphicsContextRouter_8h_source.html">GraphicsContextRouter.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af061e7ee942b50144c74e630ff9cd4c1" id="r_af061e7ee942b50144c74e630ff9cd4c1"><td class="memItemLeft" align="right" valign="top"><a id="af061e7ee942b50144c74e630ff9cd4c1" name="af061e7ee942b50144c74e630ff9cd4c1"></a>
-static <a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetContext</b> (GLFWwindow *window)</td></tr>
+<tr class="memitem:af061e7ee942b50144c74e630ff9cd4c1" id="r_af061e7ee942b50144c74e630ff9cd4c1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af061e7ee942b50144c74e630ff9cd4c1">GetContext</a> (GLFWwindow *window)</td></tr>
 <tr class="separator:af061e7ee942b50144c74e630ff9cd4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A factory class that provides the appropriate graphics context based on the selected rendering API. </p>
+<p>The <code><a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html" title="A factory class that provides the appropriate graphics context based on the selected rendering API.">GraphicsContextRouter</a></code> class determines which graphics context implementation to use (e.g., OpenGL or Vulkan) by querying the current rendering API through <code><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">RendererAPI::GetAPI()</a></code>. It is responsible for creating and returning an instance of the relevant graphics context. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af061e7ee942b50144c74e630ff9cd4c1" name="af061e7ee942b50144c74e630ff9cd4c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af061e7ee942b50144c74e630ff9cd4c1">&#9670;&#160;</a></span>GetContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a> * Moonstone::Renderer::GraphicsContextRouter::GetContext </td>
+          <td>(</td>
+          <td class="paramtype">GLFWwindow *</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Renderer/Include/<a class="el" href="GraphicsContextRouter_8h_source.html">GraphicsContextRouter.h</a></li>
+<li>Engine/src/Renderer/Include/<a class="el" href="GraphicsContextRouter_8h_source.html">GraphicsContextRouter.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

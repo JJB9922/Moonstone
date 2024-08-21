@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Moonstone: /home/Jj/Documents/Projects/Moonstone/Engine/src/Core/Include/Logger.h Source File</title>
+<title>Moonstone: Engine/src/Core/Include/Logger.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,7 +91,7 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Logger.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LOGGER_H</span></div>
+<a href="Logger_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LOGGER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define LOGGER_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;spdlog/sinks/basic_file_sink.h&quot;</span></div>
@@ -99,7 +99,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;spdlog/sinks/stdout_color_sinks.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;spdlog/spdlog.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>Moonstone</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceMoonstone.html">Moonstone</a></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>Core</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
@@ -108,33 +108,33 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Logger.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classMoonstone_1_1Core_1_1Logger.html">Logger</a></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_class" href="classMoonstone_1_1Core_1_1Logger.html">Logger</a>()  = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_class" href="classMoonstone_1_1Core_1_1Logger.html">~Logger</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Logger.html#a4e1269c3163f0c2880dba72d2832ce48">   17</a></span>        <a class="code hl_function" href="classMoonstone_1_1Core_1_1Logger.html#a4e1269c3163f0c2880dba72d2832ce48">Logger</a>()  = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Logger.html#a31ec4d7654b37ebcd7e54577330d5249">   18</a></span>        <a class="code hl_function" href="classMoonstone_1_1Core_1_1Logger.html#a31ec4d7654b37ebcd7e54577330d5249">~Logger</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> Init();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMoonstone_1_1Core_1_1Logger.html#aabbc56c6dab873d1334ae5748f054267">Init</a>();</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">inline</span> <span class="keyword">static</span> std::shared_ptr&lt;spdlog::logger&gt;&amp; GetLoggerInstance() { <span class="keywordflow">return</span> s_Logger; }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Logger.html#a4de8e6e3f07a584f44c6bd66b98093d3">   22</a></span>        <span class="keyword">inline</span> <span class="keyword">static</span> std::shared_ptr&lt;spdlog::logger&gt;&amp; <a class="code hl_function" href="classMoonstone_1_1Core_1_1Logger.html#a4de8e6e3f07a584f44c6bd66b98093d3">GetLoggerInstance</a>() { <span class="keywordflow">return</span> <a class="code hl_variable" href="classMoonstone_1_1Core_1_1Logger.html#a849ef3f0f7ae732d7784d16b84e5a3fa">s_Logger</a>; }</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">static</span> std::shared_ptr&lt;spdlog::logger&gt; s_Logger;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Logger.html#a849ef3f0f7ae732d7784d16b84e5a3fa">   25</a></span>        <span class="keyword">static</span> std::shared_ptr&lt;spdlog::logger&gt; <a class="code hl_variable" href="classMoonstone_1_1Core_1_1Logger.html#a849ef3f0f7ae732d7784d16b84e5a3fa">s_Logger</a>;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
 </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><a class="code hl_class" href="classMoonstone_1_1Core_1_1Logger.html">Logger</a>* CreateLoggerInstance();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><a class="code hl_class" href="classMoonstone_1_1Core_1_1Logger.html">Logger</a>* <a class="code hl_function" href="namespaceMoonstone_1_1Core.html#a24518dd2db20d8e17ceef7f78f099797">CreateLoggerInstance</a>();</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>} <span class="comment">// namespace Core</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>} <span class="comment">// namespace Moonstone</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define MS_TRACE(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;trace(__VA_ARGS__)</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#define MS_INFO(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;info(__VA_ARGS__)</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define MS_WARN(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;warn(__VA_ARGS__)</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define MS_ERROR(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;error(__VA_ARGS__)</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="Logger_8h.html#a6cac9a89ff49c31d184bc900a86b5c39">   33</a></span><span class="preprocessor">#define MS_TRACE(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;trace(__VA_ARGS__)</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="Logger_8h.html#a7ac0bfb31cc00b8e3e7e6b85d1d517ea">   34</a></span><span class="preprocessor">#define MS_INFO(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;info(__VA_ARGS__)</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="Logger_8h.html#a78db7b5e62a97a4cd5564ae369eeea4a">   35</a></span><span class="preprocessor">#define MS_WARN(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;warn(__VA_ARGS__)</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="Logger_8h.html#aa5b827c02b052670aca94fcaee75ce69">   36</a></span><span class="preprocessor">#define MS_ERROR(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;error(__VA_ARGS__)</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#define MS_ENABLE_DEBUG_LOGGING</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="Logger_8h.html#a0817c8d4c04040a2f40fba512cbe5d35">   38</a></span><span class="preprocessor">#define MS_ENABLE_DEBUG_LOGGING</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//#define MS_ENABLE_LOUD_DEBUG_LOGGING</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#ifdef MS_ENABLE_DEBUG_LOGGING</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#define MS_DEBUG(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;debug(__VA_ARGS__)</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="Logger_8h.html#aebc4b4104ba7eb8c99911102cfa83dab">   42</a></span><span class="preprocessor">#define MS_DEBUG(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;debug(__VA_ARGS__)</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define MS_DEBUG(...)</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#define MS_LOUD_DEBUG(...)</span></div>
@@ -143,11 +143,18 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#ifdef MS_ENABLE_LOUD_DEBUG_LOGGING</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define MS_LOUD_DEBUG(...) ::Moonstone::Core::Logger::GetLoggerInstance()-&gt;debug(__VA_ARGS__)</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define MS_LOUD_DEBUG(...)</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="Logger_8h.html#aa3432479ae59277d5fa98105be5f0f59">   51</a></span><span class="preprocessor">#define MS_LOUD_DEBUG(...)</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif </span><span class="comment">// LOGGER_H</span></div>
 <div class="ttc" id="aclassMoonstone_1_1Core_1_1Logger_html"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Logger.html">Moonstone::Core::Logger</a></div><div class="ttdef"><b>Definition</b> Logger.h:15</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Logger_html_a31ec4d7654b37ebcd7e54577330d5249"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Logger.html#a31ec4d7654b37ebcd7e54577330d5249">Moonstone::Core::Logger::~Logger</a></div><div class="ttdeci">~Logger()=default</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Logger_html_a4de8e6e3f07a584f44c6bd66b98093d3"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Logger.html#a4de8e6e3f07a584f44c6bd66b98093d3">Moonstone::Core::Logger::GetLoggerInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; spdlog::logger &gt; &amp; GetLoggerInstance()</div><div class="ttdef"><b>Definition</b> Logger.h:22</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Logger_html_a4e1269c3163f0c2880dba72d2832ce48"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Logger.html#a4e1269c3163f0c2880dba72d2832ce48">Moonstone::Core::Logger::Logger</a></div><div class="ttdeci">Logger()=default</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Logger_html_a849ef3f0f7ae732d7784d16b84e5a3fa"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Logger.html#a849ef3f0f7ae732d7784d16b84e5a3fa">Moonstone::Core::Logger::s_Logger</a></div><div class="ttdeci">static std::shared_ptr&lt; spdlog::logger &gt; s_Logger</div><div class="ttdef"><b>Definition</b> Logger.h:25</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Logger_html_aabbc56c6dab873d1334ae5748f054267"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Logger.html#aabbc56c6dab873d1334ae5748f054267">Moonstone::Core::Logger::Init</a></div><div class="ttdeci">static void Init()</div><div class="ttdoc">Initializes the logging system.</div><div class="ttdef"><b>Definition</b> Logger.cpp:17</div></div>
+<div class="ttc" id="anamespaceMoonstone_1_1Core_html_a24518dd2db20d8e17ceef7f78f099797"><div class="ttname"><a href="namespaceMoonstone_1_1Core.html#a24518dd2db20d8e17ceef7f78f099797">Moonstone::Core::CreateLoggerInstance</a></div><div class="ttdeci">Logger * CreateLoggerInstance()</div><div class="ttdoc">Gets the logger instance.</div><div class="ttdef"><b>Definition</b> Logger.cpp:42</div></div>
+<div class="ttc" id="anamespaceMoonstone_html"><div class="ttname"><a href="namespaceMoonstone.html">Moonstone</a></div><div class="ttdef"><b>Definition</b> Application.cpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

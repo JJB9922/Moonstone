@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Moonstone</b></li><li class="navelem"><b>Renderer</b></li><li class="navelem"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html">RendererCommand</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceMoonstone.html">Moonstone</a></li><li class="navelem"><a class="el" href="namespaceMoonstone_1_1Renderer.html">Renderer</a></li><li class="navelem"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html">RendererCommand</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -95,54 +95,425 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Moonstone::Renderer::RendererCommand Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Provides a static interface for renderer commands, forwarding calls to the underlying <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a>.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="RendererCommand_8h_source.html">RendererCommand.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab1de4dfbf955e2aad2f5bbae130b30f2" id="r_ab1de4dfbf955e2aad2f5bbae130b30f2"><td class="memItemLeft" align="right" valign="top"><a id="ab1de4dfbf955e2aad2f5bbae130b30f2" name="ab1de4dfbf955e2aad2f5bbae130b30f2"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearColor</b> (const glm::vec4 &amp;color)</td></tr>
+<tr class="memitem:ab1de4dfbf955e2aad2f5bbae130b30f2" id="r_ab1de4dfbf955e2aad2f5bbae130b30f2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1de4dfbf955e2aad2f5bbae130b30f2">ClearColor</a> (const glm::vec4 &amp;color)</td></tr>
 <tr class="separator:ab1de4dfbf955e2aad2f5bbae130b30f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab231b024cea0631c452f50835af984" id="r_a9ab231b024cea0631c452f50835af984"><td class="memItemLeft" align="right" valign="top"><a id="a9ab231b024cea0631c452f50835af984" name="a9ab231b024cea0631c452f50835af984"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Clear</b> ()</td></tr>
+<tr class="memitem:a9ab231b024cea0631c452f50835af984" id="r_a9ab231b024cea0631c452f50835af984"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ab231b024cea0631c452f50835af984">Clear</a> ()</td></tr>
 <tr class="separator:a9ab231b024cea0631c452f50835af984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0fdeefd28d9723219d69db34ad469da" id="r_ab0fdeefd28d9723219d69db34ad469da"><td class="memItemLeft" align="right" valign="top"><a id="ab0fdeefd28d9723219d69db34ad469da" name="ab0fdeefd28d9723219d69db34ad469da"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitVertexShader</b> (unsigned &amp;vertexShader, const char *vertexShaderSrc)</td></tr>
+<tr class="memitem:ab0fdeefd28d9723219d69db34ad469da" id="r_ab0fdeefd28d9723219d69db34ad469da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0fdeefd28d9723219d69db34ad469da">InitVertexShader</a> (unsigned &amp;vertexShader, const char *vertexShaderSrc)</td></tr>
 <tr class="separator:ab0fdeefd28d9723219d69db34ad469da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a20266b051b7145bc56bdf9cfad7020" id="r_a0a20266b051b7145bc56bdf9cfad7020"><td class="memItemLeft" align="right" valign="top"><a id="a0a20266b051b7145bc56bdf9cfad7020" name="a0a20266b051b7145bc56bdf9cfad7020"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitFragmentShader</b> (unsigned &amp;fragmentShader, const char *fragmentShaderSrc)</td></tr>
+<tr class="memitem:a0a20266b051b7145bc56bdf9cfad7020" id="r_a0a20266b051b7145bc56bdf9cfad7020"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a20266b051b7145bc56bdf9cfad7020">InitFragmentShader</a> (unsigned &amp;fragmentShader, const char *fragmentShaderSrc)</td></tr>
 <tr class="separator:a0a20266b051b7145bc56bdf9cfad7020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebb501f5b8372f78ee4fddb35bdafb04" id="r_aebb501f5b8372f78ee4fddb35bdafb04"><td class="memItemLeft" align="right" valign="top"><a id="aebb501f5b8372f78ee4fddb35bdafb04" name="aebb501f5b8372f78ee4fddb35bdafb04"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitShaderProgram</b> (unsigned &amp;shaderProgram, unsigned &amp;vertexShader, unsigned &amp;fragmentShader)</td></tr>
+<tr class="memitem:aebb501f5b8372f78ee4fddb35bdafb04" id="r_aebb501f5b8372f78ee4fddb35bdafb04"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebb501f5b8372f78ee4fddb35bdafb04">InitShaderProgram</a> (unsigned &amp;shaderProgram, unsigned &amp;vertexShader, unsigned &amp;fragmentShader)</td></tr>
 <tr class="separator:aebb501f5b8372f78ee4fddb35bdafb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebf95fc214633c4575ad06a4b7f4e7a1" id="r_aebf95fc214633c4575ad06a4b7f4e7a1"><td class="memItemLeft" align="right" valign="top"><a id="aebf95fc214633c4575ad06a4b7f4e7a1" name="aebf95fc214633c4575ad06a4b7f4e7a1"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitVertexArray</b> (unsigned &amp;VAO)</td></tr>
+<tr class="memitem:aebf95fc214633c4575ad06a4b7f4e7a1" id="r_aebf95fc214633c4575ad06a4b7f4e7a1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebf95fc214633c4575ad06a4b7f4e7a1">InitVertexArray</a> (unsigned &amp;VAO)</td></tr>
 <tr class="separator:aebf95fc214633c4575ad06a4b7f4e7a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae13b61fbe4cdd32da79f7eb80c775e91" id="r_ae13b61fbe4cdd32da79f7eb80c775e91"><td class="memItemLeft" align="right" valign="top"><a id="ae13b61fbe4cdd32da79f7eb80c775e91" name="ae13b61fbe4cdd32da79f7eb80c775e91"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitVertexBuffer</b> (unsigned &amp;VBO, float *vertices, size_t size)</td></tr>
+<tr class="memitem:ae13b61fbe4cdd32da79f7eb80c775e91" id="r_ae13b61fbe4cdd32da79f7eb80c775e91"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae13b61fbe4cdd32da79f7eb80c775e91">InitVertexBuffer</a> (unsigned &amp;VBO, float *vertices, size_t size)</td></tr>
 <tr class="separator:ae13b61fbe4cdd32da79f7eb80c775e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bc9cdba04453df0450b6f80330b0224" id="r_a3bc9cdba04453df0450b6f80330b0224"><td class="memItemLeft" align="right" valign="top"><a id="a3bc9cdba04453df0450b6f80330b0224" name="a3bc9cdba04453df0450b6f80330b0224"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitElementBuffer</b> (unsigned &amp;EBO, unsigned *indices, size_t size)</td></tr>
+<tr class="memitem:a3bc9cdba04453df0450b6f80330b0224" id="r_a3bc9cdba04453df0450b6f80330b0224"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3bc9cdba04453df0450b6f80330b0224">InitElementBuffer</a> (unsigned &amp;EBO, unsigned *indices, size_t size)</td></tr>
 <tr class="separator:a3bc9cdba04453df0450b6f80330b0224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab51f482868016334bcf1927ed467eb7c" id="r_ab51f482868016334bcf1927ed467eb7c"><td class="memItemLeft" align="right" valign="top"><a id="ab51f482868016334bcf1927ed467eb7c" name="ab51f482868016334bcf1927ed467eb7c"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>InitVertexAttributes</b> ()</td></tr>
+<tr class="memitem:ab51f482868016334bcf1927ed467eb7c" id="r_ab51f482868016334bcf1927ed467eb7c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab51f482868016334bcf1927ed467eb7c">InitVertexAttributes</a> ()</td></tr>
 <tr class="separator:ab51f482868016334bcf1927ed467eb7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43b0bbf1277eb3a9d4e7915e3d573125" id="r_a43b0bbf1277eb3a9d4e7915e3d573125"><td class="memItemLeft" align="right" valign="top"><a id="a43b0bbf1277eb3a9d4e7915e3d573125" name="a43b0bbf1277eb3a9d4e7915e3d573125"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>SubmitDrawCommands</b> (unsigned shaderProgram, unsigned VAO)</td></tr>
+<tr class="memitem:a43b0bbf1277eb3a9d4e7915e3d573125" id="r_a43b0bbf1277eb3a9d4e7915e3d573125"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43b0bbf1277eb3a9d4e7915e3d573125">SubmitDrawCommands</a> (unsigned shaderProgram, unsigned VAO)</td></tr>
 <tr class="separator:a43b0bbf1277eb3a9d4e7915e3d573125"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3d58d5a0e5527d9955bbb44453862e1" id="r_ae3d58d5a0e5527d9955bbb44453862e1"><td class="memItemLeft" align="right" valign="top"><a id="ae3d58d5a0e5527d9955bbb44453862e1" name="ae3d58d5a0e5527d9955bbb44453862e1"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPolygonMode</b> (Renderer::RendererAPI::DataType polygonMode)</td></tr>
+<tr class="memitem:ae3d58d5a0e5527d9955bbb44453862e1" id="r_ae3d58d5a0e5527d9955bbb44453862e1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3d58d5a0e5527d9955bbb44453862e1">SetPolygonMode</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a69e85253b179171f55a018a1a1f046e5">Renderer::RendererAPI::DataType</a> polygonMode)</td></tr>
 <tr class="separator:ae3d58d5a0e5527d9955bbb44453862e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad63d93c50952bbf1165d4bc366f6ac11" id="r_ad63d93c50952bbf1165d4bc366f6ac11"><td class="memItemLeft" align="right" valign="top"><a id="ad63d93c50952bbf1165d4bc366f6ac11" name="ad63d93c50952bbf1165d4bc366f6ac11"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Cleanup</b> (unsigned &amp;VAO, unsigned &amp;VBO, unsigned &amp;shaderProgram)</td></tr>
+<tr class="memitem:ad63d93c50952bbf1165d4bc366f6ac11" id="r_ad63d93c50952bbf1165d4bc366f6ac11"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad63d93c50952bbf1165d4bc366f6ac11">Cleanup</a> (unsigned &amp;VAO, unsigned &amp;VBO, unsigned &amp;shaderProgram)</td></tr>
 <tr class="separator:ad63d93c50952bbf1165d4bc366f6ac11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:a8426654e85345e2939e48499e851e7ce" id="r_a8426654e85345e2939e48499e851e7ce"><td class="memItemLeft" align="right" valign="top"><a id="a8426654e85345e2939e48499e851e7ce" name="a8426654e85345e2939e48499e851e7ce"></a>
-static <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html">RendererAPI</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>s_RendererAPI</b></td></tr>
+<tr class="memitem:a8426654e85345e2939e48499e851e7ce" id="r_a8426654e85345e2939e48499e851e7ce"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html">RendererAPI</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8426654e85345e2939e48499e851e7ce">s_RendererAPI</a></td></tr>
+<tr class="memdesc:a8426654e85345e2939e48499e851e7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a> instance.  <br /></td></tr>
 <tr class="separator:a8426654e85345e2939e48499e851e7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Provides a static interface for renderer commands, forwarding calls to the underlying <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad63d93c50952bbf1165d4bc366f6ac11" name="ad63d93c50952bbf1165d4bc366f6ac11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad63d93c50952bbf1165d4bc366f6ac11">&#9670;&#160;</a></span>Cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::Cleanup </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>VAO</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>VBO</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ab231b024cea0631c452f50835af984" name="a9ab231b024cea0631c452f50835af984"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ab231b024cea0631c452f50835af984">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::Clear </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1de4dfbf955e2aad2f5bbae130b30f2" name="ab1de4dfbf955e2aad2f5bbae130b30f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1de4dfbf955e2aad2f5bbae130b30f2">&#9670;&#160;</a></span>ClearColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::ClearColor </td>
+          <td>(</td>
+          <td class="paramtype">const glm::vec4 &amp;</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3bc9cdba04453df0450b6f80330b0224" name="a3bc9cdba04453df0450b6f80330b0224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bc9cdba04453df0450b6f80330b0224">&#9670;&#160;</a></span>InitElementBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitElementBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>EBO</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned *</td>          <td class="paramname"><span class="paramname"><em>indices</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a20266b051b7145bc56bdf9cfad7020" name="a0a20266b051b7145bc56bdf9cfad7020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a20266b051b7145bc56bdf9cfad7020">&#9670;&#160;</a></span>InitFragmentShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitFragmentShader </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>fragmentShader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fragmentShaderSrc</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebb501f5b8372f78ee4fddb35bdafb04" name="aebb501f5b8372f78ee4fddb35bdafb04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb501f5b8372f78ee4fddb35bdafb04">&#9670;&#160;</a></span>InitShaderProgram()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitShaderProgram </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>vertexShader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>fragmentShader</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebf95fc214633c4575ad06a4b7f4e7a1" name="aebf95fc214633c4575ad06a4b7f4e7a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf95fc214633c4575ad06a4b7f4e7a1">&#9670;&#160;</a></span>InitVertexArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitVertexArray </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>VAO</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab51f482868016334bcf1927ed467eb7c" name="ab51f482868016334bcf1927ed467eb7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab51f482868016334bcf1927ed467eb7c">&#9670;&#160;</a></span>InitVertexAttributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitVertexAttributes </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae13b61fbe4cdd32da79f7eb80c775e91" name="ae13b61fbe4cdd32da79f7eb80c775e91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae13b61fbe4cdd32da79f7eb80c775e91">&#9670;&#160;</a></span>InitVertexBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitVertexBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>VBO</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>vertices</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab0fdeefd28d9723219d69db34ad469da" name="ab0fdeefd28d9723219d69db34ad469da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0fdeefd28d9723219d69db34ad469da">&#9670;&#160;</a></span>InitVertexShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitVertexShader </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>vertexShader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>vertexShaderSrc</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3d58d5a0e5527d9955bbb44453862e1" name="ae3d58d5a0e5527d9955bbb44453862e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d58d5a0e5527d9955bbb44453862e1">&#9670;&#160;</a></span>SetPolygonMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::SetPolygonMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a69e85253b179171f55a018a1a1f046e5">Renderer::RendererAPI::DataType</a></td>          <td class="paramname"><span class="paramname"><em>polygonMode</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43b0bbf1277eb3a9d4e7915e3d573125" name="a43b0bbf1277eb3a9d4e7915e3d573125"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43b0bbf1277eb3a9d4e7915e3d573125">&#9670;&#160;</a></span>SubmitDrawCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::SubmitDrawCommands </td>
+          <td>(</td>
+          <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>VAO</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8426654e85345e2939e48499e851e7ce" name="a8426654e85345e2939e48499e851e7ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8426654e85345e2939e48499e851e7ce">&#9670;&#160;</a></span>s_RendererAPI</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html">RendererAPI</a>* Moonstone::Renderer::RendererCommand::s_RendererAPI</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a> instance. </p>
+<p>This static member points to an instance of <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a>, which is initialized based on the preprocessor directives. The actual instance depends on whether <code>MS_OPENGL</code> or <code>MS_VULKAN</code> is defined.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only defined if either <code>MS_OPENGL</code> or <code>MS_VULKAN</code> is set. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/Jj/Documents/Projects/Moonstone/Engine/src/Renderer/Include/<a class="el" href="RendererCommand_8h_source.html">RendererCommand.h</a></li>
+<li>Engine/src/Renderer/Include/<a class="el" href="RendererCommand_8h_source.html">RendererCommand.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
