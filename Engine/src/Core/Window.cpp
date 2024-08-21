@@ -191,10 +191,7 @@ void Window::ReportGLFWError(int error, const char *description)
 
 void Window::TerminateWindow()
 {
-    if (m_Window)
-    {
-        glfwDestroyWindow(m_Window);
-    }
+    glfwSetWindowShouldClose(m_Window, true);
 
     for (auto &event : m_SubscribedWindowEvents)
     {

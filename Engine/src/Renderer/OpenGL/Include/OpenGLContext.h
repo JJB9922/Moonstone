@@ -19,7 +19,7 @@ class OpenGLContext : public GraphicsContext
     public:
         OpenGLContext(GLFWwindow* window);
 
-        virtual void Init() override;
+        virtual void Init();
 
     private:
         GLFWwindow* m_Window;

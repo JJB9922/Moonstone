@@ -53,7 +53,7 @@ class Window
 
     public:
         glm::vec4   m_WindowColor;
-        int         m_GLPolygonMode;
+        Renderer::RendererAPI::DataType m_PolygonMode;
         GLFWwindow *m_Window;
 
     private:
