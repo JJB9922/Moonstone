@@ -10,6 +10,13 @@ namespace Moonstone
 namespace Core
 {
 
+/**
+ * @brief A layer that provides a user interface with buttons and color editing options using ImGui.
+ * 
+ * The `ExampleLayer` class inherits from `Layer` and implements a simple user interface that allows
+ * users to interact with background color settings, toggle wireframe mode, and exit the application.
+ * It uses ImGui for rendering the interface and supports dynamic callbacks for button interactions.
+ */
 class ExampleLayer : public Layer
 {
     public:
@@ -74,6 +81,7 @@ class ExampleLayer : public Layer
             }
 
             if (ImGui::Button("Apply Colour", ImVec2(150, 40)) && m_BtnCallbacks[ButtonID::ApplyBGColor])
+
             {
                 m_BtnCallbacks[ButtonID::ApplyBGColor]();
 
@@ -94,7 +102,6 @@ class ExampleLayer : public Layer
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
         ImVec4                                       m_BGColor;
 };
-
 } // namespace Core
 
 } // namespace Moonstone

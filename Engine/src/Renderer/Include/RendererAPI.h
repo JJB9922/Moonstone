@@ -10,6 +10,14 @@ namespace Moonstone
 namespace Renderer
 {
 
+/**
+ * @brief Abstract base class for Renderer API implementations.
+ * 
+ * Defines an interface for rendering operations, such as setting clear color, 
+ * initializing shaders, and submitting draw commands. The class also supports 
+ * different rendering APIs, such as OpenGL and Vulkan, which can be queried 
+ * through the static method GetAPI().
+ */
 class RendererAPI
 {
     public:

@@ -10,6 +10,11 @@ namespace Renderer
 class BasicVertexShader
 {
     public:
+        /**
+        * @brief Provides the source code for a basic vertex shader.
+        *
+        * @return A string literal containing the GLSL source code for the vertex shader.
+        */
         static inline const char* GetBasicVertexShaderSrc()
         {
             return R"(
@@ -27,6 +32,11 @@ class BasicVertexShader
         }
 };
 
+/**
+ * @brief Provides the source code for a basic fragment shader.
+ *
+ * @return A string literal containing the GLSL source code for the fragment shader.
+ */
 class BasicFragmentShader
 {
     public:

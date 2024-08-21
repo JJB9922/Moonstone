@@ -9,6 +9,12 @@ namespace Moonstone
 namespace Core
 {
 
+/**
+ * @brief Base class for all events in the system.
+ * 
+ * The `Event` class provides a common interface for events, allowing them to be identified and handled uniformly.
+ * It includes a pure virtual method to obtain the event type and a static method to hash event names.
+ */
 class Event
 {
     public:

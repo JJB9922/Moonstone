@@ -9,6 +9,13 @@ namespace Moonstone
 namespace Core
 {
 
+/**
+ * @brief Manages a queue of events, providing functionality to enqueue and process events.
+ * 
+ * The `EventQueue` class is a singleton that holds and processes a queue of events using an `EventDispatcher`.
+ * Events are enqueued and then dispatched in the `process` method. The singleton pattern ensures that only one
+ * instance of the `EventQueue` exists and is accessible throughout the application.
+ */
 class EventQueue
 {
     public:

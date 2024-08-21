@@ -9,6 +9,9 @@ namespace Moonstone
 namespace Renderer
 {
 
+/**
+ * @brief Provides a static interface for renderer commands, forwarding calls to the underlying RendererAPI.
+ */
 class RendererCommand
 {
     public:
