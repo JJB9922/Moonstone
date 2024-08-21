@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: List documentation files
-        run: ls -R Documentation/Doxygen/docs/html
+        run: ls -R docs/html
 
       - name: Set up Doxygen
         run: sudo apt-get install doxygen graphviz -y
@@ -25,7 +25,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: Documentation/Doxygen/docs/html
+          publish_dir: docs/html
           publish_branch: gh-pages
 
 
