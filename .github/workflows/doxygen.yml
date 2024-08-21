@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+- name: List documentation files
+  run: ls -R Documentation/Doxygen/docs/html
+
       - name: Set up Doxygen
         run: sudo apt-get install doxygen graphviz -y
 
