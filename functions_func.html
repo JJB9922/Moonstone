@@ -141,12 +141,6 @@ $(function() {
 <li>GetApplicationInstance()
 : <a class="el" href="classMoonstone_1_1Core_1_1Application.html#ab46c7c1ef2564a8b318f46cd6c725c94">Moonstone::Core::Application</a>
 </li>
-<li>GetBasicFragmentShaderSrc()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1BasicFragmentShader.html#a673ed112d686355659afd4ad4603f8c7">Moonstone::Renderer::BasicFragmentShader</a>
-</li>
-<li>GetBasicVertexShaderSrc()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1BasicVertexShader.html#a9b2419b80a946189902a6ea4bbc900a1">Moonstone::Renderer::BasicVertexShader</a>
-</li>
 <li>GetBGColor()
 : <a class="el" href="classMoonstone_1_1Core_1_1ExampleLayer.html#acf014ed7da9793409d7070e70f97f5fe">Moonstone::Core::ExampleLayer</a>
 </li>
@@ -374,13 +368,37 @@ $(function() {
 <li>SetBGColor()
 : <a class="el" href="classMoonstone_1_1Core_1_1ExampleLayer.html#a8dc60f43ebb01bfd741868928cc831a1">Moonstone::Core::ExampleLayer</a>
 </li>
+<li>SetBool()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html#a2affc1761c2744af74f721efc398d121">Moonstone::Renderer::Shader</a>
+</li>
 <li>SetBtnCallback()
 : <a class="el" href="classMoonstone_1_1Core_1_1ExampleLayer.html#af5d84a109f5ed0e61eb98df0d6d85c5c">Moonstone::Core::ExampleLayer</a>
+</li>
+<li>SetFloat()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html#a71a2fb70ee31644d1c8d4bdc873b4854">Moonstone::Renderer::Shader</a>
+</li>
+<li>SetInt()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html#afeabf1c458d6841dcd51898e3069a07d">Moonstone::Renderer::Shader</a>
 </li>
 <li>SetPolygonMode()
 : <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#ad29fa0965e1e94764a13ec16fcd044d8">Moonstone::Renderer::OpenGLRendererAPI</a>
 , <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a1f7a86b87992cb720ccb632a9e90bf5b">Moonstone::Renderer::RendererAPI</a>
 , <a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#ae3d58d5a0e5527d9955bbb44453862e1">Moonstone::Renderer::RendererCommand</a>
+</li>
+<li>SetUniformBool()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a458528cf61903caf318d3bba840e4e37">Moonstone::Renderer::OpenGLRendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aaff7977707a8f577c7bbe3a0a8a3ee95">Moonstone::Renderer::RendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#adb6af3a6a64648afb600a1f6e260b2db">Moonstone::Renderer::RendererCommand</a>
+</li>
+<li>SetUniformFloat()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a7c41ee36d431adc43a96b4670dfb8848">Moonstone::Renderer::OpenGLRendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ab55f5576d71b05c4e0e592adef2771b5">Moonstone::Renderer::RendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a823eca9b290f47f1c31a328ad36713fc">Moonstone::Renderer::RendererCommand</a>
+</li>
+<li>SetUniformInt()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a85dd063023c659f8a6089baabf05c3dd">Moonstone::Renderer::OpenGLRendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a0cac2eef74bcacf6bd7aa7283fd838b6">Moonstone::Renderer::RendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#acc9eda2e886b6875a2a6127e57ab4fcb">Moonstone::Renderer::RendererCommand</a>
 </li>
 <li>SetupInitEvents()
 : <a class="el" href="classMoonstone_1_1Core_1_1Window.html#a95346effeae4db2ef38826aa3458d3b4">Moonstone::Core::Window</a>
@@ -396,6 +414,9 @@ $(function() {
 </li>
 <li>SetWindow()
 : <a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html#a3da5e3ce575544816f567f324fe26d8a">Moonstone::Tools::ImGuiLayer</a>
+</li>
+<li>Shader()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html#abf3e7304fef503c20b59765fa04557bb">Moonstone::Renderer::Shader</a>
 </li>
 <li>Start()
 : <a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html#a084b1428ca3536c0d9c5c04933a4df2d">Moonstone::Tools::ImGuiLayer</a>
@@ -424,6 +445,14 @@ $(function() {
 </li>
 <li>UpdateWindow()
 : <a class="el" href="classMoonstone_1_1Core_1_1Window.html#ab554945e50ee7422411945517e4a32a2">Moonstone::Core::Window</a>
+</li>
+<li>Use()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html#ab2ec31d558fe5c6689f9ee51da236044">Moonstone::Renderer::Shader</a>
+</li>
+<li>UseProgram()
+: <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a2ee104978989887793d077862b1f44e2">Moonstone::Renderer::OpenGLRendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa3703bf7a5e7fc42b1ee9b7be584505e">Moonstone::Renderer::RendererAPI</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a756b7bcc60ce990b50529d8a57716875">Moonstone::Renderer::RendererCommand</a>
 </li>
 </ul>
 

@@ -130,6 +130,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1f7a86b87992cb720ccb632a9e90bf5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d5a1ea6a47ee7067b8b5585f8832375"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a9d5a1ea6a47ee7067b8b5585f8832375">Cleanup</a> (unsigned &amp;VAO, unsigned &amp;VBO, unsigned &amp;shaderProgram)=0</td></tr>
 <tr class="separator:a9d5a1ea6a47ee7067b8b5585f8832375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3703bf7a5e7fc42b1ee9b7be584505e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa3703bf7a5e7fc42b1ee9b7be584505e">UseProgram</a> (unsigned &amp;ID)=0</td></tr>
+<tr class="separator:aa3703bf7a5e7fc42b1ee9b7be584505e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff7977707a8f577c7bbe3a0a8a3ee95"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aaff7977707a8f577c7bbe3a0a8a3ee95">SetUniformBool</a> (const unsigned &amp;ID, const std::string &amp;name, bool value)=0</td></tr>
+<tr class="separator:aaff7977707a8f577c7bbe3a0a8a3ee95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cac2eef74bcacf6bd7aa7283fd838b6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a0cac2eef74bcacf6bd7aa7283fd838b6">SetUniformInt</a> (const unsigned &amp;ID, const std::string &amp;name, bool value)=0</td></tr>
+<tr class="separator:a0cac2eef74bcacf6bd7aa7283fd838b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab55f5576d71b05c4e0e592adef2771b5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ab55f5576d71b05c4e0e592adef2771b5">SetUniformFloat</a> (const unsigned &amp;ID, const std::string &amp;name, bool value)=0</td></tr>
+<tr class="separator:ab55f5576d71b05c4e0e592adef2771b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -616,6 +624,138 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aaff7977707a8f577c7bbe3a0a8a3ee95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaff7977707a8f577c7bbe3a0a8a3ee95">&#9670;&nbsp;</a></span>SetUniformBool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::SetUniformBool </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a458528cf61903caf318d3bba840e4e37">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="ab55f5576d71b05c4e0e592adef2771b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab55f5576d71b05c4e0e592adef2771b5">&#9670;&nbsp;</a></span>SetUniformFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::SetUniformFloat </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a7c41ee36d431adc43a96b4670dfb8848">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="a0cac2eef74bcacf6bd7aa7283fd838b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cac2eef74bcacf6bd7aa7283fd838b6">&#9670;&nbsp;</a></span>SetUniformInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::SetUniformInt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a85dd063023c659f8a6089baabf05c3dd">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
 <a id="a34e47c0b3454084d3e70063ddebedc59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a34e47c0b3454084d3e70063ddebedc59">&#9670;&nbsp;</a></span>SubmitDrawCommands()</h2>
 
@@ -651,6 +791,34 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a092990934c8108aec53e839216b409b7">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="aa3703bf7a5e7fc42b1ee9b7be584505e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3703bf7a5e7fc42b1ee9b7be584505e">&#9670;&nbsp;</a></span>UseProgram()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::UseProgram </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a2ee104978989887793d077862b1f44e2">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
 
 </div>
 </div>
