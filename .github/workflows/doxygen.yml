@@ -12,21 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set working directory
-        run: cd Documentation/Doxygen
-        working-directory: Documentation/Doxygen
-
       - name: Set up Doxygen
         run: sudo apt-get install doxygen graphviz -y
 
       - name: Generate Doxygen documentation
-        run: doxygen Doxyfile
+        run: doxygen Documentation/Doxygen/Doxyfile
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/html
+          publish_dir: Documentation/Doxygen/docs/html
           publish_branch: gh-pages
 
 
