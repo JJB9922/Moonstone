@@ -87,6 +87,11 @@ class RendererCommand
             s_RendererAPI->SetUniformFloat(ID, name, value);
         };
 
+        inline static void SetUniformMat4(const unsigned &ID, const std::string &name, glm::mat4 value)
+        {
+            s_RendererAPI->SetUniformMat4(ID, name, value);
+        };
+
         inline static void CreateTexture(unsigned &texture) { s_RendererAPI->CreateTexture(texture); }
         inline static void SetTextureParameters(RendererAPI::TextureTarget        target,
                                                 RendererAPI::TextureParameterName paramName,

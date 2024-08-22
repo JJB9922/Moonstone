@@ -68,6 +68,11 @@ void Shader::SetFloat(const std::string& name, float value) const
     Renderer::RendererCommand::SetUniformFloat(ID, name, value);
 }
 
+void Shader::SetMat4(const std::string& name, glm::mat4 value) const
+{
+    Renderer::RendererCommand::SetUniformMat4(ID, name, value);
+}
+
 } // namespace Renderer
 
 } // namespace Moonstone

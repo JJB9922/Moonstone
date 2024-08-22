@@ -7,6 +7,10 @@
 #include "Renderer/Include/Shader.h"
 #include "Renderer/Include/Textures.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Moonstone
 {
 

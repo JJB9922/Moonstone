@@ -41,6 +41,7 @@ class OpenGLRendererAPI : public RendererAPI
         virtual void SetUniformBool(const unsigned& ID, const std::string& name, bool value) override;
         virtual void SetUniformInt(const unsigned& ID, const std::string& name, bool value) override;
         virtual void SetUniformFloat(const unsigned& ID, const std::string& name, bool value) override;
+        virtual void SetUniformMat4(const unsigned& ID, const std::string& name, glm::mat4 value) override;
 
         virtual void CreateTexture(unsigned& texture) override;
         virtual void SetTextureParameters(TextureTarget        target,

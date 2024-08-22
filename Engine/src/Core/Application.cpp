@@ -56,8 +56,21 @@ void Application::Run()
 
     InitializeImGui();
 
+    glm::vec3 cubePositions[]
+        = {glm::vec3(0.0f, 0.0f, 0.0f),     glm::vec3(2.0f, 5.0f, -15.0f),  glm::vec3(-1.5f, -2.2f, -2.5f),
+           glm::vec3(-3.8f, -2.0f, -12.3f), glm::vec3(2.4f, -0.4f, -3.5f),  glm::vec3(-1.7f, 3.0f, -7.5f),
+           glm::vec3(1.3f, -2.0f, -2.5f),   glm::vec3(1.5f, 2.0f, -2.5f),   glm::vec3(1.5f, 0.2f, -1.5f),
+           glm::vec3(-1.3f, 1.0f, -1.5f),   glm::vec3(0.5f, 3.2f, -6.0f),   glm::vec3(-2.5f, 2.5f, -8.5f),
+           glm::vec3(3.5f, -1.0f, -4.0f),   glm::vec3(-1.0f, -1.5f, -5.5f), glm::vec3(2.3f, 4.5f, -10.5f),
+           glm::vec3(-0.6f, 2.8f, -7.0f),   glm::vec3(1.2f, 1.5f, -3.5f),   glm::vec3(2.0f, -3.0f, -5.0f),
+           glm::vec3(-3.0f, 0.5f, -9.0f),   glm::vec3(1.8f, 1.0f, -1.0f),   glm::vec3(0.3f, 3.0f, -5.2f),
+           glm::vec3(-1.5f, 4.0f, -4.3f),   glm::vec3(2.7f, 0.0f, -6.8f),   glm::vec3(-2.2f, 3.8f, -3.2f),
+           glm::vec3(1.0f, -2.5f, -2.5f),   glm::vec3(-1.8f, 1.0f, -8.0f),  glm::vec3(2.5f, -0.7f, -4.5f),
+           glm::vec3(-2.7f, 2.0f, -7.7f),   glm::vec3(0.7f, 1.3f, -3.3f),   glm::vec3(1.8f, -1.7f, -2.2f)};
+
     while (m_Running)
     {
+        glEnable(GL_DEPTH_TEST);
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
@@ -69,7 +82,31 @@ void Application::Run()
                                                textures[1]);
 
         shader.Use();
-        Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
+
+        glm::mat4 view       = glm::mat4(1.0f);
+        glm::mat4 projection = glm::mat4(1.0f);
+
+        view       = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        projection = glm::perspective(glm::radians(90.0f), 800.0f / 600.0f, 0.1f, 59.0f);
+
+        Renderer::RendererCommand::SetUniformMat4(shader.ID, "view", view);
+        Renderer::RendererCommand::SetUniformMat4(shader.ID, "projection", projection);
+
+        for (unsigned int i = 0; i < 30; i++)
+        {
+            glm::mat4 model = glm::mat4(1.0f);
+            float     angle = 15.0f * i;
+            model           = glm::translate(glm::rotate(model,
+                                               (float) glfwGetTime() * 0.25f * glm::radians(angle),
+                                               glm::vec3(0.5f, 1.0f, 0.0f)),
+                                   cubePositions[i]);
+
+            Renderer::RendererCommand::SetUniformMat4(shader.ID, "model", model);
+
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
+        //Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
 
         RenderLayers();
 
@@ -214,19 +251,38 @@ void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay);
 void Application::InitializeTestRenderData(
     unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO, unsigned* textures)
 {
-    float vertices[] = {0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+    float vertices[]
+        = {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+           0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 
-                        0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+           -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+           0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -0.5f, 0.5f,  0.5f,  0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
 
-                        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+           -0.5f, 0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 1.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+           -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
 
-                        -0.5f, 0.5f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f};
+           0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
+           0.5f,  -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+           -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
+           0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+
+           -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+           0.5f,  0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f};
+    /*
+    float vertices[] = {0.5f,  0.5f,  0.0f, 1.0f, 1.0f,
+
+                        0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
+
+                        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+
+                        -0.5f, 0.5f,  0.0f, 0.0f, 1.0f};
 
     unsigned indices[] = {0,
                           1,
-                          2,
+                          3,
 
-                          0,
+                          1,
                           2,
                           3};
 
@@ -238,32 +294,26 @@ void Application::InitializeTestRenderData(
 
                          0.5f,
                          1.0f};
-
+*/
     Renderer::RendererCommand::InitVertexArray(VAO);
     Renderer::RendererCommand::InitVertexBuffer(VBO, vertices, sizeof(vertices));
-    Renderer::RendererCommand::InitElementBuffer(EBO, indices, sizeof(indices));
+    //Renderer::RendererCommand::InitElementBuffer(EBO, indices, sizeof(indices));
 
     Renderer::RendererCommand::InitVertexAttributes(0,
                                                     3,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
-                                                    8 * sizeof(float),
+                                                    5 * sizeof(float),
                                                     0);
     Renderer::RendererCommand::InitVertexAttributes(1,
-                                                    3,
-                                                    Renderer::RendererAPI::NumericalDataType::Float,
-                                                    Renderer::RendererAPI::BooleanDataType::False,
-                                                    8 * sizeof(float),
-                                                    3 * sizeof(float));
-    Renderer::RendererCommand::InitVertexAttributes(2,
                                                     2,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
-                                                    8 * sizeof(float),
-                                                    6 * sizeof(float));
+                                                    5 * sizeof(float),
+                                                    3 * sizeof(float));
 
     stbi_set_flip_vertically_on_load(true);
-    std::string texturePath  = std::string(RESOURCE_DIR) + "/Textures/container.jpg";
+    std::string texturePath  = std::string(RESOURCE_DIR) + "/Textures/rock.jpg";
     std::string texture2Path = std::string(RESOURCE_DIR) + "/Textures/geeble.png";
 
     int            width, height, nrChannels;

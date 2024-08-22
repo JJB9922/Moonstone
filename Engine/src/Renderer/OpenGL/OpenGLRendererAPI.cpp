@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Moonstone
 {
@@ -247,6 +249,14 @@ void OpenGLRendererAPI::SetUniformInt(const unsigned &ID, const std::string &nam
 void OpenGLRendererAPI::SetUniformFloat(const unsigned &ID, const std::string &name, bool value)
 {
     glUniform1f(glad_glGetUniformLocation(ID, name.c_str()), value);
+}
+
+void OpenGLRendererAPI::SetUniformMat4(const unsigned &ID, const std::string &name, glm::mat4 value)
+{
+    glad_glUniformMatrix4fv(glad_glGetUniformLocation(ID, name.c_str()),
+                            1,
+                            ToOpenGLBooleanType(RendererAPI::BooleanDataType::False),
+                            glm::value_ptr(value));
 }
 
 void OpenGLRendererAPI::CreateTexture(unsigned &texture)

@@ -109,7 +109,8 @@ class RendererAPI
 
         virtual void SetUniformBool(const unsigned &ID, const std::string &name, bool value)  = 0;
         virtual void SetUniformInt(const unsigned &ID, const std::string &name, bool value)   = 0;
-        virtual void SetUniformFloat(const unsigned &ID, const std::string &name, bool value) = 0;
+        virtual void SetUniformFloat(const unsigned &ID, const std::string &name, bool value)     = 0;
+        virtual void SetUniformMat4(const unsigned &ID, const std::string &name, glm::mat4 value) = 0;
 
         virtual void CreateTexture(unsigned &texture) = 0;
         virtual void SetTextureParameters(TextureTarget target, TextureParameterName paramName, TextureParameter param)
