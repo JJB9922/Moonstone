@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['r_163',['r',['../structMoonstone_1_1Core_1_1GLColor.html#a6f7c84c657ffb9dedc16987218eff3de',1,'Moonstone::Core::GLColor']]],
-  ['rendererapi_164',['RendererAPI',['../classMoonstone_1_1Renderer_1_1RendererAPI.html',1,'Moonstone::Renderer']]],
-  ['rendererapi_2ecpp_165',['RendererAPI.cpp',['../RendererAPI_8cpp.html',1,'']]],
-  ['rendererapi_2eh_166',['RendererAPI.h',['../RendererAPI_8h.html',1,'']]],
-  ['renderercommand_167',['RendererCommand',['../classMoonstone_1_1Renderer_1_1RendererCommand.html',1,'Moonstone::Renderer']]],
-  ['renderercommand_2ecpp_168',['RendererCommand.cpp',['../RendererCommand_8cpp.html',1,'']]],
-  ['renderercommand_2eh_169',['RendererCommand.h',['../RendererCommand_8h.html',1,'']]],
-  ['renderlayers_170',['RenderLayers',['../classMoonstone_1_1Core_1_1Application.html#a25c23fa28d2db211acad051e688afd16',1,'Moonstone::Core::Application']]],
-  ['reportglfwerror_171',['ReportGLFWError',['../classMoonstone_1_1Core_1_1Window.html#aad66f6b868212c8e00e71b2161626ebe',1,'Moonstone::Core::Window']]],
-  ['run_172',['Run',['../classMoonstone_1_1Core_1_1Application.html#a1a8631145736b19b4f239ad99e137eec',1,'Moonstone::Core::Application']]]
+  ['polygondatatype_162',['PolygonDataType',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#ad9f1abe13238bc81912eed5119394dad',1,'Moonstone::Renderer::RendererAPI']]],
+  ['polygonfill_163',['PolygonFill',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#ad9f1abe13238bc81912eed5119394dada6d4a26410d669946e8e4ccfc96c95d39',1,'Moonstone::Renderer::RendererAPI']]],
+  ['polygonline_164',['PolygonLine',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#ad9f1abe13238bc81912eed5119394dada35c22dd3365e6f5370d5a59d94d02142',1,'Moonstone::Renderer::RendererAPI']]],
+  ['poplayer_165',['PopLayer',['../classMoonstone_1_1Core_1_1Application.html#ae5d141c56a94260e6ad53774b3e94bc7',1,'Moonstone::Core::Application::PopLayer()'],['../classMoonstone_1_1Core_1_1LayerStack.html#ae8d2bc79f2afd5fcc5d9f484a4378112',1,'Moonstone::Core::LayerStack::PopLayer()']]],
+  ['popoverlay_166',['PopOverlay',['../classMoonstone_1_1Core_1_1Application.html#a134ae4509644d397c21d3dd1212c1024',1,'Moonstone::Core::Application::PopOverlay()'],['../classMoonstone_1_1Core_1_1LayerStack.html#a4df4dbb65d8493e29e814c0e1e188779',1,'Moonstone::Core::LayerStack::PopOverlay()']]],
+  ['process_167',['process',['../classMoonstone_1_1Core_1_1EventQueue.html#ad5bc2cbe25b7b55273724ef78f82ffac',1,'Moonstone::Core::EventQueue']]],
+  ['pushlayer_168',['PushLayer',['../classMoonstone_1_1Core_1_1Application.html#a78d6c2ce0c9aec47c3292d438cdad823',1,'Moonstone::Core::Application::PushLayer()'],['../classMoonstone_1_1Core_1_1LayerStack.html#a99883898500fd405774adae271ef2c3a',1,'Moonstone::Core::LayerStack::PushLayer()']]],
+  ['pushoverlay_169',['PushOverlay',['../classMoonstone_1_1Core_1_1Application.html#a8a9f3d9f4423f81a0bf42bcf46803681',1,'Moonstone::Core::Application::PushOverlay()'],['../classMoonstone_1_1Core_1_1LayerStack.html#a271e3b9d384c7ea18da738218ad47dbb',1,'Moonstone::Core::LayerStack::PushOverlay()']]]
 ];
