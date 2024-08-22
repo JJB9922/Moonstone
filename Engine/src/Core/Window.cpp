@@ -326,6 +326,27 @@ void Window::SetupInitEvents()
                                           break;
                                       case GLFW_REPEAT:
                                           MS_LOUD_DEBUG("key repeat event: {0} - {1}", action, key);
+
+                                          if (m_CameraController)
+                                          {
+                                              if (key == GLFW_KEY_W)
+                                              {
+                                                  m_CameraController->OnMoveForward();
+                                              }
+                                              else if (key == GLFW_KEY_S)
+                                              {
+                                                  m_CameraController->OnMoveBackward();
+                                              }
+                                              else if (key == GLFW_KEY_A)
+                                              {
+                                                  m_CameraController->OnMoveLeft();
+                                              }
+                                              else if (key == GLFW_KEY_D)
+                                              {
+                                                  m_CameraController->OnMoveRight();
+                                              }
+                                          }
+
                                           break;
                                   }
                               });

@@ -76,8 +76,14 @@ void Application::Run()
 
     m_Window->SetCamera(pCamera);
 
+    Time& time = Time::GetInstance();
+
     while (m_Running)
     {
+        float currentFrame = glfwGetTime();
+        time.SetDeltaTime(currentFrame - time.GetLastFrame());
+        time.SetLastFrame(currentFrame);
+
         Renderer::RendererCommand::EnableDepthTesting();
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();

@@ -7,6 +7,9 @@ namespace Moonstone
 namespace Renderer
 {
 
+/**
+ * @brief The CameraController interface
+ */
 class CameraController
 {
     public:

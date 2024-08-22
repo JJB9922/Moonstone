@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+#include "Core/Include/Logger.h"
+#include "Core/Include/Time.h"
 #include "Renderer/Include/CameraController.h"
 
 namespace Moonstone
@@ -13,27 +15,36 @@ namespace Renderer
 
 class Camera : public CameraController
 {
+        Core::Time& time = Core::Time::GetInstance();
+
     public:
+        /**
+         * @brief Camera Initialize a camera
+         * @param pos
+         * @param front
+         * @param up
+         */
         Camera(const glm::vec3& pos, const glm::vec3& front, const glm::vec3& up)
             : m_CameraPos(pos)
             , m_CameraFront(front)
             , m_CameraUp(up)
-            , m_CameraSpeed(1.0f)
+            , m_CameraSpeed(10.0f)
         {
+            Core::Time& time = Core::Time::GetInstance();
         }
 
-        void OnMoveForward() override { m_CameraPos += m_CameraSpeed * m_CameraFront; }
+        void OnMoveForward() override { m_CameraPos += m_CameraSpeed * time.GetDeltaTime() * m_CameraFront; }
 
-        void OnMoveBackward() override { m_CameraPos -= m_CameraSpeed * m_CameraFront; }
+        void OnMoveBackward() override { m_CameraPos -= m_CameraSpeed * time.GetDeltaTime() * m_CameraFront; }
 
         void OnMoveLeft() override
         {
-            m_CameraPos -= glm::normalize(glm::cross(m_CameraFront, m_CameraUp)) * m_CameraSpeed;
+            m_CameraPos -= glm::normalize(glm::cross(m_CameraFront, m_CameraUp)) * m_CameraSpeed * time.GetDeltaTime();
         }
 
         void OnMoveRight() override
         {
-            m_CameraPos += glm::normalize(glm::cross(m_CameraFront, m_CameraUp)) * m_CameraSpeed;
+            m_CameraPos += glm::normalize(glm::cross(m_CameraFront, m_CameraUp)) * m_CameraSpeed * time.GetDeltaTime();
         }
 
         glm::vec3 GetPosition() const { return m_CameraPos; }
