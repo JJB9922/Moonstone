@@ -7,6 +7,7 @@
 #include "Events/Include/EventQueue.h"
 #include "Events/Include/InputEvents.h"
 #include "Events/Include/WindowEvents.h"
+#include "Renderer/Include/Camera.h"
 #include "Renderer/Include/GraphicsContext.h"
 #include "Renderer/Include/GraphicsContextRouter.h"
 #include "Renderer/Include/RendererCommand.h"
@@ -50,6 +51,11 @@ class Window
         void           TerminateWindow();
         static void    UpdateWindow(GLFWwindow *window);
 
+        inline void SetCamera(std::shared_ptr<Renderer::CameraController> camera) { m_CameraController = camera; };
+
+        inline static int GetWidth() { return WindowProperties().Width; }
+        inline static int GetHeight() { return WindowProperties().Height; }
+
     public:
         glm::vec4   m_WindowColor;
         Renderer::RendererAPI::PolygonDataType m_PolygonMode;
@@ -68,7 +74,8 @@ class Window
     private:
         WindowData                   m_WindowData;
         std::vector<std::type_index> m_SubscribedWindowEvents;
-        Renderer::GraphicsContext   *m_GraphicsContext;
+        Renderer::GraphicsContext                  *m_GraphicsContext;
+        std::shared_ptr<Renderer::CameraController> m_CameraController = nullptr;
 };
 
 } // namespace Core

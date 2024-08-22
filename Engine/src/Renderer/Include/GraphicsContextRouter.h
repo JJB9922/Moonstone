@@ -3,7 +3,7 @@
 
 #include "Renderer/Include/GraphicsContext.h"
 #include "Renderer/Include/RendererAPI.h"
-#include "Renderer/OpenGL/Include/OpenGLContext.h"
+#include "Renderer/Platform/OpenGL/Include/OpenGLContext.h"
 
 namespace Moonstone
 {

@@ -289,7 +289,7 @@ void Window::TerminateWindow()
 void Window::SetupInitEvents()
 {
     eventDispatcher.Subscribe(typeid(KeyPressEvent),
-                              [](std::shared_ptr<Event> event)
+                              [this](std::shared_ptr<Event> event)
                               {
                                   auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
                                   int  key      = keyEvent->GetKeyCode();
@@ -299,6 +299,27 @@ void Window::SetupInitEvents()
                                   {
                                       case GLFW_PRESS:
                                           MS_LOUD_DEBUG("key press event: {0} - {1}", action, key);
+
+                                          if (m_CameraController)
+                                          {
+                                              if (key == GLFW_KEY_W)
+                                              {
+                                                  m_CameraController->OnMoveForward();
+                                              }
+                                              else if (key == GLFW_KEY_S)
+                                              {
+                                                  m_CameraController->OnMoveBackward();
+                                              }
+                                              else if (key == GLFW_KEY_A)
+                                              {
+                                                  m_CameraController->OnMoveLeft();
+                                              }
+                                              else if (key == GLFW_KEY_D)
+                                              {
+                                                  m_CameraController->OnMoveRight();
+                                              }
+                                          }
+
                                           break;
                                       case GLFW_RELEASE:
                                           MS_LOUD_DEBUG("key release event: {0} - {1}", action, key);

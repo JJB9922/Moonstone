@@ -13,6 +13,7 @@ namespace Renderer
 class OpenGLRendererAPI : public RendererAPI
 {
     public:
+        virtual void EnableDepthTesting() override;
         virtual void ClearColor(const glm::vec4& color) override;
         virtual void Clear() override;
         virtual void InitVertexShader(unsigned& vertexShader, const char* vertexShaderSrc) override;

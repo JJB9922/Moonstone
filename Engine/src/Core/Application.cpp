@@ -69,9 +69,16 @@ void Application::Run()
         glm::vec3(-1.3f, 1.0f, -1.5f),
     };
 
+    glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f, 3.0f);
+    glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f, 0.0f);
+    auto      pCamera     = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
+
+    m_Window->SetCamera(pCamera);
+
     while (m_Running)
     {
-        glEnable(GL_DEPTH_TEST);
+        Renderer::RendererCommand::EnableDepthTesting();
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
@@ -84,11 +91,15 @@ void Application::Run()
 
         shader.Use();
 
-        glm::mat4 view       = glm::mat4(1.0f);
-        glm::mat4 projection = glm::mat4(1.0f);
+        glm::mat4 projection = glm::mat4(1.0);
 
-        view       = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-        projection = glm::perspective(glm::radians(90.0f), 800.0f / 600.0f, 0.1f, 59.0f);
+        projection = glm::perspective(glm::radians(45.0f),
+                                      (float) m_Window->GetWidth() / (float) m_Window->GetHeight(),
+                                      0.1f,
+                                      100.0f);
+
+        glm::mat4 view;
+        view = glm::lookAt(pCamera->GetPosition(), pCamera->GetPosition() + pCamera->GetFront(), pCamera->GetUp());
 
         Renderer::RendererCommand::SetUniformMat4(shader.ID, "view", view);
         Renderer::RendererCommand::SetUniformMat4(shader.ID, "projection", projection);
@@ -96,11 +107,9 @@ void Application::Run()
         for (unsigned int i = 0; i < 10; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
-            float     angle = 15.0f * i;
-            model           = glm::translate(glm::rotate(model,
-                                               (float) glfwGetTime() * glm::radians(angle),
-                                               glm::vec3(0.5f, 1.0f, 0.0f)),
-                                   cubePositions[i]);
+            model           = glm::translate(model, cubePositions[i]);
+            float angle     = 20.0f * i;
+            model           = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 
             Renderer::RendererCommand::SetUniformMat4(shader.ID, "model", model);
 

@@ -4,6 +4,7 @@
 #include "Core/Include/Core.h"
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
+#include "Renderer/Include/Camera.h"
 #include "Renderer/Include/Shader.h"
 #include "Renderer/Include/Textures.h"
 
