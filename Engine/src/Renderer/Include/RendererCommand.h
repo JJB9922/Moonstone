@@ -65,6 +65,11 @@ class RendererCommand
             s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO);
         };
 
+        inline static void SubmitDrawArrays(RendererAPI::DrawMode drawMode, int index, int count)
+        {
+            s_RendererAPI->SubmitDrawArrays(drawMode, index, count);
+        };
+
         inline static void Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderProgram)
         {
             s_RendererAPI->Cleanup(VAO, VBO, shaderProgram);
@@ -93,6 +98,7 @@ class RendererCommand
         };
 
         inline static void CreateTexture(unsigned &texture) { s_RendererAPI->CreateTexture(texture); }
+
         inline static void SetTextureParameters(RendererAPI::TextureTarget        target,
                                                 RendererAPI::TextureParameterName paramName,
                                                 RendererAPI::TextureParameter     param)

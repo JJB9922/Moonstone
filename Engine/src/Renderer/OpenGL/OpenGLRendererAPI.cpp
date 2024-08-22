@@ -215,6 +215,17 @@ void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
 }
 
 /**
+ * @brief SubmitDrawArrays submits draw arrays command, useful for when indices are not in use
+ * @param drawMode
+ * @param index
+ * @param count
+ */
+void OpenGLRendererAPI::SubmitDrawArrays(DrawMode drawMode, int index, int count)
+{
+    glDrawArrays(ToOpenGLDrawMode(drawMode), index, count);
+};
+
+/**
  * @brief Cleans up OpenGL resources.
  *
  * Deletes the VAO, VBO, and shader program to free up resources.

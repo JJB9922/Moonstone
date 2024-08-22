@@ -48,6 +48,11 @@ class RendererAPI
             False
         };
 
+        enum class DrawMode
+        {
+            Triangles
+        };
+
         enum class TextureTarget
         {
             Texture1D,
@@ -101,7 +106,8 @@ class RendererAPI
 
         virtual void SetPolygonMode(PolygonDataType dataType) = 0;
 
-        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO) = 0;
+        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)  = 0;
+        virtual void SubmitDrawArrays(DrawMode drawMode, int index, int count) = 0;
 
         virtual void Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderProgram) = 0;
 

@@ -31,6 +31,7 @@ class OpenGLRendererAPI : public RendererAPI
                                           size_t            offset) override;
 
         virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO) override;
+        virtual void SubmitDrawArrays(DrawMode drawMode, int index, int count) override;
 
         virtual void SetPolygonMode(PolygonDataType polygonMode) override;
 
@@ -180,6 +181,19 @@ class OpenGLRendererAPI : public RendererAPI
                     break;
                 case Texture::Texture2:
                     return GL_TEXTURE2;
+                    break;
+                default:
+                    return 0;
+                    break;
+            }
+        }
+
+        inline static GLuint ToOpenGLDrawMode(DrawMode mode)
+        {
+            switch (mode)
+            {
+                case DrawMode::Triangles:
+                    return GL_TRIANGLES;
                     break;
                 default:
                     return 0;

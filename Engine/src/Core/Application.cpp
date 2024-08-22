@@ -56,17 +56,18 @@ void Application::Run()
 
     InitializeImGui();
 
-    glm::vec3 cubePositions[]
-        = {glm::vec3(0.0f, 0.0f, 0.0f),     glm::vec3(2.0f, 5.0f, -15.0f),  glm::vec3(-1.5f, -2.2f, -2.5f),
-           glm::vec3(-3.8f, -2.0f, -12.3f), glm::vec3(2.4f, -0.4f, -3.5f),  glm::vec3(-1.7f, 3.0f, -7.5f),
-           glm::vec3(1.3f, -2.0f, -2.5f),   glm::vec3(1.5f, 2.0f, -2.5f),   glm::vec3(1.5f, 0.2f, -1.5f),
-           glm::vec3(-1.3f, 1.0f, -1.5f),   glm::vec3(0.5f, 3.2f, -6.0f),   glm::vec3(-2.5f, 2.5f, -8.5f),
-           glm::vec3(3.5f, -1.0f, -4.0f),   glm::vec3(-1.0f, -1.5f, -5.5f), glm::vec3(2.3f, 4.5f, -10.5f),
-           glm::vec3(-0.6f, 2.8f, -7.0f),   glm::vec3(1.2f, 1.5f, -3.5f),   glm::vec3(2.0f, -3.0f, -5.0f),
-           glm::vec3(-3.0f, 0.5f, -9.0f),   glm::vec3(1.8f, 1.0f, -1.0f),   glm::vec3(0.3f, 3.0f, -5.2f),
-           glm::vec3(-1.5f, 4.0f, -4.3f),   glm::vec3(2.7f, 0.0f, -6.8f),   glm::vec3(-2.2f, 3.8f, -3.2f),
-           glm::vec3(1.0f, -2.5f, -2.5f),   glm::vec3(-1.8f, 1.0f, -8.0f),  glm::vec3(2.5f, -0.7f, -4.5f),
-           glm::vec3(-2.7f, 2.0f, -7.7f),   glm::vec3(0.7f, 1.3f, -3.3f),   glm::vec3(1.8f, -1.7f, -2.2f)};
+    glm::vec3 cubePositions[] = {
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(2.0f, 5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3(2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f, 3.0f, -7.5f),
+        glm::vec3(1.3f, -2.0f, -2.5f),
+        glm::vec3(1.5f, 2.0f, -2.5f),
+        glm::vec3(1.5f, 0.2f, -1.5f),
+        glm::vec3(-1.3f, 1.0f, -1.5f),
+    };
 
     while (m_Running)
     {
@@ -92,18 +93,18 @@ void Application::Run()
         Renderer::RendererCommand::SetUniformMat4(shader.ID, "view", view);
         Renderer::RendererCommand::SetUniformMat4(shader.ID, "projection", projection);
 
-        for (unsigned int i = 0; i < 30; i++)
+        for (unsigned int i = 0; i < 10; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
             float     angle = 15.0f * i;
             model           = glm::translate(glm::rotate(model,
-                                               (float) glfwGetTime() * 0.25f * glm::radians(angle),
+                                               (float) glfwGetTime() * glm::radians(angle),
                                                glm::vec3(0.5f, 1.0f, 0.0f)),
                                    cubePositions[i]);
 
             Renderer::RendererCommand::SetUniformMat4(shader.ID, "model", model);
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+            Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
         }
 
         //Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
