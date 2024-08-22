@@ -24,7 +24,10 @@ class OpenGLRendererAPI : public RendererAPI
         virtual void InitElementBuffer(unsigned& EBO, unsigned* indices, size_t size) override;
         virtual void InitVertexAttributes() override;
 
-        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO) override;
+        virtual void SubmitDrawCommands(unsigned shaderProgram,
+                                        unsigned VAO,
+                                        unsigned texture,
+                                        unsigned texture2) override;
 
         virtual void SetPolygonMode(DataType polygonMode) override;
 
@@ -35,6 +38,8 @@ class OpenGLRendererAPI : public RendererAPI
         virtual void SetUniformBool(const unsigned& ID, const std::string& name, bool value) override;
         virtual void SetUniformInt(const unsigned& ID, const std::string& name, bool value) override;
         virtual void SetUniformFloat(const unsigned& ID, const std::string& name, bool value) override;
+
+        virtual void CreateTexture(unsigned& texture) override;
 };
 
 } // namespace Renderer

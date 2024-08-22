@@ -5,6 +5,7 @@
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
 #include "Renderer/Include/Shader.h"
+#include "Renderer/Include/Textures.h"
 
 namespace Moonstone
 {
@@ -30,7 +31,8 @@ public:
 private:
     void RenderLayers();
     void InitializeImGui();
-    void InitializeTestRenderData(unsigned &shaderProgram, unsigned &VBO, unsigned &VAO, unsigned &EBO);
+    void InitializeTestRenderData(
+        unsigned &shaderProgram, unsigned &VBO, unsigned &VAO, unsigned &EBO, unsigned &texture, unsigned &texture2);
 
 private:
     bool                    m_Running;

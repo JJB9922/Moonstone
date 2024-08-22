@@ -47,9 +47,9 @@ class RendererCommand
 
         inline static void InitVertexAttributes() { s_RendererAPI->InitVertexAttributes(); };
 
-        inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
+        inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, unsigned texture, unsigned texture2)
         {
-            s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO);
+            s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO, texture, texture2);
         };
 
         inline static void SetPolygonMode(Renderer::RendererAPI::DataType polygonMode)
@@ -78,6 +78,8 @@ class RendererCommand
         {
             s_RendererAPI->SetUniformFloat(ID, name, value);
         };
+
+        inline static void CreateTexture(unsigned &texture) { s_RendererAPI->CreateTexture(texture); }
 
     private:
         /**

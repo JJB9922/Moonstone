@@ -41,23 +41,31 @@ void Application::Run()
     m_Running = true;
     m_Window  = std::unique_ptr<Window>(Window::CreateWindow());
 
-    unsigned shaderProgram, VBO, VAO, EBO;
-    InitializeTestRenderData(shaderProgram, VBO, VAO, EBO);
+    unsigned shaderProgram, VBO, VAO, EBO, texture, texture2;
+    InitializeTestRenderData(shaderProgram, VBO, VAO, EBO, texture, texture2);
 
-    // ToDo: Fix this abomination
     std::string      vertexShaderPath   = std::string(RESOURCE_DIR) + "/Shaders/vshader.vs";
     std::string      fragmentShaderPath = std::string(RESOURCE_DIR) + "/Shaders/fshader.fs";
     Renderer::Shader shader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
-    InitializeImGui();
 
+    shader.Use(); // don't forget to activate/use the shader before setting uniforms!
+    // either set it manually like so:
+    glUniform1i(glGetUniformLocation(shader.ID, "texture"), 0);
+    Renderer::RendererCommand::SetUniformInt(shader.ID, "texture2", 1);
+
+    InitializeImGui();
     while (m_Running)
     {
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+
         shader.Use();
-        shader.SetFloat("someUniform", 1.0f);
-        Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
+        Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO, texture, texture2);
 
         RenderLayers();
 
@@ -199,48 +207,74 @@ void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay);
  * @param VAO A reference to an unsigned integer to store the vertex array object ID.
  * @param EBO A reference to an unsigned integer to store the element buffer object ID.
  */
-void Application::InitializeTestRenderData(unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO)
+void Application::InitializeTestRenderData(
+    unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO, unsigned& texture, unsigned& texture2)
 {
-    float vertices[] = {
-        -0.5f,
-        -0.5f,
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
+    float vertices[] = {0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 
-        0.5f,
-        -0.5f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
+                        0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
 
-        0.0f,
-        0.5f,
-        0.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-    };
+                        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
 
-    unsigned indices[] = {
-        0,
-        1,
-        2,
-    };
+                        -0.5f, 0.5f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f};
 
-    /*
-    unsigned vertexShader, fragmentShader;
-    Renderer::RendererCommand::InitVertexShader(vertexShader, vertexShaderSrc);
-    Renderer::RendererCommand::InitFragmentShader(fragmentShader, fragmentShaderSrc);
-    Renderer::RendererCommand::InitShaderProgram(shaderProgram, vertexShader, fragmentShader);
-        */
+    unsigned indices[] = {0,
+                          1,
+                          2,
+
+                          0,
+                          2,
+                          3};
+
+    float texCoords[] = {0.0f,
+                         0.0f,
+
+                         1.0f,
+                         0.0f,
+
+                         0.5f,
+                         1.0f};
 
     Renderer::RendererCommand::InitVertexArray(VAO);
     Renderer::RendererCommand::InitVertexBuffer(VBO, vertices, sizeof(vertices));
     Renderer::RendererCommand::InitElementBuffer(EBO, indices, sizeof(indices));
     Renderer::RendererCommand::InitVertexAttributes();
+
+    std::string texturePath = std::string(RESOURCE_DIR) + "/Textures/container.jpg";
+
+    std::string texture2Path = std::string(RESOURCE_DIR) + "/Textures/geeble.png";
+
+    int            width, height, nrChannels;
+    unsigned char* texData = Renderer::Textures::LoadTexture(texturePath.c_str(), width, height, nrChannels);
+
+    Renderer::RendererCommand::CreateTexture(texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    stbi_image_free(texData);
+
+    Renderer::RendererCommand::CreateTexture(texture2);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* texData2 = Renderer::Textures::LoadTexture(texture2Path.c_str(), width, height, nrChannels);
+    if (texData2)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData2);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+
+    stbi_image_free(texData2);
 }
 
 } // namespace Core

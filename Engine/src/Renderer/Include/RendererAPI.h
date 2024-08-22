@@ -48,7 +48,7 @@ class RendererAPI
         virtual void InitElementBuffer(unsigned &EBO, unsigned *indices, size_t size)                             = 0;
         virtual void InitVertexAttributes()                                                                       = 0;
 
-        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO) = 0;
+        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, unsigned texture, unsigned texture2) = 0;
 
         virtual void SetPolygonMode(DataType dataType) = 0;
 
@@ -59,6 +59,8 @@ class RendererAPI
         virtual void SetUniformBool(const unsigned &ID, const std::string &name, bool value)  = 0;
         virtual void SetUniformInt(const unsigned &ID, const std::string &name, bool value)   = 0;
         virtual void SetUniformFloat(const unsigned &ID, const std::string &name, bool value) = 0;
+
+        virtual void CreateTexture(unsigned &texture) = 0;
 
     private:
         /**

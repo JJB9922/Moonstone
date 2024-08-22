@@ -56,6 +56,7 @@ add_subdirectory(vendor/glad)
 add_subdirectory(vendor/glm)
 
 # Static libraries
+
 # ImGui
 set (IMGUI_PATH "vendor/imgui")
 include_directories(${CMAKE_SOURCE_DIR}/vendor/imgui)
@@ -74,6 +75,10 @@ file(GLOB IMGUI_SOURCES
 
 add_library("ImGui" STATIC ${IMGUI_SOURCES})
 target_include_directories("ImGui" PUBLIC ${IMGUI_PATH} ${IMGUI_PATH}/backends)
+
+# STB
+include_directories(${CMAKE_SOURCE_DIR}/vendor/stb)
+link_directories(${CMAKE_SOURCE_DIR}/vendor/stb)
 
 # Create the Moonstone library
 add_library(Moonstone STATIC ${SRC_CORE_FILES} ${GLOBAL_FILES})

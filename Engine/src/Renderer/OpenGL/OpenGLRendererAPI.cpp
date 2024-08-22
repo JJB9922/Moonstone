@@ -165,14 +165,14 @@ void OpenGLRendererAPI::InitElementBuffer(unsigned &EBO, unsigned *indices, size
  */
 void OpenGLRendererAPI::InitVertexAttributes()
 {
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glBindVertexArray(0);
-    glBindVertexArray(1);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 };
 
 /**
@@ -182,16 +182,12 @@ void OpenGLRendererAPI::InitVertexAttributes()
  *
  * @param shaderProgram The shader program ID to use for rendering.
  * @param VAO The VAO ID that contains the vertex data to render.
+ * @param texture the texture to render.
  */
-void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
+void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, unsigned texture, unsigned texture2)
 {
-    float timeValue           = glfwGetTime();
-    float greenValue          = (sin(timeValue) / 2.0f) + 0.5f;
-    int   vertexColorLocation = glGetUniformLocation(shaderProgram, "gColor");
-    glUseProgram(shaderProgram);
-    glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 };
 
 /**
@@ -253,6 +249,12 @@ void OpenGLRendererAPI::SetUniformFloat(const unsigned &ID, const std::string &n
 {
     glUniform1f(glad_glGetUniformLocation(ID, name.c_str()), value);
 };
+
+void OpenGLRendererAPI::CreateTexture(unsigned &texture)
+{
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+}
 
 } // namespace Renderer
 
