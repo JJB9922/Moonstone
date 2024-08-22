@@ -113,9 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4799bf6b5ad49cee8e3052d9e9e20eb3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a4799bf6b5ad49cee8e3052d9e9e20eb3">InitVertexAttributes</a> () override</td></tr>
 <tr class="memdesc:a4799bf6b5ad49cee8e3052d9e9e20eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes vertex attributes for the currently bound VAO.  <a href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a4799bf6b5ad49cee8e3052d9e9e20eb3">More...</a><br /></td></tr>
 <tr class="separator:a4799bf6b5ad49cee8e3052d9e9e20eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a092990934c8108aec53e839216b409b7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a092990934c8108aec53e839216b409b7">SubmitDrawCommands</a> (unsigned shaderProgram, unsigned VAO) override</td></tr>
-<tr class="memdesc:a092990934c8108aec53e839216b409b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits draw commands for rendering.  <a href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a092990934c8108aec53e839216b409b7">More...</a><br /></td></tr>
-<tr class="separator:a092990934c8108aec53e839216b409b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c8a4c6a3864e2a06c2977fd81989e5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a96c8a4c6a3864e2a06c2977fd81989e5">SubmitDrawCommands</a> (unsigned shaderProgram, unsigned VAO, unsigned texture, unsigned texture2) override</td></tr>
+<tr class="memdesc:a96c8a4c6a3864e2a06c2977fd81989e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits draw commands for rendering.  <a href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a96c8a4c6a3864e2a06c2977fd81989e5">More...</a><br /></td></tr>
+<tr class="separator:a96c8a4c6a3864e2a06c2977fd81989e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad29fa0965e1e94764a13ec16fcd044d8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#ad29fa0965e1e94764a13ec16fcd044d8">SetPolygonMode</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a69e85253b179171f55a018a1a1f046e5">DataType</a> polygonMode) override</td></tr>
 <tr class="memdesc:ad29fa0965e1e94764a13ec16fcd044d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the polygon mode for rasterization.  <a href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#ad29fa0965e1e94764a13ec16fcd044d8">More...</a><br /></td></tr>
 <tr class="separator:ad29fa0965e1e94764a13ec16fcd044d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,6 +131,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a85dd063023c659f8a6089baabf05c3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c41ee36d431adc43a96b4670dfb8848"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a7c41ee36d431adc43a96b4670dfb8848">SetUniformFloat</a> (const unsigned &amp;ID, const std::string &amp;name, bool value) override</td></tr>
 <tr class="separator:a7c41ee36d431adc43a96b4670dfb8848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2304914e3039be1b6c9a6d170b7c4c36"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a2304914e3039be1b6c9a6d170b7c4c36">CreateTexture</a> (unsigned &amp;texture) override</td></tr>
+<tr class="separator:a2304914e3039be1b6c9a6d170b7c4c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -269,6 +271,34 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a3e3426656fbb269486fc998c57d2931e">Moonstone::Renderer::RendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="a2304914e3039be1b6c9a6d170b7c4c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2304914e3039be1b6c9a6d170b7c4c36">&#9670;&nbsp;</a></span>CreateTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Renderer::OpenGLRendererAPI::CreateTexture </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a6d1599e4d2aa7b14bd7cf9331fb1ce56">Moonstone::Renderer::RendererAPI</a>.</p>
 
 </div>
 </div>
@@ -769,8 +799,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a092990934c8108aec53e839216b409b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a092990934c8108aec53e839216b409b7">&#9670;&nbsp;</a></span>SubmitDrawCommands()</h2>
+<a id="a96c8a4c6a3864e2a06c2977fd81989e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c8a4c6a3864e2a06c2977fd81989e5">&#9670;&nbsp;</a></span>SubmitDrawCommands()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -788,7 +818,19 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>VAO</em>&#160;</td>
+          <td class="paramname"><em>VAO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>texture2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -809,11 +851,12 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">shaderProgram</td><td>The shader program ID to use for rendering. </td></tr>
     <tr><td class="paramname">VAO</td><td>The VAO ID that contains the vertex data to render. </td></tr>
+    <tr><td class="paramname">texture</td><td>the texture to render. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a34e47c0b3454084d3e70063ddebedc59">Moonstone::Renderer::RendererAPI</a>.</p>
+<p>Implements <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a948b9ff49a779eeac1206bda78ca6687">Moonstone::Renderer::RendererAPI</a>.</p>
 
 </div>
 </div>
