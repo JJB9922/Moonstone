@@ -45,8 +45,8 @@ void Application::Run()
     InitializeTestRenderData(shaderProgram, VBO, VAO, EBO);
 
     // ToDo: Fix this abomination
-    std::string      vertexShaderPath   = std::string(SHADER_DIR) + "/vshader.vs";
-    std::string      fragmentShaderPath = std::string(SHADER_DIR) + "/fshader.fs";
+    std::string      vertexShaderPath   = std::string(RESOURCE_DIR) + "/Shaders/vshader.vs";
+    std::string      fragmentShaderPath = std::string(RESOURCE_DIR) + "/Shaders/fshader.fs";
     Renderer::Shader shader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
     InitializeImGui();
 
