@@ -32,7 +32,7 @@ private:
     void RenderLayers();
     void InitializeImGui();
     void InitializeTestRenderData(
-        unsigned &shaderProgram, unsigned &VBO, unsigned &VAO, unsigned &EBO, unsigned &texture, unsigned &texture2);
+        unsigned &shaderProgram, unsigned &VBO, unsigned &VAO, unsigned &EBO, unsigned *textures);
 
 private:
     bool                    m_Running;

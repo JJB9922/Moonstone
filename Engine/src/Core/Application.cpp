@@ -41,31 +41,35 @@ void Application::Run()
     m_Running = true;
     m_Window  = std::unique_ptr<Window>(Window::CreateWindow());
 
-    unsigned shaderProgram, VBO, VAO, EBO, texture, texture2;
-    InitializeTestRenderData(shaderProgram, VBO, VAO, EBO, texture, texture2);
+    unsigned shaderProgram, VBO, VAO, EBO;
+    unsigned textures[2];
+    InitializeTestRenderData(shaderProgram, VBO, VAO, EBO, textures);
 
     std::string      vertexShaderPath   = std::string(RESOURCE_DIR) + "/Shaders/vshader.vs";
     std::string      fragmentShaderPath = std::string(RESOURCE_DIR) + "/Shaders/fshader.fs";
+
     Renderer::Shader shader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
 
-    shader.Use(); // don't forget to activate/use the shader before setting uniforms!
-    // either set it manually like so:
-    glUniform1i(glGetUniformLocation(shader.ID, "texture"), 0);
+    shader.Use();
+    Renderer::RendererCommand::SetUniformInt(shader.ID, "texture", 0);
     Renderer::RendererCommand::SetUniformInt(shader.ID, "texture2", 1);
 
     InitializeImGui();
+
     while (m_Running)
     {
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
+        Renderer::RendererCommand::BindTexture(Renderer::RendererAPI::Texture::Texture0,
+                                               Renderer::RendererAPI::TextureTarget::Texture2D,
+                                               textures[0]);
+        Renderer::RendererCommand::BindTexture(Renderer::RendererAPI::Texture::Texture1,
+                                               Renderer::RendererAPI::TextureTarget::Texture2D,
+                                               textures[1]);
 
         shader.Use();
-        Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO, texture, texture2);
+        Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
 
         RenderLayers();
 
@@ -125,19 +129,19 @@ void Application::InitializeImGui()
     exampleLayer->SetBtnCallback(ExampleLayer::ButtonID::ToggleWireframe,
                                  [this]()
                                  {
-                                     if (m_Window->m_PolygonMode == Renderer::RendererAPI::DataType::PolygonLine)
+                                     if (m_Window->m_PolygonMode == Renderer::RendererAPI::PolygonDataType::PolygonLine)
                                      {
                                          Renderer::RendererCommand::SetPolygonMode(
-                                             Renderer::RendererAPI::DataType::PolygonFill);
+                                             Renderer::RendererAPI::PolygonDataType::PolygonFill);
 
-                                         m_Window->m_PolygonMode = Renderer::RendererAPI::DataType::PolygonFill;
+                                         m_Window->m_PolygonMode = Renderer::RendererAPI::PolygonDataType::PolygonFill;
                                      }
                                      else
                                      {
                                          Renderer::RendererCommand::SetPolygonMode(
-                                             Renderer::RendererAPI::DataType::PolygonLine);
+                                             Renderer::RendererAPI::PolygonDataType::PolygonLine);
 
-                                         m_Window->m_PolygonMode = Renderer::RendererAPI::DataType::PolygonLine;
+                                         m_Window->m_PolygonMode = Renderer::RendererAPI::PolygonDataType::PolygonLine;
                                      }
                                  });
 
@@ -208,7 +212,7 @@ void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay);
  * @param EBO A reference to an unsigned integer to store the element buffer object ID.
  */
 void Application::InitializeTestRenderData(
-    unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO, unsigned& texture, unsigned& texture2)
+    unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO, unsigned* textures)
 {
     float vertices[] = {0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 
@@ -238,41 +242,90 @@ void Application::InitializeTestRenderData(
     Renderer::RendererCommand::InitVertexArray(VAO);
     Renderer::RendererCommand::InitVertexBuffer(VBO, vertices, sizeof(vertices));
     Renderer::RendererCommand::InitElementBuffer(EBO, indices, sizeof(indices));
-    Renderer::RendererCommand::InitVertexAttributes();
 
-    std::string texturePath = std::string(RESOURCE_DIR) + "/Textures/container.jpg";
+    Renderer::RendererCommand::InitVertexAttributes(0,
+                                                    3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    8 * sizeof(float),
+                                                    0);
+    Renderer::RendererCommand::InitVertexAttributes(1,
+                                                    3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    8 * sizeof(float),
+                                                    3 * sizeof(float));
+    Renderer::RendererCommand::InitVertexAttributes(2,
+                                                    2,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    8 * sizeof(float),
+                                                    6 * sizeof(float));
 
+    stbi_set_flip_vertically_on_load(true);
+    std::string texturePath  = std::string(RESOURCE_DIR) + "/Textures/container.jpg";
     std::string texture2Path = std::string(RESOURCE_DIR) + "/Textures/geeble.png";
 
     int            width, height, nrChannels;
     unsigned char* texData = Renderer::Textures::LoadTexture(texturePath.c_str(), width, height, nrChannels);
 
-    Renderer::RendererCommand::CreateTexture(texture);
+    Renderer::RendererCommand::CreateTexture(textures[0]);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureWrapS,
+                                                    Renderer::RendererAPI::TextureParameter::Repeat);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureWrapT,
+                                                    Renderer::RendererAPI::TextureParameter::Repeat);
+
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureFilteringMin,
+                                                    Renderer::RendererAPI::TextureParameter::Linear);
+
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureFilteringMag,
+                                                    Renderer::RendererAPI::TextureParameter::Linear);
+
+    Renderer::RendererCommand::UploadTexture(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                             0,
+                                             Renderer::RendererAPI::TextureFormat::RGB,
+                                             width,
+                                             height,
+                                             Renderer::RendererAPI::TextureFormat::RGB,
+                                             Renderer::RendererAPI::NumericalDataType::UnsignedByte,
+                                             texData);
 
     stbi_image_free(texData);
 
-    Renderer::RendererCommand::CreateTexture(texture2);
+    Renderer::RendererCommand::CreateTexture(textures[1]);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureWrapS,
+                                                    Renderer::RendererAPI::TextureParameter::Repeat);
 
-    stbi_set_flip_vertically_on_load(true);
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureWrapT,
+                                                    Renderer::RendererAPI::TextureParameter::Repeat);
+
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureFilteringMin,
+                                                    Renderer::RendererAPI::TextureParameter::Linear);
+
+    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                                    Renderer::RendererAPI::TextureParameterName::TextureFilteringMag,
+                                                    Renderer::RendererAPI::TextureParameter::Linear);
+
     unsigned char* texData2 = Renderer::Textures::LoadTexture(texture2Path.c_str(), width, height, nrChannels);
-    if (texData2)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData2);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
+
+    Renderer::RendererCommand::UploadTexture(Renderer::RendererAPI::TextureTarget::Texture2D,
+                                             0,
+                                             Renderer::RendererAPI::TextureFormat::RGB,
+                                             width,
+                                             height,
+                                             Renderer::RendererAPI::TextureFormat::RGBA,
+                                             Renderer::RendererAPI::NumericalDataType::UnsignedByte,
+                                             texData2);
 
     stbi_image_free(texData2);
 }

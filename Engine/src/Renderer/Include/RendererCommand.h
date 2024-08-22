@@ -45,16 +45,24 @@ class RendererCommand
             s_RendererAPI->InitElementBuffer(EBO, indices, size);
         };
 
-        inline static void InitVertexAttributes() { s_RendererAPI->InitVertexAttributes(); };
-
-        inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, unsigned texture, unsigned texture2)
+        inline static void InitVertexAttributes(int                            index,
+                                                int                            size,
+                                                RendererAPI::NumericalDataType type,
+                                                RendererAPI::BooleanDataType   normalize,
+                                                size_t                         stride,
+                                                size_t                         offset)
         {
-            s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO, texture, texture2);
+            s_RendererAPI->InitVertexAttributes(index, size, type, normalize, stride, offset);
         };
 
-        inline static void SetPolygonMode(Renderer::RendererAPI::DataType polygonMode)
+        inline static void SetPolygonMode(RendererAPI::PolygonDataType dataType)
         {
-            s_RendererAPI->SetPolygonMode(polygonMode);
+            s_RendererAPI->SetPolygonMode(dataType);
+        };
+
+        inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
+        {
+            s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO);
         };
 
         inline static void Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderProgram)
@@ -80,6 +88,31 @@ class RendererCommand
         };
 
         inline static void CreateTexture(unsigned &texture) { s_RendererAPI->CreateTexture(texture); }
+        inline static void SetTextureParameters(RendererAPI::TextureTarget        target,
+                                                RendererAPI::TextureParameterName paramName,
+                                                RendererAPI::TextureParameter     param)
+        {
+            s_RendererAPI->SetTextureParameters(target, paramName, param);
+        };
+
+        inline static void UploadTexture(RendererAPI::TextureTarget     target,
+                                         int                            mipmapLevel,
+                                         RendererAPI::TextureFormat     texFormat,
+                                         int                            x,
+                                         int                            y,
+                                         RendererAPI::TextureFormat     imageDataType,
+                                         RendererAPI::NumericalDataType dataType,
+                                         unsigned char                 *texData)
+        {
+            s_RendererAPI->UploadTexture(target, mipmapLevel, texFormat, x, y, imageDataType, dataType, texData);
+        };
+
+        inline static void BindTexture(RendererAPI::Texture       texture,
+                                       RendererAPI::TextureTarget target,
+                                       unsigned                   textureObject)
+        {
+            s_RendererAPI->BindTexture(texture, target, textureObject);
+        }
 
     private:
         /**

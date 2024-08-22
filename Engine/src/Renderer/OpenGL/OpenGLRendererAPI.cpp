@@ -159,20 +159,42 @@ void OpenGLRendererAPI::InitElementBuffer(unsigned &EBO, unsigned *indices, size
 };
 
 /**
- * @brief Initializes vertex attributes for the currently bound VAO.
+ * @brief Sets the polygon mode for rasterization.
  *
- * Configures the vertex attribute pointers for the vertex data layout.
+ * Configures whether polygons are rendered as lines or filled shapes.
+ *
+ * @param polygonMode The mode to set for rendering polygons, defined by DataType.
  */
-void OpenGLRendererAPI::InitVertexAttributes()
+void OpenGLRendererAPI::SetPolygonMode(PolygonDataType polygonMode)
 {
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) 0);
-    glEnableVertexAttribArray(0);
+    switch (polygonMode)
+    {
+        case PolygonDataType::PolygonLine:
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            break;
+        case PolygonDataType::PolygonFill:
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            break;
+        default:
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            break;
+    }
+};
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
+/**
+ * @brief Init vertex attributes for the currently bound VAO
+ * @param index
+ * @param size
+ * @param type
+ * @param normalize
+ * @param stride
+ * @param offset
+ */
+void OpenGLRendererAPI::InitVertexAttributes(
+    int index, int size, NumericalDataType type, BooleanDataType normalize, size_t stride, size_t offset)
+{
+    glVertexAttribPointer(index, size, ToOpenGLShaderType(type), ToOpenGLBooleanType(normalize), stride, (void *) offset);
+    glEnableVertexAttribArray(index);
 };
 
 /**
@@ -184,34 +206,11 @@ void OpenGLRendererAPI::InitVertexAttributes()
  * @param VAO The VAO ID that contains the vertex data to render.
  * @param texture the texture to render.
  */
-void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, unsigned texture, unsigned texture2)
+void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
 {
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-};
-
-/**
- * @brief Sets the polygon mode for rasterization.
- *
- * Configures whether polygons are rendered as lines or filled shapes.
- *
- * @param polygonMode The mode to set for rendering polygons, defined by DataType.
- */
-void OpenGLRendererAPI::SetPolygonMode(DataType polygonMode)
-{
-    switch (polygonMode)
-    {
-        case DataType::PolygonLine:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            break;
-        case DataType::PolygonFill:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            break;
-        default:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            break;
-    }
-};
+}
 
 /**
  * @brief Cleans up OpenGL resources.
@@ -243,17 +242,54 @@ void OpenGLRendererAPI::SetUniformBool(const unsigned &ID, const std::string &na
 void OpenGLRendererAPI::SetUniformInt(const unsigned &ID, const std::string &name, bool value)
 {
     glUniform1i(glad_glGetUniformLocation(ID, name.c_str()), value);
-};
+}
 
 void OpenGLRendererAPI::SetUniformFloat(const unsigned &ID, const std::string &name, bool value)
 {
     glUniform1f(glad_glGetUniformLocation(ID, name.c_str()), value);
-};
+}
 
 void OpenGLRendererAPI::CreateTexture(unsigned &texture)
 {
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
+}
+
+void OpenGLRendererAPI::SetTextureParameters(TextureTarget        target,
+                                             TextureParameterName paramName,
+                                             TextureParameter     param)
+{
+    glTexParameteri(ToOpenGLTextureTarget(target),
+                    ToOpenGLTextureParameterName(paramName),
+                    ToOpenGLTextureParameter(param));
+}
+
+void OpenGLRendererAPI::UploadTexture(TextureTarget     target,
+                                      int               mipmapLevel,
+                                      TextureFormat     texFormat,
+                                      int               x,
+                                      int               y,
+                                      TextureFormat     imageDataType,
+                                      NumericalDataType dataType,
+                                      unsigned char    *texData)
+{
+    glTexImage2D(ToOpenGLTextureTarget(target),
+                 mipmapLevel,
+                 ToOpenGLTextureFormat(texFormat),
+                 x,
+                 y,
+                 0,
+                 ToOpenGLTextureFormat(imageDataType),
+                 ToOpenGLShaderType(dataType),
+                 texData);
+
+    glGenerateMipmap(ToOpenGLTextureTarget(target));
+}
+
+void OpenGLRendererAPI::BindTexture(Texture texture, TextureTarget target, unsigned textureObject)
+{
+    glActiveTexture(ToOpenGLTexture(texture));
+    glBindTexture(ToOpenGLTextureTarget(target), textureObject);
 }
 
 } // namespace Renderer
