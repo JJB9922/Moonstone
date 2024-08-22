@@ -112,6 +112,9 @@ Public Types</h2></td></tr>
 , <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a0e479df7320b2b137e6c7bb1d4773e0caf8320b26d30ab433c5a54546d21f414c">False</a>
  }</td></tr>
 <tr class="separator:a0e479df7320b2b137e6c7bb1d4773e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa75c678c4518703afb04304131d88d75"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">DrawMode</a> { <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75a7ca66fdfaad3eb33fc65d7490178f856">Triangles</a>
+ }</td></tr>
+<tr class="separator:aa75c678c4518703afb04304131d88d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2219a63c6a79526577a5300761da0a25"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25">TextureTarget</a> { <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25adc7f989aa32631adaea4eb6a609b0de4">Texture1D</a>
 , <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25aa6e2bae752d3bf4e34cb392bca789995">Texture2D</a>
 , <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25a89c915587e16bcf8963be7cf41a0d9fd">Texture3D</a>
@@ -162,6 +165,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adc0571468f8d765b7c4a295b85f677b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34e47c0b3454084d3e70063ddebedc59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a34e47c0b3454084d3e70063ddebedc59">SubmitDrawCommands</a> (unsigned shaderProgram, unsigned VAO)=0</td></tr>
 <tr class="separator:a34e47c0b3454084d3e70063ddebedc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be7c2114cd5cb5b0b6842a7f6baf515"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2be7c2114cd5cb5b0b6842a7f6baf515">SubmitDrawArrays</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">DrawMode</a> drawMode, int index, int count)=0</td></tr>
+<tr class="separator:a2be7c2114cd5cb5b0b6842a7f6baf515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d5a1ea6a47ee7067b8b5585f8832375"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a9d5a1ea6a47ee7067b8b5585f8832375">Cleanup</a> (unsigned &amp;VAO, unsigned &amp;VBO, unsigned &amp;shaderProgram)=0</td></tr>
 <tr class="separator:a9d5a1ea6a47ee7067b8b5585f8832375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3703bf7a5e7fc42b1ee9b7be584505e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa3703bf7a5e7fc42b1ee9b7be584505e">UseProgram</a> (unsigned &amp;ID)=0</td></tr>
@@ -247,6 +252,31 @@ Static Private Attributes</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0e479df7320b2b137e6c7bb1d4773e0caf827cf462f62848df37c5e1e94a4da74"></a>True&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0e479df7320b2b137e6c7bb1d4773e0caf8320b26d30ab433c5a54546d21f414c"></a>False&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="aa75c678c4518703afb04304131d88d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa75c678c4518703afb04304131d88d75">&#9670;&nbsp;</a></span>DrawMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">Moonstone::Renderer::RendererAPI::DrawMode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa75c678c4518703afb04304131d88d75a7ca66fdfaad3eb33fc65d7490178f856"></a>Triangles&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -1180,6 +1210,50 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#acb85df954699ffaaaf8f43820238ec9e">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="a2be7c2114cd5cb5b0b6842a7f6baf515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be7c2114cd5cb5b0b6842a7f6baf515">&#9670;&nbsp;</a></span>SubmitDrawArrays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::SubmitDrawArrays </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">DrawMode</a>&#160;</td>
+          <td class="paramname"><em>drawMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a9683eb7a7b6b156dd942d68475071290">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
 
 </div>
 </div>
