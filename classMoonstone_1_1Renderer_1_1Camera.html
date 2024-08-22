@@ -81,13 +81,14 @@ Inheritance diagram for Moonstone::Renderer::Camera:</div>
  <div class="center">
   <img src="classMoonstone_1_1Renderer_1_1Camera.png" usemap="#Moonstone::Renderer::Camera_map" alt=""/>
   <map id="Moonstone::Renderer::Camera_map" name="Moonstone::Renderer::Camera_map">
-<area href="classMoonstone_1_1Renderer_1_1CameraController.html" alt="Moonstone::Renderer::CameraController" shape="rect" coords="0,0,239,24"/>
+<area href="classMoonstone_1_1Renderer_1_1CameraController.html" title="The CameraController interface." alt="Moonstone::Renderer::CameraController" shape="rect" coords="0,0,239,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a04573343c86deb18424fe82424975219"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a04573343c86deb18424fe82424975219">Camera</a> (const glm::vec3 &amp;pos, const glm::vec3 &amp;front, const glm::vec3 &amp;up)</td></tr>
+<tr class="memdesc:a04573343c86deb18424fe82424975219"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> Initialize a camera.  <a href="classMoonstone_1_1Renderer_1_1Camera.html#a04573343c86deb18424fe82424975219">More...</a><br /></td></tr>
 <tr class="separator:a04573343c86deb18424fe82424975219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add7fbd3754e0cdf9f129abedbb75db9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#add7fbd3754e0cdf9f129abedbb75db9f">OnMoveForward</a> () override</td></tr>
 <tr class="separator:add7fbd3754e0cdf9f129abedbb75db9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,6 +116,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a17d5f7730d1faae0c27976071fc51eb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1Time.html">Core::Time</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a17d5f7730d1faae0c27976071fc51eb6">time</a> = <a class="el" href="classMoonstone_1_1Core_1_1Time.html#a7b0d645b7eae2d2927c71cd410afad80">Core::Time::GetInstance</a>()</td></tr>
+<tr class="separator:a17d5f7730d1faae0c27976071fc51eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f1f43fb4d44b50d35c326936aa6af6c"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a9f1f43fb4d44b50d35c326936aa6af6c">m_CameraPos</a></td></tr>
 <tr class="separator:a9f1f43fb4d44b50d35c326936aa6af6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0468741b88e4cd4e9dc016f10ce8507"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ae0468741b88e4cd4e9dc016f10ce8507">m_CameraFront</a></td></tr>
@@ -164,6 +167,16 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> Initialize a camera. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td></td></tr>
+    <tr><td class="paramname">front</td><td></td></tr>
+    <tr><td class="paramname">up</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -507,6 +520,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">glm::vec3 Moonstone::Renderer::Camera::m_CameraUp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17d5f7730d1faae0c27976071fc51eb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d5f7730d1faae0c27976071fc51eb6">&#9670;&nbsp;</a></span>time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1Time.html">Core::Time</a>&amp; Moonstone::Renderer::Camera::time = <a class="el" href="classMoonstone_1_1Core_1_1Time.html#a7b0d645b7eae2d2927c71cd410afad80">Core::Time::GetInstance</a>()</td>
         </tr>
       </table>
   </td>
