@@ -159,6 +159,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a176d24ec491c66a38e1b683e67360cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a060e04272f06cefc1d5fdc4fb9043e74"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a060e04272f06cefc1d5fdc4fb9043e74">InitVertexBuffer</a> (unsigned &amp;VBO, float *vertices, size_t size)=0</td></tr>
 <tr class="separator:a060e04272f06cefc1d5fdc4fb9043e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfc4d4efb5eeb9374ce8c343106d255"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#accfc4d4efb5eeb9374ce8c343106d255">BindVertexBuffer</a> (unsigned &amp;VBO)=0</td></tr>
+<tr class="separator:accfc4d4efb5eeb9374ce8c343106d255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073a562c6e8b7621baa2f3f538893ab7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a073a562c6e8b7621baa2f3f538893ab7">BindVertexArray</a> (unsigned &amp;VAO)=0</td></tr>
+<tr class="separator:a073a562c6e8b7621baa2f3f538893ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb63478cd01382197748df9191e1d8f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#abb63478cd01382197748df9191e1d8f5">InitElementBuffer</a> (unsigned &amp;EBO, unsigned *indices, size_t size)=0</td></tr>
 <tr class="separator:abb63478cd01382197748df9191e1d8f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e571c4a3749c34cfa2de109bc022537"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a1e571c4a3749c34cfa2de109bc022537">InitVertexAttributes</a> (int index, int size, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a48638d315a289ea9200d445579f161d4">NumericalDataType</a> type, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a0e479df7320b2b137e6c7bb1d4773e0c">BooleanDataType</a> normalize, size_t stride, size_t offset)=0</td></tr>
@@ -181,6 +185,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab55f5576d71b05c4e0e592adef2771b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d8a07ecc3e651ee6b4d6aac07a4f617"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a1d8a07ecc3e651ee6b4d6aac07a4f617">SetUniformMat4</a> (const unsigned &amp;ID, const std::string &amp;name, glm::mat4 value)=0</td></tr>
 <tr class="separator:a1d8a07ecc3e651ee6b4d6aac07a4f617"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4edaaa763abdc7fbc58d9524bbbdc77"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#af4edaaa763abdc7fbc58d9524bbbdc77">SetUniformVec3</a> (const unsigned &amp;ID, const std::string &amp;name, glm::vec3 value)=0</td></tr>
+<tr class="separator:af4edaaa763abdc7fbc58d9524bbbdc77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d1599e4d2aa7b14bd7cf9331fb1ce56"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a6d1599e4d2aa7b14bd7cf9331fb1ce56">CreateTexture</a> (unsigned &amp;texture)=0</td></tr>
 <tr class="separator:a6d1599e4d2aa7b14bd7cf9331fb1ce56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f0e8fb1574e6a63cf46ea8892da71c0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a5f0e8fb1574e6a63cf46ea8892da71c0">SetTextureParameters</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25">TextureTarget</a> target, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a7029c55409e3b766577993958f93d47e">TextureParameterName</a> paramName, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa27189ab012259948503161678bf7a9f">TextureParameter</a> param)=0</td></tr>
@@ -514,6 +520,62 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#aa3f96b34005c20a454950f233cbf135a">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="a073a562c6e8b7621baa2f3f538893ab7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a073a562c6e8b7621baa2f3f538893ab7">&#9670;&nbsp;</a></span>BindVertexArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::BindVertexArray </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>VAO</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a7defae1831b6de4b9e58ba9485fc7173">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="accfc4d4efb5eeb9374ce8c343106d255"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accfc4d4efb5eeb9374ce8c343106d255">&#9670;&nbsp;</a></span>BindVertexBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::BindVertexBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>VBO</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a6599430295829de9c8b48eefc9669713">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
 
 </div>
 </div>
@@ -1239,6 +1301,50 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#acb85df954699ffaaaf8f43820238ec9e">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="af4edaaa763abdc7fbc58d9524bbbdc77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4edaaa763abdc7fbc58d9524bbbdc77">&#9670;&nbsp;</a></span>SetUniformVec3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::SetUniformVec3 </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a0b1365fa7a3390f0dc2138095f92ed06">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
 
 </div>
 </div>
