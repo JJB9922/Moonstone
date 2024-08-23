@@ -100,6 +100,8 @@ class RendererAPI
         virtual void InitShaderProgram(unsigned &shaderProgram, unsigned &vertexShader, unsigned &fragmentShader) = 0;
         virtual void InitVertexArray(unsigned &VAO)                                                               = 0;
         virtual void InitVertexBuffer(unsigned &VBO, float *vertices, size_t size)                                = 0;
+        virtual void BindVertexBuffer(unsigned &VBO)                                                              = 0;
+        virtual void BindVertexArray(unsigned &VAO)                                                               = 0;
         virtual void InitElementBuffer(unsigned &EBO, unsigned *indices, size_t size)                             = 0;
         virtual void InitVertexAttributes(
             int index, int size, NumericalDataType type, BooleanDataType normalize, size_t stride, size_t offset)
@@ -118,6 +120,7 @@ class RendererAPI
         virtual void SetUniformInt(const unsigned &ID, const std::string &name, bool value)   = 0;
         virtual void SetUniformFloat(const unsigned &ID, const std::string &name, bool value)     = 0;
         virtual void SetUniformMat4(const unsigned &ID, const std::string &name, glm::mat4 value) = 0;
+        virtual void SetUniformVec3(const unsigned &ID, const std::string &name, glm::vec3 value) = 0;
 
         virtual void CreateTexture(unsigned &texture) = 0;
         virtual void SetTextureParameters(TextureTarget target, TextureParameterName paramName, TextureParameter param)

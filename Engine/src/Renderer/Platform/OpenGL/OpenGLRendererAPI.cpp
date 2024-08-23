@@ -149,6 +149,10 @@ void OpenGLRendererAPI::InitVertexBuffer(unsigned &VBO, float *vertices, size_t 
     glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 };
 
+void OpenGLRendererAPI::BindVertexBuffer(unsigned &VBO) { glBindBuffer(GL_ARRAY_BUFFER, VBO); }
+
+void OpenGLRendererAPI::BindVertexArray(unsigned &VAO) { glBindBuffer(GL_ARRAY_BUFFER, VAO); }
+
 /**
  * @brief Initializes an element buffer object (EBO).
  *
@@ -273,6 +277,11 @@ void OpenGLRendererAPI::SetUniformMat4(const unsigned &ID, const std::string &na
                             1,
                             ToOpenGLBooleanType(RendererAPI::BooleanDataType::False),
                             glm::value_ptr(value));
+}
+
+void OpenGLRendererAPI::SetUniformVec3(const unsigned &ID, const std::string &name, glm::vec3 value)
+{
+    glad_glUniform3fv(glad_glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 }
 
 void OpenGLRendererAPI::CreateTexture(unsigned &texture)

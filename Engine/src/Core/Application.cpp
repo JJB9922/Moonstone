@@ -6,6 +6,9 @@ namespace Moonstone
 namespace Core
 {
 
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 cubePos(0.0f, 0.0f, 0.0f);
+
 /**
  * @brief Static pointer to the current application instance.
  *
@@ -41,33 +44,8 @@ void Application::Run()
     m_Running = true;
     m_Window  = std::unique_ptr<Window>(Window::CreateWindow());
 
-    unsigned shaderProgram, VBO, VAO, EBO;
-    unsigned textures[2];
-    InitializeTestRenderData(shaderProgram, VBO, VAO, EBO, textures);
-
-    std::string      vertexShaderPath   = std::string(RESOURCE_DIR) + "/Shaders/vshader.vs";
-    std::string      fragmentShaderPath = std::string(RESOURCE_DIR) + "/Shaders/fshader.fs";
-
-    Renderer::Shader shader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
-
-    shader.Use();
-    Renderer::RendererCommand::SetUniformInt(shader.ID, "texture", 0);
-    Renderer::RendererCommand::SetUniformInt(shader.ID, "texture2", 1);
-
-    InitializeImGui();
-
-    glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(2.0f, 5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f, 3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f, 2.0f, -2.5f),
-        glm::vec3(1.5f, 0.2f, -1.5f),
-        glm::vec3(-1.3f, 1.0f, -1.5f),
-    };
+    unsigned shaderProgram[16], VBO[16], VAO[16], EBO[16];
+    unsigned textures[16];
 
     glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f, 3.0f);
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -77,10 +55,24 @@ void Application::Run()
     float farClip  = 100.0f;
 
     auto pCamera = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
+    InitializeTestRenderData(shaderProgram, VBO, VAO, EBO, textures);
+
+    std::string      vertexShaderPath   = std::string(RESOURCE_DIR) + "/Shaders/vshader.vs";
+    std::string      fragmentShaderPath = std::string(RESOURCE_DIR) + "/Shaders/fshader.fs";
+
+    std::string lightVertexShaderPath   = std::string(RESOURCE_DIR) + "/Shaders/lightvshader.vs";
+    std::string lightFragmentShaderPath = std::string(RESOURCE_DIR) + "/Shaders/lightfshader.fs";
+
+    Renderer::Shader cubeShader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
+    Renderer::Shader lightShader(lightVertexShaderPath.c_str(), lightFragmentShaderPath.c_str());
+
+    InitializeImGui();
 
     m_Window->SetCamera(pCamera);
 
     Time& time = Time::GetInstance();
+
+    glm::vec3 cube = glm::vec3(0.0f, 0.0f, 0.0f);
 
     while (m_Running)
     {
@@ -99,23 +91,33 @@ void Application::Run()
                                                Renderer::RendererAPI::TextureTarget::Texture2D,
                                                textures[1]);
 
-        shader.Use();
+        cubeShader.Use();
+        Renderer::RendererCommand::SetUniformVec3(cubeShader.ID, "objectColor", {1.0f, 0.5f, 0.3f});
+        Renderer::RendererCommand::SetUniformVec3(cubeShader.ID, "lightColor", {1.0f, 1.0f, 1.0f});
 
-        pCamera->SetProjectionMatrix(shader.ID, pCamera, m_Window->GetWidth(), m_Window->GetHeight(), nearClip, farClip);
-        pCamera->SetViewMatrix(shader.ID, pCamera);
+        pCamera->SetProjectionMatrix(cubeShader.ID, pCamera, m_Window->GetWidth(), m_Window->GetHeight(), 0.1f, 100.0f);
+        pCamera->SetViewMatrix(cubeShader.ID, pCamera);
+        Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "projection", pCamera->GetProjectionMatrix());
+        Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "view", pCamera->GetViewMatrix());
 
-        for (unsigned int i = 0; i < 10; i++)
-        {
-            pCamera->SetModel(shader.ID, cubePositions[i]);
+        pCamera->SetModel(cubeShader.ID, cubePos);
+        Renderer::RendererCommand::BindVertexArray(VAO[0]);
+        Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
 
-            float     angle = 20.0f * i;
-            glm::mat4 m     = pCamera->GetModel();
-            m               = glm::rotate(m, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+        lightShader.Use();
+        Renderer::RendererCommand::SetUniformMat4(lightShader.ID, "projection", pCamera->GetProjectionMatrix());
+        Renderer::RendererCommand::SetUniformMat4(lightShader.ID, "view", pCamera->GetViewMatrix());
+        pCamera->SetModel(lightShader.ID, lightPos);
+        pCamera->SetModelTransform(lightShader.ID, glm::scale(pCamera->GetModel(), glm::vec3(0.2f)));
+        Renderer::RendererCommand::SetUniformMat4(lightShader.ID, "model", pCamera->GetModel());
 
-            pCamera->SetModelTransform(shader.ID, m);
+        Renderer::RendererCommand::BindVertexArray(VAO[1]);
+        Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
 
-            Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
-        }
+        // render the cube
+        //glBindVertexArray(cubeVAO);
+
+        //Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
 
         //Renderer::RendererCommand::SubmitDrawCommands(shaderProgram, VAO);
 
@@ -127,7 +129,10 @@ void Application::Run()
             m_Running = false;
     }
 
-    Renderer::RendererCommand::Cleanup(VAO, VBO, shaderProgram);
+    for (int i = 0; i < 16; ++i)
+    {
+        Renderer::RendererCommand::Cleanup(VAO[i], VBO[i], shaderProgram[i]);
+    }
 }
 
 /**
@@ -260,72 +265,51 @@ void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay);
  * @param EBO A reference to an unsigned integer to store the element buffer object ID.
  */
 void Application::InitializeTestRenderData(
-    unsigned& shaderProgram, unsigned& VBO, unsigned& VAO, unsigned& EBO, unsigned* textures)
+    unsigned* shaderProgram, unsigned* VBO, unsigned* VAO, unsigned* EBO, unsigned* textures)
 {
-    float vertices[]
-        = {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
-           0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+    float vertices[] = {
+        -0.5f, -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, 0.5f,  0.5f,  -0.5f,
+        0.5f,  0.5f,  -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, -0.5f, -0.5f,
 
-           -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -0.5f, 0.5f,  0.5f,  0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f,  0.5f,  -0.5f, 0.5f,  0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,  -0.5f, 0.5f,  0.5f,  -0.5f, -0.5f, 0.5f,
 
-           -0.5f, 0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 1.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-           -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f, 0.5f,  0.5f,  -0.5f, 0.5f,  -0.5f, -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f,  -0.5f, 0.5f,  0.5f,
 
-           0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
-           0.5f,  -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  -0.5f, 0.5f,  -0.5f, -0.5f,
+        0.5f,  -0.5f, -0.5f, 0.5f,  -0.5f, 0.5f,  0.5f,  0.5f,  0.5f,
 
-           -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
-           0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, 0.5f,  -0.5f, 0.5f,
+        0.5f,  -0.5f, 0.5f,  -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, -0.5f,
 
-           -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f};
-    /*
-    float vertices[] = {0.5f,  0.5f,  0.0f, 1.0f, 1.0f,
+        -0.5f, 0.5f,  -0.5f, 0.5f,  0.5f,  -0.5f, 0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,  -0.5f, 0.5f,  0.5f,  -0.5f, 0.5f,  -0.5f,
+    };
 
-                        0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
-
-                        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-
-                        -0.5f, 0.5f,  0.0f, 0.0f, 1.0f};
-
-    unsigned indices[] = {0,
-                          1,
-                          3,
-
-                          1,
-                          2,
-                          3};
-
-    float texCoords[] = {0.0f,
-                         0.0f,
-
-                         1.0f,
-                         0.0f,
-
-                         0.5f,
-                         1.0f};
-*/
-    Renderer::RendererCommand::InitVertexArray(VAO);
-    Renderer::RendererCommand::InitVertexBuffer(VBO, vertices, sizeof(vertices));
+    Renderer::RendererCommand::InitVertexArray(VAO[0]);
+    Renderer::RendererCommand::InitVertexBuffer(VBO[0], vertices, sizeof(vertices));
     //Renderer::RendererCommand::InitElementBuffer(EBO, indices, sizeof(indices));
 
     Renderer::RendererCommand::InitVertexAttributes(0,
                                                     3,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
-                                                    5 * sizeof(float),
+                                                    3 * sizeof(float),
                                                     0);
-    Renderer::RendererCommand::InitVertexAttributes(1,
-                                                    2,
+
+    Renderer::RendererCommand::InitVertexArray(VAO[1]);
+    Renderer::RendererCommand::BindVertexBuffer(VBO[0]);
+    Renderer::RendererCommand::InitVertexAttributes(0,
+                                                    3,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
-                                                    5 * sizeof(float),
-                                                    3 * sizeof(float));
+                                                    3 * sizeof(float),
+                                                    0);
 
+    // -------------------------------------- Tex
     stbi_set_flip_vertically_on_load(true);
-    std::string texturePath  = std::string(RESOURCE_DIR) + "/Textures/rock.jpg";
-    std::string texture2Path = std::string(RESOURCE_DIR) + "/Textures/geeble.png";
+    std::string texturePath = std::string(RESOURCE_DIR) + "/Textures/container.jpg";
 
     int            width, height, nrChannels;
     unsigned char* texData = Renderer::Textures::LoadTexture(texturePath.c_str(), width, height, nrChannels);
@@ -358,37 +342,6 @@ void Application::InitializeTestRenderData(
                                              texData);
 
     stbi_image_free(texData);
-
-    Renderer::RendererCommand::CreateTexture(textures[1]);
-
-    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
-                                                    Renderer::RendererAPI::TextureParameterName::TextureWrapS,
-                                                    Renderer::RendererAPI::TextureParameter::Repeat);
-
-    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
-                                                    Renderer::RendererAPI::TextureParameterName::TextureWrapT,
-                                                    Renderer::RendererAPI::TextureParameter::Repeat);
-
-    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
-                                                    Renderer::RendererAPI::TextureParameterName::TextureFilteringMin,
-                                                    Renderer::RendererAPI::TextureParameter::Linear);
-
-    Renderer::RendererCommand::SetTextureParameters(Renderer::RendererAPI::TextureTarget::Texture2D,
-                                                    Renderer::RendererAPI::TextureParameterName::TextureFilteringMag,
-                                                    Renderer::RendererAPI::TextureParameter::Linear);
-
-    unsigned char* texData2 = Renderer::Textures::LoadTexture(texture2Path.c_str(), width, height, nrChannels);
-
-    Renderer::RendererCommand::UploadTexture(Renderer::RendererAPI::TextureTarget::Texture2D,
-                                             0,
-                                             Renderer::RendererAPI::TextureFormat::RGB,
-                                             width,
-                                             height,
-                                             Renderer::RendererAPI::TextureFormat::RGBA,
-                                             Renderer::RendererAPI::NumericalDataType::UnsignedByte,
-                                             texData2);
-
-    stbi_image_free(texData2);
 }
 
 } // namespace Core

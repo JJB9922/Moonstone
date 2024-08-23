@@ -41,6 +41,9 @@ class RendererCommand
             s_RendererAPI->InitVertexBuffer(VBO, vertices, size);
         };
 
+        inline static void BindVertexBuffer(unsigned &VBO) { s_RendererAPI->BindVertexBuffer(VBO); }
+        inline static void BindVertexArray(unsigned &VAO) { s_RendererAPI->BindVertexArray(VAO); }
+
         inline static void InitElementBuffer(unsigned &EBO, unsigned *indices, size_t size)
         {
             s_RendererAPI->InitElementBuffer(EBO, indices, size);
@@ -96,6 +99,11 @@ class RendererCommand
         inline static void SetUniformMat4(const unsigned &ID, const std::string &name, glm::mat4 value)
         {
             s_RendererAPI->SetUniformMat4(ID, name, value);
+        };
+
+        inline static void SetUniformVec3(const unsigned &ID, const std::string &name, glm::vec3 value)
+        {
+            s_RendererAPI->SetUniformVec3(ID, name, value);
         };
 
         inline static void CreateTexture(unsigned &texture) { s_RendererAPI->CreateTexture(texture); }
