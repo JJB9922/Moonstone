@@ -150,6 +150,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a20a6247833cfaf3f3bf4687ef2f7276d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a8e556e23e4ae37b0e1e53f721f83d7"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html">Renderer::CameraController</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a0a8e556e23e4ae37b0e1e53f721f83d7">m_CameraController</a> = nullptr</td></tr>
 <tr class="separator:a0a8e556e23e4ae37b0e1e53f721f83d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacc33e211e421ef399db9d8f6c58648"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#adacc33e211e421ef399db9d8f6c58648">m_LastX</a> = m_WindowData.windowProperties.Width / 2</td></tr>
+<tr class="separator:adacc33e211e421ef399db9d8f6c58648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42f29a27ec2a8463ac2c0df2daeebae"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#ad42f29a27ec2a8463ac2c0df2daeebae">m_LastY</a> = m_WindowData.windowProperties.Height / 2</td></tr>
+<tr class="separator:ad42f29a27ec2a8463ac2c0df2daeebae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52e78f906aebd30a8edf5b13f3dd7198"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a52e78f906aebd30a8edf5b13f3dd7198">m_FirstMouse</a> = true</td></tr>
+<tr class="separator:a52e78f906aebd30a8edf5b13f3dd7198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a63ddccc3428cc8ff026d1377d36415a2"></a>
@@ -613,6 +619,28 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a52e78f906aebd30a8edf5b13f3dd7198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52e78f906aebd30a8edf5b13f3dd7198">&#9670;&nbsp;</a></span>m_FirstMouse</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Moonstone::Core::Window::m_FirstMouse = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a20a6247833cfaf3f3bf4687ef2f7276d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a20a6247833cfaf3f3bf4687ef2f7276d">&#9670;&nbsp;</a></span>m_GraphicsContext</h2>
 
@@ -624,6 +652,50 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">Renderer::GraphicsContext</a>* Moonstone::Core::Window::m_GraphicsContext</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adacc33e211e421ef399db9d8f6c58648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adacc33e211e421ef399db9d8f6c58648">&#9670;&nbsp;</a></span>m_LastX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::Window::m_LastX = m_WindowData.windowProperties.Width / 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad42f29a27ec2a8463ac2c0df2daeebae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad42f29a27ec2a8463ac2c0df2daeebae">&#9670;&nbsp;</a></span>m_LastY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::Window::m_LastY = m_WindowData.windowProperties.Height / 2</td>
         </tr>
       </table>
   </td>
