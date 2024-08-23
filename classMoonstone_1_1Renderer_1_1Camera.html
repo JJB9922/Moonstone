@@ -98,6 +98,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a516be179b3315034cb9c676004c5c8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5050550612842f63fb999b63b6f8bd8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a5050550612842f63fb999b63b6f8bd8c">OnMoveRight</a> () override</td></tr>
 <tr class="separator:a5050550612842f63fb999b63b6f8bd8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49f1e0a6a49e60381eec1b72d27bc39c"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a49f1e0a6a49e60381eec1b72d27bc39c">GetProjectionMatrix</a> () const</td></tr>
+<tr class="separator:a49f1e0a6a49e60381eec1b72d27bc39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69829e3cbad1bbaa623d5a73122922e9"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a69829e3cbad1bbaa623d5a73122922e9">GetViewMatrix</a> () const</td></tr>
+<tr class="separator:a69829e3cbad1bbaa623d5a73122922e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ee831cadc3642434d4e3f24e102798b"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a0ee831cadc3642434d4e3f24e102798b">GetModel</a> () const</td></tr>
+<tr class="separator:a0ee831cadc3642434d4e3f24e102798b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89af991d97b9e5afc9015940dc3c67a8"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a89af991d97b9e5afc9015940dc3c67a8">GetPosition</a> () const</td></tr>
 <tr class="separator:a89af991d97b9e5afc9015940dc3c67a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74530cce5151a9fba10b972d44afa4b2"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a74530cce5151a9fba10b972d44afa4b2">GetFront</a> () const</td></tr>
@@ -116,6 +122,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0583181415f0bbf8e6a59bca40aa88c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23e8678da364b4edafe1b563ecc5b2bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a23e8678da364b4edafe1b563ecc5b2bc">GetConnected</a> () const override</td></tr>
 <tr class="separator:a23e8678da364b4edafe1b563ecc5b2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a814c7d4ffb004112c9eb1d4ca2928001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a814c7d4ffb004112c9eb1d4ca2928001">SetProjectionMatrix</a> (unsigned shaderID, std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> &gt; camera, int winWidth, int winHeight, float nearClip, float farClip)</td></tr>
+<tr class="memdesc:a814c7d4ffb004112c9eb1d4ca2928001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the projection matrix for the given shader.  <a href="classMoonstone_1_1Renderer_1_1Camera.html#a814c7d4ffb004112c9eb1d4ca2928001">More...</a><br /></td></tr>
+<tr class="separator:a814c7d4ffb004112c9eb1d4ca2928001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d75a2a9e3bbfdb8ce580c663f270efe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a9d75a2a9e3bbfdb8ce580c663f270efe">SetViewMatrix</a> (unsigned shaderID, std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> &gt; camera)</td></tr>
+<tr class="memdesc:a9d75a2a9e3bbfdb8ce580c663f270efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the view matrix for the given shader.  <a href="classMoonstone_1_1Renderer_1_1Camera.html#a9d75a2a9e3bbfdb8ce580c663f270efe">More...</a><br /></td></tr>
+<tr class="separator:a9d75a2a9e3bbfdb8ce580c663f270efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0bdbefb4e78ff65bee04cf50a03a1b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ae0bdbefb4e78ff65bee04cf50a03a1b6">SetModel</a> (unsigned shaderID, glm::vec3 model)</td></tr>
+<tr class="separator:ae0bdbefb4e78ff65bee04cf50a03a1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b07b0822b39eebaa98761f6db71f603"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a4b07b0822b39eebaa98761f6db71f603">SetModelTransform</a> (unsigned shaderID, glm::mat4 model)</td></tr>
+<tr class="separator:a4b07b0822b39eebaa98761f6db71f603"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0d91cf341b685036b9d3a4bdfa95249"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ac0d91cf341b685036b9d3a4bdfa95249">SetPosition</a> (const glm::vec3 &amp;pos)</td></tr>
 <tr class="separator:ac0d91cf341b685036b9d3a4bdfa95249"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe604ddca8653ef279fc51a1cdf603a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#abe604ddca8653ef279fc51a1cdf603a7">SetFront</a> (const glm::vec3 &amp;front) override</td></tr>
@@ -142,6 +158,12 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a17d5f7730d1faae0c27976071fc51eb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1Time.html">Core::Time</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a17d5f7730d1faae0c27976071fc51eb6">time</a> = <a class="el" href="classMoonstone_1_1Core_1_1Time.html#a7b0d645b7eae2d2927c71cd410afad80">Core::Time::GetInstance</a>()</td></tr>
 <tr class="separator:a17d5f7730d1faae0c27976071fc51eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fdb32de87e984a44a7f3e7dea0ce15c"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a9fdb32de87e984a44a7f3e7dea0ce15c">m_ProjectionMatrix</a></td></tr>
+<tr class="separator:a9fdb32de87e984a44a7f3e7dea0ce15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087f1c57a88f6c59e982cb10a377d19a"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a087f1c57a88f6c59e982cb10a377d19a">m_ViewMatrix</a></td></tr>
+<tr class="separator:a087f1c57a88f6c59e982cb10a377d19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e14bcad2ba5b57f4d52dfd6bb32e24b"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a1e14bcad2ba5b57f4d52dfd6bb32e24b">m_Model</a></td></tr>
+<tr class="separator:a1e14bcad2ba5b57f4d52dfd6bb32e24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f1f43fb4d44b50d35c326936aa6af6c"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a9f1f43fb4d44b50d35c326936aa6af6c">m_CameraPos</a></td></tr>
 <tr class="separator:a9f1f43fb4d44b50d35c326936aa6af6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0468741b88e4cd4e9dc016f10ce8507"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ae0468741b88e4cd4e9dc016f10ce8507">m_CameraFront</a></td></tr>
@@ -321,6 +343,31 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0ee831cadc3642434d4e3f24e102798b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ee831cadc3642434d4e3f24e102798b">&#9670;&nbsp;</a></span>GetModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 Moonstone::Renderer::Camera::GetModel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ade256c5e55df1c3d8f808dacdf7484eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ade256c5e55df1c3d8f808dacdf7484eb">&#9670;&nbsp;</a></span>GetPitch()</h2>
 
@@ -373,6 +420,31 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a49f1e0a6a49e60381eec1b72d27bc39c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49f1e0a6a49e60381eec1b72d27bc39c">&#9670;&nbsp;</a></span>GetProjectionMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 Moonstone::Renderer::Camera::GetProjectionMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3a353d2d35b7aa904cc848c36a8a8890"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a353d2d35b7aa904cc848c36a8a8890">&#9670;&nbsp;</a></span>GetSpeed()</h2>
 
@@ -411,6 +483,31 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">glm::vec3 Moonstone::Renderer::Camera::GetUp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69829e3cbad1bbaa623d5a73122922e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69829e3cbad1bbaa623d5a73122922e9">&#9670;&nbsp;</a></span>GetViewMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 Moonstone::Renderer::Camera::GetViewMatrix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -672,6 +769,62 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae0bdbefb4e78ff65bee04cf50a03a1b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0bdbefb4e78ff65bee04cf50a03a1b6">&#9670;&nbsp;</a></span>SetModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Renderer::Camera::SetModel </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>shaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>model</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b07b0822b39eebaa98761f6db71f603"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b07b0822b39eebaa98761f6db71f603">&#9670;&nbsp;</a></span>SetModelTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Renderer::Camera::SetModelTransform </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>shaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::mat4&#160;</td>
+          <td class="paramname"><em>model</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad8ef8afc3c59d9ba5aa6c422c1ece3e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad8ef8afc3c59d9ba5aa6c422c1ece3e3">&#9670;&nbsp;</a></span>SetPitch()</h2>
 
@@ -726,6 +879,72 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a814c7d4ffb004112c9eb1d4ca2928001"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814c7d4ffb004112c9eb1d4ca2928001">&#9670;&nbsp;</a></span>SetProjectionMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Renderer::Camera::SetProjectionMatrix </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>shaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> &gt;&#160;</td>
+          <td class="paramname"><em>camera</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>winWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>winHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>nearClip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>farClip</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the projection matrix for the given shader. </p>
+<p>Calculates the perspective projection matrix based on the camera's field of view (FOV), the aspect ratio of the window, and the near and far clipping planes. This matrix is then set as a uniform in the specified shader.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shaderID</td><td>The ID of the shader program where the projection matrix will be set. </td></tr>
+    <tr><td class="paramname">camera</td><td>A shared pointer to the <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> object containing the FOV and other parameters. </td></tr>
+    <tr><td class="paramname">winWidth</td><td>The width of the window or viewport. </td></tr>
+    <tr><td class="paramname">winHeight</td><td>The height of the window or viewport. </td></tr>
+    <tr><td class="paramname">nearClip</td><td>The distance to the near clipping plane. </td></tr>
+    <tr><td class="paramname">farClip</td><td>The distance to the far clipping plane. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa8cdf6b1b6f978876d3ea4961f3b5efd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8cdf6b1b6f978876d3ea4961f3b5efd">&#9670;&nbsp;</a></span>SetSpeed()</h2>
 
@@ -777,6 +996,44 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d75a2a9e3bbfdb8ce580c663f270efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d75a2a9e3bbfdb8ce580c663f270efe">&#9670;&nbsp;</a></span>SetViewMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Renderer::Camera::SetViewMatrix </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>shaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> &gt;&#160;</td>
+          <td class="paramname"><em>camera</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the view matrix for the given shader. </p>
+<p>Calculates the view matrix based on the camera's position, front vector (direction), and up vector. This matrix represents the camera's orientation and position in the world. The matrix is then set as a uniform in the specified shader.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shaderID</td><td>The ID of the shader program where the view matrix will be set. </td></tr>
+    <tr><td class="paramname">camera</td><td>A shared pointer to the <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> object containing the position, front, and up vectors. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1007,6 +1264,72 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1e14bcad2ba5b57f4d52dfd6bb32e24b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e14bcad2ba5b57f4d52dfd6bb32e24b">&#9670;&nbsp;</a></span>m_Model</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 Moonstone::Renderer::Camera::m_Model</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9fdb32de87e984a44a7f3e7dea0ce15c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fdb32de87e984a44a7f3e7dea0ce15c">&#9670;&nbsp;</a></span>m_ProjectionMatrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 Moonstone::Renderer::Camera::m_ProjectionMatrix</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a087f1c57a88f6c59e982cb10a377d19a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087f1c57a88f6c59e982cb10a377d19a">&#9670;&nbsp;</a></span>m_ViewMatrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 Moonstone::Renderer::Camera::m_ViewMatrix</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a17d5f7730d1faae0c27976071fc51eb6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17d5f7730d1faae0c27976071fc51eb6">&#9670;&nbsp;</a></span>time</h2>
 
@@ -1029,8 +1352,9 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>Engine/src/Renderer/Include/<a class="el" href="Camera_8h_source.html">Camera.h</a></li>
+<li>Engine/src/Renderer/<a class="el" href="Camera_8cpp.html">Camera.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
