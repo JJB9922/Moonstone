@@ -72,7 +72,11 @@ void Application::Run()
     glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f, 3.0f);
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f, 0.0f);
-    auto      pCamera     = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
+
+    float nearClip = 0.1f;
+    float farClip  = 100.0f;
+
+    auto pCamera = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
 
     m_Window->SetCamera(pCamera);
 
@@ -97,27 +101,18 @@ void Application::Run()
 
         shader.Use();
 
-        glm::mat4 projection = glm::mat4(1.0);
-
-        projection = glm::perspective(glm::radians(pCamera->GetFov()),
-                                      (float) m_Window->GetWidth() / (float) m_Window->GetHeight(),
-                                      0.1f,
-                                      100.0f);
-
-        glm::mat4 view;
-        view = glm::lookAt(pCamera->GetPosition(), pCamera->GetPosition() + pCamera->GetFront(), pCamera->GetUp());
-
-        Renderer::RendererCommand::SetUniformMat4(shader.ID, "view", view);
-        Renderer::RendererCommand::SetUniformMat4(shader.ID, "projection", projection);
+        pCamera->SetProjectionMatrix(shader.ID, pCamera, m_Window->GetWidth(), m_Window->GetHeight(), nearClip, farClip);
+        pCamera->SetViewMatrix(shader.ID, pCamera);
 
         for (unsigned int i = 0; i < 10; i++)
         {
-            glm::mat4 model = glm::mat4(1.0f);
-            model           = glm::translate(model, cubePositions[i]);
-            float angle     = 20.0f * i;
-            model           = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            pCamera->SetModel(shader.ID, cubePositions[i]);
 
-            Renderer::RendererCommand::SetUniformMat4(shader.ID, "model", model);
+            float     angle = 20.0f * i;
+            glm::mat4 m     = pCamera->GetModel();
+            m               = glm::rotate(m, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+
+            pCamera->SetModelTransform(shader.ID, m);
 
             Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
         }
