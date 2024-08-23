@@ -12,37 +12,43 @@ namespace Core
 class KeyPressEvent : public Event
 {
     public:
-        KeyPressEvent(int keycode, int action)
+        KeyPressEvent(int keycode, int action, int mods)
             : m_Keycode(keycode)
             , m_Action(action)
+            , m_Mods(mods)
         {
         }
 
         inline int             GetKeyCode() const { return m_Keycode; }
         inline int             GetAction() const { return m_Action; }
+        inline int             GetMods() const { return m_Mods; }
         inline std::type_index GetEventType() const override { return typeid(KeyPressEvent); }
 
     private:
         int m_Keycode;
         int m_Action;
+        int m_Mods;
 };
 
 class MouseButtonPressEvent : public Event
 {
     public:
-        MouseButtonPressEvent(int button, int action)
+        MouseButtonPressEvent(int button, int action, int mods)
             : m_Button(button)
             , m_Action(action)
+            , m_Mods(mods)
         {
         }
 
         inline int             GetButton() const { return m_Button; }
         inline int             GetAction() const { return m_Action; }
+        inline int             GetMods() const { return m_Mods; }
         inline std::type_index GetEventType() const override { return typeid(MouseButtonPressEvent); }
 
     private:
         int m_Button;
         int m_Action;
+        int m_Mods;
 };
 
 class MouseScrollEvent : public Event

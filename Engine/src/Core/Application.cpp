@@ -99,7 +99,7 @@ void Application::Run()
 
         glm::mat4 projection = glm::mat4(1.0);
 
-        projection = glm::perspective(glm::radians(45.0f),
+        projection = glm::perspective(glm::radians(pCamera->GetFov()),
                                       (float) m_Window->GetWidth() / (float) m_Window->GetHeight(),
                                       0.1f,
                                       100.0f);

@@ -139,6 +139,8 @@ bool Window::InitializeWindow(const WindowProperties &windowProperties)
         return false;
     }
 
+    glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     m_GraphicsContext->Init();
     SetVSync(true);
 
@@ -178,7 +180,7 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
     glfwSetKeyCallback(m_Window,
                        [](GLFWwindow *window, int key, int scancode, int action, int mods)
                        {
-                           auto  event      = std::make_shared<KeyPressEvent>(key, action);
+                           auto  event      = std::make_shared<KeyPressEvent>(key, action, mods);
                            auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
                            eventQueue->enqueue(event);
                        });
@@ -186,7 +188,7 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
     glfwSetMouseButtonCallback(m_Window,
                                [](GLFWwindow *window, int button, int action, int mods)
                                {
-                                   auto  event      = std::make_shared<MouseButtonPressEvent>(button, action);
+                                   auto  event      = std::make_shared<MouseButtonPressEvent>(button, action, mods);
                                    auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
                                    eventQueue->enqueue(event);
                                });
@@ -294,13 +296,14 @@ void Window::SetupInitEvents()
                                   auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
                                   int  key      = keyEvent->GetKeyCode();
                                   int  action   = keyEvent->GetAction();
+                                  int  mods     = keyEvent->GetMods();
 
                                   switch (action)
                                   {
                                       case GLFW_PRESS:
                                           MS_LOUD_DEBUG("key press event: {0} - {1}", action, key);
 
-                                          if (m_CameraController)
+                                          if (m_CameraController && m_CameraController->GetConnected())
                                           {
                                               if (key == GLFW_KEY_W)
                                               {
@@ -320,6 +323,18 @@ void Window::SetupInitEvents()
                                               }
                                           }
 
+                                          if (key == GLFW_KEY_ESCAPE && m_CameraController->GetConnected())
+                                          {
+                                              glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                                              m_CameraController->SetConnected(false);
+                                              m_FirstMouse = true;
+                                          }
+                                          else if (key == GLFW_KEY_ESCAPE && !m_CameraController->GetConnected())
+                                          {
+                                              glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                                              m_CameraController->SetConnected(true);
+                                          }
+
                                           break;
                                       case GLFW_RELEASE:
                                           MS_LOUD_DEBUG("key release event: {0} - {1}", action, key);
@@ -327,7 +342,7 @@ void Window::SetupInitEvents()
                                       case GLFW_REPEAT:
                                           MS_LOUD_DEBUG("key repeat event: {0} - {1}", action, key);
 
-                                          if (m_CameraController)
+                                          if (m_CameraController && m_CameraController->GetConnected())
                                           {
                                               if (key == GLFW_KEY_W)
                                               {
@@ -354,7 +369,7 @@ void Window::SetupInitEvents()
     m_SubscribedWindowEvents.push_back(typeid(KeyPressEvent));
 
     eventDispatcher.Subscribe(typeid(MouseButtonPressEvent),
-                              [](std::shared_ptr<Event> event)
+                              [this](std::shared_ptr<Event> event)
                               {
                                   auto btnEvent = std::static_pointer_cast<MouseButtonPressEvent>(event);
                                   int  btn      = btnEvent->GetButton();
@@ -363,7 +378,16 @@ void Window::SetupInitEvents()
                                   switch (action)
                                   {
                                       case GLFW_PRESS:
-                                          MS_LOUD_DEBUG("mouse button press event: {0} - {1}", action, btn);
+                                          MS_DEBUG("mouse button press event: {0} - {1}", action, btn);
+
+                                          if (m_CameraController && m_CameraController->GetConnected())
+                                          {
+                                              if (btn == GLFW_MOUSE_BUTTON_MIDDLE)
+                                              {
+                                                  m_CameraController->SetFov(65.0f);
+                                              }
+                                          }
+
                                           break;
                                       case GLFW_RELEASE:
                                           MS_LOUD_DEBUG("mouse button release event: {0} - {1}", action, btn);
@@ -374,11 +398,21 @@ void Window::SetupInitEvents()
     m_SubscribedWindowEvents.push_back(typeid(MouseButtonPressEvent));
 
     eventDispatcher.Subscribe(typeid(MouseScrollEvent),
-                              [](std::shared_ptr<Event> event)
+                              [this](std::shared_ptr<Event> event)
                               {
                                   auto scrollEvent = std::static_pointer_cast<MouseScrollEvent>(event);
                                   int  xOffset     = scrollEvent->GetXOffset();
                                   int  yOffset     = scrollEvent->GetYOffset();
+
+                                  if (m_CameraController && m_CameraController->GetConnected())
+                                  {
+                                      m_CameraController->SetFov(m_CameraController->GetFov() - (float) yOffset);
+
+                                      if (m_CameraController->GetFov() < 1.0f)
+                                          m_CameraController->SetFov(1.0f);
+                                      if (m_CameraController->GetFov() > 120.0f)
+                                          m_CameraController->SetFov(120.0f);
+                                  }
 
                                   MS_DEBUG("mouse scroll event: x{0}, y{1}", xOffset, yOffset);
                               });
@@ -386,11 +420,47 @@ void Window::SetupInitEvents()
     m_SubscribedWindowEvents.push_back(typeid(MouseScrollEvent));
 
     eventDispatcher.Subscribe(typeid(MouseMoveEvent),
-                              [](std::shared_ptr<Event> event)
+                              [this](std::shared_ptr<Event> event)
                               {
                                   auto   moveEvent = std::static_pointer_cast<MouseMoveEvent>(event);
                                   double xPosition = moveEvent->GetXPosition();
                                   double yPosition = moveEvent->GetYPosition();
+
+                                  if (m_CameraController && m_CameraController->GetConnected())
+                                  {
+                                      if (m_FirstMouse)
+                                      {
+                                          m_LastX      = xPosition;
+                                          m_LastY      = yPosition;
+                                          m_FirstMouse = false;
+                                      }
+
+                                      float xoffset = xPosition - m_LastX;
+                                      float yoffset = m_LastY - yPosition;
+                                      m_LastX       = xPosition;
+                                      m_LastY       = yPosition;
+
+                                      const float sensitivity = 0.2f;
+                                      xoffset *= sensitivity;
+                                      yoffset *= sensitivity;
+
+                                      m_CameraController->SetPitch(m_CameraController->GetPitch() + yoffset);
+                                      m_CameraController->SetYaw(m_CameraController->GetYaw() + xoffset);
+
+                                      if (m_CameraController->GetPitch() > 89.0f)
+                                          m_CameraController->SetPitch(89.0f);
+                                      if (m_CameraController->GetPitch() < -89.0f)
+                                          m_CameraController->SetPitch(-89.0f);
+
+                                      glm::vec3 direction = {cos(glm::radians(m_CameraController->GetYaw())
+                                                                 * cos(glm::radians(m_CameraController->GetPitch()))),
+                                                             sin(glm::radians(m_CameraController->GetPitch())),
+                                                             sin(glm::radians(m_CameraController->GetYaw())
+                                                                 * cos(glm::radians(m_CameraController->GetPitch())))};
+
+                                      m_CameraController->SetDirection(glm::normalize(direction));
+                                      m_CameraController->SetFront(m_CameraController->GetDirection());
+                                  }
 
                                   MS_LOUD_DEBUG("mouse move event: x{0}, y{1}", xPosition, yPosition);
                               });

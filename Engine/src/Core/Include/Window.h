@@ -76,6 +76,9 @@ class Window
         std::vector<std::type_index> m_SubscribedWindowEvents;
         Renderer::GraphicsContext                  *m_GraphicsContext;
         std::shared_ptr<Renderer::CameraController> m_CameraController = nullptr;
+        float                                       m_LastX            = m_WindowData.windowProperties.Width / 2;
+        float                                       m_LastY            = m_WindowData.windowProperties.Height / 2;
+        bool                                        m_FirstMouse       = true;
 };
 
 } // namespace Core
