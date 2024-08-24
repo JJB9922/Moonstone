@@ -80,25 +80,25 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Core</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMoonstone_1_1Core_1_1Event.html">Event</a></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html#a211a4503946e63599406b09ad262b3bc">   21</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classMoonstone_1_1Core_1_1Event.html#a211a4503946e63599406b09ad262b3bc">~Event</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html#a98e0fa75dc50ab78d8558d845c187069">   23</a></span>&#160;        <span class="keyword">virtual</span> std::type_index <a class="code" href="classMoonstone_1_1Core_1_1Event.html#a98e0fa75dc50ab78d8558d845c187069">GetEventType</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html#a3727f6a4f3eddbe82d35b23a0d40f5cd">   25</a></span>&#160;        <span class="keyword">static</span> std::size_t <a class="code" href="classMoonstone_1_1Core_1_1Event.html#a3727f6a4f3eddbe82d35b23a0d40f5cd">HashId</a>(<span class="keyword">const</span> std::string&amp; name) { <span class="keywordflow">return</span> std::hash&lt;std::string&gt;{}(name); }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace Core</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace Moonstone</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// EVENT_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMoonstone_1_1Core_1_1Event.html">Event</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html#a211a4503946e63599406b09ad262b3bc">   15</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classMoonstone_1_1Core_1_1Event.html#a211a4503946e63599406b09ad262b3bc">~Event</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html#a98e0fa75dc50ab78d8558d845c187069">   17</a></span>&#160;        <span class="keyword">virtual</span> std::type_index <a class="code" href="classMoonstone_1_1Core_1_1Event.html#a98e0fa75dc50ab78d8558d845c187069">GetEventType</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Core_1_1Event.html#a3727f6a4f3eddbe82d35b23a0d40f5cd">   19</a></span>&#160;        <span class="keyword">static</span> std::size_t <a class="code" href="classMoonstone_1_1Core_1_1Event.html#a3727f6a4f3eddbe82d35b23a0d40f5cd">HashId</a>(<span class="keyword">const</span> std::string&amp; name) { <span class="keywordflow">return</span> std::hash&lt;std::string&gt;{}(name); }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;} <span class="comment">// namespace Core</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <span class="comment">// namespace Moonstone</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// EVENT_H</span></div>
 <div class="ttc" id="aCore_8h_html"><div class="ttname"><a href="Core_8h.html">Core.h</a></div></div>
-<div class="ttc" id="aclassMoonstone_1_1Core_1_1Event_html"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Event.html">Moonstone::Core::Event</a></div><div class="ttdoc">Base class for all events in the system.</div><div class="ttdef"><b>Definition:</b> Event.h:19</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Event_html"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Event.html">Moonstone::Core::Event</a></div><div class="ttdef"><b>Definition:</b> Event.h:13</div></div>
 <div class="ttc" id="aclassMoonstone_1_1Core_1_1Event_html_a211a4503946e63599406b09ad262b3bc"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Event.html#a211a4503946e63599406b09ad262b3bc">Moonstone::Core::Event::~Event</a></div><div class="ttdeci">virtual ~Event()=default</div></div>
-<div class="ttc" id="aclassMoonstone_1_1Core_1_1Event_html_a3727f6a4f3eddbe82d35b23a0d40f5cd"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Event.html#a3727f6a4f3eddbe82d35b23a0d40f5cd">Moonstone::Core::Event::HashId</a></div><div class="ttdeci">static std::size_t HashId(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> Event.h:25</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Core_1_1Event_html_a3727f6a4f3eddbe82d35b23a0d40f5cd"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Event.html#a3727f6a4f3eddbe82d35b23a0d40f5cd">Moonstone::Core::Event::HashId</a></div><div class="ttdeci">static std::size_t HashId(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> Event.h:19</div></div>
 <div class="ttc" id="aclassMoonstone_1_1Core_1_1Event_html_a98e0fa75dc50ab78d8558d845c187069"><div class="ttname"><a href="classMoonstone_1_1Core_1_1Event.html#a98e0fa75dc50ab78d8558d845c187069">Moonstone::Core::Event::GetEventType</a></div><div class="ttdeci">virtual std::type_index GetEventType() const =0</div></div>
 <div class="ttc" id="anamespaceMoonstone_html"><div class="ttname"><a href="namespaceMoonstone.html">Moonstone</a></div><div class="ttdef"><b>Definition:</b> Application.cpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->

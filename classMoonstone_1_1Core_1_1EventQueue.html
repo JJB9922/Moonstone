@@ -68,59 +68,49 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classMoonstone_1_1Core_1_1EventQueue-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Moonstone::Core::EventQueue Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Manages a queue of events, providing functionality to enqueue and process events.  
- <a href="classMoonstone_1_1Core_1_1EventQueue.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="EventQueue_8h_source.html">EventQueue.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0e4e4448bf49e5c4acf822883e77f504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a0e4e4448bf49e5c4acf822883e77f504">enqueue</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt; event)</td></tr>
-<tr class="separator:a0e4e4448bf49e5c4acf822883e77f504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5bc2cbe25b7b55273724ef78f82ffac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#ad5bc2cbe25b7b55273724ef78f82ffac">process</a> ()</td></tr>
-<tr class="separator:ad5bc2cbe25b7b55273724ef78f82ffac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f2b8ea8eacf4a52c5a50ce26125b732"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a5f2b8ea8eacf4a52c5a50ce26125b732">EventQueue</a> ()</td></tr>
+<tr class="separator:a5f2b8ea8eacf4a52c5a50ce26125b732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78da59b327a0e54879621dbf3e2e96b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a78da59b327a0e54879621dbf3e2e96b2">~EventQueue</a> ()=default</td></tr>
+<tr class="separator:a78da59b327a0e54879621dbf3e2e96b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc1d6b36fbc81862fe011c82f986395d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#acc1d6b36fbc81862fe011c82f986395d">Enqueue</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt; event)</td></tr>
+<tr class="separator:acc1d6b36fbc81862fe011c82f986395d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc809f1e4867ceed9428a24932620fb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#acc809f1e4867ceed9428a24932620fb0">Process</a> ()</td></tr>
+<tr class="separator:acc809f1e4867ceed9428a24932620fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa7ef4cdb039b44afa6b02e944c46a4aa"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#aa7ef4cdb039b44afa6b02e944c46a4aa">GetInstance</a> ()</td></tr>
-<tr class="separator:aa7ef4cdb039b44afa6b02e944c46a4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:aa1d4dc4e9c2e59c5d375fad899ebdcdc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#aa1d4dc4e9c2e59c5d375fad899ebdcdc">EventQueue</a> (<a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;dispatcher)</td></tr>
-<tr class="separator:aa1d4dc4e9c2e59c5d375fad899ebdcdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a661989d1f7afac9339b769ab4190754d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a661989d1f7afac9339b769ab4190754d">EventQueue</a> (const <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &amp;)=delete</td></tr>
-<tr class="separator:a661989d1f7afac9339b769ab4190754d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a603e9847854e5180a9f851b47f4b5a1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a603e9847854e5180a9f851b47f4b5a1e">operator=</a> (const <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &amp;)=delete</td></tr>
-<tr class="separator:a603e9847854e5180a9f851b47f4b5a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
-Static Private Member Functions</h2></td></tr>
-<tr class="memitem:a51290bb9687e48465b5712dcefcb4d07"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a51290bb9687e48465b5712dcefcb4d07">GetInstanceDispatcher</a> ()</td></tr>
-<tr class="separator:a51290bb9687e48465b5712dcefcb4d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c51dbe63f3fd733d9a7772de0f25c7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#ad5c51dbe63f3fd733d9a7772de0f25c7">Init</a> ()</td></tr>
+<tr class="separator:ad5c51dbe63f3fd733d9a7772de0f25c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ba916adf3d50621a401d29ccd914bcd"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a8ba916adf3d50621a401d29ccd914bcd">GetEventQueueInstance</a> ()</td></tr>
+<tr class="separator:a8ba916adf3d50621a401d29ccd914bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a435eed13b9e4b663cdcc939906552810"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a435eed13b9e4b663cdcc939906552810">m_EventQueue</a></td></tr>
-<tr class="separator:a435eed13b9e4b663cdcc939906552810"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a1bbde7a41541220a32351f060eeeed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a1a1bbde7a41541220a32351f060eeeed">m_Dispatcher</a></td></tr>
-<tr class="separator:a1a1bbde7a41541220a32351f060eeeed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a783ceb94d44ad586c11ebb10dad3aed7"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a783ceb94d44ad586c11ebb10dad3aed7">m_Queue</a></td></tr>
+<tr class="separator:a783ceb94d44ad586c11ebb10dad3aed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4daff3b23e0a72cac79c99e460f3a570"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a4daff3b23e0a72cac79c99e460f3a570">m_Dispatcher</a></td></tr>
+<tr class="separator:a4daff3b23e0a72cac79c99e460f3a570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a4d8e69ae1f138ee4df1fc89e593821b5"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html#a4d8e69ae1f138ee4df1fc89e593821b5">s_EventQueue</a></td></tr>
+<tr class="separator:a4d8e69ae1f138ee4df1fc89e593821b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages a queue of events, providing functionality to enqueue and process events. </p>
-<p>The <code><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html" title="Manages a queue of events, providing functionality to enqueue and process events.">EventQueue</a></code> class is a singleton that holds and processes a queue of events using an <code><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html" title="Manages event subscriptions and dispatches events to subscribed callbacks.">EventDispatcher</a></code>. Events are enqueued and then dispatched in the <code>process</code> method. The singleton pattern ensures that only one instance of the <code><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html" title="Manages a queue of events, providing functionality to enqueue and process events.">EventQueue</a></code> exists and is accessible throughout the application. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa1d4dc4e9c2e59c5d375fad899ebdcdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1d4dc4e9c2e59c5d375fad899ebdcdc">&#9670;&nbsp;</a></span>EventQueue() <span class="overload">[1/2]</span></h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5f2b8ea8eacf4a52c5a50ce26125b732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f2b8ea8eacf4a52c5a50ce26125b732">&#9670;&nbsp;</a></span>EventQueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,40 +121,38 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">Moonstone::Core::EventQueue::EventQueue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &amp;&#160;</td>
-          <td class="paramname"><em>dispatcher</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a661989d1f7afac9339b769ab4190754d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a661989d1f7afac9339b769ab4190754d">&#9670;&nbsp;</a></span>EventQueue() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Moonstone::Core::EventQueue::EventQueue </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78da59b327a0e54879621dbf3e2e96b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78da59b327a0e54879621dbf3e2e96b2">&#9670;&nbsp;</a></span>~EventQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Moonstone::Core::EventQueue::~EventQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -172,8 +160,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0e4e4448bf49e5c4acf822883e77f504"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e4e4448bf49e5c4acf822883e77f504">&#9670;&nbsp;</a></span>enqueue()</h2>
+<a id="acc1d6b36fbc81862fe011c82f986395d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc1d6b36fbc81862fe011c82f986395d">&#9670;&nbsp;</a></span>Enqueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +170,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Moonstone::Core::EventQueue::enqueue </td>
+          <td class="memname">void Moonstone::Core::EventQueue::Enqueue </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a> &gt;&#160;</td>
           <td class="paramname"><em>event</em></td><td>)</td>
@@ -198,8 +186,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa7ef4cdb039b44afa6b02e944c46a4aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7ef4cdb039b44afa6b02e944c46a4aa">&#9670;&nbsp;</a></span>GetInstance()</h2>
+<a id="a8ba916adf3d50621a401d29ccd914bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ba916adf3d50621a401d29ccd914bcd">&#9670;&nbsp;</a></span>GetEventQueueInstance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,7 +196,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a>&amp; Moonstone::Core::EventQueue::GetInstance </td>
+          <td class="memname">static std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a>&gt;&amp; Moonstone::Core::EventQueue::GetEventQueueInstance </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -223,8 +211,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a51290bb9687e48465b5712dcefcb4d07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51290bb9687e48465b5712dcefcb4d07">&#9670;&nbsp;</a></span>GetInstanceDispatcher()</h2>
+<a id="ad5c51dbe63f3fd733d9a7772de0f25c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c51dbe63f3fd733d9a7772de0f25c7">&#9670;&nbsp;</a></span>Init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,7 +221,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a>&amp; Moonstone::Core::EventQueue::GetInstanceDispatcher </td>
+          <td class="memname">void Moonstone::Core::EventQueue::Init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -241,15 +229,15 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a603e9847854e5180a9f851b47f4b5a1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a603e9847854e5180a9f851b47f4b5a1e">&#9670;&nbsp;</a></span>operator=()</h2>
+<a id="acc809f1e4867ceed9428a24932620fb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc809f1e4867ceed9428a24932620fb0">&#9670;&nbsp;</a></span>Process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,33 +246,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a>&amp; Moonstone::Core::EventQueue::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad5bc2cbe25b7b55273724ef78f82ffac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5bc2cbe25b7b55273724ef78f82ffac">&#9670;&nbsp;</a></span>process()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Moonstone::Core::EventQueue::process </td>
+          <td class="memname">void Moonstone::Core::EventQueue::Process </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -300,8 +262,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1a1bbde7a41541220a32351f060eeeed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a1bbde7a41541220a32351f060eeeed">&#9670;&nbsp;</a></span>m_Dispatcher</h2>
+<a id="a4daff3b23e0a72cac79c99e460f3a570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4daff3b23e0a72cac79c99e460f3a570">&#9670;&nbsp;</a></span>m_Dispatcher</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,7 +272,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a>&amp; Moonstone::Core::EventQueue::m_Dispatcher</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a>&gt; Moonstone::Core::EventQueue::m_Dispatcher</td>
         </tr>
       </table>
   </td>
@@ -322,8 +284,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a435eed13b9e4b663cdcc939906552810"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a435eed13b9e4b663cdcc939906552810">&#9670;&nbsp;</a></span>m_EventQueue</h2>
+<a id="a783ceb94d44ad586c11ebb10dad3aed7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a783ceb94d44ad586c11ebb10dad3aed7">&#9670;&nbsp;</a></span>m_Queue</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +294,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::queue&lt;std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a>&gt; &gt; Moonstone::Core::EventQueue::m_EventQueue</td>
+          <td class="memname">std::queue&lt;std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Core_1_1Event.html">Event</a>&gt; &gt; Moonstone::Core::EventQueue::m_Queue</td>
         </tr>
       </table>
   </td>
@@ -344,8 +306,31 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a4d8e69ae1f138ee4df1fc89e593821b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d8e69ae1f138ee4df1fc89e593821b5">&#9670;&nbsp;</a></span>s_EventQueue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &gt; Moonstone::Core::EventQueue::s_EventQueue</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>Engine/src/Core/Events/Include/<a class="el" href="EventQueue_8h_source.html">EventQueue.h</a></li>
+<li>Engine/src/Core/Events/<a class="el" href="EventQueue_8cpp.html">EventQueue.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -82,44 +82,44 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>Renderer</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">GraphicsContextRouter</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#abc65551e3d4009d3b736c7d39108c481">   24</a></span>&#160;        <span class="keyword">static</span> <a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a>* <a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#abc65551e3d4009d3b736c7d39108c481">GetContext</a>(GLFWwindow* window)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keyword">auto</span> API = <a class="code" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">RendererAPI::GetAPI</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">if</span> (API == <a class="code" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777a760716b590ee7c0adc25f434f577d8be">RendererAPI::API::OpenGL</a>)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a>* context = <span class="keyword">new</span> <a class="code" href="classMoonstone_1_1Renderer_1_1OpenGLContext.html">OpenGLContext</a>(window);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">return</span> context;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (API == <a class="code" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777a38625270231b647116c80bcbc4f9d1d8">RendererAPI::API::Vulkan</a>)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <a class="code" href="Logger_8h.html#aa5b827c02b052670aca94fcaee75ce69">MS_ERROR</a>(<span class="stringliteral">&quot;vulkan not yet supported - switch to a different Renderer API&quot;</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <span class="comment">// namespace Renderer</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace Moonstone</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GRAPHICSCONTEXTROUTER_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">GraphicsContextRouter</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#abc65551e3d4009d3b736c7d39108c481">   17</a></span>&#160;        <span class="keyword">static</span> <a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a>* <a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#abc65551e3d4009d3b736c7d39108c481">GetContext</a>(GLFWwindow* window)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">auto</span> API = <a class="code" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">RendererAPI::GetAPI</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keywordflow">if</span> (API == <a class="code" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777a760716b590ee7c0adc25f434f577d8be">RendererAPI::API::OpenGL</a>)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <a class="code" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">GraphicsContext</a>* context = <span class="keyword">new</span> <a class="code" href="classMoonstone_1_1Renderer_1_1OpenGLContext.html">OpenGLContext</a>(window);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="keywordflow">return</span> context;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (API == <a class="code" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777a38625270231b647116c80bcbc4f9d1d8">RendererAPI::API::Vulkan</a>)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <a class="code" href="Logger_8h.html#aa5b827c02b052670aca94fcaee75ce69">MS_ERROR</a>(<span class="stringliteral">&quot;vulkan not yet supported - switch to a different Renderer API&quot;</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace Renderer</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <span class="comment">// namespace Moonstone</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GRAPHICSCONTEXTROUTER_H</span></div>
 <div class="ttc" id="aGraphicsContext_8h_html"><div class="ttname"><a href="GraphicsContext_8h.html">GraphicsContext.h</a></div></div>
-<div class="ttc" id="aLogger_8h_html_aa5b827c02b052670aca94fcaee75ce69"><div class="ttname"><a href="Logger_8h.html#aa5b827c02b052670aca94fcaee75ce69">MS_ERROR</a></div><div class="ttdeci">#define MS_ERROR(...)</div><div class="ttdef"><b>Definition:</b> Logger.h:36</div></div>
+<div class="ttc" id="aLogger_8h_html_aa5b827c02b052670aca94fcaee75ce69"><div class="ttname"><a href="Logger_8h.html#aa5b827c02b052670aca94fcaee75ce69">MS_ERROR</a></div><div class="ttdeci">#define MS_ERROR(...)</div><div class="ttdef"><b>Definition:</b> Logger.h:35</div></div>
 <div class="ttc" id="aOpenGLContext_8h_html"><div class="ttname"><a href="OpenGLContext_8h.html">OpenGLContext.h</a></div></div>
 <div class="ttc" id="aRendererAPI_8h_html"><div class="ttname"><a href="RendererAPI_8h.html">RendererAPI.h</a></div></div>
-<div class="ttc" id="aclassMoonstone_1_1Renderer_1_1GraphicsContextRouter_html"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">Moonstone::Renderer::GraphicsContextRouter</a></div><div class="ttdoc">A factory class that provides the appropriate graphics context based on the selected rendering API.</div><div class="ttdef"><b>Definition:</b> GraphicsContextRouter.h:22</div></div>
-<div class="ttc" id="aclassMoonstone_1_1Renderer_1_1GraphicsContextRouter_html_abc65551e3d4009d3b736c7d39108c481"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#abc65551e3d4009d3b736c7d39108c481">Moonstone::Renderer::GraphicsContextRouter::GetContext</a></div><div class="ttdeci">static GraphicsContext * GetContext(GLFWwindow *window)</div><div class="ttdef"><b>Definition:</b> GraphicsContextRouter.h:24</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Renderer_1_1GraphicsContextRouter_html"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html">Moonstone::Renderer::GraphicsContextRouter</a></div><div class="ttdef"><b>Definition:</b> GraphicsContextRouter.h:15</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Renderer_1_1GraphicsContextRouter_html_abc65551e3d4009d3b736c7d39108c481"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#abc65551e3d4009d3b736c7d39108c481">Moonstone::Renderer::GraphicsContextRouter::GetContext</a></div><div class="ttdeci">static GraphicsContext * GetContext(GLFWwindow *window)</div><div class="ttdef"><b>Definition:</b> GraphicsContextRouter.h:17</div></div>
 <div class="ttc" id="aclassMoonstone_1_1Renderer_1_1GraphicsContext_html"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">Moonstone::Renderer::GraphicsContext</a></div><div class="ttdef"><b>Definition:</b> GraphicsContext.h:11</div></div>
 <div class="ttc" id="aclassMoonstone_1_1Renderer_1_1OpenGLContext_html"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1OpenGLContext.html">Moonstone::Renderer::OpenGLContext</a></div><div class="ttdef"><b>Definition:</b> OpenGLContext.h:18</div></div>
 <div class="ttc" id="aclassMoonstone_1_1Renderer_1_1RendererAPI_html_ac0f6e85beaa331fdceaa16c8e89bf777a38625270231b647116c80bcbc4f9d1d8"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777a38625270231b647116c80bcbc4f9d1d8">Moonstone::Renderer::RendererAPI::API::Vulkan</a></div><div class="ttdeci">@ Vulkan</div></div>
 <div class="ttc" id="aclassMoonstone_1_1Renderer_1_1RendererAPI_html_ac0f6e85beaa331fdceaa16c8e89bf777a760716b590ee7c0adc25f434f577d8be"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777a760716b590ee7c0adc25f434f577d8be">Moonstone::Renderer::RendererAPI::API::OpenGL</a></div><div class="ttdeci">@ OpenGL</div></div>
-<div class="ttc" id="aclassMoonstone_1_1Renderer_1_1RendererAPI_html_ac8d63bea2724c2c12453d30ac91d1414"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">Moonstone::Renderer::RendererAPI::GetAPI</a></div><div class="ttdeci">static API GetAPI()</div><div class="ttdef"><b>Definition:</b> RendererAPI.h:93</div></div>
+<div class="ttc" id="aclassMoonstone_1_1Renderer_1_1RendererAPI_html_ac8d63bea2724c2c12453d30ac91d1414"><div class="ttname"><a href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">Moonstone::Renderer::RendererAPI::GetAPI</a></div><div class="ttdeci">static API GetAPI()</div><div class="ttdef"><b>Definition:</b> RendererAPI.h:85</div></div>
 <div class="ttc" id="anamespaceMoonstone_html"><div class="ttname"><a href="namespaceMoonstone.html">Moonstone</a></div><div class="ttdef"><b>Definition:</b> Application.cpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

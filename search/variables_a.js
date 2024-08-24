@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['time_652',['time',['../classMoonstone_1_1Renderer_1_1Camera.html#a17d5f7730d1faae0c27976071fc51eb6',1,'Moonstone::Renderer::Camera']]],
-  ['title_653',['Title',['../structMoonstone_1_1Core_1_1WindowProperties.html#afe231425811efd6e1389c6effbaf2f06',1,'Moonstone::Core::WindowProperties']]]
+  ['width_662',['Width',['../structMoonstone_1_1Core_1_1WindowProperties.html#a3b3de81934861c69669beafc8526e7d9',1,'Moonstone::Core::WindowProperties']]],
+  ['windowproperties_663',['windowProperties',['../structMoonstone_1_1Core_1_1WindowData.html#a2ef3a3399ee6ebeb57568a7e834ac0e8',1,'Moonstone::Core::WindowData']]]
 ];

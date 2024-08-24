@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logger_598',['logger',['../namespaceMoonstone_1_1Core.html#a1ec1e2185ab91b5e55ec174839418ac4',1,'Moonstone::Core']]]
+  ['r_652',['r',['../structMoonstone_1_1Core_1_1GLColor.html#a6f7c84c657ffb9dedc16987218eff3de',1,'Moonstone::Core::GLColor']]]
 ];

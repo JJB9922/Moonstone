@@ -81,14 +81,13 @@ Inheritance diagram for Moonstone::Renderer::Camera:</div>
  <div class="center">
   <img src="classMoonstone_1_1Renderer_1_1Camera.png" usemap="#Moonstone::Renderer::Camera_map" alt=""/>
   <map id="Moonstone::Renderer::Camera_map" name="Moonstone::Renderer::Camera_map">
-<area href="classMoonstone_1_1Renderer_1_1CameraController.html" title="The CameraController interface." alt="Moonstone::Renderer::CameraController" shape="rect" coords="0,0,239,24"/>
+<area href="classMoonstone_1_1Renderer_1_1CameraController.html" alt="Moonstone::Renderer::CameraController" shape="rect" coords="0,0,239,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a04573343c86deb18424fe82424975219"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a04573343c86deb18424fe82424975219">Camera</a> (const glm::vec3 &amp;pos, const glm::vec3 &amp;front, const glm::vec3 &amp;up)</td></tr>
-<tr class="memdesc:a04573343c86deb18424fe82424975219"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> Initialize a camera.  <a href="classMoonstone_1_1Renderer_1_1Camera.html#a04573343c86deb18424fe82424975219">More...</a><br /></td></tr>
 <tr class="separator:a04573343c86deb18424fe82424975219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add7fbd3754e0cdf9f129abedbb75db9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#add7fbd3754e0cdf9f129abedbb75db9f">OnMoveForward</a> () override</td></tr>
 <tr class="separator:add7fbd3754e0cdf9f129abedbb75db9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,10 +122,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a23e8678da364b4edafe1b563ecc5b2bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a23e8678da364b4edafe1b563ecc5b2bc">GetConnected</a> () const override</td></tr>
 <tr class="separator:a23e8678da364b4edafe1b563ecc5b2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a814c7d4ffb004112c9eb1d4ca2928001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a814c7d4ffb004112c9eb1d4ca2928001">SetProjectionMatrix</a> (unsigned shaderID, std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> &gt; camera, int winWidth, int winHeight, float nearClip, float farClip)</td></tr>
-<tr class="memdesc:a814c7d4ffb004112c9eb1d4ca2928001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the projection matrix for the given shader.  <a href="classMoonstone_1_1Renderer_1_1Camera.html#a814c7d4ffb004112c9eb1d4ca2928001">More...</a><br /></td></tr>
 <tr class="separator:a814c7d4ffb004112c9eb1d4ca2928001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d75a2a9e3bbfdb8ce580c663f270efe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a9d75a2a9e3bbfdb8ce580c663f270efe">SetViewMatrix</a> (unsigned shaderID, std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> &gt; camera)</td></tr>
-<tr class="memdesc:a9d75a2a9e3bbfdb8ce580c663f270efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the view matrix for the given shader.  <a href="classMoonstone_1_1Renderer_1_1Camera.html#a9d75a2a9e3bbfdb8ce580c663f270efe">More...</a><br /></td></tr>
 <tr class="separator:a9d75a2a9e3bbfdb8ce580c663f270efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0bdbefb4e78ff65bee04cf50a03a1b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ae0bdbefb4e78ff65bee04cf50a03a1b6">SetModel</a> (unsigned shaderID, glm::vec3 model)</td></tr>
 <tr class="separator:ae0bdbefb4e78ff65bee04cf50a03a1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,16 +220,6 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> Initialize a camera. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pos</td><td></td></tr>
-    <tr><td class="paramname">front</td><td></td></tr>
-    <tr><td class="paramname">up</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -929,20 +916,6 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the projection matrix for the given shader. </p>
-<p>Calculates the perspective projection matrix based on the camera's field of view (FOV), the aspect ratio of the window, and the near and far clipping planes. This matrix is then set as a uniform in the specified shader.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shaderID</td><td>The ID of the shader program where the projection matrix will be set. </td></tr>
-    <tr><td class="paramname">camera</td><td>A shared pointer to the <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> object containing the FOV and other parameters. </td></tr>
-    <tr><td class="paramname">winWidth</td><td>The width of the window or viewport. </td></tr>
-    <tr><td class="paramname">winHeight</td><td>The height of the window or viewport. </td></tr>
-    <tr><td class="paramname">nearClip</td><td>The distance to the near clipping plane. </td></tr>
-    <tr><td class="paramname">farClip</td><td>The distance to the far clipping plane. </td></tr>
-  </table>
-  </dd>
-</dl>
-
 </div>
 </div>
 <a id="aa8cdf6b1b6f978876d3ea4961f3b5efd"></a>
@@ -1024,16 +997,6 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Sets the view matrix for the given shader. </p>
-<p>Calculates the view matrix based on the camera's position, front vector (direction), and up vector. This matrix represents the camera's orientation and position in the world. The matrix is then set as a uniform in the specified shader.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shaderID</td><td>The ID of the shader program where the view matrix will be set. </td></tr>
-    <tr><td class="paramname">camera</td><td>A shared pointer to the <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html">Camera</a> object containing the position, front, and up vectors. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

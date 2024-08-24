@@ -76,9 +76,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract base class for <a class="el" href="namespaceMoonstone_1_1Renderer.html">Renderer</a> API implementations.  
- <a href="classMoonstone_1_1Renderer_1_1RendererAPI.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="RendererAPI_8h_source.html">RendererAPI.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Moonstone::Renderer::RendererAPI:</div>
@@ -204,13 +201,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
 <tr class="memitem:a5e35aec4bc793f14c903cc6c7c2c1d26"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac0f6e85beaa331fdceaa16c8e89bf777">API</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a5e35aec4bc793f14c903cc6c7c2c1d26">s_API</a></td></tr>
-<tr class="memdesc:a5e35aec4bc793f14c903cc6c7c2c1d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static member representing the current <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a>.  <a href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a5e35aec4bc793f14c903cc6c7c2c1d26">More...</a><br /></td></tr>
 <tr class="separator:a5e35aec4bc793f14c903cc6c7c2c1d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract base class for <a class="el" href="namespaceMoonstone_1_1Renderer.html">Renderer</a> API implementations. </p>
-<p>Defines an interface for rendering operations, such as setting clear color, initializing shaders, and submitting draw commands. The class also supports different rendering APIs, such as OpenGL and Vulkan, which can be queried through the static method <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">GetAPI()</a>. </p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="ac0f6e85beaa331fdceaa16c8e89bf777"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac0f6e85beaa331fdceaa16c8e89bf777">&#9670;&nbsp;</a></span>API</h2>
 
@@ -1552,10 +1545,6 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Static member representing the current <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html" title="Abstract base class for Renderer API implementations.">RendererAPI</a>. </p>
-<p>This static member indicates the type of rendering API being used, set based on the preprocessor directives. The value depends on whether <code>MS_OPENGL</code> or <code>MS_VULKAN</code> is defined.</p>
-<dl class="section note"><dt>Note</dt><dd>This is only defined if either <code>MS_OPENGL</code> or <code>MS_VULKAN</code> is set. </dd></dl>
 
 </div>
 </div>
