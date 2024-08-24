@@ -39,6 +39,9 @@ file(GLOB_RECURSE SRC_CORE_FILES
     "${SRC_RENDERER_DIR}/*/*.cpp"
     "${SRC_RENDERER_DIR}/*/Include/*h"
 
+    "${SRC_RENDERER_DIR}/Platform/*/*.cpp"
+    "${SRC_RENDERER_DIR}/Platform/*/Include/*h"
+
     "${SHADER_DIR}/*.cpp"
     "${SHADER_DIR}/Include/*.h"
 

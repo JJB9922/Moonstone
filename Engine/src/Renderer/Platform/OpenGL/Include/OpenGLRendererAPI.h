@@ -37,6 +37,7 @@ class OpenGLRendererAPI : public RendererAPI
         virtual void SubmitDrawArrays(DrawMode drawMode, int index, int count) override;
 
         virtual void SetPolygonMode(PolygonDataType polygonMode) override;
+        virtual void SetViewport(int width, int height) override;
 
         virtual void Cleanup(unsigned& VAO, unsigned& VBO, unsigned& shaderProgram) override;
 

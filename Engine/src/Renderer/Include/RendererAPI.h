@@ -100,6 +100,7 @@ class RendererAPI
             = 0;
 
         virtual void SetPolygonMode(PolygonDataType dataType) = 0;
+        virtual void SetViewport(int width, int height)       = 0;
 
         virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)  = 0;
         virtual void SubmitDrawArrays(DrawMode drawMode, int index, int count) = 0;

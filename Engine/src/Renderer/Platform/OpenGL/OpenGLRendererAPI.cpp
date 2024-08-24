@@ -116,6 +116,8 @@ void OpenGLRendererAPI::SetPolygonMode(PolygonDataType polygonMode)
     }
 };
 
+void OpenGLRendererAPI::SetViewport(int width, int height) { glViewport(0, 0, width, height); }
+
 void OpenGLRendererAPI::InitVertexAttributes(
     int index, int size, NumericalDataType type, BooleanDataType normalize, size_t stride, size_t offset)
 {

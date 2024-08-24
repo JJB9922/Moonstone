@@ -61,6 +61,8 @@ class RendererCommand
             s_RendererAPI->SetPolygonMode(dataType);
         };
 
+        inline static void SetViewport(int width, int height) { s_RendererAPI->SetViewport(width, height); }
+
         inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
         {
             s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO);
