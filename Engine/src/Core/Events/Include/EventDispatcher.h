@@ -10,13 +10,6 @@ namespace Moonstone
 namespace Core
 {
 
-/**
- * @brief Manages event subscriptions and dispatches events to subscribed callbacks.
- * 
- * The `EventDispatcher` class follows the singleton pattern to ensure a single instance is used throughout the application.
- * It maintains a map of event types to their corresponding callbacks. Events are dispatched to all callbacks subscribed
- * to their type. The class supports subscribing to, unsubscribing from, and dispatching events.
- */
 class EventDispatcher
 {
     public:

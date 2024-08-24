@@ -9,19 +9,8 @@ namespace Core
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 glm::vec3 cubePos(0.0f, 0.0f, 0.0f);
 
-/**
- * @brief Static pointer to the current application instance.
- *
- * This is used to ensure only one instance of the Application class exists.
- */
 Application* Application::s_ApplicationInstance = nullptr;
 
-/**
- * @brief Constructs an Application instance.
- *
- * Ensures no other instance of Application exists and sets the static
- * instance pointer to this instance.
- */
 Application::Application()
 {
     if (s_ApplicationInstance)
@@ -32,13 +21,6 @@ Application::Application()
     s_ApplicationInstance = this;
 }
 
-/**
- * @brief Runs the application loop.
- *
- * Initializes the window and rendering data, then enters the main loop where
- * it clears the screen, submits draw commands, renders layers, and updates
- * the window until the window should close.
- */
 void Application::Run()
 {
     m_Running = true;
@@ -135,12 +117,6 @@ void Application::Run()
     }
 }
 
-/**
- * @brief Renders all layers in the stack.
- *
- * Calls `OnUpdate` on each layer, then starts and ends the ImGui layer, and
- * calls `OnImGuiRender` on each layer.
- */
 void Application::RenderLayers()
 {
     for (Layer* layer : m_LayerStack)
@@ -156,12 +132,6 @@ void Application::RenderLayers()
     m_ImGuiLayer->End();
 }
 
-/**
- * @brief Initializes ImGui and adds it to the layer stack.
- *
- * Creates an ImGui layer, sets the window for ImGui, and sets up callback
- * functions for UI elements.
- */
 void Application::InitializeImGui()
 {
     m_ImGuiLayer = new Tools::ImGuiLayer();
@@ -201,69 +171,24 @@ void Application::InitializeImGui()
     PushLayer(exampleLayer);
 }
 
-/**
- * @brief Creates an instance of Application.
- *
- * Allocates and returns a new Application object.
- *
- * @return A pointer to the newly created Application instance.
- */
 Application* CreateApplicationInstance() { return new Application(); }
 
-/**
- * @brief Adds a layer to the layer stack.
- *
- * Pushes the layer onto the layer stack and calls `OnAttach` on it.
- *
- * @param layer A pointer to the Layer to add.
- */
 void Application::PushLayer(Layer* layer)
 {
     m_LayerStack.PushLayer(layer);
     layer->OnAttach();
 }
 
-/**
- * @brief Removes a layer from the layer stack.
- *
- * Removes the specified layer from the stack.
- *
- * @param layer A pointer to the Layer to remove.
- */
 void Application::PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
 
-/**
- * @brief Adds an overlay layer to the layer stack.
- *
- * Pushes the overlay onto the layer stack and calls `OnAttach` on it.
- *
- * @param layer A pointer to the Layer to add as an overlay.
- */
 void Application::PushOverlay(Layer* layer)
 {
     m_LayerStack.PushOverlay(layer);
     layer->OnAttach();
 }
 
-/**
- * @brief Removes an overlay layer from the layer stack.
- *
- * Removes the specified overlay from the stack.
- *
- * @param overlay A pointer to the Layer to remove as an overlay.
- */
 void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
 
-/**
- * @brief Initializes test rendering data.
- *
- * Sets up shaders, vertex arrays, buffers, and attributes for rendering.
- *
- * @param shaderProgram A reference to an unsigned integer to store the shader program ID.
- * @param VBO A reference to an unsigned integer to store the vertex buffer object ID.
- * @param VAO A reference to an unsigned integer to store the vertex array object ID.
- * @param EBO A reference to an unsigned integer to store the element buffer object ID.
- */
 void Application::InitializeTestRenderData(
     unsigned* shaderProgram, unsigned* VBO, unsigned* VAO, unsigned* EBO, unsigned* textures)
 {

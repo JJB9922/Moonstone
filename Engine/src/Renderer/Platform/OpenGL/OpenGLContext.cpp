@@ -6,29 +6,12 @@ namespace Moonstone
 namespace Renderer
 {
 
-/**
- * @brief Constructs an OpenGLContext instance.
- *
- * Initializes the context with the specified GLFW window and asserts that
- * the window is not null.
- *
- * @param window A pointer to the GLFW window to associate with the OpenGL context.
- */
 OpenGLContext::OpenGLContext(GLFWwindow *window)
     : m_Window(window)
 {
     MS_ASSERT(window, "window is null");
 }
 
-/**
- * @brief Initializes the OpenGL context.
- *
- * Sets the current context to the specified GLFW window and loads OpenGL
- * functions using GLAD. Logs OpenGL information such as vendor, renderer,
- * and version.
- *
- * @note This function asserts that the GLAD loader was successful.
- */
 void OpenGLContext::Init()
 {
     glfwMakeContextCurrent(m_Window);

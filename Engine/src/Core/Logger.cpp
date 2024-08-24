@@ -8,12 +8,6 @@ namespace Core
 
 std::shared_ptr<spdlog::logger> Logger::s_Logger;
 
-/**
- * @brief Initializes the logging system.
- *
- * Sets up the logger instance and prepares the logging system
- * for use. It must be called before any logging happens.
- */
 void Logger::Init()
 {
     try
@@ -32,13 +26,6 @@ void Logger::Init()
     s_Logger->set_level(spdlog::level::trace);
 }
 
-/**
- * @brief Gets the logger instance.
- *
- * Provides access to the shared logger instance.
- *
- * @return std::shared_ptr<spdlog::logger>& A reference to the shared logger instance.
- */
 Logger* CreateLoggerInstance() { return new Logger(); }
 
 } // namespace Core

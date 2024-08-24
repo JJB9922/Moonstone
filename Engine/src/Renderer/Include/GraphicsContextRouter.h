@@ -11,13 +11,6 @@ namespace Moonstone
 namespace Renderer
 {
 
-/**
- * @brief A factory class that provides the appropriate graphics context based on the selected rendering API.
- * 
- * The `GraphicsContextRouter` class determines which graphics context implementation to use 
- * (e.g., OpenGL or Vulkan) by querying the current rendering API through `RendererAPI::GetAPI()`.
- * It is responsible for creating and returning an instance of the relevant graphics context.
- */
 class GraphicsContextRouter
 {
     public:

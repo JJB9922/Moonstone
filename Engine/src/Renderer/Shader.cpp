@@ -6,11 +6,6 @@ namespace Moonstone
 namespace Renderer
 {
 
-/**
- * @brief Retrieve shaders from file
- * @param vertexPath
- * @param fragmentPath
- */
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
     std::string   vertexCode;
@@ -48,9 +43,6 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     Renderer::RendererCommand::InitShaderProgram(ID, vertex, fragment);
 }
 
-/**
- * @brief Use the current shader program
- */
 void Shader::Use() { Renderer::RendererCommand::UseProgram(ID); }
 
 void Shader::SetBool(const std::string& name, bool value) const

@@ -22,12 +22,6 @@ class Camera : public CameraController
         Core::Time& time = Core::Time::GetInstance();
 
     public:
-        /**
-         * @brief Camera Initialize a camera
-         * @param pos
-         * @param front
-         * @param up
-         */
         Camera(const glm::vec3& pos, const glm::vec3& front, const glm::vec3& up)
             : m_CameraPos(pos)
             , m_CameraFront(front)

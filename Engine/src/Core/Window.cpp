@@ -11,15 +11,6 @@ Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue:
 
 std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
 
-/**
- * @brief Constructs a WindowProperties instance.
- *
- * Initializes the window properties with the specified title, width, and height.
- *
- * @param Title The title of the window.
- * @param Width The width of the window.
- * @param Height The height of the window.
- */
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
     , Width(Width)
@@ -27,25 +18,8 @@ WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsi
 {
 }
 
-/**
- * @brief Creates a new Window instance.
- *
- * Instantiates a new Window object with the given properties.
- *
- * @param windowProperties The properties to use for the new window.
- * @return Window* A pointer to the newly created Window instance.
- */
 Window *Window::CreateWindow(const WindowProperties &windowProperties) { return new Window(windowProperties); }
 
-/**
- * @brief Constructs a Window instance.
- *
- * Initializes the window using the provided properties and sets up the window
- * color. Logs an error and terminates initialization if the window fails to
- * initialize.
- *
- * @param windowProperties The properties to use for initializing the window.
- */
 Window::Window(const WindowProperties &windowProperties)
 {
     bool success = InitializeWindow(windowProperties);
@@ -59,20 +33,8 @@ Window::Window(const WindowProperties &windowProperties)
     m_WindowColor = {0.7f, 0.75f, 0.78f, 1.0f};
 }
 
-/**
- * @brief Destructs a Window instance.
- *
- * Terminates GLFW and cleans up resources associated with the window.
- */
 Window::~Window() { glfwTerminate(); }
 
-/**
- * @brief Updates the window.
- *
- * Swaps the front and back buffers and processes events for the window.
- *
- * @param window The GLFW window to update.
- */
 void Window::UpdateWindow(GLFWwindow *window)
 {
     glfwSwapBuffers(window);
@@ -80,15 +42,6 @@ void Window::UpdateWindow(GLFWwindow *window)
     eventQueue.process();
 }
 
-/**
- * @brief Initializes the window.
- *
- * Sets up GLFW, creates the window, and initializes the graphics context.
- * Logs errors and performs clean-up if any step fails.
- *
- * @param windowProperties The properties to use for initializing the window.
- * @return bool True if the window was initialized successfully; false otherwise.
- */
 bool Window::InitializeWindow(const WindowProperties &windowProperties)
 {
     m_WindowData.windowProperties.Title  = windowProperties.Title;
@@ -147,13 +100,6 @@ bool Window::InitializeWindow(const WindowProperties &windowProperties)
     return true;
 }
 
-/**
- * @brief Sets the vertical synchronization (V-Sync) mode.
- *
- * Enables or disables V-Sync based on the provided flag.
- *
- * @param vSyncEnabled True to enable V-Sync; false to disable it.
- */
 void Window::SetVSync(bool vSyncEnabled)
 {
     if (vSyncEnabled)
@@ -168,13 +114,6 @@ void Window::SetVSync(bool vSyncEnabled)
     m_WindowData.VSync = vSyncEnabled;
 }
 
-/**
- * @brief Sets up input callbacks for the window.
- *
- * Configures GLFW callbacks for keyboard, mouse button, scroll, and cursor position events.
- *
- * @param window The GLFW window to configure callbacks for.
- */
 void Window::SetupInputCallbacks(GLFWwindow *window)
 {
     glfwSetKeyCallback(m_Window,
@@ -210,13 +149,6 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
                              });
 }
 
-/**
- * @brief Sets up window-related callbacks.
- *
- * Configures GLFW callbacks for window close, resize, minimize, and focus events.
- *
- * @param window The GLFW window to configure callbacks for.
- */
 void Window::SetupWindowCallbacks(GLFWwindow *window)
 {
     glfwSetWindowCloseCallback(m_Window,
@@ -252,14 +184,6 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                                });
 }
 
-/**
- * @brief Reports GLFW errors.
- *
- * Logs GLFW error messages using the provided error code and description.
- *
- * @param error The error code.
- * @param description The error description.
- */
 void Window::ReportGLFWError(int error, const char *description)
 {
     std::stringstream ss;
@@ -267,11 +191,6 @@ void Window::ReportGLFWError(int error, const char *description)
     MS_ERROR(ss.str());
 }
 
-/**
- * @brief Terminates the window.
- *
- * Sets the window to close and unsubscribes all events from the event dispatcher.
- */
 void Window::TerminateWindow()
 {
     glfwSetWindowShouldClose(m_Window, true);
@@ -282,12 +201,6 @@ void Window::TerminateWindow()
     }
 }
 
-/**
- * @brief Sets up initial events for the window.
- *
- * Subscribes to various window events (e.g., key presses, mouse clicks) and
- * configures their corresponding event handlers.
- */
 void Window::SetupInitEvents()
 {
     eventDispatcher.Subscribe(typeid(KeyPressEvent),

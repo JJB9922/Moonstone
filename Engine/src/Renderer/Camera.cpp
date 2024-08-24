@@ -6,20 +6,6 @@ namespace Moonstone
 namespace Renderer
 {
 
-/**
- * @brief Sets the projection matrix for the given shader.
- *
- * Calculates the perspective projection matrix based on the camera's field of view (FOV), 
- * the aspect ratio of the window, and the near and far clipping planes. This matrix is then 
- * set as a uniform in the specified shader.
- *
- * @param shaderID The ID of the shader program where the projection matrix will be set.
- * @param camera A shared pointer to the Camera object containing the FOV and other parameters.
- * @param winWidth The width of the window or viewport.
- * @param winHeight The height of the window or viewport.
- * @param nearClip The distance to the near clipping plane.
- * @param farClip The distance to the far clipping plane.
- */
 void Camera::SetProjectionMatrix(
     unsigned shaderID, std::shared_ptr<Camera> camera, int winWidth, int winHeight, float nearClip, float farClip)
 {
@@ -35,16 +21,6 @@ void Camera::SetProjectionMatrix(
     m_ProjectionMatrix = projection;
 }
 
-/**
- * @brief Sets the view matrix for the given shader.
- *
- * Calculates the view matrix based on the camera's position, front vector (direction), and up vector. 
- * This matrix represents the camera's orientation and position in the world. The matrix is then 
- * set as a uniform in the specified shader.
- *
- * @param shaderID The ID of the shader program where the view matrix will be set.
- * @param camera A shared pointer to the Camera object containing the position, front, and up vectors.
- */
 void Camera::SetViewMatrix(unsigned shaderID, std::shared_ptr<Camera> camera)
 {
     glm::mat4 view;

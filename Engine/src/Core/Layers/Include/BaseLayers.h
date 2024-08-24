@@ -10,13 +10,6 @@ namespace Moonstone
 namespace Core
 {
 
-/**
- * @brief A layer that provides a user interface with buttons and color editing options using ImGui.
- * 
- * The `ExampleLayer` class inherits from `Layer` and implements a simple user interface that allows
- * users to interact with background color settings, toggle wireframe mode, and exit the application.
- * It uses ImGui for rendering the interface and supports dynamic callbacks for button interactions.
- */
 class ExampleLayer : public Layer
 {
     public:

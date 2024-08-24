@@ -10,14 +10,6 @@ namespace Moonstone
 namespace Renderer
 {
 
-/**
- * @brief Abstract base class for Renderer API implementations.
- * 
- * Defines an interface for rendering operations, such as setting clear color, 
- * initializing shaders, and submitting draw commands. The class also supports 
- * different rendering APIs, such as OpenGL and Vulkan, which can be queried 
- * through the static method GetAPI().
- */
 class RendererAPI
 {
     public:
@@ -138,15 +130,6 @@ class RendererAPI
         virtual void BindTexture(Texture texture, TextureTarget target, unsigned textureObject) = 0;
 
     private:
-        /**
-        * @brief Static member representing the current RendererAPI.
-        *
-        * This static member indicates the type of rendering API being used, set
-        * based on the preprocessor directives. The value depends on whether
-        * `MS_OPENGL` or `MS_VULKAN` is defined.
-        *
-        * @note This is only defined if either `MS_OPENGL` or `MS_VULKAN` is set.
-        */
         static API s_API;
 };
 
