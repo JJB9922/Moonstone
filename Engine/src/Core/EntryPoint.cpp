@@ -5,7 +5,10 @@
 int main()
 {
     Moonstone::Core::Logger::Init();
-    MS_INFO("application started successfully");
+    Moonstone::Core::EventDispatcher::Init();
+    Moonstone::Core::EventQueue::Init();
+
+    MS_INFO("application initialised successfully");
 
     auto app = Moonstone::Core::CreateApplicationInstance();
     app->Run();

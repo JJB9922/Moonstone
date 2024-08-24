@@ -3,6 +3,7 @@
 
 namespace Moonstone
 {
+
 namespace Core
 {
 
@@ -24,9 +25,10 @@ void Logger::Init()
 
     s_Logger = spdlog::stdout_color_mt("MOONSTONE");
     s_Logger->set_level(spdlog::level::trace);
+
+    MS_INFO("logger initialized");
 }
 
-Logger* CreateLoggerInstance() { return new Logger(); }
-
 } // namespace Core
+
 } // namespace Moonstone

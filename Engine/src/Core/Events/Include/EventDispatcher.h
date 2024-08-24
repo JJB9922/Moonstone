@@ -13,10 +13,14 @@ namespace Core
 class EventDispatcher
 {
     public:
-        static EventDispatcher& GetInstance()
+        EventDispatcher() = default;
+
+        static void Init();
+
+        inline static std::shared_ptr<EventDispatcher>& GetEventDispatcherInstance()
         {
-            static EventDispatcher instance;
-            return instance;
+            MS_ASSERT(s_EventDispatcher, "event dispatcher failed to initialise");
+            return s_EventDispatcher;
         }
 
         using Callback = std::function<void(std::shared_ptr<Event>)>;
@@ -47,11 +51,7 @@ class EventDispatcher
         }
 
     private:
-        EventDispatcher();
-        EventDispatcher(const EventDispatcher&)            = delete;
-        EventDispatcher& operator=(const EventDispatcher&) = delete;
-
-    private:
+        static std::shared_ptr<EventDispatcher>                    s_EventDispatcher;
         std::unordered_map<std::type_index, std::vector<Callback>> m_Subscribers;
 };
 

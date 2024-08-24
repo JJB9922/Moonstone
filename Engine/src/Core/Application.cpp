@@ -24,7 +24,7 @@ Application::Application()
 void Application::Run()
 {
     m_Running = true;
-    m_Window  = std::unique_ptr<Window>(Window::CreateWindow());
+    m_Window  = std::shared_ptr<Window>(Window::CreateWindow());
 
     unsigned shaderProgram[16], VBO[16], VAO[16], EBO[16];
     unsigned textures[16];
@@ -105,7 +105,7 @@ void Application::Run()
 
         RenderLayers();
 
-        Window::UpdateWindow(m_Window->m_Window);
+        Window::UpdateWindow(m_Window);
 
         if (glfwWindowShouldClose(m_Window->m_Window))
             m_Running = false;

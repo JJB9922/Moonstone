@@ -44,7 +44,7 @@ private:
     bool                    m_Running;
     static Application     *s_ApplicationInstance;
     LayerStack              m_LayerStack;
-    std::unique_ptr<Window> m_Window;
+    std::shared_ptr<Window> m_Window;
     Tools::ImGuiLayer      *m_ImGuiLayer;
 };
 

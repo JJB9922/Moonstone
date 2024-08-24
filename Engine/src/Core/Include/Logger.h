@@ -25,9 +25,8 @@ class Logger
         static std::shared_ptr<spdlog::logger> s_Logger;
 };
 
-Logger* CreateLoggerInstance();
-
 } // namespace Core
+
 } // namespace Moonstone
 
 #define MS_TRACE(...) ::Moonstone::Core::Logger::GetLoggerInstance()->trace(__VA_ARGS__)

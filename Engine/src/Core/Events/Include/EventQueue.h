@@ -12,35 +12,33 @@ namespace Core
 class EventQueue
 {
     public:
-        static EventQueue& GetInstance()
-        {
-            static EventQueue instance(GetInstanceDispatcher());
-            return instance;
-        };
+        EventQueue() { m_Dispatcher = EventDispatcher::GetEventDispatcherInstance(); }
+        ~EventQueue() = default;
 
-        void enqueue(std::shared_ptr<Event> event) { m_EventQueue.push(std::move(event)); }
-        void process()
+        static void Init();
+
+        inline static std::shared_ptr<EventQueue>& GetEventQueueInstance()
         {
-            while (!m_EventQueue.empty())
+            MS_ASSERT(s_EventQueue, "event queue failed to initialise");
+            return s_EventQueue;
+        }
+
+        void Enqueue(std::shared_ptr<Event> event) { m_Queue.push(std::move(event)); }
+
+        void Process()
+        {
+            while (!m_Queue.empty())
             {
-                auto event = m_EventQueue.front();
-                m_EventQueue.pop();
-                m_Dispatcher.Dispatch(event);
+                auto event = m_Queue.front();
+                m_Queue.pop();
+                m_Dispatcher->Dispatch(event);
             }
         }
 
     private:
-        EventQueue(EventDispatcher& dispatcher)
-            : m_Dispatcher(dispatcher)
-        {
-        }
-        EventQueue(const EventQueue&)            = delete;
-        EventQueue& operator=(const EventQueue&) = delete;
-
-        static EventDispatcher& GetInstanceDispatcher() { return EventDispatcher::GetInstance(); }
-
-        std::queue<std::shared_ptr<Event>> m_EventQueue;
-        EventDispatcher&                   m_Dispatcher;
+        static std::shared_ptr<EventQueue> s_EventQueue;
+        std::queue<std::shared_ptr<Event>> m_Queue;
+        std::shared_ptr<EventDispatcher>   m_Dispatcher;
 };
 
 } // namespace Core

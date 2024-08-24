@@ -3,13 +3,9 @@
 
 namespace Moonstone
 {
+
 namespace Core
 {
-
-Moonstone::Core::EventDispatcher &eventDispatcher = Moonstone::Core::EventDispatcher::GetInstance();
-Moonstone::Core::EventQueue      &eventQueue      = Moonstone::Core::EventQueue::GetInstance();
-
-std::shared_ptr<spdlog::logger> logger = Logger::GetLoggerInstance();
 
 WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsigned Height)
     : Title(Title)
@@ -22,6 +18,10 @@ Window *Window::CreateWindow(const WindowProperties &windowProperties) { return 
 
 Window::Window(const WindowProperties &windowProperties)
 {
+    m_EventDispatcher = EventDispatcher::GetEventDispatcherInstance();
+    m_EventQueue      = EventQueue::GetEventQueueInstance();
+    m_Logger          = Logger::GetLoggerInstance();
+
     bool success = InitializeWindow(windowProperties);
     if (!success)
     {
@@ -35,11 +35,11 @@ Window::Window(const WindowProperties &windowProperties)
 
 Window::~Window() { glfwTerminate(); }
 
-void Window::UpdateWindow(GLFWwindow *window)
+void Window::UpdateWindow(std::shared_ptr<Window> window)
 {
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(window->m_Window);
     glfwPollEvents();
-    eventQueue.process();
+    window->m_EventQueue->Process();
 }
 
 bool Window::InitializeWindow(const WindowProperties &windowProperties)
@@ -78,7 +78,7 @@ bool Window::InitializeWindow(const WindowProperties &windowProperties)
         return false;
     }
 
-    glfwSetWindowUserPointer(m_Window, &eventQueue);
+    glfwSetWindowUserPointer(m_Window, m_EventQueue.get());
 
     SetupInitEvents();
     SetupWindowCallbacks(m_Window);
@@ -121,7 +121,7 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
                        {
                            auto  event      = std::make_shared<KeyPressEvent>(key, action, mods);
                            auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                           eventQueue->enqueue(event);
+                           eventQueue->Enqueue(event);
                        });
 
     glfwSetMouseButtonCallback(m_Window,
@@ -129,7 +129,7 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
                                {
                                    auto  event      = std::make_shared<MouseButtonPressEvent>(button, action, mods);
                                    auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                                   eventQueue->enqueue(event);
+                                   eventQueue->Enqueue(event);
                                });
 
     glfwSetScrollCallback(m_Window,
@@ -137,7 +137,7 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
                           {
                               auto  event      = std::make_shared<MouseScrollEvent>(xOffset, yOffset);
                               auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                              eventQueue->enqueue(event);
+                              eventQueue->Enqueue(event);
                           });
 
     glfwSetCursorPosCallback(m_Window,
@@ -145,7 +145,7 @@ void Window::SetupInputCallbacks(GLFWwindow *window)
                              {
                                  auto  event      = std::make_shared<MouseMoveEvent>(xPosition, yPosition);
                                  auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                                 eventQueue->enqueue(event);
+                                 eventQueue->Enqueue(event);
                              });
 }
 
@@ -156,7 +156,7 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                                {
                                    auto  event      = std::make_shared<WindowCloseEvent>();
                                    auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                                   eventQueue->enqueue(event);
+                                   eventQueue->Enqueue(event);
                                });
 
     glfwSetWindowSizeCallback(m_Window,
@@ -164,7 +164,7 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                               {
                                   auto  event      = std::make_shared<WindowResizeEvent>(width, height);
                                   auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                                  eventQueue->enqueue(event);
+                                  eventQueue->Enqueue(event);
                               });
 
     glfwSetWindowIconifyCallback(m_Window,
@@ -172,7 +172,7 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                                  {
                                      auto  event      = std::make_shared<WindowMinimizeEvent>(minimized);
                                      auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                                     eventQueue->enqueue(event);
+                                     eventQueue->Enqueue(event);
                                  });
 
     glfwSetWindowFocusCallback(m_Window,
@@ -180,7 +180,7 @@ void Window::SetupWindowCallbacks(GLFWwindow *window)
                                {
                                    auto  event      = std::make_shared<WindowFocusEvent>(focused);
                                    auto *eventQueue = static_cast<EventQueue *>(glfwGetWindowUserPointer(window));
-                                   eventQueue->enqueue(event);
+                                   eventQueue->Enqueue(event);
                                });
 }
 
@@ -197,231 +197,232 @@ void Window::TerminateWindow()
 
     for (auto &event : m_SubscribedWindowEvents)
     {
-        eventDispatcher.Unsubscribe(event);
+        m_EventDispatcher->Unsubscribe(event);
     }
 }
 
 void Window::SetupInitEvents()
 {
-    eventDispatcher.Subscribe(typeid(KeyPressEvent),
-                              [this](std::shared_ptr<Event> event)
-                              {
-                                  auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
-                                  int  key      = keyEvent->GetKeyCode();
-                                  int  action   = keyEvent->GetAction();
-                                  int  mods     = keyEvent->GetMods();
+    m_EventDispatcher->Subscribe(typeid(KeyPressEvent),
+                                 [this](std::shared_ptr<Event> event)
+                                 {
+                                     auto keyEvent = std::static_pointer_cast<KeyPressEvent>(event);
+                                     int  key      = keyEvent->GetKeyCode();
+                                     int  action   = keyEvent->GetAction();
+                                     int  mods     = keyEvent->GetMods();
 
-                                  switch (action)
-                                  {
-                                      case GLFW_PRESS:
-                                          MS_LOUD_DEBUG("key press event: {0} - {1}", action, key);
+                                     switch (action)
+                                     {
+                                         case GLFW_PRESS:
+                                             MS_LOUD_DEBUG("key press event: {0} - {1}", action, key);
 
-                                          if (m_CameraController && m_CameraController->GetConnected())
-                                          {
-                                              if (key == GLFW_KEY_W)
-                                              {
-                                                  m_CameraController->OnMoveForward();
-                                              }
-                                              else if (key == GLFW_KEY_S)
-                                              {
-                                                  m_CameraController->OnMoveBackward();
-                                              }
-                                              else if (key == GLFW_KEY_A)
-                                              {
-                                                  m_CameraController->OnMoveLeft();
-                                              }
-                                              else if (key == GLFW_KEY_D)
-                                              {
-                                                  m_CameraController->OnMoveRight();
-                                              }
-                                          }
+                                             if (m_CameraController && m_CameraController->GetConnected())
+                                             {
+                                                 if (key == GLFW_KEY_W)
+                                                 {
+                                                     m_CameraController->OnMoveForward();
+                                                 }
+                                                 else if (key == GLFW_KEY_S)
+                                                 {
+                                                     m_CameraController->OnMoveBackward();
+                                                 }
+                                                 else if (key == GLFW_KEY_A)
+                                                 {
+                                                     m_CameraController->OnMoveLeft();
+                                                 }
+                                                 else if (key == GLFW_KEY_D)
+                                                 {
+                                                     m_CameraController->OnMoveRight();
+                                                 }
+                                             }
 
-                                          if (key == GLFW_KEY_ESCAPE && m_CameraController->GetConnected())
-                                          {
-                                              glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-                                              m_CameraController->SetConnected(false);
-                                              m_FirstMouse = true;
-                                          }
-                                          else if (key == GLFW_KEY_ESCAPE && !m_CameraController->GetConnected())
-                                          {
-                                              glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-                                              m_CameraController->SetConnected(true);
-                                          }
+                                             if (key == GLFW_KEY_ESCAPE && m_CameraController->GetConnected())
+                                             {
+                                                 glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                                                 m_CameraController->SetConnected(false);
+                                                 m_FirstMouse = true;
+                                             }
+                                             else if (key == GLFW_KEY_ESCAPE && !m_CameraController->GetConnected())
+                                             {
+                                                 glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                                                 m_CameraController->SetConnected(true);
+                                             }
 
-                                          break;
-                                      case GLFW_RELEASE:
-                                          MS_LOUD_DEBUG("key release event: {0} - {1}", action, key);
-                                          break;
-                                      case GLFW_REPEAT:
-                                          MS_LOUD_DEBUG("key repeat event: {0} - {1}", action, key);
+                                             break;
+                                         case GLFW_RELEASE:
+                                             MS_LOUD_DEBUG("key release event: {0} - {1}", action, key);
+                                             break;
+                                         case GLFW_REPEAT:
+                                             MS_LOUD_DEBUG("key repeat event: {0} - {1}", action, key);
 
-                                          if (m_CameraController && m_CameraController->GetConnected())
-                                          {
-                                              if (key == GLFW_KEY_W)
-                                              {
-                                                  m_CameraController->OnMoveForward();
-                                              }
-                                              else if (key == GLFW_KEY_S)
-                                              {
-                                                  m_CameraController->OnMoveBackward();
-                                              }
-                                              else if (key == GLFW_KEY_A)
-                                              {
-                                                  m_CameraController->OnMoveLeft();
-                                              }
-                                              else if (key == GLFW_KEY_D)
-                                              {
-                                                  m_CameraController->OnMoveRight();
-                                              }
-                                          }
+                                             if (m_CameraController && m_CameraController->GetConnected())
+                                             {
+                                                 if (key == GLFW_KEY_W)
+                                                 {
+                                                     m_CameraController->OnMoveForward();
+                                                 }
+                                                 else if (key == GLFW_KEY_S)
+                                                 {
+                                                     m_CameraController->OnMoveBackward();
+                                                 }
+                                                 else if (key == GLFW_KEY_A)
+                                                 {
+                                                     m_CameraController->OnMoveLeft();
+                                                 }
+                                                 else if (key == GLFW_KEY_D)
+                                                 {
+                                                     m_CameraController->OnMoveRight();
+                                                 }
+                                             }
 
-                                          break;
-                                  }
-                              });
+                                             break;
+                                     }
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(KeyPressEvent));
 
-    eventDispatcher.Subscribe(typeid(MouseButtonPressEvent),
-                              [this](std::shared_ptr<Event> event)
-                              {
-                                  auto btnEvent = std::static_pointer_cast<MouseButtonPressEvent>(event);
-                                  int  btn      = btnEvent->GetButton();
-                                  int  action   = btnEvent->GetAction();
+    m_EventDispatcher->Subscribe(typeid(MouseButtonPressEvent),
+                                 [this](std::shared_ptr<Event> event)
+                                 {
+                                     auto btnEvent = std::static_pointer_cast<MouseButtonPressEvent>(event);
+                                     int  btn      = btnEvent->GetButton();
+                                     int  action   = btnEvent->GetAction();
 
-                                  switch (action)
-                                  {
-                                      case GLFW_PRESS:
-                                          MS_DEBUG("mouse button press event: {0} - {1}", action, btn);
+                                     switch (action)
+                                     {
+                                         case GLFW_PRESS:
+                                             MS_DEBUG("mouse button press event: {0} - {1}", action, btn);
 
-                                          if (m_CameraController && m_CameraController->GetConnected())
-                                          {
-                                              if (btn == GLFW_MOUSE_BUTTON_MIDDLE)
-                                              {
-                                                  m_CameraController->SetFov(65.0f);
-                                              }
-                                          }
+                                             if (m_CameraController && m_CameraController->GetConnected())
+                                             {
+                                                 if (btn == GLFW_MOUSE_BUTTON_MIDDLE)
+                                                 {
+                                                     m_CameraController->SetFov(65.0f);
+                                                 }
+                                             }
 
-                                          break;
-                                      case GLFW_RELEASE:
-                                          MS_LOUD_DEBUG("mouse button release event: {0} - {1}", action, btn);
-                                          break;
-                                  }
-                              });
+                                             break;
+                                         case GLFW_RELEASE:
+                                             MS_LOUD_DEBUG("mouse button release event: {0} - {1}", action, btn);
+                                             break;
+                                     }
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(MouseButtonPressEvent));
 
-    eventDispatcher.Subscribe(typeid(MouseScrollEvent),
-                              [this](std::shared_ptr<Event> event)
-                              {
-                                  auto scrollEvent = std::static_pointer_cast<MouseScrollEvent>(event);
-                                  int  xOffset     = scrollEvent->GetXOffset();
-                                  int  yOffset     = scrollEvent->GetYOffset();
+    m_EventDispatcher->Subscribe(typeid(MouseScrollEvent),
+                                 [this](std::shared_ptr<Event> event)
+                                 {
+                                     auto scrollEvent = std::static_pointer_cast<MouseScrollEvent>(event);
+                                     int  xOffset     = scrollEvent->GetXOffset();
+                                     int  yOffset     = scrollEvent->GetYOffset();
 
-                                  if (m_CameraController && m_CameraController->GetConnected())
-                                  {
-                                      m_CameraController->SetFov(m_CameraController->GetFov() - (float) yOffset);
+                                     if (m_CameraController && m_CameraController->GetConnected())
+                                     {
+                                         m_CameraController->SetFov(m_CameraController->GetFov() - (float) yOffset);
 
-                                      if (m_CameraController->GetFov() < 1.0f)
-                                          m_CameraController->SetFov(1.0f);
-                                      if (m_CameraController->GetFov() > 120.0f)
-                                          m_CameraController->SetFov(120.0f);
-                                  }
+                                         if (m_CameraController->GetFov() < 1.0f)
+                                             m_CameraController->SetFov(1.0f);
+                                         if (m_CameraController->GetFov() > 120.0f)
+                                             m_CameraController->SetFov(120.0f);
+                                     }
 
-                                  MS_DEBUG("mouse scroll event: x{0}, y{1}", xOffset, yOffset);
-                              });
+                                     MS_DEBUG("mouse scroll event: x{0}, y{1}", xOffset, yOffset);
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(MouseScrollEvent));
 
-    eventDispatcher.Subscribe(typeid(MouseMoveEvent),
-                              [this](std::shared_ptr<Event> event)
-                              {
-                                  auto   moveEvent = std::static_pointer_cast<MouseMoveEvent>(event);
-                                  double xPosition = moveEvent->GetXPosition();
-                                  double yPosition = moveEvent->GetYPosition();
+    m_EventDispatcher->Subscribe(typeid(MouseMoveEvent),
+                                 [this](std::shared_ptr<Event> event)
+                                 {
+                                     auto   moveEvent = std::static_pointer_cast<MouseMoveEvent>(event);
+                                     double xPosition = moveEvent->GetXPosition();
+                                     double yPosition = moveEvent->GetYPosition();
 
-                                  if (m_CameraController && m_CameraController->GetConnected())
-                                  {
-                                      if (m_FirstMouse)
-                                      {
-                                          m_LastX      = xPosition;
-                                          m_LastY      = yPosition;
-                                          m_FirstMouse = false;
-                                      }
+                                     if (m_CameraController && m_CameraController->GetConnected())
+                                     {
+                                         if (m_FirstMouse)
+                                         {
+                                             m_LastX      = xPosition;
+                                             m_LastY      = yPosition;
+                                             m_FirstMouse = false;
+                                         }
 
-                                      float xoffset = xPosition - m_LastX;
-                                      float yoffset = m_LastY - yPosition;
-                                      m_LastX       = xPosition;
-                                      m_LastY       = yPosition;
+                                         float xoffset = xPosition - m_LastX;
+                                         float yoffset = m_LastY - yPosition;
+                                         m_LastX       = xPosition;
+                                         m_LastY       = yPosition;
 
-                                      const float sensitivity = 0.2f;
-                                      xoffset *= sensitivity;
-                                      yoffset *= sensitivity;
+                                         const float sensitivity = 0.2f;
+                                         xoffset *= sensitivity;
+                                         yoffset *= sensitivity;
 
-                                      m_CameraController->SetPitch(m_CameraController->GetPitch() + yoffset);
-                                      m_CameraController->SetYaw(m_CameraController->GetYaw() + xoffset);
+                                         m_CameraController->SetPitch(m_CameraController->GetPitch() + yoffset);
+                                         m_CameraController->SetYaw(m_CameraController->GetYaw() + xoffset);
 
-                                      if (m_CameraController->GetPitch() > 89.0f)
-                                          m_CameraController->SetPitch(89.0f);
-                                      if (m_CameraController->GetPitch() < -89.0f)
-                                          m_CameraController->SetPitch(-89.0f);
+                                         if (m_CameraController->GetPitch() > 89.0f)
+                                             m_CameraController->SetPitch(89.0f);
+                                         if (m_CameraController->GetPitch() < -89.0f)
+                                             m_CameraController->SetPitch(-89.0f);
 
-                                      glm::vec3 direction = {cos(glm::radians(m_CameraController->GetYaw())
-                                                                 * cos(glm::radians(m_CameraController->GetPitch()))),
-                                                             sin(glm::radians(m_CameraController->GetPitch())),
-                                                             sin(glm::radians(m_CameraController->GetYaw())
-                                                                 * cos(glm::radians(m_CameraController->GetPitch())))};
+                                         glm::vec3 direction = {cos(glm::radians(m_CameraController->GetYaw())
+                                                                    * cos(glm::radians(m_CameraController->GetPitch()))),
+                                                                sin(glm::radians(m_CameraController->GetPitch())),
+                                                                sin(glm::radians(m_CameraController->GetYaw())
+                                                                    * cos(
+                                                                        glm::radians(m_CameraController->GetPitch())))};
 
-                                      m_CameraController->SetDirection(glm::normalize(direction));
-                                      m_CameraController->SetFront(m_CameraController->GetDirection());
-                                  }
+                                         m_CameraController->SetDirection(glm::normalize(direction));
+                                         m_CameraController->SetFront(m_CameraController->GetDirection());
+                                     }
 
-                                  MS_LOUD_DEBUG("mouse move event: x{0}, y{1}", xPosition, yPosition);
-                              });
+                                     MS_LOUD_DEBUG("mouse move event: x{0}, y{1}", xPosition, yPosition);
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(MouseMoveEvent));
 
-    eventDispatcher.Subscribe(typeid(WindowCloseEvent),
-                              [this](std::shared_ptr<Event> event)
-                              {
-                                  MS_DEBUG("window close event");
-                                  TerminateWindow();
-                              });
+    m_EventDispatcher->Subscribe(typeid(WindowCloseEvent),
+                                 [this](std::shared_ptr<Event> event)
+                                 {
+                                     MS_DEBUG("window close event");
+                                     TerminateWindow();
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowCloseEvent));
 
-    eventDispatcher.Subscribe(typeid(WindowResizeEvent),
-                              [](std::shared_ptr<Event> event)
-                              {
-                                  auto resizeEvent = std::static_pointer_cast<WindowResizeEvent>(event);
-                                  int  width       = resizeEvent->GetWidth();
-                                  int  height      = resizeEvent->GetHeight();
+    m_EventDispatcher->Subscribe(typeid(WindowResizeEvent),
+                                 [](std::shared_ptr<Event> event)
+                                 {
+                                     auto resizeEvent = std::static_pointer_cast<WindowResizeEvent>(event);
+                                     int  width       = resizeEvent->GetWidth();
+                                     int  height      = resizeEvent->GetHeight();
 
-                                  // ToDo : Don't forget this abstraction
-                                  glViewport(0, 0, width, height);
-                                  MS_DEBUG("window resize event: {0}x{1}", width, height);
-                              });
+                                     // ToDo : Don't forget this abstraction
+                                     glViewport(0, 0, width, height);
+                                     MS_DEBUG("window resize event: {0}x{1}", width, height);
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowResizeEvent));
 
-    eventDispatcher.Subscribe(typeid(WindowMinimizeEvent),
-                              [](std::shared_ptr<Event> event)
-                              {
-                                  auto minimizeEvent = std::static_pointer_cast<WindowMinimizeEvent>(event);
-                                  int  minimized     = minimizeEvent->IsMinimized();
+    m_EventDispatcher->Subscribe(typeid(WindowMinimizeEvent),
+                                 [](std::shared_ptr<Event> event)
+                                 {
+                                     auto minimizeEvent = std::static_pointer_cast<WindowMinimizeEvent>(event);
+                                     int  minimized     = minimizeEvent->IsMinimized();
 
-                                  MS_DEBUG("window minimize event: {0}", minimized);
-                              });
+                                     MS_DEBUG("window minimize event: {0}", minimized);
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowMinimizeEvent));
 
-    eventDispatcher.Subscribe(typeid(WindowFocusEvent),
-                              [](std::shared_ptr<Event> event)
-                              {
-                                  auto focusEvent = std::static_pointer_cast<WindowFocusEvent>(event);
-                                  int  focused    = focusEvent->IsFocused();
+    m_EventDispatcher->Subscribe(typeid(WindowFocusEvent),
+                                 [](std::shared_ptr<Event> event)
+                                 {
+                                     auto focusEvent = std::static_pointer_cast<WindowFocusEvent>(event);
+                                     int  focused    = focusEvent->IsFocused();
 
-                                  MS_LOUD_DEBUG("window focus event: {0}", focused);
-                              });
+                                     MS_LOUD_DEBUG("window focus event: {0}", focused);
+                                 });
 
     m_SubscribedWindowEvents.push_back(typeid(WindowFocusEvent));
 }

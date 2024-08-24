@@ -49,7 +49,7 @@ class Window
 
         static Window *CreateWindow(const WindowProperties &windowProperties = WindowProperties());
         void           TerminateWindow();
-        static void    UpdateWindow(GLFWwindow *window);
+        static void    UpdateWindow(std::shared_ptr<Window> window);
 
         inline void SetCamera(std::shared_ptr<Renderer::CameraController> camera) { m_CameraController = camera; };
 
@@ -79,6 +79,10 @@ class Window
         float                                       m_LastX            = m_WindowData.windowProperties.Width / 2;
         float                                       m_LastY            = m_WindowData.windowProperties.Height / 2;
         bool                                        m_FirstMouse       = true;
+
+        std::shared_ptr<EventDispatcher> m_EventDispatcher;
+        std::shared_ptr<EventQueue>      m_EventQueue;
+        std::shared_ptr<spdlog::logger>  m_Logger;
 };
 
 } // namespace Core
