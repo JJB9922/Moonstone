@@ -76,6 +76,7 @@ file(GLOB IMGUI_SOURCES
     ${IMGUI_PATH}/backends/imgui_impl_vulkan.cpp
 )
 
+
 add_library("ImGui" STATIC ${IMGUI_SOURCES})
 target_include_directories("ImGui" PUBLIC ${IMGUI_PATH} ${IMGUI_PATH}/backends)
 
@@ -97,6 +98,7 @@ target_include_directories(Moonstone PUBLIC
     vendor/spdlog/include
     vendor/glad/include
     vendor/glm/glm
+    vendor/imgui
 )
 
 # Link libraries to Moonstone

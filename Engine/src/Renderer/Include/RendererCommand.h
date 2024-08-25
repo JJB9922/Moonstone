@@ -90,7 +90,7 @@ class RendererCommand
             s_RendererAPI->SetUniformInt(ID, name, value);
         };
 
-        inline static void SetUniformFloat(const unsigned &ID, const std::string &name, bool value)
+        inline static void SetUniformFloat(const unsigned &ID, const std::string &name, float value)
         {
             s_RendererAPI->SetUniformFloat(ID, name, value);
         };

@@ -365,13 +365,14 @@ void Window::SetupInitEvents()
                                          if (m_CameraController->GetPitch() < -89.0f)
                                              m_CameraController->SetPitch(-89.0f);
 
-                                         glm::vec3 direction = {cos(glm::radians(m_CameraController->GetYaw())
-                                                                    * cos(glm::radians(m_CameraController->GetPitch()))),
-                                                                sin(glm::radians(m_CameraController->GetPitch())),
-                                                                sin(glm::radians(m_CameraController->GetYaw())
-                                                                    * cos(
-                                                                        glm::radians(m_CameraController->GetPitch())))};
+                                         glm::vec3 direction;
+                                         direction.x = cos(glm::radians(m_CameraController->GetYaw()))
+                                                       * cos(glm::radians(m_CameraController->GetPitch()));
+                                         direction.y = sin(glm::radians(m_CameraController->GetPitch()));
+                                         direction.z = sin(glm::radians(m_CameraController->GetYaw()))
+                                                       * cos(glm::radians(m_CameraController->GetPitch()));
 
+                                         // Normalize the direction vector
                                          m_CameraController->SetDirection(glm::normalize(direction));
                                          m_CameraController->SetFront(m_CameraController->GetDirection());
                                      }
