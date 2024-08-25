@@ -95,6 +95,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8a9f3d9f4423f81a0bf42bcf46803681"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a134ae4509644d397c21d3dd1212c1024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a134ae4509644d397c21d3dd1212c1024">PopOverlay</a> (<a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a> *overlay)</td></tr>
 <tr class="separator:a134ae4509644d397c21d3dd1212c1024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e407624a5a9eefbc873261d9deefc11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a4e407624a5a9eefbc873261d9deefc11">GetDefaultGridEnabled</a> ()</td></tr>
+<tr class="separator:a4e407624a5a9eefbc873261d9deefc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3809478f8d794d53483bef4deb009bd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a3809478f8d794d53483bef4deb009bd8">SetDefaultGridEnabled</a> (bool show)</td></tr>
+<tr class="separator:a3809478f8d794d53483bef4deb009bd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -107,8 +111,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a25c23fa28d2db211acad051e688afd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05772fe4e377f200bbeba6c0daae9aac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a05772fe4e377f200bbeba6c0daae9aac">InitializeImGui</a> ()</td></tr>
 <tr class="separator:a05772fe4e377f200bbeba6c0daae9aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3577c02582f5f4c2c5cadcbf7ef88212"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a3577c02582f5f4c2c5cadcbf7ef88212">InitializeTestRenderData</a> (unsigned *shaderProgram, unsigned *VBO, unsigned *VAO, unsigned *EBO, unsigned *textures)</td></tr>
-<tr class="separator:a3577c02582f5f4c2c5cadcbf7ef88212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6218b396db48d80358b70b67f26b225e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a6218b396db48d80358b70b67f26b225e">InitializeDefaultGrid</a> (unsigned *shaderProgram, unsigned *VBO, unsigned *VAO, unsigned *EBO, unsigned *textures)</td></tr>
+<tr class="separator:a6218b396db48d80358b70b67f26b225e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -120,6 +124,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a4d1b1218734e5355f46cc5b1b240d2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a013a0277e34a8d76efa6c2a3d4c74cb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html">Tools::ImGuiLayer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a013a0277e34a8d76efa6c2a3d4c74cb7">m_ImGuiLayer</a></td></tr>
 <tr class="separator:a013a0277e34a8d76efa6c2a3d4c74cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c2d29f5a71a2580c57e41842dd039b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a45c2d29f5a71a2580c57e41842dd039b">m_Layers</a></td></tr>
+<tr class="separator:a45c2d29f5a71a2580c57e41842dd039b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9c977dc63bf8fd226fa63ae747c1918"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#ab9c977dc63bf8fd226fa63ae747c1918">m_DefaultGrid</a> = true</td></tr>
+<tr class="separator:ab9c977dc63bf8fd226fa63ae747c1918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -195,8 +203,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a05772fe4e377f200bbeba6c0daae9aac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05772fe4e377f200bbeba6c0daae9aac">&#9670;&nbsp;</a></span>InitializeImGui()</h2>
+<a id="a4e407624a5a9eefbc873261d9deefc11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e407624a5a9eefbc873261d9deefc11">&#9670;&nbsp;</a></span>GetDefaultGridEnabled()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +213,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Moonstone::Core::Application::InitializeImGui </td>
+          <td class="memname">bool Moonstone::Core::Application::GetDefaultGridEnabled </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -213,15 +221,15 @@ Static Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3577c02582f5f4c2c5cadcbf7ef88212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3577c02582f5f4c2c5cadcbf7ef88212">&#9670;&nbsp;</a></span>InitializeTestRenderData()</h2>
+<a id="a6218b396db48d80358b70b67f26b225e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6218b396db48d80358b70b67f26b225e">&#9670;&nbsp;</a></span>InitializeDefaultGrid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +238,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Moonstone::Core::Application::InitializeTestRenderData </td>
+          <td class="memname">void Moonstone::Core::Application::InitializeDefaultGrid </td>
           <td>(</td>
           <td class="paramtype">unsigned *&#160;</td>
           <td class="paramname"><em>shaderProgram</em>, </td>
@@ -263,6 +271,31 @@ Static Private Attributes</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a05772fe4e377f200bbeba6c0daae9aac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05772fe4e377f200bbeba6c0daae9aac">&#9670;&nbsp;</a></span>InitializeImGui()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::InitializeImGui </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -388,7 +421,55 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3809478f8d794d53483bef4deb009bd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3809478f8d794d53483bef4deb009bd8">&#9670;&nbsp;</a></span>SetDefaultGridEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::SetDefaultGridEnabled </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>show</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab9c977dc63bf8fd226fa63ae747c1918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9c977dc63bf8fd226fa63ae747c1918">&#9670;&nbsp;</a></span>m_DefaultGrid</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Moonstone::Core::Application::m_DefaultGrid = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a013a0277e34a8d76efa6c2a3d4c74cb7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a013a0277e34a8d76efa6c2a3d4c74cb7">&#9670;&nbsp;</a></span>m_ImGuiLayer</h2>
 
@@ -400,6 +481,28 @@ Static Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html">Tools::ImGuiLayer</a>* Moonstone::Core::Application::m_ImGuiLayer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45c2d29f5a71a2580c57e41842dd039b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c2d29f5a71a2580c57e41842dd039b">&#9670;&nbsp;</a></span>m_Layers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Layer</a>&gt; Moonstone::Core::Application::m_Layers</td>
         </tr>
       </table>
   </td>

@@ -90,6 +90,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aae15bddab2414522c5de91fd7b7884fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a919fba8533b74abf8fe51e3f268b069e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a919fba8533b74abf8fe51e3f268b069e">SetCamera</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html">Renderer::CameraController</a> &gt; camera)</td></tr>
 <tr class="separator:a919fba8533b74abf8fe51e3f268b069e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ca09237c0c14a7fcfc50f7f151822e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a2ca09237c0c14a7fcfc50f7f151822e1">SetCameraSens</a> (float sens)</td></tr>
+<tr class="separator:a2ca09237c0c14a7fcfc50f7f151822e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -145,6 +147,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ad42f29a27ec2a8463ac2c0df2daeebae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52e78f906aebd30a8edf5b13f3dd7198"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a52e78f906aebd30a8edf5b13f3dd7198">m_FirstMouse</a> = true</td></tr>
 <tr class="separator:a52e78f906aebd30a8edf5b13f3dd7198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20b0128618f3167a376bd8f976aeae2b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a20b0128618f3167a376bd8f976aeae2b">m_CamSensitivity</a> = 0.2f</td></tr>
+<tr class="separator:a20b0128618f3167a376bd8f976aeae2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac94ad3d178f987a9bece63de3768b3b"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html">EventDispatcher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#aac94ad3d178f987a9bece63de3768b3b">m_EventDispatcher</a></td></tr>
 <tr class="separator:aac94ad3d178f987a9bece63de3768b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a4af6947590429e5c90ad0dcaa87bf8"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1EventQueue.html">EventQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a0a4af6947590429e5c90ad0dcaa87bf8">m_EventQueue</a></td></tr>
@@ -361,6 +365,32 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a2ca09237c0c14a7fcfc50f7f151822e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ca09237c0c14a7fcfc50f7f151822e1">&#9670;&nbsp;</a></span>SetCameraSens()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Window::SetCameraSens </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>sens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a95346effeae4db2ef38826aa3458d3b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a95346effeae4db2ef38826aa3458d3b4">&#9670;&nbsp;</a></span>SetupInitEvents()</h2>
 
@@ -519,6 +549,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html">Renderer::CameraController</a>&gt; Moonstone::Core::Window::m_CameraController = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20b0128618f3167a376bd8f976aeae2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b0128618f3167a376bd8f976aeae2b">&#9670;&nbsp;</a></span>m_CamSensitivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::Window::m_CamSensitivity = 0.2f</td>
         </tr>
       </table>
   </td>

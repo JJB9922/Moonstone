@@ -109,7 +109,8 @@ Public Types</h2></td></tr>
 , <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a0e479df7320b2b137e6c7bb1d4773e0caf8320b26d30ab433c5a54546d21f414c">False</a>
  }</td></tr>
 <tr class="separator:a0e479df7320b2b137e6c7bb1d4773e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa75c678c4518703afb04304131d88d75"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">DrawMode</a> { <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75a7ca66fdfaad3eb33fc65d7490178f856">Triangles</a>
+<tr class="memitem:aa75c678c4518703afb04304131d88d75"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">DrawMode</a> { <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75aa0b0293a2db49f5f93c15a62e095c819">Lines</a>
+, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75a7ca66fdfaad3eb33fc65d7490178f856">Triangles</a>
  }</td></tr>
 <tr class="separator:aa75c678c4518703afb04304131d88d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2219a63c6a79526577a5300761da0a25"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25">TextureTarget</a> { <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25adc7f989aa32631adaea4eb6a609b0de4">Texture1D</a>
@@ -194,6 +195,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1db6b8bb3affe470d6fe2682b3802617"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0d1b52057b0b78b513ddcc1624e9f61"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ab0d1b52057b0b78b513ddcc1624e9f61">BindTexture</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a32d04287eaf94aa64d2e412396c0332a">Texture</a> texture, <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a2219a63c6a79526577a5300761da0a25">TextureTarget</a> target, unsigned textureObject)=0</td></tr>
 <tr class="separator:ab0d1b52057b0b78b513ddcc1624e9f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff55e86f1503a761fa58f2b74a0c748a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aff55e86f1503a761fa58f2b74a0c748a">EnableBlending</a> ()=0</td></tr>
+<tr class="separator:aff55e86f1503a761fa58f2b74a0c748a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7889995f762d3595fb3fdfa51f2a26ee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a7889995f762d3595fb3fdfa51f2a26ee">DisableBlending</a> ()=0</td></tr>
+<tr class="separator:a7889995f762d3595fb3fdfa51f2a26ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae05e378c0ec13aec20ef8ce8ffe9d66"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aae05e378c0ec13aec20ef8ce8ffe9d66">EnableDepthMask</a> ()=0</td></tr>
+<tr class="separator:aae05e378c0ec13aec20ef8ce8ffe9d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14f97d827d6c207fd5e3844d8de0606b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a14f97d827d6c207fd5e3844d8de0606b">DisableDepthMask</a> ()=0</td></tr>
+<tr class="separator:a14f97d827d6c207fd5e3844d8de0606b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -279,7 +288,8 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa75c678c4518703afb04304131d88d75a7ca66fdfaad3eb33fc65d7490178f856"></a>Triangles&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa75c678c4518703afb04304131d88d75aa0b0293a2db49f5f93c15a62e095c819"></a>Lines&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa75c678c4518703afb04304131d88d75a7ca66fdfaad3eb33fc65d7490178f856"></a>Triangles&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -698,6 +708,114 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a2304914e3039be1b6c9a6d170b7c4c36">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="a7889995f762d3595fb3fdfa51f2a26ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7889995f762d3595fb3fdfa51f2a26ee">&#9670;&nbsp;</a></span>DisableBlending()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::DisableBlending </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#aeea480154d279d4b416991414f8bb30c">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="a14f97d827d6c207fd5e3844d8de0606b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14f97d827d6c207fd5e3844d8de0606b">&#9670;&nbsp;</a></span>DisableDepthMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::DisableDepthMask </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a211a0b3ec7584b6943f3acc2d660fadc">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="aff55e86f1503a761fa58f2b74a0c748a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff55e86f1503a761fa58f2b74a0c748a">&#9670;&nbsp;</a></span>EnableBlending()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::EnableBlending </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a4ff71e81f725d6a1c39c4cf88efdf0ac">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="aae05e378c0ec13aec20ef8ce8ffe9d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae05e378c0ec13aec20ef8ce8ffe9d66">&#9670;&nbsp;</a></span>EnableDepthMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::EnableDepthMask </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#ac42309ccad5ef8dae86eccf446ccf9b8">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
 
 </div>
 </div>

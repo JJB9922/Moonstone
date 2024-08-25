@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['enabledepthtesting_440',['EnableDepthTesting',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#a736f5a925ccf08400abb5c0c7d4e634f',1,'Moonstone::Renderer::RendererAPI::EnableDepthTesting()'],['../classMoonstone_1_1Renderer_1_1RendererCommand.html#a79de5ccc1fc06d8ce30cd10b82faf881',1,'Moonstone::Renderer::RendererCommand::EnableDepthTesting()'],['../classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a0a757f3403cef03ab617f5182e33594f',1,'Moonstone::Renderer::OpenGLRendererAPI::EnableDepthTesting()']]],
-  ['end_441',['End',['../classMoonstone_1_1Tools_1_1ImGuiLayer.html#a2f64f731bf72ad8e747d7c8da7f0e169',1,'Moonstone::Tools::ImGuiLayer']]],
-  ['end_442',['end',['../classMoonstone_1_1Core_1_1LayerStack.html#a49205e19cbca3b90d5f70a31e9d853c3',1,'Moonstone::Core::LayerStack']]],
-  ['enqueue_443',['Enqueue',['../classMoonstone_1_1Core_1_1EventQueue.html#acc1d6b36fbc81862fe011c82f986395d',1,'Moonstone::Core::EventQueue']]],
-  ['eventdispatcher_444',['EventDispatcher',['../classMoonstone_1_1Core_1_1EventDispatcher.html#ab6b9f4813d8f16ad224ca13ff080af97',1,'Moonstone::Core::EventDispatcher']]],
-  ['eventqueue_445',['EventQueue',['../classMoonstone_1_1Core_1_1EventQueue.html#a5f2b8ea8eacf4a52c5a50ce26125b732',1,'Moonstone::Core::EventQueue']]],
-  ['examplelayer_446',['ExampleLayer',['../classMoonstone_1_1Core_1_1ExampleLayer.html#a4c2b122a1e0aac87d84b526087686903',1,'Moonstone::Core::ExampleLayer']]]
+  ['enableblending_465',['EnableBlending',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#aff55e86f1503a761fa58f2b74a0c748a',1,'Moonstone::Renderer::RendererAPI::EnableBlending()'],['../classMoonstone_1_1Renderer_1_1RendererCommand.html#a8c0e8af8dffb18cff9daed607104fa5c',1,'Moonstone::Renderer::RendererCommand::EnableBlending()'],['../classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a4ff71e81f725d6a1c39c4cf88efdf0ac',1,'Moonstone::Renderer::OpenGLRendererAPI::EnableBlending()']]],
+  ['enabledepthmask_466',['EnableDepthMask',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#aae05e378c0ec13aec20ef8ce8ffe9d66',1,'Moonstone::Renderer::RendererAPI::EnableDepthMask()'],['../classMoonstone_1_1Renderer_1_1RendererCommand.html#a95da070e048e297f4d986205e5f0ead8',1,'Moonstone::Renderer::RendererCommand::EnableDepthMask()'],['../classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#ac42309ccad5ef8dae86eccf446ccf9b8',1,'Moonstone::Renderer::OpenGLRendererAPI::EnableDepthMask()']]],
+  ['enabledepthtesting_467',['EnableDepthTesting',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#a736f5a925ccf08400abb5c0c7d4e634f',1,'Moonstone::Renderer::RendererAPI::EnableDepthTesting()'],['../classMoonstone_1_1Renderer_1_1RendererCommand.html#a79de5ccc1fc06d8ce30cd10b82faf881',1,'Moonstone::Renderer::RendererCommand::EnableDepthTesting()'],['../classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a0a757f3403cef03ab617f5182e33594f',1,'Moonstone::Renderer::OpenGLRendererAPI::EnableDepthTesting()']]],
+  ['end_468',['End',['../classMoonstone_1_1Tools_1_1ImGuiLayer.html#a2f64f731bf72ad8e747d7c8da7f0e169',1,'Moonstone::Tools::ImGuiLayer']]],
+  ['end_469',['end',['../classMoonstone_1_1Core_1_1LayerStack.html#a49205e19cbca3b90d5f70a31e9d853c3',1,'Moonstone::Core::LayerStack']]],
+  ['enqueue_470',['Enqueue',['../classMoonstone_1_1Core_1_1EventQueue.html#acc1d6b36fbc81862fe011c82f986395d',1,'Moonstone::Core::EventQueue']]],
+  ['entitylayer_471',['EntityLayer',['../classMoonstone_1_1Core_1_1EntityLayer.html#a32b4bdbf2be48aa944cd705c13e18e7d',1,'Moonstone::Core::EntityLayer']]],
+  ['eventdispatcher_472',['EventDispatcher',['../classMoonstone_1_1Core_1_1EventDispatcher.html#ab6b9f4813d8f16ad224ca13ff080af97',1,'Moonstone::Core::EventDispatcher']]],
+  ['eventqueue_473',['EventQueue',['../classMoonstone_1_1Core_1_1EventQueue.html#a5f2b8ea8eacf4a52c5a50ce26125b732',1,'Moonstone::Core::EventQueue']]]
 ];
