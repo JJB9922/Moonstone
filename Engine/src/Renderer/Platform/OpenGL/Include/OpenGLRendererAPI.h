@@ -65,6 +65,11 @@ class OpenGLRendererAPI : public RendererAPI
 
         virtual void BindTexture(Texture texture, TextureTarget target, unsigned textureObject) override;
 
+        virtual void EnableBlending() override;
+        virtual void DisableBlending() override;
+        virtual void EnableDepthMask() override;
+        virtual void DisableDepthMask() override;
+
     private:
         inline static GLuint ToOpenGLShaderType(NumericalDataType type)
         {
@@ -197,6 +202,9 @@ class OpenGLRendererAPI : public RendererAPI
         {
             switch (mode)
             {
+                case DrawMode::Lines:
+                    return GL_LINES;
+                    break;
                 case DrawMode::Triangles:
                     return GL_TRIANGLES;
                     break;

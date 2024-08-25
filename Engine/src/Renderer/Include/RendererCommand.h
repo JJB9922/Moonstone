@@ -133,6 +133,14 @@ class RendererCommand
             s_RendererAPI->BindTexture(texture, target, textureObject);
         }
 
+        inline static void EnableBlending() { s_RendererAPI->EnableBlending(); }
+
+        inline static void DisableBlending() { s_RendererAPI->DisableBlending(); }
+
+        inline static void EnableDepthMask() { s_RendererAPI->EnableDepthMask(); };
+
+        inline static void DisableDepthMask() { s_RendererAPI->DisableDepthMask(); };
+
     private:
         static RendererAPI *s_RendererAPI;
 };

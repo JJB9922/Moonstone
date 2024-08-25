@@ -19,6 +19,12 @@ class Time
         inline float GetDeltaTime() const { return m_DeltaTime; }
         inline float GetLastFrame() const { return m_LastFrame; }
 
+        void Update(float currentTime)
+        {
+            m_DeltaTime = currentTime - m_LastFrame;
+            m_LastFrame = currentTime;
+        }
+
         void SetDeltaTime(float deltaTime) { m_DeltaTime = deltaTime; }
         void SetLastFrame(float lastFrame) { m_LastFrame = lastFrame; }
 

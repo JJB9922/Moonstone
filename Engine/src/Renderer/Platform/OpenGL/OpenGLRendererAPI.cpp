@@ -216,6 +216,18 @@ void OpenGLRendererAPI::BindTexture(Texture texture, TextureTarget target, unsig
     glBindTexture(ToOpenGLTextureTarget(target), textureObject);
 }
 
+void OpenGLRendererAPI::EnableBlending()
+{
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void OpenGLRendererAPI::DisableBlending() { glDisable(GL_BLEND); }
+
+void OpenGLRendererAPI::EnableDepthMask() { glDepthMask(GL_TRUE); }
+
+void OpenGLRendererAPI::DisableDepthMask() { glDepthMask(GL_FALSE); }
+
 } // namespace Renderer
 
 } // namespace Moonstone

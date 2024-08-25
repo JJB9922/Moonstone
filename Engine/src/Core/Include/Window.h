@@ -1,9 +1,12 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "Tools/ImGui/Include/ImGuiLayer.h"
+
+#include "Core/Layers/Include/BaseLayers.h"
+
 #include "Core/Include/LayerStack.h"
 #include "Core/Include/Logger.h"
-#include "Core/Layers/Include/BaseLayers.h"
 #include "Events/Include/EventQueue.h"
 #include "Events/Include/InputEvents.h"
 #include "Events/Include/WindowEvents.h"
@@ -11,7 +14,6 @@
 #include "Renderer/Include/GraphicsContext.h"
 #include "Renderer/Include/GraphicsContextRouter.h"
 #include "Renderer/Include/RendererCommand.h"
-#include "Tools/ImGui/Include/ImGuiLayer.h"
 #include "mspch.h"
 
 namespace Moonstone
@@ -51,7 +53,8 @@ class Window
         void           TerminateWindow();
         static void    UpdateWindow(std::shared_ptr<Window> window);
 
-        inline void SetCamera(std::shared_ptr<Renderer::CameraController> camera) { m_CameraController = camera; };
+        inline void SetCamera(std::shared_ptr<Renderer::CameraController> camera) { m_CameraController = camera; }
+        inline void SetCameraSens(float sens) { m_CamSensitivity = sens; }
 
         inline static int GetWidth() { return WindowProperties().Width; }
         inline static int GetHeight() { return WindowProperties().Height; }
@@ -79,6 +82,7 @@ class Window
         float                                       m_LastX            = m_WindowData.windowProperties.Width / 2;
         float                                       m_LastY            = m_WindowData.windowProperties.Height / 2;
         bool                                        m_FirstMouse       = true;
+        float                                       m_CamSensitivity   = 0.2f;
 
         std::shared_ptr<EventDispatcher> m_EventDispatcher;
         std::shared_ptr<EventQueue>      m_EventQueue;

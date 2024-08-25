@@ -42,6 +42,7 @@ class RendererAPI
 
         enum class DrawMode
         {
+            Lines,
             Triangles
         };
 
@@ -129,6 +130,11 @@ class RendererAPI
             = 0;
 
         virtual void BindTexture(Texture texture, TextureTarget target, unsigned textureObject) = 0;
+
+        virtual void EnableBlending()   = 0;
+        virtual void DisableBlending()  = 0;
+        virtual void EnableDepthMask()  = 0;
+        virtual void DisableDepthMask() = 0;
 
     private:
         static API s_API;

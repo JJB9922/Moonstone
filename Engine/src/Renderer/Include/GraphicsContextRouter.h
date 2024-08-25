@@ -1,9 +1,10 @@
 #ifndef GRAPHICSCONTEXTROUTER_H
 #define GRAPHICSCONTEXTROUTER_H
 
+#include "Renderer/Platform/OpenGL/Include/OpenGLContext.h"
+
 #include "Renderer/Include/GraphicsContext.h"
 #include "Renderer/Include/RendererAPI.h"
-#include "Renderer/Platform/OpenGL/Include/OpenGLContext.h"
 
 namespace Moonstone
 {

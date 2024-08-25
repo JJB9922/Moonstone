@@ -2,7 +2,9 @@
 #define BASELAYERS_H
 
 #include "Core/Include/Layer.h"
+#include "Core/Include/Time.h"
 #include "imgui.h"
+#include <GLFW/glfw3.h>
 
 namespace Moonstone
 {
@@ -10,20 +12,22 @@ namespace Moonstone
 namespace Core
 {
 
-class ExampleLayer : public Layer
+class ControlsLayer : public Layer
 {
     public:
         enum class ButtonID
         {
             Exit,
             ApplyBGColor,
-            ToggleWireframe
+            ToggleWireframe,
+            ApplyCameraSens,
+            ToggleGrid
         };
 
         using ButtonCallback = std::function<void()>;
 
-        ExampleLayer()
-            : Layer("Example")
+        ControlsLayer()
+            : Layer("Controls")
         {
         }
 
@@ -31,29 +35,34 @@ class ExampleLayer : public Layer
 
         inline ImVec4 GetBGColor() { return m_BGColor; }
         void          SetBGColor(const ImVec4& color) { m_BGColor = color; }
+        inline float  GetCamSensitivity() { return m_CamSensitivity; }
 
         void OnUpdate() override {}
 
         virtual void OnImGuiRender() override
         {
+            ImVec2      btnSize  = ImVec2(150, 20);
             ImGuiStyle& style    = ImGui::GetStyle();
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({0, 0});
-            ImGui::SetNextWindowSize({300, 250});
+            ImGui::SetNextWindowPos({0, 150});
+            ImGui::SetNextWindowSize({300, 600});
 
             ImGui::Begin("Moonstone");
             ImGui::Text("Moonstone");
 
-            if (ImGui::Button("Exit", ImVec2(150, 40)) && m_BtnCallbacks[ButtonID::Exit])
+            if (ImGui::Button("Exit", btnSize) && m_BtnCallbacks[ButtonID::Exit])
             {
                 m_BtnCallbacks[ButtonID::Exit]();
             }
 
-            static ImVec4 color = ImVec4(0.7f, 0.75f, 0.78f, 1.0f);
+            ImGui::SeparatorText("Engine | Editor Settings");
+
+            //static ImVec4 color = ImVec4(0.7f, 0.75f, 0.78f, 1.0f);
+            static ImVec4 color = ImVec4(0.15f, 0.15f, 0.15f, 1.0f);
             m_BGColor           = color;
-            ImGui::Text("Background Color:");
+            ImGui::Text("Background Color");
 
             static bool alpha_preview      = true;
             static bool alpha_half_preview = false;
@@ -73,7 +82,7 @@ class ExampleLayer : public Layer
                 SetBGColor(color);
             }
 
-            if (ImGui::Button("Apply Colour", ImVec2(150, 40)) && m_BtnCallbacks[ButtonID::ApplyBGColor])
+            if (ImGui::Button("Apply Colour", btnSize) && m_BtnCallbacks[ButtonID::ApplyBGColor])
 
             {
                 m_BtnCallbacks[ButtonID::ApplyBGColor]();
@@ -81,9 +90,30 @@ class ExampleLayer : public Layer
                 MS_DEBUG("background colour changed: r({0}), g({1}), b({2})", color.x, color.y, color.z);
             }
 
-            ImGui::Text("Renderer:");
+            ImGui::Text("Grid");
+            bool gridEnabled = true;
+            if (ImGui::Button("Toggle Grid", btnSize) && m_BtnCallbacks[ButtonID::ToggleGrid])
 
-            if (ImGui::Button("Toggle Wireframe", ImVec2(150, 40)) && m_BtnCallbacks[ButtonID::ToggleWireframe])
+            {
+                m_BtnCallbacks[ButtonID::ToggleGrid]();
+
+                MS_DEBUG("grid toggled: {0}", gridEnabled);
+            }
+
+            ImGui::Text("Camera Sensitivity");
+
+            ImGui::SliderFloat("Sensitivity", &m_CamSensitivity, 0.0f, 1.0f, "%.3f");
+
+            if (ImGui::Button("Apply Sensitivity", btnSize) && m_BtnCallbacks[ButtonID::ApplyCameraSens])
+            {
+                m_BtnCallbacks[ButtonID::ApplyCameraSens]();
+
+                MS_DEBUG("camera sens changed: {0}", m_CamSensitivity);
+            }
+
+            ImGui::SeparatorText("Renderer:");
+
+            if (ImGui::Button("Toggle Wireframe", btnSize) && m_BtnCallbacks[ButtonID::ToggleWireframe])
             {
                 m_BtnCallbacks[ButtonID::ToggleWireframe]();
             }
@@ -94,7 +124,78 @@ class ExampleLayer : public Layer
     private:
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
         ImVec4                                       m_BGColor;
+        float                                        m_CamSensitivity = 0.2f;
+        float                                        m_CamSpeed       = 10.0f;
 };
+
+class DebugLayer : public Layer
+{
+    public:
+        DebugLayer()
+            : Layer("Debug")
+        {
+        }
+
+        void OnUpdate() override {}
+
+        virtual void OnImGuiRender() override
+        {
+            Time& time = Time::GetInstance();
+
+            ImVec2      btnSize  = ImVec2(150, 20);
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            ImGui::SetNextWindowPos({0, 0});
+            ImGui::SetNextWindowSize({300, 150});
+
+            ImGui::Begin("Debug");
+            float fps = 1.0f / time.GetDeltaTime();
+
+            ImGui::Text("FPS: %.2f", fps);
+            ImGui::Text("Delta Time: %.4f seconds", time.GetDeltaTime());
+
+            ImGui::End();
+        };
+};
+
+class EntityLayer : public Layer
+{
+    public:
+        EntityLayer()
+            : Layer("Entity")
+        {
+        }
+        void OnUpdate() override {}
+
+        void SetWindow(GLFWwindow* window) { m_Window = window; };
+
+        virtual void OnImGuiRender() override
+        {
+            Time& time = Time::GetInstance();
+
+            ImVec2      btnSize  = ImVec2(150, 20);
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            int winWidth, winHeight;
+            glfwGetWindowSize(m_Window, &winWidth, &winHeight);
+
+            ImGui::SetNextWindowPos({(float) winWidth - 200, 0});
+            ImGui::SetNextWindowSize({200, 500});
+
+            ImGui::Begin("Entities");
+
+            ImGui::Text("- Default Cube");
+            ImGui::End();
+        };
+
+    private:
+        GLFWwindow* m_Window;
+};
+
 } // namespace Core
 
 } // namespace Moonstone

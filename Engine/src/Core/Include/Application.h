@@ -3,7 +3,6 @@
 
 #include "Core/Include/Core.h"
 #include "Core/Include/Logger.h"
-#include "Core/Include/Time.h"
 #include "Core/Include/Window.h"
 #include "Renderer/Include/Camera.h"
 #include "Renderer/Include/Shader.h"
@@ -34,11 +33,13 @@ public:
     void PushOverlay(Layer *overlay);
     void PopOverlay(Layer *overlay);
 
+    inline bool GetDefaultGridEnabled() { return m_DefaultGrid; }
+    inline void SetDefaultGridEnabled(bool show) { m_DefaultGrid = show; }
+
 private:
     void RenderLayers();
     void InitializeImGui();
-    void InitializeTestRenderData(
-        unsigned *shaderProgram, unsigned *VBO, unsigned *VAO, unsigned *EBO, unsigned *textures);
+    void InitializeDefaultGrid(unsigned *shaderProgram, unsigned *VBO, unsigned *VAO, unsigned *EBO, unsigned *textures);
 
 private:
     bool                    m_Running;
@@ -46,6 +47,8 @@ private:
     LayerStack              m_LayerStack;
     std::shared_ptr<Window> m_Window;
     Tools::ImGuiLayer      *m_ImGuiLayer;
+    std::vector<Layer>      m_Layers;
+    bool                    m_DefaultGrid = true;
 };
 
 Application* CreateApplicationInstance();

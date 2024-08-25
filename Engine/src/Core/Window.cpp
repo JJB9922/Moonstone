@@ -30,7 +30,7 @@ Window::Window(const WindowProperties &windowProperties)
         return;
     }
 
-    m_WindowColor = {0.7f, 0.75f, 0.78f, 1.0f};
+    m_WindowColor = {0.15f, 0.15f, 0.15f, 1.0f};
 }
 
 Window::~Window() { glfwTerminate(); }
@@ -353,9 +353,8 @@ void Window::SetupInitEvents()
                                          m_LastX       = xPosition;
                                          m_LastY       = yPosition;
 
-                                         const float sensitivity = 0.2f;
-                                         xoffset *= sensitivity;
-                                         yoffset *= sensitivity;
+                                         xoffset *= m_CamSensitivity;
+                                         yoffset *= m_CamSensitivity;
 
                                          m_CameraController->SetPitch(m_CameraController->GetPitch() + yoffset);
                                          m_CameraController->SetYaw(m_CameraController->GetYaw() + xoffset);
