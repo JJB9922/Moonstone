@@ -68,8 +68,8 @@ class ControlsLayer : public Layer
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({0, 100});
-            ImGui::SetNextWindowSize({300, 600});
+            ImGui::SetNextWindowPos({0, 100}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({300, 600}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Moonstone");
             ImGui::Text("Moonstone");
@@ -213,8 +213,8 @@ class DebugLayer : public Layer
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({0, 0});
-            ImGui::SetNextWindowSize({300, 100});
+            ImGui::SetNextWindowPos({0, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({300, 100}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Debug");
             float fps = 1.0f / time.GetDeltaTime();
@@ -259,8 +259,8 @@ class EntityLayer : public Layer
             int winWidth, winHeight;
             glfwGetWindowSize(m_Window, &winWidth, &winHeight);
 
-            ImGui::SetNextWindowPos({(float) winWidth - 200, 0});
-            ImGui::SetNextWindowSize({200, 500});
+            ImGui::SetNextWindowPos({(float) winWidth - 200, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({200, 500}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Entities");
 
@@ -287,8 +287,6 @@ class TransformLayer : public Layer
 
         void OnUpdate() override {}
 
-        void SetWindowWidth(int width) { m_WindowWidth = width; };
-
         virtual void OnImGuiRender() override
         {
             ImVec2      btnSize  = ImVec2(150, 20);
@@ -296,16 +294,12 @@ class TransformLayer : public Layer
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({(float) m_WindowWidth / 2, 0});
-            ImGui::SetNextWindowSize({300, 150});
+            ImGui::SetNextWindowPos({300, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({300, 150}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Transform");
-            ImGui::Text("Transformations");
             ImGui::End();
         }
-
-    private:
-        int m_WindowWidth;
 };
 
 } // namespace Core

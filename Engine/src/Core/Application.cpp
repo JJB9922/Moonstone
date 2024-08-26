@@ -158,11 +158,12 @@ void Application::InitializeImGui()
     PushLayer(entityLayer);
 
     auto transformLayer = new TransformLayer;
-    transformLayer->SetWindowWidth(m_Window->GetWidth());
     PushLayer(transformLayer);
 
     auto controlsLayer = new ControlsLayer;
+
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
+
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor,
                                   [this, controlsLayer]()
                                   {
@@ -172,6 +173,7 @@ void Application::InitializeImGui()
                                       m_Window->m_WindowColor.b = color.z;
                                       m_Window->m_WindowColor.a = color.w;
                                   });
+
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe,
                                   [this]()
                                   {

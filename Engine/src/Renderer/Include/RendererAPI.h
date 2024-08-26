@@ -43,7 +43,8 @@ class RendererAPI
         enum class DrawMode
         {
             Lines,
-            Triangles
+            Triangles,
+            Polygons
         };
 
         enum class TextureTarget

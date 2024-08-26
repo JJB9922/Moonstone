@@ -208,6 +208,9 @@ class OpenGLRendererAPI : public RendererAPI
                 case DrawMode::Triangles:
                     return GL_TRIANGLES;
                     break;
+                case DrawMode::Polygons:
+                    return GL_POLYGON;
+                    break;
                 default:
                     return 0;
                     break;

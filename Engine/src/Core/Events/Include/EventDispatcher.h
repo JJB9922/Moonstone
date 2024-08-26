@@ -27,13 +27,13 @@ class EventDispatcher
 
         void Subscribe(const std::type_index& eventType, Callback callback)
         {
-            MS_DEBUG("subscribing {0}", eventType.name());
+            MS_LOUD_DEBUG("subscribing {0}", eventType.name());
             m_Subscribers[eventType].push_back(std::move(callback));
         }
 
         void Unsubscribe(const std::type_index& eventType)
         {
-            MS_DEBUG("unsubscribing {0}", eventType.name());
+            MS_LOUD_DEBUG("unsubscribing {0}", eventType.name());
             m_Subscribers.erase(eventType);
         }
 
