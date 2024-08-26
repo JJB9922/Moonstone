@@ -96,15 +96,22 @@ Public Types</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca77bfa926518159e75c2c4b508a81f19e">ToggleGrid</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca650a024818e022f05f44766109a5f846">AddObject</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca09f99be50dbb4e53c7bfd0b18552b47d">ToggleSunlight</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca3f308387afd123a5e8347eb5be9a0dc8">ApplyTimeOfDay</a>
 <br />
  }</td></tr>
 <tr class="separator:a1ba876227b45d86479ee7d67ac06555c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53efcdcd1bc0735f99381f95465771fe"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fe">SliderID</a> { <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fea0f094b17d6d26c3925824223a3c97fdd">TimeOfDay</a>
+ }</td></tr>
+<tr class="separator:a53efcdcd1bc0735f99381f95465771fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10dbc02076b3070cbd4ec0b401b70867"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a> { <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867a6adf97f83acf6453d4a6a4b1070f3754">None</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867aa296104f0c61a9cf39f4824d05315e12">Cube</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867ab7095f057db3fefa7325ad93a04e14fd">Sphere</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867a5e5b0d93bab61584149905b5e5dc71a0">Pyramid</a>
  }</td></tr>
 <tr class="separator:a10dbc02076b3070cbd4ec0b401b70867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cddd3164b29425fe1dbb53826a242e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#aa8cddd3164b29425fe1dbb53826a242e">SliderCallback</a> = std::function&lt; void(float)&gt;</td></tr>
+<tr class="separator:aa8cddd3164b29425fe1dbb53826a242e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e877958e1da9af6a84593657a964151"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4e877958e1da9af6a84593657a964151">ButtonCallback</a> = std::function&lt; void()&gt;</td></tr>
 <tr class="separator:a4e877958e1da9af6a84593657a964151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -114,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a56801f30e827fc26fde87bf8faa34aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addf0221ae35ef7a6c8031be149b998a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#addf0221ae35ef7a6c8031be149b998a1">SetBtnCallback</a> (<a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555c">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4e877958e1da9af6a84593657a964151">ButtonCallback</a> callback)</td></tr>
 <tr class="separator:addf0221ae35ef7a6c8031be149b998a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacf775b371ff5373a6b3d27eb826656"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#adacf775b371ff5373a6b3d27eb826656">SetSliderCallback</a> (<a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fe">SliderID</a> sliderID, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#aa8cddd3164b29425fe1dbb53826a242e">SliderCallback</a> callback)</td></tr>
+<tr class="separator:adacf775b371ff5373a6b3d27eb826656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9e10ae9395e6c9c31b854dc2e12ca9e"><td class="memItemLeft" align="right" valign="top">ImVec4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#af9e10ae9395e6c9c31b854dc2e12ca9e">GetBGColor</a> ()</td></tr>
 <tr class="separator:af9e10ae9395e6c9c31b854dc2e12ca9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6a295a64c518d5cce48ef62fb2111de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#ab6a295a64c518d5cce48ef62fb2111de">SetBGColor</a> (const ImVec4 &amp;color)</td></tr>
@@ -142,10 +151,14 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a550ba5872619971357aae5701294e5f8"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555c">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4e877958e1da9af6a84593657a964151">ButtonCallback</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a550ba5872619971357aae5701294e5f8">m_BtnCallbacks</a></td></tr>
 <tr class="separator:a550ba5872619971357aae5701294e5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a285096bb1a46bfbb1687b76c98568cd5"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fe">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#aa8cddd3164b29425fe1dbb53826a242e">SliderCallback</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a285096bb1a46bfbb1687b76c98568cd5">m_SliderCallbacks</a></td></tr>
+<tr class="separator:a285096bb1a46bfbb1687b76c98568cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5afe416c2ba8bba00cce43383dcfd195"><td class="memItemLeft" align="right" valign="top">ImVec4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a5afe416c2ba8bba00cce43383dcfd195">m_BGColor</a></td></tr>
 <tr class="separator:a5afe416c2ba8bba00cce43383dcfd195"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc4243da8da6300e81db9f7d9b3373bb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#afc4243da8da6300e81db9f7d9b3373bb">m_CamSensitivity</a> = 0.2f</td></tr>
 <tr class="separator:afc4243da8da6300e81db9f7d9b3373bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f4020eedda0a663aeffd781b69fa08"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#af8f4020eedda0a663aeffd781b69fa08">m_TimeOfDay</a> = 0.5f</td></tr>
+<tr class="separator:af8f4020eedda0a663aeffd781b69fa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fbb89c0b29b710dc9b56cef8f8ef5f9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4fbb89c0b29b710dc9b56cef8f8ef5f9">m_CamSpeed</a> = 10.0f</td></tr>
 <tr class="separator:a4fbb89c0b29b710dc9b56cef8f8ef5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81ba8cc7ded3ec255519960e810a5a3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a81ba8cc7ded3ec255519960e810a5a3c">m_AddObject</a></td></tr>
@@ -160,6 +173,20 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4e877958e1da9af6a84593657a964151">Moonstone::Core::ControlsLayer::ButtonCallback</a> =  std::function&lt;void()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8cddd3164b29425fe1dbb53826a242e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cddd3164b29425fe1dbb53826a242e">&#9670;&nbsp;</a></span>SliderCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#aa8cddd3164b29425fe1dbb53826a242e">Moonstone::Core::ControlsLayer::SliderCallback</a> =  std::function&lt;void(float)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -193,6 +220,8 @@ Private Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca91d5374f41faa67860a76be1d039fa53"></a>ApplyCameraSens&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca77bfa926518159e75c2c4b508a81f19e"></a>ToggleGrid&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca650a024818e022f05f44766109a5f846"></a>AddObject&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca09f99be50dbb4e53c7bfd0b18552b47d"></a>ToggleSunlight&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca3f308387afd123a5e8347eb5be9a0dc8"></a>ApplyTimeOfDay&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -221,6 +250,31 @@ Private Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867aa296104f0c61a9cf39f4824d05315e12"></a>Cube&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867ab7095f057db3fefa7325ad93a04e14fd"></a>Sphere&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867a5e5b0d93bab61584149905b5e5dc71a0"></a>Pyramid&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a53efcdcd1bc0735f99381f95465771fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53efcdcd1bc0735f99381f95465771fe">&#9670;&nbsp;</a></span>SliderID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fe">Moonstone::Core::ControlsLayer::SliderID</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a53efcdcd1bc0735f99381f95465771fea0f094b17d6d26c3925824223a3c97fdd"></a>TimeOfDay&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -443,6 +497,42 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="adacf775b371ff5373a6b3d27eb826656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adacf775b371ff5373a6b3d27eb826656">&#9670;&nbsp;</a></span>SetSliderCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::ControlsLayer::SetSliderCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fe">SliderID</a>&#160;</td>
+          <td class="paramname"><em>sliderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#aa8cddd3164b29425fe1dbb53826a242e">SliderCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a81ba8cc7ded3ec255519960e810a5a3c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81ba8cc7ded3ec255519960e810a5a3c">&#9670;&nbsp;</a></span>m_AddObject</h2>
@@ -543,6 +633,50 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">float Moonstone::Core::ControlsLayer::m_CamSpeed = 10.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a285096bb1a46bfbb1687b76c98568cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a285096bb1a46bfbb1687b76c98568cd5">&#9670;&nbsp;</a></span>m_SliderCallbacks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a53efcdcd1bc0735f99381f95465771fe">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#aa8cddd3164b29425fe1dbb53826a242e">SliderCallback</a>&gt; Moonstone::Core::ControlsLayer::m_SliderCallbacks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8f4020eedda0a663aeffd781b69fa08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8f4020eedda0a663aeffd781b69fa08">&#9670;&nbsp;</a></span>m_TimeOfDay</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::ControlsLayer::m_TimeOfDay = 0.5f</td>
         </tr>
       </table>
   </td>

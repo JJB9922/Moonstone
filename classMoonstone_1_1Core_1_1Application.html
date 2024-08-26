@@ -105,6 +105,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4e407624a5a9eefbc873261d9deefc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3809478f8d794d53483bef4deb009bd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a3809478f8d794d53483bef4deb009bd8">SetDefaultGridEnabled</a> (bool show)</td></tr>
 <tr class="separator:a3809478f8d794d53483bef4deb009bd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2e577eeea7137fc1149b4ea2e9012a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a3f2e577eeea7137fc1149b4ea2e9012a">ToggleSunlight</a> ()</td></tr>
+<tr class="separator:a3f2e577eeea7137fc1149b4ea2e9012a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -140,6 +142,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ab9c977dc63bf8fd226fa63ae747c1918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab118cd57463f5ab1620afc486de6df4f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structMoonstone_1_1Core_1_1Application_1_1SceneObject.html">SceneObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#ab118cd57463f5ab1620afc486de6df4f">m_Objects</a></td></tr>
 <tr class="separator:ab118cd57463f5ab1620afc486de6df4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a317552d1c24b962c632e937b467640b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a317552d1c24b962c632e937b467640b6">m_SunLight</a> = false</td></tr>
+<tr class="separator:a317552d1c24b962c632e937b467640b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7cc8f1d59898d023c47ad6b8d538539"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#ae7cc8f1d59898d023c47ad6b8d538539">m_TimeOfDay</a> = {-1.0f, -0.5f, 0}</td></tr>
+<tr class="separator:ae7cc8f1d59898d023c47ad6b8d538539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a259613d04d20325757d498b4875e7a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a5a259613d04d20325757d498b4875e7a">m_ShaderProgram</a></td></tr>
 <tr class="separator:a5a259613d04d20325757d498b4875e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add2b74be166a4ff486e3648082862c95"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#add2b74be166a4ff486e3648082862c95">m_VBO</a></td></tr>
@@ -577,6 +583,31 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3f2e577eeea7137fc1149b4ea2e9012a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2e577eeea7137fc1149b4ea2e9012a">&#9670;&nbsp;</a></span>ToggleSunlight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::ToggleSunlight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ab9c977dc63bf8fd226fa63ae747c1918"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab9c977dc63bf8fd226fa63ae747c1918">&#9670;&nbsp;</a></span>m_DefaultGrid</h2>
@@ -754,6 +785,28 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a317552d1c24b962c632e937b467640b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a317552d1c24b962c632e937b467640b6">&#9670;&nbsp;</a></span>m_SunLight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Moonstone::Core::Application::m_SunLight = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af3b8e26cd3a22f80e380ed80b8dc8d94"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3b8e26cd3a22f80e380ed80b8dc8d94">&#9670;&nbsp;</a></span>m_Texture</h2>
 
@@ -765,6 +818,28 @@ Static Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;unsigned&gt; Moonstone::Core::Application::m_Texture</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7cc8f1d59898d023c47ad6b8d538539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7cc8f1d59898d023c47ad6b8d538539">&#9670;&nbsp;</a></span>m_TimeOfDay</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 Moonstone::Core::Application::m_TimeOfDay = {-1.0f, -0.5f, 0}</td>
         </tr>
       </table>
   </td>
