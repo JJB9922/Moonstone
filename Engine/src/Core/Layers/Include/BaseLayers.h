@@ -226,9 +226,53 @@ class DebugLayer : public Layer
         };
 };
 
+class TransformLayer : public Layer
+{
+    public:
+        TransformLayer()
+            : Layer("Transform")
+        {
+        }
+
+        void OnUpdate() override {}
+
+        static inline std::string GetSelectedObject() { return m_SelectedObject; }
+        static inline void        SetSelectedObject(std::string objName) { m_SelectedObject = objName; }
+
+        virtual void OnImGuiRender() override
+        {
+            ImVec2      btnSize  = ImVec2(150, 20);
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            ImGui::SetNextWindowPos({300, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({300, 150}, ImGuiCond_FirstUseEver);
+
+            ImGui::Begin("Transform");
+
+            if (!GetSelectedObject().empty())
+            {
+                ImGui::SeparatorText(GetSelectedObject().c_str());
+            }
+
+            ImGui::End();
+        }
+
+    private:
+        static std::string m_SelectedObject;
+};
+
 class EntityLayer : public Layer
 {
     public:
+        enum class ButtonID
+        {
+            ClearSelection
+        };
+
+        using ButtonCallback = std::function<void()>;
+
         EntityLayer()
             : Layer("Entity")
         {
@@ -246,6 +290,11 @@ class EntityLayer : public Layer
                 m_ObjectNames.erase(it);
             }
         }
+        static inline void SetSelectedEntity(int selection) { m_SelectedEntity = selection; }
+        static inline int  GetSelectedEntity() { return m_SelectedEntity; }
+        static inline void ClearEntitySelection() { m_SelectedEntity = -1; }
+
+        void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
 
         virtual void OnImGuiRender() override
         {
@@ -259,47 +308,44 @@ class EntityLayer : public Layer
             int winWidth, winHeight;
             glfwGetWindowSize(m_Window, &winWidth, &winHeight);
 
-            ImGui::SetNextWindowPos({(float) winWidth - 200, 0}, ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize({200, 500}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowPos({0, (float) winHeight - 200}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({200, 200}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Entities");
 
+            if (ImGui::Button("Clear Selection", btnSize) && m_BtnCallbacks[ButtonID::ClearSelection])
+            {
+                m_BtnCallbacks[ButtonID::ClearSelection]();
+            }
+
+            int idx = 0;
             for (std::string& name : m_ObjectNames)
             {
-                ImGui::Text(name.c_str());
+                if (ImGui::Selectable(name.c_str(), GetSelectedEntity() == idx))
+                {
+                    SetSelectedEntity(idx);
+                }
+
+                ++idx;
+            }
+
+            if (m_SelectedEntity > -1)
+            {
+                TransformLayer::SetSelectedObject(m_ObjectNames[GetSelectedEntity()]);
+            }
+            else
+            {
+                TransformLayer::SetSelectedObject("");
             }
 
             ImGui::End();
         };
 
     private:
-        GLFWwindow*              m_Window;
-        std::vector<std::string> m_ObjectNames;
-};
-
-class TransformLayer : public Layer
-{
-    public:
-        TransformLayer()
-            : Layer("Transform")
-        {
-        }
-
-        void OnUpdate() override {}
-
-        virtual void OnImGuiRender() override
-        {
-            ImVec2      btnSize  = ImVec2(150, 20);
-            ImGuiStyle& style    = ImGui::GetStyle();
-            style.FrameRounding  = 2;
-            style.WindowRounding = 2;
-
-            ImGui::SetNextWindowPos({300, 0}, ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize({300, 150}, ImGuiCond_FirstUseEver);
-
-            ImGui::Begin("Transform");
-            ImGui::End();
-        }
+        static int                                   m_SelectedEntity;
+        GLFWwindow*                                  m_Window;
+        std::vector<std::string>                     m_ObjectNames;
+        std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
 };
 
 } // namespace Core

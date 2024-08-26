@@ -155,6 +155,8 @@ void Application::InitializeImGui()
 
     auto entityLayer = new EntityLayer;
     entityLayer->SetWindow(m_Window->m_Window);
+    entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
+                                [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
     PushLayer(entityLayer);
 
     auto transformLayer = new TransformLayer;
