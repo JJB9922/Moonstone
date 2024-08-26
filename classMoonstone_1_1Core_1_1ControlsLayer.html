@@ -95,9 +95,16 @@ Public Types</h2></td></tr>
 , <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca91d5374f41faa67860a76be1d039fa53">ApplyCameraSens</a>
 , <br />
 &#160;&#160;<a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca77bfa926518159e75c2c4b508a81f19e">ToggleGrid</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca650a024818e022f05f44766109a5f846">AddObject</a>
 <br />
  }</td></tr>
 <tr class="separator:a1ba876227b45d86479ee7d67ac06555c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10dbc02076b3070cbd4ec0b401b70867"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a> { <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867a6adf97f83acf6453d4a6a4b1070f3754">None</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867aa296104f0c61a9cf39f4824d05315e12">Cube</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867ab7095f057db3fefa7325ad93a04e14fd">Sphere</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867a5e5b0d93bab61584149905b5e5dc71a0">Pyramid</a>
+ }</td></tr>
+<tr class="separator:a10dbc02076b3070cbd4ec0b401b70867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e877958e1da9af6a84593657a964151"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4e877958e1da9af6a84593657a964151">ButtonCallback</a> = std::function&lt; void()&gt;</td></tr>
 <tr class="separator:a4e877958e1da9af6a84593657a964151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -113,6 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab6a295a64c518d5cce48ef62fb2111de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae801391f068acf9f4b2493e7372f214e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#ae801391f068acf9f4b2493e7372f214e">GetCamSensitivity</a> ()</td></tr>
 <tr class="separator:ae801391f068acf9f4b2493e7372f214e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29857f9f848bc39cb02bc77398851ac0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a29857f9f848bc39cb02bc77398851ac0">GetAddObject</a> ()</td></tr>
+<tr class="separator:a29857f9f848bc39cb02bc77398851ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7377c9546bdcf076e1a9bc60c8bca1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#abd7377c9546bdcf076e1a9bc60c8bca1">OnUpdate</a> () override</td></tr>
 <tr class="separator:abd7377c9546bdcf076e1a9bc60c8bca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb653a13b8487d9797dd77cb77597598"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#adb653a13b8487d9797dd77cb77597598">OnImGuiRender</a> () override</td></tr>
@@ -139,6 +148,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:afc4243da8da6300e81db9f7d9b3373bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fbb89c0b29b710dc9b56cef8f8ef5f9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a4fbb89c0b29b710dc9b56cef8f8ef5f9">m_CamSpeed</a> = 10.0f</td></tr>
 <tr class="separator:a4fbb89c0b29b710dc9b56cef8f8ef5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ba8cc7ded3ec255519960e810a5a3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a81ba8cc7ded3ec255519960e810a5a3c">m_AddObject</a></td></tr>
+<tr class="separator:a81ba8cc7ded3ec255519960e810a5a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a4e877958e1da9af6a84593657a964151"></a>
@@ -181,6 +192,35 @@ Private Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca5f016a1451c3ef09fb46e01820078905"></a>ToggleWireframe&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca91d5374f41faa67860a76be1d039fa53"></a>ApplyCameraSens&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca77bfa926518159e75c2c4b508a81f19e"></a>ToggleGrid&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1ba876227b45d86479ee7d67ac06555ca650a024818e022f05f44766109a5f846"></a>AddObject&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a10dbc02076b3070cbd4ec0b401b70867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10dbc02076b3070cbd4ec0b401b70867">&#9670;&nbsp;</a></span>SceneObject</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">Moonstone::Core::ControlsLayer::SceneObject</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867aa296104f0c61a9cf39f4824d05315e12"></a>Cube&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867ab7095f057db3fefa7325ad93a04e14fd"></a>Sphere&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10dbc02076b3070cbd4ec0b401b70867a5e5b0d93bab61584149905b5e5dc71a0"></a>Pyramid&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -212,6 +252,31 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a29857f9f848bc39cb02bc77398851ac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29857f9f848bc39cb02bc77398851ac0">&#9670;&nbsp;</a></span>GetAddObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a> Moonstone::Core::ControlsLayer::GetAddObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af9e10ae9395e6c9c31b854dc2e12ca9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9e10ae9395e6c9c31b854dc2e12ca9e">&#9670;&nbsp;</a></span>GetBGColor()</h2>
 
@@ -379,6 +444,28 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a81ba8cc7ded3ec255519960e810a5a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ba8cc7ded3ec255519960e810a5a3c">&#9670;&nbsp;</a></span>m_AddObject</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867">SceneObject</a> Moonstone::Core::ControlsLayer::m_AddObject</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5afe416c2ba8bba00cce43383dcfd195"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5afe416c2ba8bba00cce43383dcfd195">&#9670;&nbsp;</a></span>m_BGColor</h2>
 

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['repeat_724',['Repeat',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#aa27189ab012259948503161678bf7a9fa7020426cfb0a204051be4b3053d2acc8',1,'Moonstone::Renderer::RendererAPI']]],
-  ['rgb_725',['RGB',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#a35a0016d3c97f90aa8c9fe2c6b9c19e0a889574aebacda6bfd3e534e2b49b8028',1,'Moonstone::Renderer::RendererAPI']]],
-  ['rgba_726',['RGBA',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#a35a0016d3c97f90aa8c9fe2c6b9c19e0aea3495a278957dc58165e48a8945469f',1,'Moonstone::Renderer::RendererAPI']]]
+  ['polygonfill_779',['PolygonFill',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#ad9f1abe13238bc81912eed5119394dada6d4a26410d669946e8e4ccfc96c95d39',1,'Moonstone::Renderer::RendererAPI']]],
+  ['polygonline_780',['PolygonLine',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#ad9f1abe13238bc81912eed5119394dada35c22dd3365e6f5370d5a59d94d02142',1,'Moonstone::Renderer::RendererAPI']]],
+  ['pyramid_781',['Pyramid',['../classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867a5e5b0d93bab61584149905b5e5dc71a0',1,'Moonstone::Core::ControlsLayer']]]
 ];
