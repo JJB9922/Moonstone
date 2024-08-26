@@ -94,7 +94,7 @@ class Camera : public CameraController
         float     m_CameraPitch = 0.0f;
         float     m_CameraYaw   = -90.0f;
         float     m_CameraFov   = 65.0f;
-        float     m_CameraSpeed = 10.0f;
+        float     m_CameraSpeed = 20.0f;
 
         bool m_CameraConnected = true;
 };

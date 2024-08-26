@@ -140,7 +140,10 @@ void OpenGLRendererAPI::Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderPr
 {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
+    if (shaderProgram)
+    {
+        glDeleteProgram(shaderProgram);
+    }
 }
 
 void OpenGLRendererAPI::UseProgram(unsigned &ID) { glUseProgram(ID); }

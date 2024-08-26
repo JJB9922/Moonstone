@@ -63,13 +63,18 @@ add_subdirectory(vendor/glm)
 
 # Static libraries
 
-# ImGui
+# ImGui & ImGuizmo
 set (IMGUI_PATH "vendor/imgui")
-include_directories(${CMAKE_SOURCE_DIR}/vendor/imgui)
+set (IMGUIZMO_PATH "vendor/ImGuizmo")
+include_directories(${IMGUI_PATH})
+include_directories(${IMGUIZMO_PATH})
 
 file(GLOB IMGUI_SOURCES
     ${IMGUI_PATH}/*.cpp a
     ${IMGUI_PATH}/*.h
+
+    ${IMGUIZMO_PATH}/*.cpp a
+    ${IMGUIZMO_PATH}/*.h
 
     ${IMGUI_PATH}/backends/imgui_impl_glfw.h
     ${IMGUI_PATH}/backends/imgui_impl_glfw.cpp
@@ -81,7 +86,7 @@ file(GLOB IMGUI_SOURCES
 
 
 add_library("ImGui" STATIC ${IMGUI_SOURCES})
-target_include_directories("ImGui" PUBLIC ${IMGUI_PATH} ${IMGUI_PATH}/backends)
+target_include_directories("ImGui" PUBLIC ${IMGUI_PATH} ${IMGUIZMO_PATH} ${IMGUI_PATH}/backends)
 
 # STB
 include_directories(${CMAKE_SOURCE_DIR}/vendor/stb)

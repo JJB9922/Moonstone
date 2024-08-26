@@ -6,6 +6,8 @@
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+
 namespace Moonstone
 {
 
@@ -22,7 +24,14 @@ class ControlsLayer : public Layer
             ToggleWireframe,
             ApplyCameraSens,
             ToggleGrid,
-            AddObject
+            AddObject,
+            ToggleSunlight,
+            ApplyTimeOfDay,
+        };
+
+        enum class SliderID
+        {
+            TimeOfDay,
         };
 
         enum class SceneObject
@@ -33,6 +42,7 @@ class ControlsLayer : public Layer
             Pyramid
         };
 
+        using SliderCallback = std::function<void(float)>;
         using ButtonCallback = std::function<void()>;
 
         ControlsLayer()
@@ -41,8 +51,9 @@ class ControlsLayer : public Layer
         }
 
         void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
+        void SetSliderCallback(SliderID sliderID, SliderCallback callback) { m_SliderCallbacks[sliderID] = callback; }
 
-        inline ImVec4 GetBGColor() { return m_BGColor; }
+        inline ImVec4      GetBGColor() { return m_BGColor; }
         inline void        SetBGColor(const ImVec4& color) { m_BGColor = color; }
         inline float       GetCamSensitivity() { return m_CamSensitivity; }
         inline SceneObject GetAddObject() { return m_AddObject; }
@@ -128,6 +139,20 @@ class ControlsLayer : public Layer
                 m_BtnCallbacks[ButtonID::ToggleWireframe]();
             }
 
+            ImGui::Text("Lighting");
+            if (ImGui::Button("Toggle Sun Light", btnSize) && m_BtnCallbacks[ButtonID::ToggleSunlight])
+            {
+                m_BtnCallbacks[ButtonID::ToggleSunlight]();
+            }
+
+            ImGui::Text("Time of Day");
+            ImGui::SliderFloat("Time of Day", &m_TimeOfDay, 0.0f, 1.0f, "%.3f");
+
+            if (m_SliderCallbacks[SliderID::TimeOfDay])
+            {
+                m_SliderCallbacks[SliderID::TimeOfDay](m_TimeOfDay);
+            }
+
             ImGui::Text("Objects");
 
             static int  selected_object = -1;
@@ -150,7 +175,7 @@ class ControlsLayer : public Layer
                 m_AddObject = static_cast<SceneObject>(selected_object + 1);
             }
 
-            if (ImGui::Button("Add Object", btnSize) && m_BtnCallbacks[ButtonID::ToggleWireframe])
+            if (ImGui::Button("Add Object", btnSize) && m_BtnCallbacks[ButtonID::AddObject])
             {
                 m_BtnCallbacks[ButtonID::AddObject]();
             }
@@ -160,8 +185,10 @@ class ControlsLayer : public Layer
 
     private:
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
+        std::unordered_map<SliderID, SliderCallback> m_SliderCallbacks;
         ImVec4                                       m_BGColor;
         float                                        m_CamSensitivity = 0.2f;
+        float                                        m_TimeOfDay      = 0.5f;
         float                                        m_CamSpeed       = 10.0f;
         SceneObject                                  m_AddObject;
 };
@@ -209,6 +236,15 @@ class EntityLayer : public Layer
 
         void SetWindow(GLFWwindow* window) { m_Window = window; };
         void AddObjectName(std::string name) { m_ObjectNames.push_back(name); };
+        void RemoveObjectName(const std::string& name)
+        {
+            auto it = std::find(m_ObjectNames.begin(), m_ObjectNames.end(), name);
+
+            if (it != m_ObjectNames.end())
+            {
+                m_ObjectNames.erase(it);
+            }
+        }
 
         virtual void OnImGuiRender() override
         {

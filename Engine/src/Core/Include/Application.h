@@ -45,6 +45,7 @@ class Application
 
         inline bool GetDefaultGridEnabled() { return m_DefaultGrid; }
         inline void SetDefaultGridEnabled(bool show) { m_DefaultGrid = show; }
+        inline void ToggleSunlight() { m_SunLight = !m_SunLight; }
 
     private:
         void RenderLayers();
@@ -76,6 +77,8 @@ class Application
         std::vector<Layer>       m_Layers;
         bool                     m_DefaultGrid = true;
         std::vector<SceneObject> m_Objects;
+        bool                     m_SunLight  = false;
+        glm::vec3                m_TimeOfDay = {-1.0f, -0.5f, 0};
 
         std::vector<unsigned> m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture;
 };

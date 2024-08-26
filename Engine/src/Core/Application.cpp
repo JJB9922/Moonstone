@@ -94,27 +94,29 @@ void Application::Run()
                                                       "projection",
                                                       pCamera->GetProjectionMatrix());
 
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "objectColor", {1.0f, 0.0f, 1.0f});
+
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.diffuse", {0.6f, 0.6f, 0.6f});
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
+            Renderer::RendererCommand::SetUniformFloat(m_Objects[i].shader.ID, "material.shininess", 64.0f);
+
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "viewPos", pCamera->GetPosition());
+
+            // Directional Light
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.direction", m_TimeOfDay);
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.ambient", {0.3f, 0.3f, 0.3f});
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
+            Renderer::RendererCommand::SetUniformBool(m_Objects[i].shader.ID, "dirLight.isActive", m_SunLight);
+
             pCamera->SetModelTransform(m_Objects[i].shader.ID,
-                                       glm::translate(pCamera->GetModel(), glm::vec3(0.0f, 0.0f, 2.0f)));
+                                       glm::translate(pCamera->GetModel(), glm::vec3(0.0f, 0.0f, 4.0f)));
 
             Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles,
                                                         0,
                                                         m_Objects[i].size);
         }
 
-        /*
-        cubeShader.Use();
-        Renderer::RendererCommand::BindVertexArray(VAO[1]);
-
-        pCamera->SetModel(cubeShader.ID, glm::vec3(0.0f));
-        float angle = 1.0f * currentFrame;
-        pCamera->SetModelTransform(cubeShader.ID, glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f)));
-
-        Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "model", pCamera->GetModel());
-        Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "view", pCamera->GetViewMatrix());
-        Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "projection", pCamera->GetProjectionMatrix());
-        Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
-*/
         RenderLayers();
 
         Window::UpdateWindow(m_Window);
@@ -208,16 +210,46 @@ void Application::InitializeImGui()
                                       {
                                           case ControlsLayer::SceneObject::Cube:
                                               AddCube(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
+                                              entityLayer->AddObjectName(m_Objects.back().name);
                                               break;
                                           case Moonstone::Core::ControlsLayer::SceneObject::Pyramid:
                                               AddPyramid(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
+                                              entityLayer->AddObjectName(m_Objects.back().name);
                                               break;
                                           default:
                                               break;
                                       }
-
-                                      entityLayer->AddObjectName(m_Objects.back().name);
                                   });
+
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
+                                  [this, controlsLayer, entityLayer]()
+                                  {
+                                      ToggleSunlight();
+                                      if (m_SunLight)
+                                      {
+                                          entityLayer->AddObjectName("Sun Light");
+                                      }
+                                      else
+                                      {
+                                          entityLayer->RemoveObjectName("Sun Light");
+                                      }
+                                  });
+
+    controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay,
+                                     [this, controlsLayer](float timeOfDayFloat)
+                                     {
+                                         float timeOfDay = timeOfDayFloat;
+
+                                         float angle = timeOfDay * 2.0f * 3.14159f;
+
+                                         float y = cos(angle);
+                                         float x = sin(angle);
+                                         float z = 0.0f;
+
+                                         glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
+
+                                         m_TimeOfDay = lightDirection;
+                                     });
 
     m_Layers.push_back(*controlsLayer);
     PushLayer(controlsLayer);
@@ -259,15 +291,7 @@ void Application::InitializeDefaultScene(std::vector<unsigned>& shaderProgram,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
                                                     3 * sizeof(float),
-                                                    0); /*
-    Renderer::RendererCommand::InitVertexArray(VAO[1]);
-    Renderer::RendererCommand::InitVertexBuffer(VBO[0], vertices, sizeof(vertices));
-    Renderer::RendererCommand::InitVertexAttributes(0,
-                                                    3,
-                                                    Renderer::RendererAPI::NumericalDataType::Float,
-                                                    Renderer::RendererAPI::BooleanDataType::False,
-                                                    5 * sizeof(float),
-                                                    0);*/
+                                                    0);
 }
 
 void Application::AddCube(std::vector<unsigned>& shaderProgram,
@@ -283,12 +307,20 @@ void Application::AddCube(std::vector<unsigned>& shaderProgram,
     Renderer::RendererCommand::InitVertexBuffer(VBO.back(),
                                                 Tools::BaseShapes::cubeVertices,
                                                 Tools::BaseShapes::cubeVerticesSize);
+
     Renderer::RendererCommand::InitVertexAttributes(0,
                                                     3,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
-                                                    5 * sizeof(float),
+                                                    6 * sizeof(float),
                                                     0);
+
+    Renderer::RendererCommand::InitVertexAttributes(1,
+                                                    3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    6 * sizeof(float),
+                                                    3 * sizeof(float));
 
     std::string      cubeVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.vert";
     std::string      cubeFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.frag";
