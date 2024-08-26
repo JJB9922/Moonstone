@@ -66,8 +66,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classMoonstone_1_1Core_1_1TransformLayer-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -86,12 +88,26 @@ Inheritance diagram for Moonstone::Core::TransformLayer:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af858a823d11af1192569280c63997ec8"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> { <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8af0c405ca8e7eb2c3fa3d102bb69b75a9">RemoveObject</a>
+ }</td></tr>
+<tr class="separator:af858a823d11af1192569280c63997ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad08119cea88bf1a6aeb5db48d4d98fc7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a> = std::function&lt; void()&gt;</td></tr>
+<tr class="separator:ad08119cea88bf1a6aeb5db48d4d98fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda4345d5ca4fd49f2e4ac1db288e8ea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afda4345d5ca4fd49f2e4ac1db288e8ea">ButtonCallbackStr</a> = std::function&lt; void(std::string)&gt;</td></tr>
+<tr class="separator:afda4345d5ca4fd49f2e4ac1db288e8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a469a7ce8a955103952edf94da8eac1bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a469a7ce8a955103952edf94da8eac1bc">TransformLayer</a> ()</td></tr>
 <tr class="separator:a469a7ce8a955103952edf94da8eac1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af64898103086c0a152e5630eed8cba4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af64898103086c0a152e5630eed8cba4b">OnUpdate</a> () override</td></tr>
 <tr class="separator:af64898103086c0a152e5630eed8cba4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e68c2cf1a06ef3532382e8099c3ec8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a0e68c2cf1a06ef3532382e8099c3ec8d">SetBtnCallback</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a> callback)</td></tr>
+<tr class="separator:a0e68c2cf1a06ef3532382e8099c3ec8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04011bb2994cf4cf58f2f4c6e9a156ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a04011bb2994cf4cf58f2f4c6e9a156ac">SetBtnCallbackStr</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afda4345d5ca4fd49f2e4ac1db288e8ea">ButtonCallbackStr</a> callback)</td></tr>
+<tr class="separator:a04011bb2994cf4cf58f2f4c6e9a156ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa07f0605e124cca697413c0126bdd46"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afa07f0605e124cca697413c0126bdd46">OnImGuiRender</a> () override</td></tr>
 <tr class="separator:afa07f0605e124cca697413c0126bdd46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMoonstone_1_1Core_1_1Layer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMoonstone_1_1Core_1_1Layer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Moonstone::Core::Layer</a></td></tr>
@@ -113,11 +129,73 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af98cf063aa12e817b599db0e890cd530"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af98cf063aa12e817b599db0e890cd530">SetSelectedObject</a> (std::string objName)</td></tr>
 <tr class="separator:af98cf063aa12e817b599db0e890cd530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a7310e9dac6d55a21020e56175233f2e4"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7310e9dac6d55a21020e56175233f2e4">m_BtnCallbacks</a></td></tr>
+<tr class="separator:a7310e9dac6d55a21020e56175233f2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a963b5de9216acaeaf541541ce37e93"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afda4345d5ca4fd49f2e4ac1db288e8ea">ButtonCallbackStr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a2a963b5de9216acaeaf541541ce37e93">m_BtnCallbacksStr</a></td></tr>
+<tr class="separator:a2a963b5de9216acaeaf541541ce37e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
 <tr class="memitem:ae24bc7e50fc0f98fecb72e2fc0def832"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae24bc7e50fc0f98fecb72e2fc0def832">m_SelectedObject</a> = &quot;&quot;</td></tr>
 <tr class="separator:ae24bc7e50fc0f98fecb72e2fc0def832"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ad08119cea88bf1a6aeb5db48d4d98fc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad08119cea88bf1a6aeb5db48d4d98fc7">&#9670;&nbsp;</a></span>ButtonCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">Moonstone::Core::TransformLayer::ButtonCallback</a> =  std::function&lt;void()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afda4345d5ca4fd49f2e4ac1db288e8ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afda4345d5ca4fd49f2e4ac1db288e8ea">&#9670;&nbsp;</a></span>ButtonCallbackStr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afda4345d5ca4fd49f2e4ac1db288e8ea">Moonstone::Core::TransformLayer::ButtonCallbackStr</a> =  std::function&lt;void(std::string)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="af858a823d11af1192569280c63997ec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af858a823d11af1192569280c63997ec8">&#9670;&nbsp;</a></span>ButtonID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">Moonstone::Core::TransformLayer::ButtonID</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af858a823d11af1192569280c63997ec8af0c405ca8e7eb2c3fa3d102bb69b75a9"></a>RemoveObject&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a469a7ce8a955103952edf94da8eac1bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a469a7ce8a955103952edf94da8eac1bc">&#9670;&nbsp;</a></span>TransformLayer()</h2>
@@ -224,6 +302,78 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0e68c2cf1a06ef3532382e8099c3ec8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e68c2cf1a06ef3532382e8099c3ec8d">&#9670;&nbsp;</a></span>SetBtnCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::TransformLayer::SetBtnCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>&#160;</td>
+          <td class="paramname"><em>buttonID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04011bb2994cf4cf58f2f4c6e9a156ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04011bb2994cf4cf58f2f4c6e9a156ac">&#9670;&nbsp;</a></span>SetBtnCallbackStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::TransformLayer::SetBtnCallbackStr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>&#160;</td>
+          <td class="paramname"><em>buttonID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afda4345d5ca4fd49f2e4ac1db288e8ea">ButtonCallbackStr</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af98cf063aa12e817b599db0e890cd530"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af98cf063aa12e817b599db0e890cd530">&#9670;&nbsp;</a></span>SetSelectedObject()</h2>
 
@@ -251,6 +401,50 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7310e9dac6d55a21020e56175233f2e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7310e9dac6d55a21020e56175233f2e4">&#9670;&nbsp;</a></span>m_BtnCallbacks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a>&gt; Moonstone::Core::TransformLayer::m_BtnCallbacks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a963b5de9216acaeaf541541ce37e93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a963b5de9216acaeaf541541ce37e93">&#9670;&nbsp;</a></span>m_BtnCallbacksStr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afda4345d5ca4fd49f2e4ac1db288e8ea">ButtonCallbackStr</a>&gt; Moonstone::Core::TransformLayer::m_BtnCallbacksStr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae24bc7e50fc0f98fecb72e2fc0def832"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae24bc7e50fc0f98fecb72e2fc0def832">&#9670;&nbsp;</a></span>m_SelectedObject</h2>
 
