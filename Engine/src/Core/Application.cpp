@@ -160,6 +160,22 @@ void Application::InitializeImGui()
     PushLayer(entityLayer);
 
     auto transformLayer = new TransformLayer;
+    transformLayer->SetBtnCallbackStr(TransformLayer::ButtonID::RemoveObject,
+                                      [this, entityLayer](std::string objName)
+                                      {
+                                          auto it = std::find_if(m_Objects.begin(),
+                                                                 m_Objects.end(),
+                                                                 [&objName](SceneObject& obj)
+                                                                 { return obj.name == objName; });
+
+                                          if (it != m_Objects.end())
+                                          {
+                                              m_Objects.erase(it);
+                                          }
+
+                                          entityLayer->ClearEntitySelection();
+                                          entityLayer->RemoveObjectName(objName);
+                                      });
     PushLayer(transformLayer);
 
     auto controlsLayer = new ControlsLayer;
@@ -231,14 +247,6 @@ void Application::InitializeImGui()
                                   [this, controlsLayer, entityLayer]()
                                   {
                                       ToggleSunlight();
-                                      if (m_SunLight)
-                                      {
-                                          entityLayer->AddObjectName("Sun Light");
-                                      }
-                                      else
-                                      {
-                                          entityLayer->RemoveObjectName("Sun Light");
-                                      }
                                   });
 
     controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay,

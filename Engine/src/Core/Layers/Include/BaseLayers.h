@@ -141,17 +141,30 @@ class ControlsLayer : public Layer
             }
 
             ImGui::Text("Lighting");
+
             if (ImGui::Button("Toggle Sun Light", btnSize) && m_BtnCallbacks[ButtonID::ToggleSunlight])
             {
+                m_SunOn = !m_SunOn;
                 m_BtnCallbacks[ButtonID::ToggleSunlight]();
             }
-
-            ImGui::Text("Time of Day");
-            ImGui::SliderFloat("Time of Day", &m_TimeOfDay, 0.0f, 1.0f, "%.3f");
-
-            if (m_SliderCallbacks[SliderID::TimeOfDay])
+            if (m_SunOn)
             {
-                m_SliderCallbacks[SliderID::TimeOfDay](m_TimeOfDay);
+                ImGui::SameLine();
+                ImGui::Text("Sunlight is On");
+
+                ImGui::Text("Time of Day");
+
+                ImGui::SliderFloat("Time of Day", &m_TimeOfDay, 0.0f, 1.0f, "%.3f");
+
+                if (m_SliderCallbacks[SliderID::TimeOfDay])
+                {
+                    m_SliderCallbacks[SliderID::TimeOfDay](m_TimeOfDay);
+                }
+            }
+            else
+            {
+                ImGui::SameLine();
+                ImGui::Text("Sunlight is Off");
             }
 
             ImGui::Text("Objects");
@@ -185,6 +198,7 @@ class ControlsLayer : public Layer
         }
 
     private:
+        bool                                         m_SunOn = false;
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
         std::unordered_map<SliderID, SliderCallback> m_SliderCallbacks;
         ImVec4                                       m_BGColor;
@@ -229,6 +243,14 @@ class DebugLayer : public Layer
 class TransformLayer : public Layer
 {
     public:
+        enum class ButtonID
+        {
+            RemoveObject
+        };
+
+        using ButtonCallback    = std::function<void()>;
+        using ButtonCallbackStr = std::function<void(std::string)>;
+
         TransformLayer()
             : Layer("Transform")
         {
@@ -238,6 +260,12 @@ class TransformLayer : public Layer
 
         static inline std::string GetSelectedObject() { return m_SelectedObject; }
         static inline void        SetSelectedObject(std::string objName) { m_SelectedObject = objName; }
+
+        void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
+        void SetBtnCallbackStr(ButtonID buttonID, ButtonCallbackStr callback)
+        {
+            m_BtnCallbacksStr[buttonID] = callback;
+        }
 
         virtual void OnImGuiRender() override
         {
@@ -254,13 +282,20 @@ class TransformLayer : public Layer
             if (!GetSelectedObject().empty())
             {
                 ImGui::SeparatorText(GetSelectedObject().c_str());
+
+                if (ImGui::Button("Remove Object", btnSize) && m_BtnCallbacksStr[ButtonID::RemoveObject])
+                {
+                    m_BtnCallbacksStr[ButtonID::RemoveObject](GetSelectedObject());
+                }
             }
 
             ImGui::End();
         }
 
     private:
-        static std::string m_SelectedObject;
+        static std::string                              m_SelectedObject;
+        std::unordered_map<ButtonID, ButtonCallback>    m_BtnCallbacks;
+        std::unordered_map<ButtonID, ButtonCallbackStr> m_BtnCallbacksStr;
 };
 
 class EntityLayer : public Layer
