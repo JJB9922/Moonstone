@@ -86,6 +86,7 @@ void Application::Run()
 
         for (int i = 0; i < m_Objects.size(); ++i)
         {
+            // Model
             m_Objects[i].shader.Use();
             Renderer::RendererCommand::BindVertexArray(m_VAO[i + 1]);
             Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", pCamera->GetModel());
@@ -108,9 +109,6 @@ void Application::Run()
             Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
             Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
             Renderer::RendererCommand::SetUniformBool(m_Objects[i].shader.ID, "dirLight.isActive", m_SunLight);
-
-            pCamera->SetModelTransform(m_Objects[i].shader.ID,
-                                       glm::translate(pCamera->GetModel(), glm::vec3(0.0f, 0.0f, 4.0f)));
 
             Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles,
                                                         0,
@@ -158,6 +156,10 @@ void Application::InitializeImGui()
     auto entityLayer = new EntityLayer;
     entityLayer->SetWindow(m_Window->m_Window);
     PushLayer(entityLayer);
+
+    auto transformLayer = new TransformLayer;
+    transformLayer->SetWindowWidth(m_Window->GetWidth());
+    PushLayer(transformLayer);
 
     auto controlsLayer = new ControlsLayer;
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });

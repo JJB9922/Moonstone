@@ -6,6 +6,7 @@
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 
+#include <ImGuizmo.h>
 #include <glm/glm.hpp>
 
 namespace Moonstone
@@ -67,7 +68,7 @@ class ControlsLayer : public Layer
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({0, 150});
+            ImGui::SetNextWindowPos({0, 100});
             ImGui::SetNextWindowSize({300, 600});
 
             ImGui::Begin("Moonstone");
@@ -213,7 +214,7 @@ class DebugLayer : public Layer
             style.WindowRounding = 2;
 
             ImGui::SetNextWindowPos({0, 0});
-            ImGui::SetNextWindowSize({300, 150});
+            ImGui::SetNextWindowSize({300, 100});
 
             ImGui::Begin("Debug");
             float fps = 1.0f / time.GetDeltaTime();
@@ -274,6 +275,37 @@ class EntityLayer : public Layer
     private:
         GLFWwindow*              m_Window;
         std::vector<std::string> m_ObjectNames;
+};
+
+class TransformLayer : public Layer
+{
+    public:
+        TransformLayer()
+            : Layer("Transform")
+        {
+        }
+
+        void OnUpdate() override {}
+
+        void SetWindowWidth(int width) { m_WindowWidth = width; };
+
+        virtual void OnImGuiRender() override
+        {
+            ImVec2      btnSize  = ImVec2(150, 20);
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            ImGui::SetNextWindowPos({(float) m_WindowWidth / 2, 0});
+            ImGui::SetNextWindowSize({300, 150});
+
+            ImGui::Begin("Transform");
+            ImGui::Text("Transformations");
+            ImGui::End();
+        }
+
+    private:
+        int m_WindowWidth;
 };
 
 } // namespace Core
