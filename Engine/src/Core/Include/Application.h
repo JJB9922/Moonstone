@@ -23,8 +23,10 @@ class Application
 {
         struct SceneObject
         {
-                bool             isActive;
+                bool isActive;
+
                 glm::vec3        position;
+
                 std::string      name;
                 Renderer::Shader shader;
                 size_t           size;

@@ -90,6 +90,11 @@ void Application::Run()
             m_Objects[i].shader.Use();
             Renderer::RendererCommand::BindVertexArray(m_VAO[i + 1]);
             Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", pCamera->GetModel());
+
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
+                                                      "model",
+                                                      glm::translate(pCamera->GetModel(), m_Objects[i].position));
+
             Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", pCamera->GetViewMatrix());
             Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
                                                       "projection",
@@ -176,6 +181,19 @@ void Application::InitializeImGui()
                                           entityLayer->ClearEntitySelection();
                                           entityLayer->RemoveObjectName(objName);
                                       });
+    transformLayer->SetSliderCallbackPos(TransformLayer::SliderID::PosGroup,
+                                         [this](glm::vec3 posGroup, std::string objName)
+                                         {
+                                             auto it = std::find_if(m_Objects.begin(),
+                                                                    m_Objects.end(),
+                                                                    [&objName](SceneObject& obj)
+                                                                    { return obj.name == objName; });
+
+                                             if (it != m_Objects.end())
+                                             {
+                                                 it->position = posGroup * 0.1f;
+                                             }
+                                         });
     PushLayer(transformLayer);
 
     auto controlsLayer = new ControlsLayer;
@@ -233,10 +251,12 @@ void Application::InitializeImGui()
                                           case ControlsLayer::SceneObject::Cube:
                                               AddCube(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
                                               entityLayer->AddObjectName(m_Objects.back().name);
+                                              entityLayer->ClearEntitySelection();
                                               break;
                                           case Moonstone::Core::ControlsLayer::SceneObject::Pyramid:
                                               AddPyramid(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
                                               entityLayer->AddObjectName(m_Objects.back().name);
+                                              entityLayer->ClearEntitySelection();
                                               break;
                                           default:
                                               break;

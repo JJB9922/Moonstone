@@ -248,8 +248,16 @@ class TransformLayer : public Layer
             RemoveObject
         };
 
-        using ButtonCallback    = std::function<void()>;
-        using ButtonCallbackStr = std::function<void(std::string)>;
+        enum class SliderID
+        {
+            PosGroup
+        };
+
+        using ButtonCallback     = std::function<void()>;
+        using ButtonCallbackStr  = std::function<void(std::string)>;
+        using SliderCallback     = std::function<void(float)>;
+        using SliderCallbackVec3 = std::function<void(glm::vec3)>;
+        using SliderCallbackPos  = std::function<void(glm::vec3, std::string)>;
 
         TransformLayer()
             : Layer("Transform")
@@ -265,6 +273,16 @@ class TransformLayer : public Layer
         void SetBtnCallbackStr(ButtonID buttonID, ButtonCallbackStr callback)
         {
             m_BtnCallbacksStr[buttonID] = callback;
+        }
+
+        void SetSliderCallback(SliderID sliderID, SliderCallback callback) { m_SliderCallbacks[sliderID] = callback; }
+        void SetSliderCallbackVec3(SliderID sliderID, SliderCallbackVec3 callback)
+        {
+            m_SliderCallbacksVec3[sliderID] = callback;
+        }
+        void SetSliderCallbackPos(SliderID sliderID, SliderCallbackPos callback)
+        {
+            m_SliderCallbacksPos[sliderID] = callback;
         }
 
         virtual void OnImGuiRender() override
@@ -287,15 +305,33 @@ class TransformLayer : public Layer
                 {
                     m_BtnCallbacksStr[ButtonID::RemoveObject](GetSelectedObject());
                 }
+
+                ImGui::Text("Position");
+                ImGui::SliderFloat("X", &m_XPos, -100.0f, 100.0f, "X = %.3f");
+                ImGui::SliderFloat("Y", &m_YPos, -100.0f, 100.0f, "Y = %.3f");
+                ImGui::SliderFloat("Z", &m_ZPos, -100.0f, 100.0f, "Z = %.3f");
+
+                m_Position = {m_XPos, m_YPos, m_ZPos};
+
+                if (m_SliderCallbacksPos[SliderID::PosGroup])
+                {
+                    m_SliderCallbacksPos[SliderID::PosGroup](m_Position, GetSelectedObject());
+                }
             }
 
             ImGui::End();
         }
 
     private:
-        static std::string                              m_SelectedObject;
-        std::unordered_map<ButtonID, ButtonCallback>    m_BtnCallbacks;
-        std::unordered_map<ButtonID, ButtonCallbackStr> m_BtnCallbacksStr;
+        float                                            m_XPos, m_YPos, m_ZPos;
+        glm::vec3                                        m_Position;
+        std::vector<std::pair<std::string, glm::vec3>>   m_SavedPositions;
+        static std::string                               m_SelectedObject;
+        std::unordered_map<ButtonID, ButtonCallback>     m_BtnCallbacks;
+        std::unordered_map<ButtonID, ButtonCallbackStr>  m_BtnCallbacksStr;
+        std::unordered_map<SliderID, SliderCallback>     m_SliderCallbacks;
+        std::unordered_map<SliderID, SliderCallbackVec3> m_SliderCallbacksVec3;
+        std::unordered_map<SliderID, SliderCallbackPos>  m_SliderCallbacksPos;
 };
 
 class EntityLayer : public Layer
