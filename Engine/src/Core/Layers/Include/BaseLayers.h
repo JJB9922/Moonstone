@@ -21,7 +21,16 @@ class ControlsLayer : public Layer
             ApplyBGColor,
             ToggleWireframe,
             ApplyCameraSens,
-            ToggleGrid
+            ToggleGrid,
+            AddObject
+        };
+
+        enum class SceneObject
+        {
+            None,
+            Cube,
+            Sphere,
+            Pyramid
         };
 
         using ButtonCallback = std::function<void()>;
@@ -34,8 +43,9 @@ class ControlsLayer : public Layer
         void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
 
         inline ImVec4 GetBGColor() { return m_BGColor; }
-        void          SetBGColor(const ImVec4& color) { m_BGColor = color; }
-        inline float  GetCamSensitivity() { return m_CamSensitivity; }
+        inline void        SetBGColor(const ImVec4& color) { m_BGColor = color; }
+        inline float       GetCamSensitivity() { return m_CamSensitivity; }
+        inline SceneObject GetAddObject() { return m_AddObject; }
 
         void OnUpdate() override {}
 
@@ -118,14 +128,42 @@ class ControlsLayer : public Layer
                 m_BtnCallbacks[ButtonID::ToggleWireframe]();
             }
 
+            ImGui::Text("Objects");
+
+            static int  selected_object = -1;
+            const char* names[]         = {"Cube", "Sphere", "Pyramid"};
+
+            if (ImGui::Button("Select Object"))
+                ImGui::OpenPopup("shape_popup");
+            ImGui::SameLine();
+            ImGui::TextUnformatted(selected_object == -1 ? "<No Object Selected>" : names[selected_object]);
+            if (ImGui::BeginPopup("shape_popup"))
+            {
+                ImGui::SeparatorText("Base Shapes");
+                for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+                    if (ImGui::Selectable(names[i]))
+                    {
+                        selected_object = i;
+                    }
+                ImGui::EndPopup();
+
+                m_AddObject = static_cast<SceneObject>(selected_object + 1);
+            }
+
+            if (ImGui::Button("Add Object", btnSize) && m_BtnCallbacks[ButtonID::ToggleWireframe])
+            {
+                m_BtnCallbacks[ButtonID::AddObject]();
+            }
+
             ImGui::End();
-        };
+        }
 
     private:
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
         ImVec4                                       m_BGColor;
         float                                        m_CamSensitivity = 0.2f;
         float                                        m_CamSpeed       = 10.0f;
+        SceneObject                                  m_AddObject;
 };
 
 class DebugLayer : public Layer
@@ -170,6 +208,7 @@ class EntityLayer : public Layer
         void OnUpdate() override {}
 
         void SetWindow(GLFWwindow* window) { m_Window = window; };
+        void AddObjectName(std::string name) { m_ObjectNames.push_back(name); };
 
         virtual void OnImGuiRender() override
         {
@@ -188,12 +227,17 @@ class EntityLayer : public Layer
 
             ImGui::Begin("Entities");
 
-            ImGui::Text("- Default Cube");
+            for (std::string& name : m_ObjectNames)
+            {
+                ImGui::Text(name.c_str());
+            }
+
             ImGui::End();
         };
 
     private:
-        GLFWwindow* m_Window;
+        GLFWwindow*              m_Window;
+        std::vector<std::string> m_ObjectNames;
 };
 
 } // namespace Core

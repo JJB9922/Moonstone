@@ -30,6 +30,9 @@ file(GLOB_RECURSE SRC_CORE_FILES
     "${SRC_CORE_DIR}/Layers/*.cpp"
     "${SRC_CORE_DIR}/Layers/Include/*.h"
 
+    "${SRC_TOOLS_DIR}/*.cpp"
+    "${SRC_TOOLS_DIR}/Include/*.h"
+
     "${SRC_TOOLS_DIR}/*/*.cpp"
     "${SRC_TOOLS_DIR}/*/Include/*h"
 

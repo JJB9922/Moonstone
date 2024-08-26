@@ -291,7 +291,7 @@ void Window::SetupInitEvents()
                                      switch (action)
                                      {
                                          case GLFW_PRESS:
-                                             MS_DEBUG("mouse button press event: {0} - {1}", action, btn);
+                                             MS_LOUD_DEBUG("mouse button press event: {0} - {1}", action, btn);
 
                                              if (m_CameraController && m_CameraController->GetConnected())
                                              {
@@ -327,7 +327,7 @@ void Window::SetupInitEvents()
                                              m_CameraController->SetFov(120.0f);
                                      }
 
-                                     MS_DEBUG("mouse scroll event: x{0}, y{1}", xOffset, yOffset);
+                                     MS_LOUD_DEBUG("mouse scroll event: x{0}, y{1}", xOffset, yOffset);
                                  });
 
     m_SubscribedWindowEvents.push_back(typeid(MouseScrollEvent));

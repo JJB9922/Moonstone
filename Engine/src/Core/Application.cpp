@@ -6,34 +6,6 @@ namespace Moonstone
 namespace Core
 {
 
-float gridVertices[] = {
-    -50.0f, 0.0f, -50.0f, 50.0f,  0.0f, -50.0f,
-
-    -50.0f, 0.0f, 50.0f,  50.0f,  0.0f, 50.0f,
-
-    -50.0f, 0.0f, -50.0f, -50.0f, 0.0f, 50.0f,
-
-    50.0f,  0.0f, -50.0f, 50.0f,  0.0f, 50.0f,
-};
-
-float vertices[] = {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
-                    0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-
-                    -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-                    0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -0.5f, 0.5f,  0.5f,  0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
-
-                    -0.5f, 0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 1.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-                    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
-
-                    0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
-                    0.5f,  -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-                    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
-                    0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-
-                    -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                    0.5f,  0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f};
-
 Application* Application::s_ApplicationInstance = nullptr;
 
 Application::Application()
@@ -62,17 +34,11 @@ void Application::Run()
 
     m_Window->SetCamera(pCamera);
 
-    unsigned shaderProgram[16], VBO[16], VAO[16], EBO[16], texture[16];
-
-    std::string      gridVert = std::string(RESOURCE_DIR) + "/Shaders/defaultgrid.vert";
-    std::string      gridFrag = std::string(RESOURCE_DIR) + "/Shaders/defaultgrid.frag";
+    std::string      gridVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.vert";
+    std::string      gridFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.frag";
     Renderer::Shader gridShader(gridVert.c_str(), gridFrag.c_str());
 
-    std::string      cubeVert = std::string(RESOURCE_DIR) + "/Shaders/lightvshader.vs";
-    std::string      cubeFrag = std::string(RESOURCE_DIR) + "/Shaders/lightfshader.fs";
-    Renderer::Shader cubeShader(cubeVert.c_str(), cubeFrag.c_str());
-
-    InitializeDefaultGrid(shaderProgram, VBO, VAO, EBO, texture);
+    InitializeDefaultScene(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
     InitializeImGui();
 
     Time& time = Time::GetInstance();
@@ -105,19 +71,38 @@ void Application::Run()
             Renderer::RendererCommand::EnableBlending();
             Renderer::RendererCommand::DisableDepthMask();
 
-            Renderer::RendererCommand::BindVertexArray(VAO[0]);
+            Renderer::RendererCommand::BindVertexArray(m_VAO[0]);
             Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "model", pCamera->GetModel());
             Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "view", pCamera->GetViewMatrix());
             Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "projection", pCamera->GetProjectionMatrix());
 
             Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles,
                                                         0,
-                                                        sizeof(gridVertices) / 3 * sizeof(float));
+                                                        Tools::BaseShapes::gridVerticesSize / 3 * sizeof(float));
 
             Renderer::RendererCommand::DisableBlending();
             Renderer::RendererCommand::EnableDepthMask();
         }
 
+        for (int i = 0; i < m_Objects.size(); ++i)
+        {
+            m_Objects[i].shader.Use();
+            Renderer::RendererCommand::BindVertexArray(m_VAO[i + 1]);
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", pCamera->GetModel());
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", pCamera->GetViewMatrix());
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
+                                                      "projection",
+                                                      pCamera->GetProjectionMatrix());
+
+            pCamera->SetModelTransform(m_Objects[i].shader.ID,
+                                       glm::translate(pCamera->GetModel(), glm::vec3(0.0f, 0.0f, 2.0f)));
+
+            Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles,
+                                                        0,
+                                                        m_Objects[i].size);
+        }
+
+        /*
         cubeShader.Use();
         Renderer::RendererCommand::BindVertexArray(VAO[1]);
 
@@ -129,7 +114,7 @@ void Application::Run()
         Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "view", pCamera->GetViewMatrix());
         Renderer::RendererCommand::SetUniformMat4(cubeShader.ID, "projection", pCamera->GetProjectionMatrix());
         Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, 36);
-
+*/
         RenderLayers();
 
         Window::UpdateWindow(m_Window);
@@ -138,9 +123,9 @@ void Application::Run()
             m_Running = false;
     }
 
-    for (int i = 0; i < 16; ++i)
+    for (int i = 0; i < m_Objects.size(); ++i)
     {
-        Renderer::RendererCommand::Cleanup(VAO[i], VBO[i], shaderProgram[i]);
+        Renderer::RendererCommand::Cleanup(m_VAO[i], m_VBO[i], m_ShaderProgram[i]);
     }
 }
 
@@ -214,6 +199,26 @@ void Application::InitializeImGui()
                                       }
                                   });
 
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddObject,
+                                  [this, controlsLayer, entityLayer]()
+                                  {
+                                      ControlsLayer::SceneObject obj = controlsLayer->GetAddObject();
+
+                                      switch (obj)
+                                      {
+                                          case ControlsLayer::SceneObject::Cube:
+                                              AddCube(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
+                                              break;
+                                          case Moonstone::Core::ControlsLayer::SceneObject::Pyramid:
+                                              AddPyramid(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
+                                              break;
+                                          default:
+                                              break;
+                                      }
+
+                                      entityLayer->AddObjectName(m_Objects.back().name);
+                                  });
+
     m_Layers.push_back(*controlsLayer);
     PushLayer(controlsLayer);
 }
@@ -236,18 +241,25 @@ void Application::PushOverlay(Layer* layer)
 
 void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
 
-void Application::InitializeDefaultGrid(
-    unsigned* shaderProgram, unsigned* VBO, unsigned* VAO, unsigned* EBO, unsigned* textures)
+void Application::InitializeDefaultScene(std::vector<unsigned>& shaderProgram,
+                                         std::vector<unsigned>& VBO,
+                                         std::vector<unsigned>& VAO,
+                                         std::vector<unsigned>& EBO,
+                                         std::vector<unsigned>& textures)
 {
-    Renderer::RendererCommand::InitVertexArray(VAO[0]);
-    Renderer::RendererCommand::InitVertexBuffer(VBO[0], gridVertices, sizeof(gridVertices));
+    VAO.push_back(0);
+    VBO.push_back(0);
+
+    Renderer::RendererCommand::InitVertexArray(VAO.back());
+    Renderer::RendererCommand::InitVertexBuffer(VBO.back(),
+                                                Tools::BaseShapes::gridVertices,
+                                                Tools::BaseShapes::gridVerticesSize);
     Renderer::RendererCommand::InitVertexAttributes(0,
                                                     3,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
                                                     3 * sizeof(float),
-                                                    0);
-
+                                                    0); /*
     Renderer::RendererCommand::InitVertexArray(VAO[1]);
     Renderer::RendererCommand::InitVertexBuffer(VBO[0], vertices, sizeof(vertices));
     Renderer::RendererCommand::InitVertexAttributes(0,
@@ -255,7 +267,71 @@ void Application::InitializeDefaultGrid(
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
                                                     5 * sizeof(float),
+                                                    0);*/
+}
+
+void Application::AddCube(std::vector<unsigned>& shaderProgram,
+                          std::vector<unsigned>& VBO,
+                          std::vector<unsigned>& VAO,
+                          std::vector<unsigned>& EBO,
+                          std::vector<unsigned>& textures)
+{
+    VAO.push_back(0);
+    VBO.push_back(0);
+
+    Renderer::RendererCommand::InitVertexArray(VAO.back());
+    Renderer::RendererCommand::InitVertexBuffer(VBO.back(),
+                                                Tools::BaseShapes::cubeVertices,
+                                                Tools::BaseShapes::cubeVerticesSize);
+    Renderer::RendererCommand::InitVertexAttributes(0,
+                                                    3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    5 * sizeof(float),
                                                     0);
+
+    std::string      cubeVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.vert";
+    std::string      cubeFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.frag";
+    Renderer::Shader cubeShader(cubeVert.c_str(), cubeFrag.c_str());
+
+    std::stringstream ss;
+    ss << "default_cube_" << m_Objects.size();
+
+    SceneObject cube = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
+
+    m_Objects.push_back(cube);
+}
+
+void Application::AddPyramid(std::vector<unsigned>& shaderProgram,
+                             std::vector<unsigned>& VBO,
+                             std::vector<unsigned>& VAO,
+                             std::vector<unsigned>& EBO,
+                             std::vector<unsigned>& textures)
+{
+    VAO.push_back(0);
+    VBO.push_back(0);
+
+    Renderer::RendererCommand::InitVertexArray(VAO.back());
+    Renderer::RendererCommand::InitVertexBuffer(VBO.back(),
+                                                Tools::BaseShapes::pyramidVertices,
+                                                Tools::BaseShapes::pyramidVerticesSize);
+    Renderer::RendererCommand::InitVertexAttributes(0,
+                                                    3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    5 * sizeof(float),
+                                                    0);
+
+    std::string      cubeVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.vert";
+    std::string      cubeFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.frag";
+    Renderer::Shader cubeShader(cubeVert.c_str(), cubeFrag.c_str());
+
+    std::stringstream ss;
+    ss << "default_pyramid_" << m_Objects.size();
+
+    SceneObject pyramid = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
+
+    m_Objects.push_back(pyramid);
 }
 
 } // namespace Core
