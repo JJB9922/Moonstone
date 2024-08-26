@@ -67,6 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classMoonstone_1_1Core_1_1TransformLayer-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Moonstone::Core::TransformLayer Class Reference</div>  </div>
@@ -103,6 +105,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5c75737df648e0ce663268a5eb12432c inherit pub_methods_classMoonstone_1_1Core_1_1Layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92094cb7c0a1bc163232dfd443430f64 inherit pub_methods_classMoonstone_1_1Core_1_1Layer"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Layer.html#a92094cb7c0a1bc163232dfd443430f64">GetLayerName</a> () const</td></tr>
 <tr class="separator:a92094cb7c0a1bc163232dfd443430f64 inherit pub_methods_classMoonstone_1_1Core_1_1Layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a0c43e43b8d675013a48447d418a2d4c9"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a0c43e43b8d675013a48447d418a2d4c9">GetSelectedObject</a> ()</td></tr>
+<tr class="separator:a0c43e43b8d675013a48447d418a2d4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af98cf063aa12e817b599db0e890cd530"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af98cf063aa12e817b599db0e890cd530">SetSelectedObject</a> (std::string objName)</td></tr>
+<tr class="separator:af98cf063aa12e817b599db0e890cd530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ae24bc7e50fc0f98fecb72e2fc0def832"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae24bc7e50fc0f98fecb72e2fc0def832">m_SelectedObject</a> = &quot;&quot;</td></tr>
+<tr class="separator:ae24bc7e50fc0f98fecb72e2fc0def832"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a469a7ce8a955103952edf94da8eac1bc"></a>
@@ -131,6 +145,31 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0c43e43b8d675013a48447d418a2d4c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c43e43b8d675013a48447d418a2d4c9">&#9670;&nbsp;</a></span>GetSelectedObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::string Moonstone::Core::TransformLayer::GetSelectedObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afa07f0605e124cca697413c0126bdd46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa07f0605e124cca697413c0126bdd46">&#9670;&nbsp;</a></span>OnImGuiRender()</h2>
 
@@ -185,8 +224,58 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="af98cf063aa12e817b599db0e890cd530"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af98cf063aa12e817b599db0e890cd530">&#9670;&nbsp;</a></span>SetSelectedObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Core::TransformLayer::SetSelectedObject </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>objName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae24bc7e50fc0f98fecb72e2fc0def832"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae24bc7e50fc0f98fecb72e2fc0def832">&#9670;&nbsp;</a></span>m_SelectedObject</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Moonstone::Core::TransformLayer::m_SelectedObject = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>Engine/src/Core/Layers/Include/<a class="el" href="BaseLayers_8h_source.html">BaseLayers.h</a></li>
+<li>Engine/src/Core/Layers/<a class="el" href="BaseLayers_8cpp.html">BaseLayers.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
