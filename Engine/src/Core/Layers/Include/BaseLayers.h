@@ -323,7 +323,8 @@ class TransformLayer : public Layer
         }
 
     private:
-        float                                            m_XPos, m_YPos, m_ZPos;
+        float m_XPos = 0.0f, m_YPos = 0.0f, m_ZPos = 0.0f;
+
         glm::vec3                                        m_Position;
         std::vector<std::pair<std::string, glm::vec3>>   m_SavedPositions;
         static std::string                               m_SelectedObject;

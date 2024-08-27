@@ -5,6 +5,7 @@
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
 #include "Renderer/Include/Camera.h"
+#include "Renderer/Include/Scene.h"
 #include "Renderer/Include/Shader.h"
 #include "Renderer/Include/Textures.h"
 #include "Tools/Include/BaseShapes.h"
@@ -21,17 +22,6 @@ namespace Core
 
 class Application
 {
-        struct SceneObject
-        {
-                bool isActive;
-
-                glm::vec3        position;
-
-                std::string      name;
-                Renderer::Shader shader;
-                size_t           size;
-        };
-
     public:
         Application();
         virtual ~Application() = default;
@@ -78,7 +68,7 @@ class Application
         Tools::ImGuiLayer       *m_ImGuiLayer;
         std::vector<Layer>       m_Layers;
         bool                     m_DefaultGrid = true;
-        std::vector<SceneObject> m_Objects;
+        std::vector<Renderer::Scene::SceneObject> m_Objects;
         bool                     m_SunLight  = false;
         glm::vec3                m_TimeOfDay = {-1.0f, -0.5f, 0};
 

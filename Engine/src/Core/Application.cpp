@@ -170,7 +170,7 @@ void Application::InitializeImGui()
                                       {
                                           auto it = std::find_if(m_Objects.begin(),
                                                                  m_Objects.end(),
-                                                                 [&objName](SceneObject& obj)
+                                                                 [&objName](Renderer::Scene::SceneObject& obj)
                                                                  { return obj.name == objName; });
 
                                           if (it != m_Objects.end())
@@ -181,12 +181,13 @@ void Application::InitializeImGui()
                                           entityLayer->ClearEntitySelection();
                                           entityLayer->RemoveObjectName(objName);
                                       });
+
     transformLayer->SetSliderCallbackPos(TransformLayer::SliderID::PosGroup,
                                          [this](glm::vec3 posGroup, std::string objName)
                                          {
                                              auto it = std::find_if(m_Objects.begin(),
                                                                     m_Objects.end(),
-                                                                    [&objName](SceneObject& obj)
+                                                                    [&objName](Renderer::Scene::SceneObject& obj)
                                                                     { return obj.name == objName; });
 
                                              if (it != m_Objects.end())
@@ -363,7 +364,7 @@ void Application::AddCube(std::vector<unsigned>& shaderProgram,
     std::stringstream ss;
     ss << "default_cube_" << m_Objects.size();
 
-    SceneObject cube = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
+    Renderer::Scene::SceneObject cube = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
 
     m_Objects.push_back(cube);
 }
@@ -395,7 +396,7 @@ void Application::AddPyramid(std::vector<unsigned>& shaderProgram,
     std::stringstream ss;
     ss << "default_pyramid_" << m_Objects.size();
 
-    SceneObject pyramid = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
+    Renderer::Scene::SceneObject pyramid = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
 
     m_Objects.push_back(pyramid);
 }
