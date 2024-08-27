@@ -17,7 +17,7 @@ var searchData=
   ['initvertexshader_132',['InitVertexShader',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#ad495a2139ae64bea31f189e3ba54221c',1,'Moonstone::Renderer::RendererAPI::InitVertexShader()'],['../classMoonstone_1_1Renderer_1_1RendererCommand.html#ab0fdeefd28d9723219d69db34ad469da',1,'Moonstone::Renderer::RendererCommand::InitVertexShader()'],['../classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a5997d78d8cf371ec2fd5f1ad7c93817a',1,'Moonstone::Renderer::OpenGLRendererAPI::InitVertexShader()']]],
   ['inputevents_2eh_133',['InputEvents.h',['../InputEvents_8h.html',1,'']]],
   ['int_134',['Int',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#a48638d315a289ea9200d445579f161d4a1686a6c336b71b36d77354cea19a8b52',1,'Moonstone::Renderer::RendererAPI']]],
-  ['isactive_135',['isActive',['../structMoonstone_1_1Core_1_1Application_1_1SceneObject.html#a9f43126c43e3e9dcd7fa0f76d0177730',1,'Moonstone::Core::Application::SceneObject']]],
+  ['isactive_135',['isActive',['../structMoonstone_1_1Renderer_1_1Scene_1_1SceneObject.html#a853a32924641a9a3aa24faa547db7e89',1,'Moonstone::Renderer::Scene::SceneObject']]],
   ['isfocused_136',['IsFocused',['../classMoonstone_1_1Core_1_1WindowFocusEvent.html#abac436a530f0f2f98223692efa689bfd',1,'Moonstone::Core::WindowFocusEvent']]],
   ['isminimized_137',['IsMinimized',['../classMoonstone_1_1Core_1_1WindowMinimizeEvent.html#a70a314927ca1f5e81b69c9731c327c1b',1,'Moonstone::Core::WindowMinimizeEvent']]]
 ];
