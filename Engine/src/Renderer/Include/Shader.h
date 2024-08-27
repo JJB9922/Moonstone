@@ -18,6 +18,7 @@ class Shader
         unsigned int ID;
 
         Shader(const char *vertexPath, const char *fragmentPath);
+        Shader() = default;
         void Use();
 
         void SetBool(const std::string &name, bool value) const;

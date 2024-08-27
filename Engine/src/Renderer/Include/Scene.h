@@ -23,6 +23,15 @@ class Scene
                 std::string      name;
                 Renderer::Shader shader;
                 size_t           size;
+
+                void Clear()
+                {
+                    isActive                     = false;
+                    position                     = {0, 0, 0};
+                    name                         = "";
+                    std::optional<Shader> shader = std::nullopt;
+                    size                         = 0;
+                }
         };
 };
 

@@ -165,13 +165,13 @@ void Application::InitializeImGui()
     PushLayer(entityLayer);
 
     auto transformLayer = new TransformLayer;
-    transformLayer->SetBtnCallbackStr(TransformLayer::ButtonID::RemoveObject,
-                                      [this, entityLayer](std::string objName)
+    transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
+                                      [this, entityLayer](Renderer::Scene::SceneObject& object)
                                       {
                                           auto it = std::find_if(m_Objects.begin(),
                                                                  m_Objects.end(),
-                                                                 [&objName](Renderer::Scene::SceneObject& obj)
-                                                                 { return obj.name == objName; });
+                                                                 [&object](Renderer::Scene::SceneObject& obj)
+                                                                 { return obj.name == object.name; });
 
                                           if (it != m_Objects.end())
                                           {
@@ -179,20 +179,20 @@ void Application::InitializeImGui()
                                           }
 
                                           entityLayer->ClearEntitySelection();
-                                          entityLayer->RemoveObjectName(objName);
+                                          entityLayer->RemoveObject(object);
                                       });
 
-    transformLayer->SetSliderCallbackPos(TransformLayer::SliderID::PosGroup,
-                                         [this](glm::vec3 posGroup, std::string objName)
+    transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::PosGroup,
+                                         [this](Renderer::Scene::SceneObject& object)
                                          {
                                              auto it = std::find_if(m_Objects.begin(),
                                                                     m_Objects.end(),
-                                                                    [&objName](Renderer::Scene::SceneObject& obj)
-                                                                    { return obj.name == objName; });
+                                                                    [&object](Renderer::Scene::SceneObject& obj)
+                                                                    { return obj.name == object.name; });
 
                                              if (it != m_Objects.end())
                                              {
-                                                 it->position = posGroup * 0.1f;
+                                                 it->position = object.position * 0.1f;
                                              }
                                          });
     PushLayer(transformLayer);
@@ -251,12 +251,12 @@ void Application::InitializeImGui()
                                       {
                                           case ControlsLayer::SceneObject::Cube:
                                               AddCube(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
-                                              entityLayer->AddObjectName(m_Objects.back().name);
+                                              entityLayer->AddObject(m_Objects.back());
                                               entityLayer->ClearEntitySelection();
                                               break;
                                           case Moonstone::Core::ControlsLayer::SceneObject::Pyramid:
                                               AddPyramid(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
-                                              entityLayer->AddObjectName(m_Objects.back().name);
+                                              entityLayer->AddObject(m_Objects.back());
                                               entityLayer->ClearEntitySelection();
                                               break;
                                           default:

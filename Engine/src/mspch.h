@@ -7,6 +7,7 @@
 #include <functional>
 #include <iostream>
 #include <memory>
+#include <optional>
 #include <queue>
 #include <sstream>
 #include <string>
