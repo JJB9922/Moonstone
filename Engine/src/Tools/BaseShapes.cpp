@@ -6,13 +6,13 @@ namespace Moonstone
 namespace Tools
 {
 float BaseShapes::gridVertices[] = {
-    -50.0f, 0.0f, -50.0f, 50.0f,  0.0f, -50.0f,
+    -100.0f, 0.0f, -100.0f, 100.0f,  0.0f, -100.0f,
 
-    -50.0f, 0.0f, 50.0f,  50.0f,  0.0f, 50.0f,
+    -100.0f, 0.0f, 100.0f,  100.0f,  0.0f, 100.0f,
 
-    -50.0f, 0.0f, -50.0f, -50.0f, 0.0f, 50.0f,
+    -100.0f, 0.0f, -100.0f, -100.0f, 0.0f, 100.0f,
 
-    50.0f,  0.0f, -50.0f, 50.0f,  0.0f, 50.0f,
+    100.0f,  0.0f, -100.0f, 100.0f,  0.0f, 100.0f,
 };
 
 const size_t BaseShapes::gridVerticesSize = sizeof(gridVertices);

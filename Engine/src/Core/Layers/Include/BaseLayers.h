@@ -16,6 +16,231 @@ namespace Moonstone
 namespace Core
 {
 
+class TransformLayer : public Layer
+{
+    public:
+        enum class ButtonID
+        {
+            RemoveObject
+        };
+
+        enum class SliderID
+        {
+            PosGroup
+        };
+
+        using ButtonCallback     = std::function<void()>;
+        using ButtonCallbackObj  = std::function<void(Renderer::Scene::SceneObject&)>;
+        using SliderCallback     = std::function<void(float)>;
+        using SliderCallbackVec3 = std::function<void(glm::vec3)>;
+        using SliderCallbackObj  = std::function<void(Renderer::Scene::SceneObject&)>;
+
+        TransformLayer()
+            : Layer("Transform")
+            , m_XPos(0.0f)
+            , m_YPos(0.0f)
+            , m_ZPos(0.0f)
+        {
+        }
+
+        void OnUpdate() override {}
+
+        inline void SetSelectedObject(Renderer::Scene::SceneObject& obj)
+        {
+            m_SelectedObject = obj;
+
+            m_XPos = obj.position.x;
+            m_YPos = obj.position.y;
+            m_ZPos = obj.position.z;
+        }
+
+        inline void ClearSelectedObject()
+        {
+            m_SelectedObject.Clear();
+            m_XPos = m_YPos = m_ZPos = 0.0f;
+        }
+
+        void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
+        void SetBtnCallbackObj(ButtonID buttonID, ButtonCallbackObj callback)
+        {
+            m_BtnCallbacksObj[buttonID] = callback;
+        }
+
+        void SetSliderCallback(SliderID sliderID, SliderCallback callback) { m_SliderCallbacks[sliderID] = callback; }
+        void SetSliderCallbackVec3(SliderID sliderID, SliderCallbackVec3 callback)
+        {
+            m_SliderCallbacksVec3[sliderID] = callback;
+        }
+        void SetSliderCallbackObj(SliderID sliderID, SliderCallbackObj callback)
+        {
+            m_SliderCallbacksObj[sliderID] = callback;
+        }
+
+        virtual void OnImGuiRender() override
+        {
+            ImVec2      btnSize  = ImVec2(150, 20);
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            ImGui::SetNextWindowPos({300, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({300, 150}, ImGuiCond_FirstUseEver);
+
+            ImGui::Begin("Transform");
+
+            if (!m_SelectedObject.name.empty())
+            {
+                ImGui::SeparatorText(m_SelectedObject.name.c_str());
+
+                if (ImGui::Button("Remove Object", btnSize) && m_BtnCallbacksObj[ButtonID::RemoveObject])
+                {
+                    m_BtnCallbacksObj[ButtonID::RemoveObject](m_SelectedObject);
+                }
+
+                ImGui::Text("Position");
+
+                if (ImGui::SliderFloat("X", &m_XPos, -50.0f, 50.0f, "X = %.3f"))
+                {
+                    ImGui::SameLine();
+                    ImGui::PushItemWidth(50);
+                    ImGui::DragFloat("##X_fine", &m_XPos, 0.001f, -50.0f, 50.0f, "%.3f");
+                    ImGui::PopItemWidth();
+                }
+
+                if (ImGui::SliderFloat("Y", &m_YPos, -50.0f, 50.0f, "Y = %.3f"))
+                {
+                    ImGui::SameLine();
+                    ImGui::PushItemWidth(50);
+                    ImGui::DragFloat("##Y_fine", &m_YPos, 0.001f, -50.0f, 50.0f, "%.3f");
+                    ImGui::PopItemWidth();
+                }
+
+                if (ImGui::SliderFloat("Z", &m_ZPos, -50.0f, 50.0f, "Z = %.3f"))
+                {
+                    ImGui::SameLine();
+                    ImGui::PushItemWidth(50);
+                    ImGui::DragFloat("##Z_fine", &m_ZPos, 0.001f, -50.0f, 50.0f, "%.3f");
+                    ImGui::PopItemWidth();
+                }
+
+                m_SelectedObject.position = {m_XPos, m_YPos, m_ZPos};
+
+                if (m_SliderCallbacksObj[SliderID::PosGroup])
+                {
+                    m_SliderCallbacksObj[SliderID::PosGroup](m_SelectedObject);
+                }
+            }
+
+            ImGui::End();
+        }
+
+    private:
+        float m_XPos, m_YPos, m_ZPos;
+
+        std::vector<std::pair<std::string, glm::vec3>>   m_SavedPositions;
+        Renderer::Scene::SceneObject                     m_SelectedObject;
+        std::unordered_map<ButtonID, ButtonCallback>     m_BtnCallbacks;
+        std::unordered_map<ButtonID, ButtonCallbackObj>  m_BtnCallbacksObj;
+        std::unordered_map<SliderID, SliderCallback>     m_SliderCallbacks;
+        std::unordered_map<SliderID, SliderCallbackVec3> m_SliderCallbacksVec3;
+        std::unordered_map<SliderID, SliderCallbackObj>  m_SliderCallbacksObj;
+};
+
+class EntityLayer : public Layer
+{
+    public:
+        enum class ButtonID
+        {
+            ClearSelection
+        };
+
+        using ButtonCallback = std::function<void()>;
+
+        EntityLayer()
+            : Layer("Entity")
+        {
+        }
+        void OnUpdate() override {}
+
+        void SetWindow(GLFWwindow* window) { m_Window = window; };
+        void AddObject(Renderer::Scene::SceneObject& object) { m_Objects.push_back(object); };
+        void RemoveObject(const Renderer::Scene::SceneObject& object)
+        {
+            auto it = std::find_if(m_Objects.begin(),
+                                   m_Objects.end(),
+                                   [&object](const Renderer::Scene::SceneObject& obj)
+                                   { return obj.name == object.name; });
+
+            if (it != m_Objects.end())
+            {
+                m_Objects.erase(it);
+            }
+        }
+        void SetObjectVector(std::vector<Renderer::Scene::SceneObject> objects) { m_Objects = objects; }
+
+        void OverwriteObject(Renderer::Scene::SceneObject& object) {}
+
+        static inline void SetSelectedEntity(int selection) { m_SelectedEntity = selection; }
+        static inline int  GetSelectedEntity() { return m_SelectedEntity; }
+        static inline void ClearEntitySelection() { m_SelectedEntity = -1; }
+
+        inline std::vector<Renderer::Scene::SceneObject> GetObjects() { return GetObjects(); }
+
+        void SetTransformLayer(TransformLayer* transformLayer) { m_TransformLayer = transformLayer; }
+
+        void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
+
+        virtual void OnImGuiRender() override
+        {
+            Time& time = Time::GetInstance();
+
+            ImVec2      btnSize  = ImVec2(150, 20);
+            ImGuiStyle& style    = ImGui::GetStyle();
+            style.FrameRounding  = 2;
+            style.WindowRounding = 2;
+
+            int winWidth, winHeight;
+            glfwGetWindowSize(m_Window, &winWidth, &winHeight);
+
+            ImGui::SetNextWindowPos({0, (float) winHeight - 200}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({200, 200}, ImGuiCond_FirstUseEver);
+
+            ImGui::Begin("Entities");
+
+            if (ImGui::Button("Clear Selection", btnSize) && m_BtnCallbacks[ButtonID::ClearSelection])
+            {
+                m_BtnCallbacks[ButtonID::ClearSelection]();
+            }
+
+            // Raw loop :/
+            for (int i = 0; i < m_Objects.size(); ++i)
+            {
+                if (ImGui::Selectable(m_Objects[i].name.c_str(), GetSelectedEntity() == i))
+                {
+                    SetSelectedEntity(i);
+                    if (m_TransformLayer)
+                    {
+                        m_TransformLayer->SetSelectedObject(m_Objects[i]);
+                    }
+                }
+            }
+
+            if (GetSelectedEntity() == -1 && m_TransformLayer)
+            {
+                m_TransformLayer->ClearSelectedObject();
+            }
+
+            ImGui::End();
+        };
+
+    private:
+        static int                                   m_SelectedEntity;
+        GLFWwindow*                                  m_Window;
+        std::vector<Renderer::Scene::SceneObject>    m_Objects;
+        std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
+        TransformLayer*                              m_TransformLayer;
+};
+
 class ControlsLayer : public Layer
 {
     public:
@@ -239,192 +464,6 @@ class DebugLayer : public Layer
 
             ImGui::End();
         };
-};
-
-class TransformLayer : public Layer
-{
-    public:
-        enum class ButtonID
-        {
-            RemoveObject
-        };
-
-        enum class SliderID
-        {
-            PosGroup
-        };
-
-        using ButtonCallback     = std::function<void()>;
-        using ButtonCallbackObj  = std::function<void(Renderer::Scene::SceneObject&)>;
-        using SliderCallback     = std::function<void(float)>;
-        using SliderCallbackVec3 = std::function<void(glm::vec3)>;
-        using SliderCallbackObj  = std::function<void(Renderer::Scene::SceneObject&)>;
-
-        TransformLayer()
-            : Layer("Transform")
-        {
-        }
-
-        void OnUpdate() override {}
-
-        static inline Renderer::Scene::SceneObject& GetSelectedObject() { return m_SelectedObject; }
-        static inline void SetSelectedObject(Renderer::Scene::SceneObject& obj) { m_SelectedObject = obj; }
-        static inline void ClearSelectedObject() { m_SelectedObject.Clear(); }
-
-        void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
-        void SetBtnCallbackObj(ButtonID buttonID, ButtonCallbackObj callback)
-        {
-            m_BtnCallbacksObj[buttonID] = callback;
-        }
-
-        void SetSliderCallback(SliderID sliderID, SliderCallback callback) { m_SliderCallbacks[sliderID] = callback; }
-        void SetSliderCallbackVec3(SliderID sliderID, SliderCallbackVec3 callback)
-        {
-            m_SliderCallbacksVec3[sliderID] = callback;
-        }
-        void SetSliderCallbackObj(SliderID sliderID, SliderCallbackObj callback)
-        {
-            m_SliderCallbacksObj[sliderID] = callback;
-        }
-
-        virtual void OnImGuiRender() override
-        {
-            ImVec2      btnSize  = ImVec2(150, 20);
-            ImGuiStyle& style    = ImGui::GetStyle();
-            style.FrameRounding  = 2;
-            style.WindowRounding = 2;
-
-            ImGui::SetNextWindowPos({300, 0}, ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize({300, 150}, ImGuiCond_FirstUseEver);
-
-            ImGui::Begin("Transform");
-
-            if (!GetSelectedObject().name.empty())
-            {
-                ImGui::SeparatorText(GetSelectedObject().name.c_str());
-
-                if (ImGui::Button("Remove Object", btnSize) && m_BtnCallbacksObj[ButtonID::RemoveObject])
-                {
-                    m_BtnCallbacksObj[ButtonID::RemoveObject](GetSelectedObject());
-                }
-
-                ImGui::Text("Position");
-                ImGui::SliderFloat("X", &m_XPos, -100.0f, 100.0f, "X = %.3f");
-                ImGui::SliderFloat("Y", &m_YPos, -100.0f, 100.0f, "Y = %.3f");
-                ImGui::SliderFloat("Z", &m_ZPos, -100.0f, 100.0f, "Z = %.3f");
-
-                m_Position                = {m_XPos, m_YPos, m_ZPos};
-                m_SelectedObject.position = m_Position;
-
-                if (m_SliderCallbacksObj[SliderID::PosGroup])
-                {
-                    m_SliderCallbacksObj[SliderID::PosGroup](GetSelectedObject());
-                }
-            }
-
-            ImGui::End();
-        }
-
-    private:
-        float m_XPos = 0.0f, m_YPos = 0.0f, m_ZPos = 0.0f;
-
-        glm::vec3                                        m_Position;
-        std::vector<std::pair<std::string, glm::vec3>>   m_SavedPositions;
-        static Renderer::Scene::SceneObject&             m_SelectedObject;
-        std::unordered_map<ButtonID, ButtonCallback>     m_BtnCallbacks;
-        std::unordered_map<ButtonID, ButtonCallbackObj>  m_BtnCallbacksObj;
-        std::unordered_map<SliderID, SliderCallback>     m_SliderCallbacks;
-        std::unordered_map<SliderID, SliderCallbackVec3> m_SliderCallbacksVec3;
-        std::unordered_map<SliderID, SliderCallbackObj>  m_SliderCallbacksObj;
-};
-
-class EntityLayer : public Layer
-{
-    public:
-        enum class ButtonID
-        {
-            ClearSelection
-        };
-
-        using ButtonCallback = std::function<void()>;
-
-        EntityLayer()
-            : Layer("Entity")
-        {
-        }
-        void OnUpdate() override {}
-
-        void SetWindow(GLFWwindow* window) { m_Window = window; };
-        void AddObject(Renderer::Scene::SceneObject& object) { m_Objects.push_back(object); };
-        void RemoveObject(const Renderer::Scene::SceneObject& object)
-        {
-            auto it = std::find_if(m_Objects.begin(),
-                                   m_Objects.end(),
-                                   [&object](const Renderer::Scene::SceneObject& obj)
-                                   { return obj.name == object.name; });
-
-            if (it != m_Objects.end())
-            {
-                m_Objects.erase(it);
-            }
-        }
-
-        static inline void SetSelectedEntity(int selection) { m_SelectedEntity = selection; }
-        static inline int  GetSelectedEntity() { return m_SelectedEntity; }
-        static inline void ClearEntitySelection() { m_SelectedEntity = -1; }
-
-        void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
-
-        virtual void OnImGuiRender() override
-        {
-            Time& time = Time::GetInstance();
-
-            ImVec2      btnSize  = ImVec2(150, 20);
-            ImGuiStyle& style    = ImGui::GetStyle();
-            style.FrameRounding  = 2;
-            style.WindowRounding = 2;
-
-            int winWidth, winHeight;
-            glfwGetWindowSize(m_Window, &winWidth, &winHeight);
-
-            ImGui::SetNextWindowPos({0, (float) winHeight - 200}, ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize({200, 200}, ImGuiCond_FirstUseEver);
-
-            ImGui::Begin("Entities");
-
-            if (ImGui::Button("Clear Selection", btnSize) && m_BtnCallbacks[ButtonID::ClearSelection])
-            {
-                m_BtnCallbacks[ButtonID::ClearSelection]();
-            }
-
-            int idx = 0;
-            for (int i = 0; i < m_Objects.size(); ++i)
-            {
-                if (ImGui::Selectable(m_Objects[i].name.c_str(), GetSelectedEntity() == idx))
-                {
-                    SetSelectedEntity(i);
-                }
-
-                ++idx;
-            }
-
-            if (m_SelectedEntity > -1)
-            {
-                TransformLayer::SetSelectedObject(m_Objects[GetSelectedEntity()]);
-            }
-            else
-            {
-                TransformLayer::ClearSelectedObject();
-            }
-
-            ImGui::End();
-        };
-
-    private:
-        static int                                   m_SelectedEntity;
-        GLFWwindow*                                  m_Window;
-        std::vector<Renderer::Scene::SceneObject>    m_Objects;
-        std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
 };
 
 } // namespace Core

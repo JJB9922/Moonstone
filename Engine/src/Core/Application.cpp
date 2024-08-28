@@ -158,13 +158,14 @@ void Application::InitializeImGui()
     auto debugLayer = new DebugLayer;
     PushLayer(debugLayer);
 
-    auto entityLayer = new EntityLayer;
+    auto transformLayer = new TransformLayer;
+    auto entityLayer    = new EntityLayer;
     entityLayer->SetWindow(m_Window->m_Window);
     entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
                                 [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
+    entityLayer->SetTransformLayer(transformLayer);
     PushLayer(entityLayer);
 
-    auto transformLayer = new TransformLayer;
     transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
                                       [this, entityLayer](Renderer::Scene::SceneObject& object)
                                       {
@@ -183,7 +184,7 @@ void Application::InitializeImGui()
                                       });
 
     transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::PosGroup,
-                                         [this](Renderer::Scene::SceneObject& object)
+                                         [this, entityLayer](Renderer::Scene::SceneObject& object)
                                          {
                                              auto it = std::find_if(m_Objects.begin(),
                                                                     m_Objects.end(),
@@ -192,13 +193,14 @@ void Application::InitializeImGui()
 
                                              if (it != m_Objects.end())
                                              {
-                                                 it->position = object.position * 0.1f;
+                                                 it->position = object.position;
                                              }
+
+                                             entityLayer->SetObjectVector(m_Objects);
                                          });
     PushLayer(transformLayer);
 
     auto controlsLayer = new ControlsLayer;
-
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor,
@@ -243,7 +245,7 @@ void Application::InitializeImGui()
                                   });
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddObject,
-                                  [this, controlsLayer, entityLayer]()
+                                  [this, controlsLayer, entityLayer, transformLayer]()
                                   {
                                       ControlsLayer::SceneObject obj = controlsLayer->GetAddObject();
 
@@ -253,11 +255,15 @@ void Application::InitializeImGui()
                                               AddCube(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
                                               entityLayer->AddObject(m_Objects.back());
                                               entityLayer->ClearEntitySelection();
+                                              entityLayer->SetSelectedEntity(m_Objects.size() - 1);
+                                              transformLayer->SetSelectedObject(m_Objects.back());
                                               break;
                                           case Moonstone::Core::ControlsLayer::SceneObject::Pyramid:
                                               AddPyramid(m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture);
                                               entityLayer->AddObject(m_Objects.back());
                                               entityLayer->ClearEntitySelection();
+                                              entityLayer->SetSelectedEntity(m_Objects.size() - 1);
+                                              transformLayer->SetSelectedObject(m_Objects.back());
                                               break;
                                           default:
                                               break;
