@@ -142,7 +142,7 @@ class RendererCommand
         inline static void DisableDepthMask() { s_RendererAPI->DisableDepthMask(); };
 
     private:
-        static RendererAPI *s_RendererAPI;
+        static std::unique_ptr<RendererAPI> s_RendererAPI;
 };
 
 } // namespace Renderer

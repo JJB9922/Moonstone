@@ -14,7 +14,10 @@ WindowProperties::WindowProperties(const std::string Title, unsigned Width, unsi
 {
 }
 
-Window *Window::CreateWindow(const WindowProperties &windowProperties) { return new Window(windowProperties); }
+std::unique_ptr<Window> Window::CreateWindow(const WindowProperties &windowProperties)
+{
+    return std::make_unique<Window>(windowProperties);
+}
 
 Window::Window(const WindowProperties &windowProperties)
 {

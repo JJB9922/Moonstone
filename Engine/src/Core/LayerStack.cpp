@@ -33,6 +33,11 @@ void LayerStack::PopLayer(Layer *layer)
         m_Layers.erase(it);
         --m_LayerIndex;
     }
+
+    if (layer != nullptr)
+    {
+        delete layer;
+    }
 }
 
 void LayerStack::PushOverlay(Layer *overlay) { m_Layers.emplace_back(overlay); }

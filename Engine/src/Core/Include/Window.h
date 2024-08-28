@@ -49,7 +49,7 @@ class Window
         Window(const WindowProperties &windowProperties);
         virtual ~Window();
 
-        static Window *CreateWindow(const WindowProperties &windowProperties = WindowProperties());
+        static std::unique_ptr<Window> CreateWindow(const WindowProperties &windowProperties = WindowProperties());
         void           TerminateWindow();
         static void    UpdateWindow(std::shared_ptr<Window> window);
 
@@ -77,7 +77,7 @@ class Window
     private:
         WindowData                   m_WindowData;
         std::vector<std::type_index> m_SubscribedWindowEvents;
-        Renderer::GraphicsContext                  *m_GraphicsContext;
+        std::unique_ptr<Renderer::GraphicsContext>  m_GraphicsContext;
         std::shared_ptr<Renderer::CameraController> m_CameraController = nullptr;
         float                                       m_LastX            = m_WindowData.windowProperties.Width / 2;
         float                                       m_LastY            = m_WindowData.windowProperties.Height / 2;

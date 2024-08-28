@@ -63,10 +63,10 @@ class Application
     private:
         bool                     m_Running;
         static std::unique_ptr<Application>       s_ApplicationInstance;
-        LayerStack               m_LayerStack;
+        LayerStack                                m_LayerStack;
         std::shared_ptr<Window>  m_Window;
-        Tools::ImGuiLayer       *m_ImGuiLayer;
-        std::vector<Layer>       m_Layers;
+        Tools::ImGuiLayer                        *m_ImGuiLayer;
+        std::vector<Layer>                        m_Layers;
         bool                     m_DefaultGrid = true;
         std::vector<Renderer::Scene::SceneObject> m_Objects;
         bool                     m_SunLight  = false;

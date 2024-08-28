@@ -15,13 +15,13 @@ namespace Renderer
 class GraphicsContextRouter
 {
     public:
-        static GraphicsContext* GetContext(GLFWwindow* window)
+        static std::unique_ptr<GraphicsContext> GetContext(GLFWwindow* window)
         {
             auto API = RendererAPI::GetAPI();
 
             if (API == RendererAPI::API::OpenGL)
             {
-                GraphicsContext* context = new OpenGLContext(window);
+                std::unique_ptr<GraphicsContext> context = std::make_unique<OpenGLContext>(window);
                 return context;
             }
             else if (API == RendererAPI::API::Vulkan)

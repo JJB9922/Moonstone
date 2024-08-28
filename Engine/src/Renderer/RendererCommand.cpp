@@ -9,11 +9,11 @@ namespace Renderer
 {
 
 #ifdef MS_OPENGL
-RendererAPI* RendererCommand::s_RendererAPI = new OpenGLRendererAPI;
+std::unique_ptr<RendererAPI> RendererCommand::s_RendererAPI = std::make_unique<OpenGLRendererAPI>();
 #endif
 
 #ifdef MS_VULKAN
-RendererAPI* RendererCommand::s_RendererAPI = new VulkanRendererAPI;
+std::unique_ptr<RendererAPI> RendererCommand::s_RendererAPI = std::make_unique<VulkanRendererAPI>();
 #endif
 
 } // namespace Renderer

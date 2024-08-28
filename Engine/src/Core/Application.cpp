@@ -14,8 +14,6 @@ Application::Application()
     {
         MS_ASSERT(!s_ApplicationInstance, "application instance already exists");
     }
-
-    s_ApplicationInstance = GetApplicationInstance();
 }
 
 void Application::Run()
@@ -136,13 +134,13 @@ void Application::Run()
 
 void Application::RenderLayers()
 {
-    for (Layer* layer : m_LayerStack)
+    for (auto layer : m_LayerStack)
     {
         layer->OnUpdate();
     }
 
     m_ImGuiLayer->Start();
-    for (Layer* layer : m_LayerStack)
+    for (auto layer : m_LayerStack)
     {
         layer->OnImGuiRender();
     }
@@ -151,7 +149,7 @@ void Application::RenderLayers()
 
 void Application::InitializeImGui()
 {
-    m_ImGuiLayer = new Tools::ImGuiLayer();
+    m_ImGuiLayer = new Tools::ImGuiLayer;
     m_ImGuiLayer->SetWindow(m_Window->m_Window);
     PushOverlay(m_ImGuiLayer);
 
