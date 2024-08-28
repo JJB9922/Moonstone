@@ -28,9 +28,9 @@ void Application::Run()
     float nearClip = 0.1f;
     float farClip  = 100.0f;
 
-    auto pCamera = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
+    m_ActiveCamera = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
 
-    m_Window->SetCamera(pCamera);
+    m_Window->SetCamera(m_ActiveCamera);
 
     std::string      gridVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.vert";
     std::string      gridFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.frag";
@@ -53,16 +53,16 @@ void Application::Run()
         gridShader.Use();
 
         // Camera setup (will always revolve around grid even if it isn't drawn)
-        pCamera->SetProjectionMatrix(gridShader.ID,
-                                     pCamera,
-                                     m_Window->GetWidth(),
-                                     m_Window->GetHeight(),
-                                     nearClip,
-                                     farClip);
+        m_ActiveCamera->SetProjectionMatrix(gridShader.ID,
+                                            m_ActiveCamera,
+                                            m_Window->GetWidth(),
+                                            m_Window->GetHeight(),
+                                            nearClip,
+                                            farClip);
 
-        pCamera->SetViewMatrix(gridShader.ID, pCamera);
+        m_ActiveCamera->SetViewMatrix(gridShader.ID, m_ActiveCamera);
         auto gridPos = glm::vec3(0, 0, 0);
-        pCamera->SetModel(gridShader.ID, gridPos);
+        m_ActiveCamera->SetModel(gridShader.ID, gridPos);
 
         if (m_DefaultGrid)
         {
@@ -70,9 +70,11 @@ void Application::Run()
             Renderer::RendererCommand::DisableDepthMask();
 
             Renderer::RendererCommand::BindVertexArray(m_VAO[0]);
-            Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "model", pCamera->GetModel());
-            Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "view", pCamera->GetViewMatrix());
-            Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "projection", pCamera->GetProjectionMatrix());
+            Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "model", m_ActiveCamera->GetModel());
+            Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "view", m_ActiveCamera->GetViewMatrix());
+            Renderer::RendererCommand::SetUniformMat4(gridShader.ID,
+                                                      "projection",
+                                                      m_ActiveCamera->GetProjectionMatrix());
 
             Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles,
                                                         0,
@@ -87,16 +89,25 @@ void Application::Run()
             // Model
             m_Objects[i].shader.Use();
             Renderer::RendererCommand::BindVertexArray(m_VAO[i + 1]);
-            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", pCamera->GetModel());
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", m_ActiveCamera->GetModel());
 
             Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
                                                       "model",
-                                                      glm::translate(pCamera->GetModel(), m_Objects[i].position));
+                                                      glm::translate(m_ActiveCamera->GetModel(), m_Objects[i].position));
 
-            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", pCamera->GetViewMatrix());
+            glm::mat4 modelTransformMatrix
+                = glm::translate(glm::mat4(1.0f), m_Objects[i].position)
+                  * glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.z), glm::vec3(0.0f, 0.0f, 1.0f))
+                  * glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.y), glm::vec3(0.0f, 1.0f, 0.0f))
+                  * glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.x), glm::vec3(1.0f, 0.0f, 0.0f))
+                  * glm::scale(glm::mat4(1.0f), m_Objects[i].scale);
+
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", modelTransformMatrix);
+
+            Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", m_ActiveCamera->GetViewMatrix());
             Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
                                                       "projection",
-                                                      pCamera->GetProjectionMatrix());
+                                                      m_ActiveCamera->GetProjectionMatrix());
 
             Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "objectColor", {1.0f, 0.0f, 1.0f});
 
@@ -104,7 +115,7 @@ void Application::Run()
             Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
             Renderer::RendererCommand::SetUniformFloat(m_Objects[i].shader.ID, "material.shininess", 64.0f);
 
-            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "viewPos", pCamera->GetPosition());
+            Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "viewPos", m_ActiveCamera->GetPosition());
 
             // Directional Light
             Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.direction", m_TimeOfDay);
@@ -156,7 +167,7 @@ void Application::InitializeImGui()
     auto debugLayer = new DebugLayer;
     PushLayer(debugLayer);
 
-    auto transformLayer = new TransformLayer;
+    auto transformLayer = new TransformLayer();
     auto entityLayer    = new EntityLayer;
     entityLayer->SetWindow(m_Window->m_Window);
     entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
@@ -181,7 +192,7 @@ void Application::InitializeImGui()
                                           entityLayer->RemoveObject(object);
                                       });
 
-    transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::PosGroup,
+    transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::TransformGroup,
                                          [this, entityLayer](Renderer::Scene::SceneObject& object)
                                          {
                                              auto it = std::find_if(m_Objects.begin(),
@@ -192,6 +203,8 @@ void Application::InitializeImGui()
                                              if (it != m_Objects.end())
                                              {
                                                  it->position = object.position;
+                                                 it->rotation = object.rotation;
+                                                 it->scale    = object.scale;
                                              }
 
                                              entityLayer->SetObjectVector(m_Objects);
@@ -368,7 +381,8 @@ void Application::AddCube(std::vector<unsigned>& shaderProgram,
     std::stringstream ss;
     ss << "default_cube_" << m_Objects.size();
 
-    Renderer::Scene::SceneObject cube = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
+    Renderer::Scene::SceneObject cube
+        = {true, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
 
     m_Objects.push_back(cube);
 }
@@ -400,7 +414,8 @@ void Application::AddPyramid(std::vector<unsigned>& shaderProgram,
     std::stringstream ss;
     ss << "default_pyramid_" << m_Objects.size();
 
-    Renderer::Scene::SceneObject pyramid = {true, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
+    Renderer::Scene::SceneObject pyramid
+        = {true, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, ss.str(), cubeShader, Tools::BaseShapes::pyramidVerticesSize};
 
     m_Objects.push_back(pyramid);
 }

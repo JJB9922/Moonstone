@@ -19,6 +19,8 @@ class Scene
                 bool isActive;
 
                 glm::vec3 position = {0.0f, 0.0f, 0.0f};
+                glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
+                glm::vec3 scale    = {1.0f, 1.0f, 1.0f};
 
                 std::string      name;
                 Renderer::Shader shader;
@@ -28,6 +30,8 @@ class Scene
                 {
                     isActive                     = false;
                     position                     = {0, 0, 0};
+                    rotation                     = {0, 0, 0};
+                    scale                        = {1, 1, 1};
                     name                         = "";
                     std::optional<Shader> shader = std::nullopt;
                     size                         = 0;

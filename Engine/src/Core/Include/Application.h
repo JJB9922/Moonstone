@@ -61,7 +61,8 @@ class Application
                         std::vector<unsigned> &textures);
 
     private:
-        bool                     m_Running;
+        bool                                      m_Running;
+        std::shared_ptr<Renderer::Camera>         m_ActiveCamera;
         static std::unique_ptr<Application>       s_ApplicationInstance;
         LayerStack                                m_LayerStack;
         std::shared_ptr<Window>  m_Window;

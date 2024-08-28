@@ -7,7 +7,6 @@
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 
-#include <ImGuizmo.h>
 #include <glm/glm.hpp>
 
 namespace Moonstone
@@ -26,7 +25,7 @@ class TransformLayer : public Layer
 
         enum class SliderID
         {
-            PosGroup
+            TransformGroup
         };
 
         using ButtonCallback     = std::function<void()>;
@@ -37,27 +36,21 @@ class TransformLayer : public Layer
 
         TransformLayer()
             : Layer("Transform")
-            , m_XPos(0.0f)
-            , m_YPos(0.0f)
-            , m_ZPos(0.0f)
         {
         }
 
         void OnUpdate() override {}
 
-        inline void SetSelectedObject(Renderer::Scene::SceneObject& obj)
-        {
-            m_SelectedObject = obj;
-
-            m_XPos = obj.position.x;
-            m_YPos = obj.position.y;
-            m_ZPos = obj.position.z;
-        }
+        inline void SetSelectedObject(Renderer::Scene::SceneObject& obj) { m_SelectedObject = obj; }
 
         inline void ClearSelectedObject()
         {
             m_SelectedObject.Clear();
+
+            m_XScale = m_YScale = m_ZScale = 1.0f;
+
             m_XPos = m_YPos = m_ZPos = 0.0f;
+            m_XRot = m_YRot = m_ZRot = 0.0f;
         }
 
         void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
@@ -99,15 +92,68 @@ class TransformLayer : public Layer
 
                 ImGui::Text("Position");
 
-                ImGui::SliderFloat("X", &m_XPos, -50.0f, 50.0f, "X = %.3f");
-                ImGui::SliderFloat("Y", &m_YPos, -50.0f, 50.0f, "Y = %.3f");
-                ImGui::SliderFloat("Z", &m_ZPos, -50.0f, 50.0f, "Z = %.3f");
+                ImGui::Text("X: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##XPos", &m_XPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+                ImGui::SameLine();
+                ImGui::Text("Y: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##YPos", &m_YPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+                ImGui::SameLine();
+                ImGui::Text("Z: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##ZPos", &m_ZPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+                ImGui::Text("Rotation");
+
+                ImGui::Text("X: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##XRot", &m_XRot, 0.1f, 0.0f, 360.0f, "%.3f");
+
+                ImGui::SameLine();
+                ImGui::Text("Y: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##YRot", &m_YRot, 0.1f, 0.0f, 360.0f, "%.3f");
+
+                ImGui::SameLine();
+                ImGui::Text("Z: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##ZRot", &m_ZRot, 0.1f, 0.0f, 360.0f, "%.3f");
+
+                ImGui::Text("Scale");
+
+                ImGui::Text("X: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##XScale", &m_XScale, 0.1f, 0.0f, 10.0f, "%.3f");
+
+                ImGui::SameLine();
+                ImGui::Text("Y: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##YScale", &m_YScale, 0.1f, 0.0f, 10.0f, "%.3f");
+
+                ImGui::SameLine();
+                ImGui::Text("Z: ");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(50);
+                ImGui::DragFloat("##ZScale", &m_ZScale, 0.1f, 0.0f, 10.0f, "%.3f");
 
                 m_SelectedObject.position = {m_XPos, m_YPos, m_ZPos};
+                m_SelectedObject.rotation = {m_XRot, m_YRot, m_ZRot};
+                m_SelectedObject.scale    = {m_XScale, m_YScale, m_ZScale};
 
-                if (m_SliderCallbacksObj[SliderID::PosGroup])
+                if (m_SliderCallbacksObj[SliderID::TransformGroup])
                 {
-                    m_SliderCallbacksObj[SliderID::PosGroup](m_SelectedObject);
+                    m_SliderCallbacksObj[SliderID::TransformGroup](m_SelectedObject);
                 }
             }
 
@@ -116,8 +162,9 @@ class TransformLayer : public Layer
 
     private:
         float m_XPos, m_YPos, m_ZPos;
+        float m_XRot, m_YRot, m_ZRot;
+        float m_XScale = 1.0f, m_YScale = 1.0f, m_ZScale = 1.0f;
 
-        std::vector<std::pair<std::string, glm::vec3>>   m_SavedPositions;
         Renderer::Scene::SceneObject                     m_SelectedObject;
         std::unordered_map<ButtonID, ButtonCallback>     m_BtnCallbacks;
         std::unordered_map<ButtonID, ButtonCallbackObj>  m_BtnCallbacksObj;
