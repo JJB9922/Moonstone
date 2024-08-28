@@ -8,12 +8,12 @@ const vec3 MINOR_GRID_COLOR = vec3(0.3, 0.3, 0.3);
 const vec3 BACKGROUND_COLOR = vec3(0.15, 0.15, 0.15);
 const vec3 X_AXIS_COLOR = vec3(1.0, 0.0, 0.0);
 const vec3 Z_AXIS_COLOR = vec3(0.0, 0.0, 1.0);
-const float MAJOR_GRID_SIZE = 8.0;
-const float MINOR_GRID_SIZE = 0.6;
-const float MAJOR_LINE_WIDTH = 0.075;
-const float MINOR_LINE_WIDTH = 0.025;
+const float MAJOR_GRID_SIZE = 10.0;
+const float MINOR_GRID_SIZE = 1.0;
+const float MAJOR_LINE_WIDTH = 0.1;
+const float MINOR_LINE_WIDTH = 0.02;
 const float FADE_DISTANCE = 75.0;
-const float AXIS_LINE_WIDTH = 0.05;
+const float AXIS_LINE_WIDTH = 0.1;
 
 float getGrid(vec2 position, float size, float lineWidth) {
     vec2 coord = position / size;
@@ -46,5 +46,11 @@ void main() {
     finalColor = mix(finalColor, X_AXIS_COLOR, xAxis);
     finalColor = mix(finalColor, Z_AXIS_COLOR, zAxis);
 
-    FragColor = vec4(finalColor, 1.0);
+    float alpha = max(gridStrength * fadeFactor, max(xAxis, zAxis));
+
+    if (alpha == 0.0) {
+        FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+    } else {
+        FragColor = vec4(finalColor, alpha);
+    }
 }
