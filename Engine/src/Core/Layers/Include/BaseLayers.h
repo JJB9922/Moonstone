@@ -99,29 +99,9 @@ class TransformLayer : public Layer
 
                 ImGui::Text("Position");
 
-                if (ImGui::SliderFloat("X", &m_XPos, -50.0f, 50.0f, "X = %.3f"))
-                {
-                    ImGui::SameLine();
-                    ImGui::PushItemWidth(50);
-                    ImGui::DragFloat("##X_fine", &m_XPos, 0.001f, -50.0f, 50.0f, "%.3f");
-                    ImGui::PopItemWidth();
-                }
-
-                if (ImGui::SliderFloat("Y", &m_YPos, -50.0f, 50.0f, "Y = %.3f"))
-                {
-                    ImGui::SameLine();
-                    ImGui::PushItemWidth(50);
-                    ImGui::DragFloat("##Y_fine", &m_YPos, 0.001f, -50.0f, 50.0f, "%.3f");
-                    ImGui::PopItemWidth();
-                }
-
-                if (ImGui::SliderFloat("Z", &m_ZPos, -50.0f, 50.0f, "Z = %.3f"))
-                {
-                    ImGui::SameLine();
-                    ImGui::PushItemWidth(50);
-                    ImGui::DragFloat("##Z_fine", &m_ZPos, 0.001f, -50.0f, 50.0f, "%.3f");
-                    ImGui::PopItemWidth();
-                }
+                ImGui::SliderFloat("X", &m_XPos, -50.0f, 50.0f, "X = %.3f");
+                ImGui::SliderFloat("Y", &m_YPos, -50.0f, 50.0f, "Y = %.3f");
+                ImGui::SliderFloat("Z", &m_ZPos, -50.0f, 50.0f, "Z = %.3f");
 
                 m_SelectedObject.position = {m_XPos, m_YPos, m_ZPos};
 

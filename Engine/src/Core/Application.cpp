@@ -6,7 +6,7 @@ namespace Moonstone
 namespace Core
 {
 
-Application* Application::s_ApplicationInstance = nullptr;
+std::unique_ptr<Application> Application::s_ApplicationInstance = nullptr;
 
 Application::Application()
 {
@@ -15,7 +15,7 @@ Application::Application()
         MS_ASSERT(!s_ApplicationInstance, "application instance already exists");
     }
 
-    s_ApplicationInstance = this;
+    s_ApplicationInstance = GetApplicationInstance();
 }
 
 void Application::Run()
@@ -296,7 +296,7 @@ void Application::InitializeImGui()
     PushLayer(controlsLayer);
 }
 
-Application* CreateApplicationInstance() { return new Application(); }
+std::unique_ptr<Application> CreateApplicationInstance() { return std::make_unique<Application>(Application()); }
 
 void Application::PushLayer(Layer* layer)
 {

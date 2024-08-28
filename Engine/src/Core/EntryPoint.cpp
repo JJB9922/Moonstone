@@ -12,6 +12,4 @@ int main()
 
     auto app = Moonstone::Core::CreateApplicationInstance();
     app->Run();
-
-    delete app;
 }

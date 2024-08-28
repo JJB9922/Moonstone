@@ -28,7 +28,7 @@ class Application
 
         void Run();
 
-        inline static Application &GetApplicationInstance() { return *s_ApplicationInstance; }
+        inline static std::unique_ptr<Application> &GetApplicationInstance() { return s_ApplicationInstance; }
 
         void PushLayer(Layer *layer);
         void PopLayer(Layer *layer);
@@ -62,7 +62,7 @@ class Application
 
     private:
         bool                     m_Running;
-        static Application      *s_ApplicationInstance;
+        static std::unique_ptr<Application>       s_ApplicationInstance;
         LayerStack               m_LayerStack;
         std::shared_ptr<Window>  m_Window;
         Tools::ImGuiLayer       *m_ImGuiLayer;
@@ -75,7 +75,7 @@ class Application
         std::vector<unsigned> m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture;
 };
 
-Application* CreateApplicationInstance();
+std::unique_ptr<Application> CreateApplicationInstance();
 
 } // namespace Core
 
