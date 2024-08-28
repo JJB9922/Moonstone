@@ -95,8 +95,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae7b5dbafa27cad7bdc1748eef87dd029"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMoonstone_1_1Core_1_1Window.html">Window</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#ae7b5dbafa27cad7bdc1748eef87dd029">CreateWindow</a> (const <a class="el" href="structMoonstone_1_1Core_1_1WindowProperties.html">WindowProperties</a> &amp;windowProperties=<a class="el" href="structMoonstone_1_1Core_1_1WindowProperties.html">WindowProperties</a>())</td></tr>
-<tr class="separator:ae7b5dbafa27cad7bdc1748eef87dd029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8857f7699a9a783d10e261033d0e2e57"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Window.html">Window</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a8857f7699a9a783d10e261033d0e2e57">CreateWindow</a> (const <a class="el" href="structMoonstone_1_1Core_1_1WindowProperties.html">WindowProperties</a> &amp;windowProperties=<a class="el" href="structMoonstone_1_1Core_1_1WindowProperties.html">WindowProperties</a>())</td></tr>
+<tr class="separator:a8857f7699a9a783d10e261033d0e2e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed09e28728a5eda73bac9681837d2c3b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#aed09e28728a5eda73bac9681837d2c3b">UpdateWindow</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Window.html">Window</a> &gt; window)</td></tr>
 <tr class="separator:aed09e28728a5eda73bac9681837d2c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1ec8b1989fcef34191ddcbf62ae4476"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#af1ec8b1989fcef34191ddcbf62ae4476">GetWidth</a> ()</td></tr>
@@ -137,8 +137,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a40b5a07f96e520234c78b85ef5f6ec63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4eee699b9dbcbee063b7fc1daefde58"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::type_index &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#ac4eee699b9dbcbee063b7fc1daefde58">m_SubscribedWindowEvents</a></td></tr>
 <tr class="separator:ac4eee699b9dbcbee063b7fc1daefde58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20a6247833cfaf3f3bf4687ef2f7276d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">Renderer::GraphicsContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a20a6247833cfaf3f3bf4687ef2f7276d">m_GraphicsContext</a></td></tr>
-<tr class="separator:a20a6247833cfaf3f3bf4687ef2f7276d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade2eaed8ae11667e19ea5d046990688a"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">Renderer::GraphicsContext</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#ade2eaed8ae11667e19ea5d046990688a">m_GraphicsContext</a></td></tr>
+<tr class="separator:ade2eaed8ae11667e19ea5d046990688a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a8e556e23e4ae37b0e1e53f721f83d7"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html">Renderer::CameraController</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#a0a8e556e23e4ae37b0e1e53f721f83d7">m_CameraController</a> = nullptr</td></tr>
 <tr class="separator:a0a8e556e23e4ae37b0e1e53f721f83d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adacc33e211e421ef399db9d8f6c58648"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Window.html#adacc33e211e421ef399db9d8f6c58648">m_LastX</a> = m_WindowData.windowProperties.Width / 2</td></tr>
@@ -201,8 +201,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae7b5dbafa27cad7bdc1748eef87dd029"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7b5dbafa27cad7bdc1748eef87dd029">&#9670;&nbsp;</a></span>CreateWindow()</h2>
+<a id="a8857f7699a9a783d10e261033d0e2e57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8857f7699a9a783d10e261033d0e2e57">&#9670;&nbsp;</a></span>CreateWindow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,7 +211,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1Window.html">Window</a> * Moonstone::Core::Window::CreateWindow </td>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Window.html">Window</a> &gt; Moonstone::Core::Window::CreateWindow </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structMoonstone_1_1Core_1_1WindowProperties.html">WindowProperties</a> &amp;&#160;</td>
           <td class="paramname"><em>windowProperties</em> = <code><a class="el" href="structMoonstone_1_1Core_1_1WindowProperties.html">WindowProperties</a>()</code></td><td>)</td>
@@ -648,8 +648,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a20a6247833cfaf3f3bf4687ef2f7276d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20a6247833cfaf3f3bf4687ef2f7276d">&#9670;&nbsp;</a></span>m_GraphicsContext</h2>
+<a id="ade2eaed8ae11667e19ea5d046990688a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade2eaed8ae11667e19ea5d046990688a">&#9670;&nbsp;</a></span>m_GraphicsContext</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -658,7 +658,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">Renderer::GraphicsContext</a>* Moonstone::Core::Window::m_GraphicsContext</td>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContext.html">Renderer::GraphicsContext</a>&gt; Moonstone::Core::Window::m_GraphicsContext</td>
         </tr>
       </table>
   </td>
