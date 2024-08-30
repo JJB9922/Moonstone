@@ -41,6 +41,14 @@ class Application
 
     private:
         void RenderLayers();
+
+        void InitializeCamera();
+        void UpdateCamera();
+
+        void UpdateGrid(Renderer::Shader &gridShader);
+
+        void UpdateCustomBaseShapes();
+
         void InitializeImGui();
         void InitializeDefaultScene(std::vector<unsigned> &shaderProgram,
                                     std::vector<unsigned> &VBO,

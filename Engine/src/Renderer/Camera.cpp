@@ -7,7 +7,7 @@ namespace Renderer
 {
 
 void Camera::SetProjectionMatrix(
-    unsigned shaderID, std::shared_ptr<Camera> camera, int winWidth, int winHeight, float nearClip, float farClip)
+    std::shared_ptr<Camera> camera, int winWidth, int winHeight, float nearClip, float farClip)
 {
     glm::mat4 projection = glm::mat4(1.0);
 
@@ -16,27 +16,21 @@ void Camera::SetProjectionMatrix(
                                   nearClip,
                                   farClip);
 
-    RendererCommand::SetUniformMat4(shaderID, "projection", projection);
-
     m_ProjectionMatrix = projection;
 }
 
-void Camera::SetViewMatrix(unsigned shaderID, std::shared_ptr<Camera> camera)
+void Camera::SetViewMatrix(std::shared_ptr<Camera> camera)
 {
     glm::mat4 view;
     view = glm::lookAt(camera->GetPosition(), camera->GetPosition() + camera->GetFront(), camera->GetUp());
 
-    Renderer::RendererCommand::SetUniformMat4(shaderID, "view", view);
-
     m_ViewMatrix = view;
 }
 
-void Camera::SetModel(unsigned shaderID, glm::vec3 model)
+void Camera::SetModel(glm::vec3 model)
 {
     glm::mat4 m = glm::mat4(1.0f);
     m           = glm::translate(m, model);
-
-    RendererCommand::SetUniformMat4(shaderID, "model", m);
 
     m_Model = m;
 }

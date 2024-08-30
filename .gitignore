@@ -32,4 +32,6 @@
 *.app
 
 build/
-Engine/build/
+Engine/build/#
+Engine/resources/Models
+resources/Models

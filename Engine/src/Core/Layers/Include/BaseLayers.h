@@ -41,16 +41,30 @@ class TransformLayer : public Layer
 
         void OnUpdate() override {}
 
-        inline void SetSelectedObject(Renderer::Scene::SceneObject& obj) { m_SelectedObject = obj; }
+        inline void SetSelectedObject(Renderer::Scene::SceneObject& obj)
+        {
+            m_SelectedObject = obj;
+
+            m_XPos = m_SelectedObject.position.x;
+            m_YPos = m_SelectedObject.position.y;
+            m_ZPos = m_SelectedObject.position.z;
+
+            m_XRot = m_SelectedObject.rotation.x;
+            m_YRot = m_SelectedObject.rotation.y;
+            m_ZRot = m_SelectedObject.rotation.z;
+
+            m_XScale = m_SelectedObject.scale.x;
+            m_YScale = m_SelectedObject.scale.y;
+            m_ZScale = m_SelectedObject.scale.z;
+        }
 
         inline void ClearSelectedObject()
         {
             m_SelectedObject.Clear();
 
-            m_XScale = m_YScale = m_ZScale = 1.0f;
-
             m_XPos = m_YPos = m_ZPos = 0.0f;
             m_XRot = m_YRot = m_ZRot = 0.0f;
+            m_XScale = m_YScale = m_ZScale = 1.0f;
         }
 
         void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
@@ -133,19 +147,40 @@ class TransformLayer : public Layer
                 ImGui::Text("X: ");
                 ImGui::SameLine();
                 ImGui::PushItemWidth(50);
-                ImGui::DragFloat("##XScale", &m_XScale, 0.1f, 0.0f, 10.0f, "%.3f");
+
+                if (ImGui::DragFloat("##XScale", &m_XScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_LinkedScale)
+                {
+                    m_YScale = m_ZScale = m_XScale;
+                }
 
                 ImGui::SameLine();
                 ImGui::Text("Y: ");
                 ImGui::SameLine();
                 ImGui::PushItemWidth(50);
-                ImGui::DragFloat("##YScale", &m_YScale, 0.1f, 0.0f, 10.0f, "%.3f");
+
+                if (ImGui::DragFloat("##YScale", &m_YScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_LinkedScale)
+                {
+                    m_XScale = m_ZScale = m_YScale;
+                }
 
                 ImGui::SameLine();
                 ImGui::Text("Z: ");
                 ImGui::SameLine();
                 ImGui::PushItemWidth(50);
-                ImGui::DragFloat("##ZScale", &m_ZScale, 0.1f, 0.0f, 10.0f, "%.3f");
+
+                if (ImGui::DragFloat("##ZScale", &m_ZScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_LinkedScale)
+                {
+                    m_XScale = m_YScale = m_ZScale;
+                }
+
+                ImGui::SameLine();
+                if (ImGui::Checkbox("Link", &m_LinkedScale))
+                {
+                    if (m_LinkedScale)
+                    {
+                        m_YScale = m_ZScale = m_XScale;
+                    }
+                }
 
                 m_SelectedObject.position = {m_XPos, m_YPos, m_ZPos};
                 m_SelectedObject.rotation = {m_XRot, m_YRot, m_ZRot};
@@ -164,6 +199,7 @@ class TransformLayer : public Layer
         float m_XPos, m_YPos, m_ZPos;
         float m_XRot, m_YRot, m_ZRot;
         float m_XScale = 1.0f, m_YScale = 1.0f, m_ZScale = 1.0f;
+        bool  m_LinkedScale;
 
         Renderer::Scene::SceneObject                     m_SelectedObject;
         std::unordered_map<ButtonID, ButtonCallback>     m_BtnCallbacks;

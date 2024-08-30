@@ -60,14 +60,11 @@ class Camera : public CameraController
 
         inline bool GetConnected() const override { return m_CameraConnected; }
 
-        void SetProjectionMatrix(unsigned                shaderID,
-                                 std::shared_ptr<Camera> camera,
-                                 int                     winWidth,
-                                 int                     winHeight,
-                                 float                   nearClip,
-                                 float                   farClip);
-        void SetViewMatrix(unsigned shaderID, std::shared_ptr<Camera> camera);
-        void SetModel(unsigned shaderID, glm::vec3 model);
+        void SetProjectionMatrix(
+            std::shared_ptr<Camera> camera, int winWidth, int winHeight, float nearClip, float farClip);
+
+        void SetViewMatrix(std::shared_ptr<Camera> camera);
+        void SetModel(glm::vec3 model);
         void SetModelTransform(unsigned shaderID, glm::mat4 model);
 
         void SetPosition(const glm::vec3& pos) { m_CameraPos = pos; }
