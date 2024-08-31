@@ -63,9 +63,9 @@ class RendererCommand
 
         inline static void SetViewport(int width, int height) { s_RendererAPI->SetViewport(width, height); }
 
-        inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
+        inline static void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, size_t size)
         {
-            s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO);
+            s_RendererAPI->SubmitDrawCommands(shaderProgram, VAO, size);
         };
 
         inline static void SubmitDrawArrays(RendererAPI::DrawMode drawMode, int index, int count)

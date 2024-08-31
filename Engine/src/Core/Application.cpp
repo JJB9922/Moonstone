@@ -112,6 +112,27 @@ void Application::UpdateCustomBaseShapes()
     }
 }
 
+void Application::UpdateModels(Renderer::Shader& meshShader, Renderer::Model& model)
+{
+    if (!meshShader.ID)
+    {
+        std::string      meshVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultmesh.vert";
+        std::string      meshFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultmesh.frag";
+        Renderer::Shader loadedShader(meshVert.c_str(), meshFrag.c_str());
+        meshShader = loadedShader;
+        MS_ASSERT(meshShader.ID, "mesh shader could not be set");
+    }
+
+    meshShader.Use();
+
+    //Renderer::RendererCommand::BindVertexArray(m_VAO[1]);
+    Renderer::RendererCommand::SetUniformMat4(meshShader.ID, "model", m_ActiveCamera->GetModel());
+    Renderer::RendererCommand::SetUniformMat4(meshShader.ID, "view", m_ActiveCamera->GetViewMatrix());
+    Renderer::RendererCommand::SetUniformMat4(meshShader.ID, "projection", m_ActiveCamera->GetProjectionMatrix());
+
+    model.Draw(meshShader);
+}
+
 void Application::Run()
 {
     m_Running = true;
@@ -123,6 +144,14 @@ void Application::Run()
 
     Time&            time = Time::GetInstance();
     Renderer::Shader gridShader;
+    Renderer::Shader meshShader;
+
+    MS_DEBUG("loading model");
+    stbi_set_flip_vertically_on_load(true);
+    std::string modelPath = std::string(RESOURCE_DIR) + "/Models/backpack/backpack.obj";
+    MS_DEBUG("set model path");
+    Renderer::Model model(modelPath);
+    MS_DEBUG("Constructed Model");
 
     while (m_Running)
     {
@@ -134,12 +163,14 @@ void Application::Run()
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
-        if (m_DefaultGrid)
-        {
-            UpdateGrid(gridShader);
-        }
+        //if (m_DefaultGrid)
+        // {
+        //    UpdateGrid(gridShader);
+        //}
 
-        UpdateCustomBaseShapes();
+        //UpdateCustomBaseShapes();
+
+        UpdateModels(meshShader, model);
 
         RenderLayers();
 

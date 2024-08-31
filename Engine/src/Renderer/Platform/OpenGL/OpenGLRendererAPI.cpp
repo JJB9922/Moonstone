@@ -125,10 +125,10 @@ void OpenGLRendererAPI::InitVertexAttributes(
     glEnableVertexAttribArray(index);
 };
 
-void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)
+void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, size_t size)
 {
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
 }
 
 void OpenGLRendererAPI::SubmitDrawArrays(DrawMode drawMode, int index, int count)

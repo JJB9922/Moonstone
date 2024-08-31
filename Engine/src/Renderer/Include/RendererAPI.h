@@ -65,22 +65,37 @@ class RendererAPI
         enum class TextureParameter
         {
             Linear,
+            LinearMipmapLinear,
             Wrap,
             Repeat,
         };
 
         enum class TextureFormat
         {
+            Red,
             RGB,
             RGBA
         };
 
-        // Goes up to 16 most of the time
-        enum class Texture
+        enum Texture
         {
-            Texture0,
+            Texture0 = 0,
             Texture1,
             Texture2,
+            Texture3,
+            Texture4,
+            Texture5,
+            Texture6,
+            Texture7,
+            Texture8,
+            Texture9,
+            Texture10,
+            Texture11,
+            Texture12,
+            Texture13,
+            Texture14,
+            Texture15,
+            Texture16,
         };
 
     public:
@@ -104,7 +119,7 @@ class RendererAPI
         virtual void SetPolygonMode(PolygonDataType dataType) = 0;
         virtual void SetViewport(int width, int height)       = 0;
 
-        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO)  = 0;
+        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, size_t size) = 0;
         virtual void SubmitDrawArrays(DrawMode drawMode, int index, int count) = 0;
 
         virtual void Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderProgram) = 0;

@@ -60,6 +60,7 @@ add_subdirectory(vendor/glfw)
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glad)
 add_subdirectory(vendor/glm)
+add_subdirectory(vendor/assimp)
 
 # Static libraries
 
@@ -107,10 +108,11 @@ target_include_directories(Moonstone PUBLIC
     vendor/glad/include
     vendor/glm/glm
     vendor/imgui
+    vendor/assimp/include
 )
 
 # Link libraries to Moonstone
-target_link_libraries(Moonstone PRIVATE glfw ImGui spdlog::spdlog glad glm)
+target_link_libraries(Moonstone PRIVATE assimp glfw ImGui spdlog::spdlog glad glm)
 
 # Define the executable
 add_executable(MoonstoneApp "${SRC_CORE_DIR}/EntryPoint.cpp")

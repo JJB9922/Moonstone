@@ -5,6 +5,7 @@
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
 #include "Renderer/Include/Camera.h"
+#include "Renderer/Include/Model.h"
 #include "Renderer/Include/Scene.h"
 #include "Renderer/Include/Shader.h"
 #include "Renderer/Include/Textures.h"
@@ -46,6 +47,7 @@ class Application
         void UpdateCamera();
 
         void UpdateGrid(Renderer::Shader &gridShader);
+        void UpdateModels(Renderer::Shader &meshShader, Renderer::Model &model);
 
         void UpdateCustomBaseShapes();
 

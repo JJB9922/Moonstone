@@ -33,7 +33,7 @@ class OpenGLRendererAPI : public RendererAPI
                                           size_t            stride,
                                           size_t            offset) override;
 
-        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO) override;
+        virtual void SubmitDrawCommands(unsigned shaderProgram, unsigned VAO, size_t size) override;
         virtual void SubmitDrawArrays(DrawMode drawMode, int index, int count) override;
 
         virtual void SetPolygonMode(PolygonDataType polygonMode) override;
@@ -151,15 +151,14 @@ class OpenGLRendererAPI : public RendererAPI
         {
             switch (param)
             {
+                case TextureParameter::LinearMipmapLinear:
+                    return GL_LINEAR_MIPMAP_LINEAR;
                 case TextureParameter::Linear:
                     return GL_LINEAR;
-                    break;
                 case TextureParameter::Repeat:
                     return GL_REPEAT;
-                    break;
                 default:
                     return 0;
-                    break;
             }
         }
 
@@ -167,15 +166,14 @@ class OpenGLRendererAPI : public RendererAPI
         {
             switch (format)
             {
+                case TextureFormat::Red:
+                    return GL_RED;
                 case TextureFormat::RGB:
                     return GL_RGB;
-                    break;
                 case TextureFormat::RGBA:
                     return GL_RGBA;
-                    break;
                 default:
                     return 0;
-                    break;
             }
         }
 
