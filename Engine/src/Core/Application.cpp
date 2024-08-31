@@ -166,7 +166,7 @@ void Application::Run()
     stbi_set_flip_vertically_on_load(true);
     std::string modelPath = std::string(RESOURCE_DIR) + "/Models/backpack/backpack.obj";
     MS_DEBUG("set model path");
-    Renderer::Model model(modelPath);
+    //Renderer::Model model(modelPath);
     MS_DEBUG("Constructed Model");
 
     while (m_Running)
@@ -186,7 +186,7 @@ void Application::Run()
 
         UpdateCustomBaseShapes();
 
-        UpdateModels(meshShader, model);
+        //UpdateModels(meshShader, model);
 
         RenderLayers();
 

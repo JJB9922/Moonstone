@@ -31,12 +31,16 @@ void ImGuiLayer::OnAttach()
     ImGui::CreateContext();
 
     ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+
+    // Todo: Delete
+    io.IniFilename = nullptr;
+
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
-    ImGui::StyleColorsClassic();
-    //ImGui::StyleColorsDark();
+    //ImGui::StyleColorsClassic();
+    ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
 
     // ToDo: Abstract this out for Vulks
