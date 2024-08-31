@@ -26,8 +26,32 @@ void Mesh::SetupMesh()
                                                     Renderer::RendererAPI::BooleanDataType::False,
                                                     sizeof(Vertex),
                                                     offsetof(Vertex, Normal));
-    Renderer::RendererCommand::InitVertexAttributes(0,
+    Renderer::RendererCommand::InitVertexAttributes(2,
+                                                    2,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    sizeof(Vertex),
+                                                    offsetof(Vertex, TexCoords));
+    Renderer::RendererCommand::InitVertexAttributes(3,
                                                     3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    sizeof(Vertex),
+                                                    offsetof(Vertex, Tangent));
+    Renderer::RendererCommand::InitVertexAttributes(4,
+                                                    3,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    sizeof(Vertex),
+                                                    offsetof(Vertex, Bitangent));
+    Renderer::RendererCommand::InitVertexAttributes(5,
+                                                    4,
+                                                    Renderer::RendererAPI::NumericalDataType::Float,
+                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    sizeof(Vertex),
+                                                    offsetof(Vertex, TexCoords));
+    Renderer::RendererCommand::InitVertexAttributes(6,
+                                                    4,
                                                     Renderer::RendererAPI::NumericalDataType::Float,
                                                     Renderer::RendererAPI::BooleanDataType::False,
                                                     sizeof(Vertex),
@@ -41,10 +65,11 @@ void Mesh::Draw(Renderer::Shader& shader)
 {
     unsigned diffuseNr  = 1;
     unsigned specularNr = 1;
+    unsigned normalNr   = 1;
+    unsigned heightNr   = 1;
 
     for (unsigned i = 0; i < textures.size(); i++)
     {
-        glActiveTexture(GL_TEXTURE0 + i);
         std::string number;
         std::string name = textures[i].type;
 
@@ -52,21 +77,19 @@ void Mesh::Draw(Renderer::Shader& shader)
             number = std::to_string(diffuseNr++);
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
+        else if (name == "texture_normal")
+            number = std::to_string(normalNr++);
+        else if (name == "texture_height")
+            number = std::to_string(heightNr++);
 
-        shader.SetInt(("material." + name + number).c_str(), i);
-        glBindTexture(GL_TEXTURE_2D, textures[i].id);
+        Renderer::RendererCommand::BindTexture(static_cast<RendererAPI::Texture>(RendererAPI::Texture::Texture0 + i),
+                                               RendererAPI::TextureTarget::Texture2D,
+                                               textures[i].id);
 
-        // Renderer::RendererCommand::BindTexture(static_cast<RendererAPI::Texture>(RendererAPI::Texture::Texture0 + i),
-        //                                      RendererAPI::TextureTarget::Texture2D,
-        //                                       textures[i].id);
+        Renderer::RendererCommand::SetUniformInt(shader.ID, ("material." + name + number).c_str(), i);
     }
-    glBindVertexArray(m_VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
 
-    // always good practice to set everything back to defaults once configured.
-    glActiveTexture(GL_TEXTURE0);
-    //Renderer::RendererCommand::SubmitDrawCommands(shader.ID, m_VAO, indices.size());
+    Renderer::RendererCommand::SubmitDrawCommands(shader.ID, m_VAO, indices.size());
 }
 
 } // namespace Renderer

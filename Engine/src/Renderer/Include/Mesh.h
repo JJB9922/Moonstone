@@ -11,6 +11,8 @@ namespace Moonstone
 namespace Renderer
 {
 
+#define MAX_BONE_INFLUENCE 4
+
 class Mesh
 {
     public:
@@ -19,6 +21,11 @@ class Mesh
                 glm::vec3 Position;
                 glm::vec3 Normal;
                 glm::vec2 TexCoords;
+
+                glm::vec3 Tangent;
+                glm::vec3 Bitangent;
+                int       m_BoneIDs[MAX_BONE_INFLUENCE];
+                int       m_Weights[MAX_BONE_INFLUENCE];
         };
 
         struct Texture

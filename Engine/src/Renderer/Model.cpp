@@ -35,15 +35,12 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene)
     if (!node || !scene)
         return;
 
-    MS_DEBUG("Processing node with {0} meshes and {1} children", node->mNumMeshes, node->mNumChildren);
-
     for (unsigned i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
         if (mesh)
             m_Meshes.push_back(ProcessMesh(mesh, scene));
     }
-    MS_DEBUG("Processed meshes for node {0}", (void*) node);
 
     for (unsigned i = 0; i < node->mNumChildren; i++)
     {

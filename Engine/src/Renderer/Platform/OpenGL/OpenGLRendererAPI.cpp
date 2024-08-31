@@ -129,6 +129,8 @@ void OpenGLRendererAPI::SubmitDrawCommands(unsigned shaderProgram, unsigned VAO,
 {
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+    glActiveTexture(GL_TEXTURE0);
 }
 
 void OpenGLRendererAPI::SubmitDrawArrays(DrawMode drawMode, int index, int count)

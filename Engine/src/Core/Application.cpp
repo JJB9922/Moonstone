@@ -125,11 +125,27 @@ void Application::UpdateModels(Renderer::Shader& meshShader, Renderer::Model& mo
 
     meshShader.Use();
 
-    //Renderer::RendererCommand::BindVertexArray(m_VAO[1]);
+    // Apply transformation matrices
     Renderer::RendererCommand::SetUniformMat4(meshShader.ID, "model", m_ActiveCamera->GetModel());
     Renderer::RendererCommand::SetUniformMat4(meshShader.ID, "view", m_ActiveCamera->GetViewMatrix());
     Renderer::RendererCommand::SetUniformMat4(meshShader.ID, "projection", m_ActiveCamera->GetProjectionMatrix());
 
+    // Set material properties
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "material.diffuse", {0.6f, 0.6f, 0.6f});
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
+    Renderer::RendererCommand::SetUniformFloat(meshShader.ID, "material.shininess", 64.0f);
+
+    // Set view position for lighting calculations
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "viewPos", m_ActiveCamera->GetPosition());
+
+    // Directional light properties
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "dirLight.direction", m_TimeOfDay);
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "dirLight.ambient", {0.3f, 0.3f, 0.3f});
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
+    Renderer::RendererCommand::SetUniformVec3(meshShader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
+    Renderer::RendererCommand::SetUniformBool(meshShader.ID, "dirLight.isActive", m_SunLight);
+
+    // Draw the model
     model.Draw(meshShader);
 }
 
@@ -163,12 +179,12 @@ void Application::Run()
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
 
-        //if (m_DefaultGrid)
-        // {
-        //    UpdateGrid(gridShader);
-        //}
+        if (m_DefaultGrid)
+        {
+            UpdateGrid(gridShader);
+        }
 
-        //UpdateCustomBaseShapes();
+        UpdateCustomBaseShapes();
 
         UpdateModels(meshShader, model);
 
