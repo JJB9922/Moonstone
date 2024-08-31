@@ -111,6 +111,14 @@ Static Public Member Functions</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a25c23fa28d2db211acad051e688afd16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a25c23fa28d2db211acad051e688afd16">RenderLayers</a> ()</td></tr>
 <tr class="separator:a25c23fa28d2db211acad051e688afd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63c7628e90cec34c3d7a35a8eb24154"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#ac63c7628e90cec34c3d7a35a8eb24154">InitializeCamera</a> ()</td></tr>
+<tr class="separator:ac63c7628e90cec34c3d7a35a8eb24154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaddf7c785544c7b7d15aaf0b99768a9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#aaddf7c785544c7b7d15aaf0b99768a9d">UpdateCamera</a> ()</td></tr>
+<tr class="separator:aaddf7c785544c7b7d15aaf0b99768a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf3e8652aacc392000420d31f40c256"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#aaaf3e8652aacc392000420d31f40c256">UpdateGrid</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html">Renderer::Shader</a> &amp;gridShader)</td></tr>
+<tr class="separator:aaaf3e8652aacc392000420d31f40c256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac586048d01c6e91b40dd01344a202881"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#ac586048d01c6e91b40dd01344a202881">UpdateCustomBaseShapes</a> ()</td></tr>
+<tr class="separator:ac586048d01c6e91b40dd01344a202881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05772fe4e377f200bbeba6c0daae9aac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#a05772fe4e377f200bbeba6c0daae9aac">InitializeImGui</a> ()</td></tr>
 <tr class="separator:a05772fe4e377f200bbeba6c0daae9aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad36e2a2f0c5360c124b4220c373f7d74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1Application.html#ad36e2a2f0c5360c124b4220c373f7d74">InitializeDefaultScene</a> (std::vector&lt; unsigned &gt; &amp;shaderProgram, std::vector&lt; unsigned &gt; &amp;VBO, std::vector&lt; unsigned &gt; &amp;VAO, std::vector&lt; unsigned &gt; &amp;EBO, std::vector&lt; unsigned &gt; &amp;textures)</td></tr>
@@ -360,6 +368,31 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac63c7628e90cec34c3d7a35a8eb24154"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63c7628e90cec34c3d7a35a8eb24154">&#9670;&nbsp;</a></span>InitializeCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::InitializeCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad36e2a2f0c5360c124b4220c373f7d74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad36e2a2f0c5360c124b4220c373f7d74">&#9670;&nbsp;</a></span>InitializeDefaultScene()</h2>
 
@@ -598,6 +631,82 @@ Static Private Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaddf7c785544c7b7d15aaf0b99768a9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaddf7c785544c7b7d15aaf0b99768a9d">&#9670;&nbsp;</a></span>UpdateCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::UpdateCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac586048d01c6e91b40dd01344a202881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac586048d01c6e91b40dd01344a202881">&#9670;&nbsp;</a></span>UpdateCustomBaseShapes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::UpdateCustomBaseShapes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaaf3e8652aacc392000420d31f40c256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf3e8652aacc392000420d31f40c256">&#9670;&nbsp;</a></span>UpdateGrid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::Application::UpdateGrid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Renderer_1_1Shader.html">Renderer::Shader</a> &amp;&#160;</td>
+          <td class="paramname"><em>gridShader</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
