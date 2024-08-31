@@ -106,8 +106,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a51167a5e7c45983c0240a4d07b6bf03b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9f3d8d03a20c75cdcf4601f122d169e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#af9f3d8d03a20c75cdcf4601f122d169e">SetViewport</a> (int width, int height)</td></tr>
 <tr class="separator:af9f3d8d03a20c75cdcf4601f122d169e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43b0bbf1277eb3a9d4e7915e3d573125"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a43b0bbf1277eb3a9d4e7915e3d573125">SubmitDrawCommands</a> (unsigned shaderProgram, unsigned VAO)</td></tr>
-<tr class="separator:a43b0bbf1277eb3a9d4e7915e3d573125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbe0781081dfe62bf20560b09fb5f4a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#adbbe0781081dfe62bf20560b09fb5f4a">SubmitDrawCommands</a> (unsigned shaderProgram, unsigned VAO, size_t size)</td></tr>
+<tr class="separator:adbbe0781081dfe62bf20560b09fb5f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a190dd9c76e7b16f79708af722c548eba"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a190dd9c76e7b16f79708af722c548eba">SubmitDrawArrays</a> (<a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#aa75c678c4518703afb04304131d88d75">RendererAPI::DrawMode</a> drawMode, int index, int count)</td></tr>
 <tr class="separator:a190dd9c76e7b16f79708af722c548eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad63d93c50952bbf1165d4bc366f6ac11"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#ad63d93c50952bbf1165d4bc366f6ac11">Cleanup</a> (unsigned &amp;VAO, unsigned &amp;VBO, unsigned &amp;shaderProgram)</td></tr>
@@ -1125,8 +1125,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a43b0bbf1277eb3a9d4e7915e3d573125"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43b0bbf1277eb3a9d4e7915e3d573125">&#9670;&nbsp;</a></span>SubmitDrawCommands()</h2>
+<a id="adbbe0781081dfe62bf20560b09fb5f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbbe0781081dfe62bf20560b09fb5f4a">&#9670;&nbsp;</a></span>SubmitDrawCommands()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1144,7 +1144,13 @@ Static Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>VAO</em>&#160;</td>
+          <td class="paramname"><em>VAO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
