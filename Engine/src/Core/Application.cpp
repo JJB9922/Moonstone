@@ -157,8 +157,9 @@ void Application::Run()
 
         //Renderer::RendererCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
 
-        RenderLayers();
         Renderer::RendererCommand::BindFrameBuffer(empty);
+
+        RenderLayers();
 
         Window::UpdateWindow(m_Window);
 

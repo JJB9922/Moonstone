@@ -34,27 +34,39 @@ class SceneLayer : public Layer
         }
 
         virtual void OnImGuiRender() override
-        {
-            int winWidth, winHeight;
-            glfwGetWindowSize(m_Window, &winWidth, &winHeight);
 
-            if (winWidth != m_LastWidth || winHeight != m_LastHeight)
+        {
+            ImGui::Begin("Scene");
+
+            auto  size      = ImGui::GetContentRegionAvail();
+            float winWidth  = size.x;
+            float winHeight = size.y;
+
+            float aspectRatio = 16.0f / 9.0f;
+            int   targetWidth, targetHeight;
+
+            if (winWidth / winHeight > aspectRatio)
             {
-                Renderer::RendererCommand::RescaleFramebuffer(m_TexMap, winWidth, winHeight);
-                Renderer::RendererCommand::SetViewport(winWidth, winHeight);
-                m_LastWidth  = winWidth;
-                m_LastHeight = winHeight;
+                targetHeight = winHeight;
+                targetWidth  = targetHeight * aspectRatio;
+            }
+            else
+            {
+                targetWidth  = winWidth;
+                targetHeight = targetWidth / aspectRatio;
             }
 
-            ImGui::Begin("Scene");
-            auto   size = ImGui::GetContentRegionAvail();
-            ImVec2 pos  = ImGui::GetCursorScreenPos();
+            float xOffset = (winWidth - targetWidth) * 0.5f;
+            float yOffset = (winHeight - targetHeight) * 0.5f;
 
-            ImGui::GetWindowDrawList()->AddImage((void*) m_TexMap,
-                                                 ImVec2(pos.x, pos.y),
-                                                 ImVec2(pos.x + winWidth, pos.y + winHeight),
-                                                 ImVec2(0, 1),
-                                                 ImVec2(1, 0));
+            Renderer::RendererCommand::RescaleFramebuffer(m_TexMap, targetWidth, targetHeight);
+            Renderer::RendererCommand::SetViewport(targetWidth, targetHeight);
+
+            ImVec2 pos = ImGui::GetCursorScreenPos();
+            ImVec2 p0(pos.x + xOffset, pos.y + yOffset);
+            ImVec2 p1(p0.x + targetWidth, p0.y + targetHeight);
+
+            ImGui::GetWindowDrawList()->AddImage((void*) m_TexMap, p0, p1, ImVec2(0, 1), ImVec2(1, 0));
 
             Renderer::RendererCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
 
@@ -65,7 +77,6 @@ class SceneLayer : public Layer
         GLFWwindow* m_Window;
         unsigned    m_TexMap;
         unsigned    m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap;
-        int         m_LastWidth, m_LastHeight;
 };
 
 class MenuLayer : public Layer
