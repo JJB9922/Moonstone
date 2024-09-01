@@ -230,6 +230,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aae05e378c0ec13aec20ef8ce8ffe9d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14f97d827d6c207fd5e3844d8de0606b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a14f97d827d6c207fd5e3844d8de0606b">DisableDepthMask</a> ()=0</td></tr>
 <tr class="separator:a14f97d827d6c207fd5e3844d8de0606b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a236e1a2d3f70c390d29ea47b8b5b3ba5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a236e1a2d3f70c390d29ea47b8b5b3ba5">BindFrameBuffer</a> (unsigned &amp;FBO)=0</td></tr>
+<tr class="separator:a236e1a2d3f70c390d29ea47b8b5b3ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810381b600b64dcdf67e4b294db62e90"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#a810381b600b64dcdf67e4b294db62e90">DrawFrameBuffer</a> (unsigned &amp;shaderID, unsigned &amp;quadVAO, unsigned &amp;FBOTexMap)=0</td></tr>
+<tr class="separator:a810381b600b64dcdf67e4b294db62e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0dcf41b702a72ce15cd6ae7769bcb69"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ad0dcf41b702a72ce15cd6ae7769bcb69">InitFrameBuffer</a> (int &amp;width, int &amp;height, unsigned &amp;FBOTextureMap, unsigned &amp;FBODepthTexture, unsigned &amp;FBO, unsigned &amp;ScreenQuadVAO, unsigned &amp;ScreenQuadVBO)=0</td></tr>
+<tr class="separator:ad0dcf41b702a72ce15cd6ae7769bcb69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -520,6 +526,34 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a236e1a2d3f70c390d29ea47b8b5b3ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a236e1a2d3f70c390d29ea47b8b5b3ba5">&#9670;&nbsp;</a></span>BindFrameBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::BindFrameBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBO</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a09bdb8a23c23aa7c90e0e1fd4ac08abb">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
 <a id="ab0d1b52057b0b78b513ddcc1624e9f61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab0d1b52057b0b78b513ddcc1624e9f61">&#9670;&nbsp;</a></span>BindTexture()</h2>
 
@@ -828,6 +862,50 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a810381b600b64dcdf67e4b294db62e90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810381b600b64dcdf67e4b294db62e90">&#9670;&nbsp;</a></span>DrawFrameBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::DrawFrameBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>shaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>quadVAO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBOTexMap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a0dcf21672fa9cdd90a1fc90df9bd6bc2">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
 <a id="aff55e86f1503a761fa58f2b74a0c748a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff55e86f1503a761fa58f2b74a0c748a">&#9670;&nbsp;</a></span>EnableBlending()</h2>
 
@@ -1040,6 +1118,74 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#a788d93cde2dbcf115ee4810593f57d99">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
+
+</div>
+</div>
+<a id="ad0dcf41b702a72ce15cd6ae7769bcb69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0dcf41b702a72ce15cd6ae7769bcb69">&#9670;&nbsp;</a></span>InitFrameBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Moonstone::Renderer::RendererAPI::InitFrameBuffer </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBOTextureMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBODepthTexture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ScreenQuadVAO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ScreenQuadVBO</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classMoonstone_1_1Renderer_1_1OpenGLRendererAPI.html#ab66aa4269a94ead3b5c97e57f4b55e38">Moonstone::Renderer::OpenGLRendererAPI</a>.</p>
 
 </div>
 </div>

@@ -144,6 +144,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a95da070e048e297f4d986205e5f0ead8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b88971821ed7656660489deccf9d90"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a12b88971821ed7656660489deccf9d90">DisableDepthMask</a> ()</td></tr>
 <tr class="separator:a12b88971821ed7656660489deccf9d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab67180a5e1b690c60a27178b2a583c0e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#ab67180a5e1b690c60a27178b2a583c0e">BindFrameBuffer</a> (unsigned &amp;FBO)</td></tr>
+<tr class="separator:ab67180a5e1b690c60a27178b2a583c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3103db3c34920617d379a1cbf692e3a1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a3103db3c34920617d379a1cbf692e3a1">DrawFrameBuffer</a> (unsigned &amp;shaderID, unsigned &amp;quadVAO, unsigned &amp;FBOTexMap)</td></tr>
+<tr class="separator:a3103db3c34920617d379a1cbf692e3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c38bed97232108f0c5beb38c91a0ad8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Renderer_1_1RendererCommand.html#a1c38bed97232108f0c5beb38c91a0ad8">InitFrameBuffer</a> (int &amp;width, int &amp;height, unsigned &amp;FBOTextureMap, unsigned &amp;FBODepthTexture, unsigned &amp;FBO, unsigned &amp;ScreenQuadVAO, unsigned &amp;ScreenQuadVBO)</td></tr>
+<tr class="separator:a1c38bed97232108f0c5beb38c91a0ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -151,6 +157,32 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a507daf79cc373ac74d961b4695389dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab67180a5e1b690c60a27178b2a583c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab67180a5e1b690c60a27178b2a583c0e">&#9670;&nbsp;</a></span>BindFrameBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::BindFrameBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBO</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3017f92b805383551ea84f02e5e0e6ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3017f92b805383551ea84f02e5e0e6ff">&#9670;&nbsp;</a></span>BindTexture()</h2>
 
@@ -439,6 +471,48 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3103db3c34920617d379a1cbf692e3a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3103db3c34920617d379a1cbf692e3a1">&#9670;&nbsp;</a></span>DrawFrameBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::DrawFrameBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>shaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>quadVAO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBOTexMap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8c0e8af8dffb18cff9daed607104fa5c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c0e8af8dffb18cff9daed607104fa5c">&#9670;&nbsp;</a></span>EnableBlending()</h2>
 
@@ -601,6 +675,72 @@ Static Private Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>fragmentShaderSrc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c38bed97232108f0c5beb38c91a0ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c38bed97232108f0c5beb38c91a0ad8">&#9670;&nbsp;</a></span>InitFrameBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Moonstone::Renderer::RendererCommand::InitFrameBuffer </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBOTextureMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBODepthTexture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ScreenQuadVAO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ScreenQuadVBO</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
