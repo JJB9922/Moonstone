@@ -162,6 +162,11 @@ class RendererCommand
                 ->InitFrameBuffer(width, height, FBOTextureMap, FBODepthTexture, FBO, ScreenQuadVAO, ScreenQuadVBO);
         };
 
+        inline static void RescaleFramebuffer(unsigned &texMap, int &width, int &height)
+        {
+            s_RendererAPI->RescaleFramebuffer(texMap, width, height);
+        };
+
     private:
         static std::unique_ptr<RendererAPI> s_RendererAPI;
 };

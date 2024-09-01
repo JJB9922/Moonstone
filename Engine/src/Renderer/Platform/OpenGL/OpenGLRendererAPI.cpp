@@ -306,6 +306,15 @@ void OpenGLRendererAPI::InitFrameBuffer(int      &width,
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) (2 * sizeof(float)));
 }
 
+void OpenGLRendererAPI::RescaleFramebuffer(unsigned &texMap, int &width, int &height)
+{
+    glBindTexture(GL_TEXTURE_2D, texMap);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texMap, 0);
+}
+
 } // namespace Renderer
 
 } // namespace Moonstone

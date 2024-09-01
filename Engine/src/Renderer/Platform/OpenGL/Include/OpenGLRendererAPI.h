@@ -83,6 +83,8 @@ class OpenGLRendererAPI : public RendererAPI
                                      unsigned& ScreenQuadVAO,
                                      unsigned& ScreenQuadVBO) override;
 
+        virtual void RescaleFramebuffer(unsigned& texMap, int& width, int& height) override;
+
     private:
         inline static GLuint ToOpenGLShaderType(NumericalDataType type)
         {

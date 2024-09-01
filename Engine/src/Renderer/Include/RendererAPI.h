@@ -164,6 +164,7 @@ class RendererAPI
                                      unsigned &ScreenQuadVAO,
                                      unsigned &ScreenQuadVBO)
             = 0;
+        virtual void RescaleFramebuffer(unsigned &texMap, int &width, int &height) = 0;
 
     private:
         static API s_API;

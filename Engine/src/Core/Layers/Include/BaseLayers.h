@@ -15,6 +15,59 @@ namespace Moonstone
 namespace Core
 {
 
+class SceneLayer : public Layer
+{
+    public:
+        SceneLayer()
+            : Layer("Scene")
+        {
+        }
+
+        void OnUpdate() override {}
+        void SetWindow(GLFWwindow* window) { m_Window = window; }
+        void SetTexMap(unsigned& texMap) { m_TexMap = texMap; }
+        void SetFBParams(unsigned& FBShaderID, unsigned& screenQuadVAO, unsigned& FBOTexMap)
+        {
+            m_FBShaderID    = FBShaderID;
+            m_ScreenQuadVAO = screenQuadVAO;
+            m_FBOTexMap     = FBOTexMap;
+        }
+
+        virtual void OnImGuiRender() override
+        {
+            int winWidth, winHeight;
+            glfwGetWindowSize(m_Window, &winWidth, &winHeight);
+
+            if (winWidth != m_LastWidth || winHeight != m_LastHeight)
+            {
+                Renderer::RendererCommand::RescaleFramebuffer(m_TexMap, winWidth, winHeight);
+                Renderer::RendererCommand::SetViewport(winWidth, winHeight);
+                m_LastWidth  = winWidth;
+                m_LastHeight = winHeight;
+            }
+
+            ImGui::Begin("Scene");
+            auto   size = ImGui::GetContentRegionAvail();
+            ImVec2 pos  = ImGui::GetCursorScreenPos();
+
+            ImGui::GetWindowDrawList()->AddImage((void*) m_TexMap,
+                                                 ImVec2(pos.x, pos.y),
+                                                 ImVec2(pos.x + winWidth, pos.y + winHeight),
+                                                 ImVec2(0, 1),
+                                                 ImVec2(1, 0));
+
+            Renderer::RendererCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
+
+            ImGui::End();
+        }
+
+    private:
+        GLFWwindow* m_Window;
+        unsigned    m_TexMap;
+        unsigned    m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap;
+        int         m_LastWidth, m_LastHeight;
+};
+
 class MenuLayer : public Layer
 {
     public:

@@ -124,10 +124,12 @@ void Application::Run()
     InitializeCamera();
     InitializeDefaultScene();
     InitializeImGui();
-    std::string framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
 
+    std::string      framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
     std::string      framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
     Renderer::Shader framebShader(framebVert.c_str(), framebFrag.c_str());
+    m_FBShaderID   = framebShader.ID;
+    unsigned empty = 0;
 
     Time&            time = Time::GetInstance();
     Renderer::Shader gridShader;
@@ -137,13 +139,14 @@ void Application::Run()
     {
         float currentFrame = glfwGetTime();
         time.Update(currentFrame);
-        UpdateCamera();
 
         Renderer::RendererCommand::BindFrameBuffer(m_FBO);
         Renderer::RendererCommand::EnableDepthTesting();
         Renderer::RendererCommand::EnableFaceCulling();
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
         Renderer::RendererCommand::Clear();
+
+        UpdateCamera();
 
         if (m_DefaultGrid)
         {
@@ -152,9 +155,10 @@ void Application::Run()
 
         UpdateCustomBaseShapes();
 
-        Renderer::RendererCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
+        //Renderer::RendererCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
 
         RenderLayers();
+        Renderer::RendererCommand::BindFrameBuffer(empty);
 
         Window::UpdateWindow(m_Window);
 
@@ -188,6 +192,12 @@ void Application::InitializeImGui()
     m_ImGuiLayer = new Tools::ImGuiLayer;
     m_ImGuiLayer->SetWindow(m_Window->m_Window);
     PushOverlay(m_ImGuiLayer);
+
+    auto sceneLayer = new SceneLayer;
+    sceneLayer->SetWindow(m_Window->m_Window);
+    sceneLayer->SetTexMap(m_FBOTextureMap);
+    sceneLayer->SetFBParams(m_FBShaderID, m_ScreenQuadVAO, m_FBOTextureMap);
+    PushLayer(sceneLayer);
 
     auto menuLayer = new MenuLayer;
     PushLayer(menuLayer);
