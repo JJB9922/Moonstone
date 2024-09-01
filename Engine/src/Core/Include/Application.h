@@ -4,11 +4,11 @@
 #include "Core/Include/Core.h"
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
-#include "Renderer/Include/Camera.h"
-#include "Renderer/Include/Model.h"
-#include "Renderer/Include/Scene.h"
-#include "Renderer/Include/Shader.h"
-#include "Renderer/Include/Textures.h"
+#include "Rendering/Include/Camera.h"
+#include "Rendering/Include/Model.h"
+#include "Rendering/Include/SceneManager.h"
+#include "Rendering/Include/Shader.h"
+#include "Rendering/Include/Textures.h"
 #include "Tools/Include/BaseShapes.h"
 
 #include <glm/glm.hpp>
@@ -36,20 +36,16 @@ class Application
         void PushOverlay(Layer *overlay);
         void PopOverlay(Layer *overlay);
 
-        inline bool GetDefaultGridEnabled() { return m_DefaultGrid; }
-        inline void SetDefaultGridEnabled(bool show) { m_DefaultGrid = show; }
-        inline void ToggleSunlight() { m_SunLight = !m_SunLight; }
+        // FIX inline void ToggleSunlight() { m_SunLight = !m_SunLight; }
 
     private:
-        void RenderLayers();
+        void UpdateUILayers();
 
         void InitializeFramebuffer();
-
         void InitializeCamera();
         void UpdateCamera();
-
-        void UpdateGrid(Renderer::Shader &gridShader);
-        void UpdateModels(Renderer::Shader &meshShader, Renderer::Model &model);
+        void UpdateGrid(Rendering::Shader &gridShader);
+        void UpdateModels(Rendering::Shader &meshShader, Rendering::Model &model);
 
         void UpdateCustomBaseShapes();
 
@@ -59,15 +55,22 @@ class Application
         void AddCube();
 
     private:
-        bool                                      m_Running;
-        std::shared_ptr<Renderer::Camera>         m_ActiveCamera;
-        static std::unique_ptr<Application>       s_ApplicationInstance;
-        LayerStack                                m_LayerStack;
+        static std::unique_ptr<Application> s_ApplicationInstance;
+
+        std::shared_ptr<Rendering::Scene> m_CurrentScene;
+        Rendering::SceneManager           m_SceneManager;
+
+        bool m_Running;
+
+        //Rendering::Camera m_Camera;
+        LayerStack m_LayerStack;
+
+        std::shared_ptr<Rendering::Camera>        m_ActiveCamera;
         std::shared_ptr<Window>  m_Window;
         Tools::ImGuiLayer                        *m_ImGuiLayer;
         std::vector<Layer>                        m_Layers;
         bool                     m_DefaultGrid = true;
-        std::vector<Renderer::Scene::SceneObject> m_Objects;
+        std::vector<Rendering::SceneObject>       m_Objects;
         bool                     m_SunLight  = false;
         glm::vec3                m_TimeOfDay = {-1.0f, -0.5f, 0};
 

@@ -3,7 +3,7 @@
 
 #include "Core/Include/Layer.h"
 #include "Core/Include/Time.h"
-#include "Renderer/Include/Scene.h"
+#include "Rendering/Include/SceneManager.h"
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 
@@ -59,16 +59,16 @@ class SceneLayer : public Layer
             float xOffset = (winWidth - targetWidth) * 0.5f;
             float yOffset = (winHeight - targetHeight) * 0.5f;
 
-            Renderer::RendererCommand::RescaleFramebuffer(m_TexMap, targetWidth, targetHeight);
-            Renderer::RendererCommand::SetViewport(targetWidth, targetHeight);
+            Rendering::RenderingCommand::RescaleFramebuffer(m_TexMap, targetWidth, targetHeight);
+            Rendering::RenderingCommand::SetViewport(targetWidth, targetHeight);
 
             ImVec2 pos = ImGui::GetCursorScreenPos();
             ImVec2 p0(pos.x + xOffset, pos.y + yOffset);
             ImVec2 p1(p0.x + targetWidth, p0.y + targetHeight);
 
-            ImGui::GetWindowDrawList()->AddImage((void*) m_TexMap, p0, p1, ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::GetWindowDrawList()->AddImage(reinterpret_cast<void*>(m_TexMap), p0, p1, ImVec2(0, 1), ImVec2(1, 0));
 
-            Renderer::RendererCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
+            Rendering::RenderingCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
 
             ImGui::End();
         }
@@ -164,10 +164,10 @@ class TransformLayer : public Layer
         };
 
         using ButtonCallback     = std::function<void()>;
-        using ButtonCallbackObj  = std::function<void(Renderer::Scene::SceneObject&)>;
+        using ButtonCallbackObj  = std::function<void(Rendering::SceneObject&)>;
         using SliderCallback     = std::function<void(float)>;
         using SliderCallbackVec3 = std::function<void(glm::vec3)>;
-        using SliderCallbackObj  = std::function<void(Renderer::Scene::SceneObject&)>;
+        using SliderCallbackObj  = std::function<void(Rendering::SceneObject&)>;
 
         TransformLayer()
             : Layer("Transform")
@@ -176,7 +176,7 @@ class TransformLayer : public Layer
 
         void OnUpdate() override {}
 
-        inline void SetSelectedObject(Renderer::Scene::SceneObject& obj)
+        inline void SetSelectedObject(Rendering::SceneObject& obj)
         {
             m_SelectedObject = obj;
 
@@ -336,7 +336,7 @@ class TransformLayer : public Layer
         float m_XScale = 1.0f, m_YScale = 1.0f, m_ZScale = 1.0f;
         bool  m_LinkedScale;
 
-        Renderer::Scene::SceneObject                     m_SelectedObject;
+        Rendering::SceneObject                            m_SelectedObject;
         std::unordered_map<ButtonID, ButtonCallback>     m_BtnCallbacks;
         std::unordered_map<ButtonID, ButtonCallbackObj>  m_BtnCallbacksObj;
         std::unordered_map<SliderID, SliderCallback>     m_SliderCallbacks;
@@ -361,28 +361,27 @@ class EntityLayer : public Layer
         void OnUpdate() override {}
 
         void SetWindow(GLFWwindow* window) { m_Window = window; };
-        void AddObject(Renderer::Scene::SceneObject& object) { m_Objects.push_back(object); };
-        void RemoveObject(const Renderer::Scene::SceneObject& object)
+        void AddObject(Rendering::SceneObject& object) { m_Objects.push_back(object); };
+        void RemoveObject(const Rendering::SceneObject& object)
         {
             auto it = std::find_if(m_Objects.begin(),
                                    m_Objects.end(),
-                                   [&object](const Renderer::Scene::SceneObject& obj)
-                                   { return obj.name == object.name; });
+                                   [&object](const Rendering::SceneObject& obj) { return obj.name == object.name; });
 
             if (it != m_Objects.end())
             {
                 m_Objects.erase(it);
             }
         }
-        void SetObjectVector(std::vector<Renderer::Scene::SceneObject> objects) { m_Objects = objects; }
+        void SetObjectVector(std::vector<Rendering::SceneObject> objects) { m_Objects = objects; }
 
-        void OverwriteObject(Renderer::Scene::SceneObject& object) {}
+        void OverwriteObject(Rendering::SceneObject& object) {}
 
         static inline void SetSelectedEntity(int selection) { m_SelectedEntity = selection; }
         static inline int  GetSelectedEntity() { return m_SelectedEntity; }
         static inline void ClearEntitySelection() { m_SelectedEntity = -1; }
 
-        inline std::vector<Renderer::Scene::SceneObject> GetObjects() { return GetObjects(); }
+        inline std::vector<Rendering::SceneObject> GetObjects() { return GetObjects(); }
 
         void SetTransformLayer(TransformLayer* transformLayer) { m_TransformLayer = transformLayer; }
 
@@ -434,7 +433,7 @@ class EntityLayer : public Layer
     private:
         static int                                   m_SelectedEntity;
         GLFWwindow*                                  m_Window;
-        std::vector<Renderer::Scene::SceneObject>    m_Objects;
+        std::vector<Rendering::SceneObject>           m_Objects;
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
         TransformLayer*                              m_TransformLayer;
 };
@@ -557,7 +556,7 @@ class ControlsLayer : public Layer
                 MS_DEBUG("camera sens changed: {0}", m_CamSensitivity);
             }
 
-            ImGui::SeparatorText("Renderer:");
+            ImGui::SeparatorText("Rendering:");
 
             if (ImGui::Button("Toggle Wireframe", btnSize) && m_BtnCallbacks[ButtonID::ToggleWireframe])
             {

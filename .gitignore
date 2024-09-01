@@ -35,3 +35,4 @@ build/
 Engine/build/#
 Engine/resources/Models
 resources/Models
+Engine/vendor/

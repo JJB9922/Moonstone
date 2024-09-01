@@ -10,10 +10,10 @@
 #include "Events/Include/EventQueue.h"
 #include "Events/Include/InputEvents.h"
 #include "Events/Include/WindowEvents.h"
-#include "Renderer/Include/Camera.h"
-#include "Renderer/Include/GraphicsContext.h"
-#include "Renderer/Include/GraphicsContextRouter.h"
-#include "Renderer/Include/RendererCommand.h"
+#include "Rendering/Include/Camera.h"
+#include "Rendering/Include/GraphicsContext.h"
+#include "Rendering/Include/GraphicsContextRouter.h"
+#include "Rendering/Include/RenderingCommand.h"
 #include "mspch.h"
 
 namespace Moonstone
@@ -53,7 +53,7 @@ class Window
         void           TerminateWindow();
         static void    UpdateWindow(std::shared_ptr<Window> window);
 
-        inline void SetCamera(std::shared_ptr<Renderer::CameraController> camera) { m_CameraController = camera; }
+        inline void SetCamera(std::shared_ptr<Rendering::CameraController> camera) { m_CameraController = camera; }
         inline void SetCameraSens(float sens) { m_CamSensitivity = sens; }
 
         inline static int GetWidth() { return WindowProperties().Width; }
@@ -61,7 +61,7 @@ class Window
 
     public:
         glm::vec4   m_WindowColor;
-        Renderer::RendererAPI::PolygonDataType m_PolygonMode;
+        Rendering::RenderingAPI::PolygonDataType m_PolygonMode;
         GLFWwindow *m_Window;
 
     private:
@@ -77,8 +77,8 @@ class Window
     private:
         WindowData                   m_WindowData;
         std::vector<std::type_index> m_SubscribedWindowEvents;
-        std::unique_ptr<Renderer::GraphicsContext>  m_GraphicsContext;
-        std::shared_ptr<Renderer::CameraController> m_CameraController = nullptr;
+        std::unique_ptr<Rendering::GraphicsContext>  m_GraphicsContext;
+        std::shared_ptr<Rendering::CameraController> m_CameraController = nullptr;
         float                                       m_LastX            = m_WindowData.windowProperties.Width / 2;
         float                                       m_LastY            = m_WindowData.windowProperties.Height / 2;
         bool                                        m_FirstMouse       = true;

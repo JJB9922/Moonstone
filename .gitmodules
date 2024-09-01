@@ -13,10 +13,7 @@
 [submodule "Engine/vendor/glm"]
 	path = Engine/vendor/glm
 	url = https://github.com/g-truc/glm.git
-
 [submodule "Engine/vendor/ImGuizmo"]
 	path = Engine/vendor/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo.git
-[submodule "Engine/vendor/assimp"]
-	path = Engine/vendor/assimp
-	url = https://github.com/assimp/assimp.git
+

@@ -14,6 +14,72 @@ Application::Application()
     {
         MS_ASSERT(!s_ApplicationInstance, "application instance already exists");
     }
+
+    Rendering::SceneManager sceneManager;
+    m_SceneManager = sceneManager;
+    m_CurrentScene = m_SceneManager.LoadDefaultScene();
+}
+
+void Application::InitializeDefaultScene() { Rendering::SceneManager sceneManager; }
+
+void Application::Run()
+{
+    m_Running = true;
+    m_Window  = std::shared_ptr<Window>(Window::CreateWindow());
+
+    //  InitializeFramebuffer();
+    //  InitializeCamera();
+    // InitializeDefaultScene();
+    //  InitializeImGui();
+
+    // std::string      framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
+    // std::string      framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
+    // Rendering::Shader framebShader(framebVert.c_str(), framebFrag.c_str());
+    // m_FBShaderID   = framebShader.ID;
+    // unsigned empty = 0;
+
+    Time&            time = Time::GetInstance();
+    Rendering::Shader gridShader;
+    Rendering::Shader meshShader;
+
+    while (m_Running)
+    {
+        float currentFrame = glfwGetTime();
+        time.Update(currentFrame);
+
+        //Rendering::RenderingCommand::BindFrameBuffer(m_FBO);
+        Rendering::RenderingCommand::EnableDepthTesting();
+        Rendering::RenderingCommand::EnableFaceCulling();
+        Rendering::RenderingCommand::ClearColor(m_Window->m_WindowColor);
+        Rendering::RenderingCommand::Clear();
+
+        m_SceneManager.RenderScene(m_CurrentScene);
+
+        //UpdateCamera();
+
+        // if (m_DefaultGrid)
+        // {
+        //     UpdateGrid(gridShader);
+        //}
+
+        //UpdateCustomBaseShapes();
+
+        //Rendering::RenderingCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
+
+        //  Rendering::RenderingCommand::BindFrameBuffer(empty);
+
+        //  UpdateUILayers();
+
+        Window::UpdateWindow(m_Window);
+
+        if (glfwWindowShouldClose(m_Window->m_Window))
+            m_Running = false;
+    }
+
+    for (int i = 0; i < m_Objects.size(); ++i)
+    {
+        Rendering::RenderingCommand::Cleanup(m_VAO[i], m_VBO[i], m_ShaderProgram[i]);
+    }
 }
 
 void Application::InitializeCamera()
@@ -22,7 +88,7 @@ void Application::InitializeCamera()
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    m_ActiveCamera = std::make_shared<Renderer::Camera>(cameraPos, cameraFront, cameraUp);
+    m_ActiveCamera = std::make_shared<Rendering::Camera>(cameraPos, cameraFront, cameraUp);
 
     m_Window->SetCamera(m_ActiveCamera);
 }
@@ -37,36 +103,36 @@ void Application::UpdateCamera()
     m_ActiveCamera->SetModel({0, 0, 0});
 }
 
-void Application::UpdateGrid(Renderer::Shader& gridShader)
+void Application::UpdateGrid(Rendering::Shader& gridShader)
 {
-    Renderer::RendererCommand::DisableFaceCulling();
+    Rendering::RenderingCommand::DisableFaceCulling();
 
     if (!gridShader.ID)
     {
         std::string      gridVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.vert";
         std::string      gridFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.frag";
-        Renderer::Shader loadedShader(gridVert.c_str(), gridFrag.c_str());
+        Rendering::Shader loadedShader(gridVert.c_str(), gridFrag.c_str());
         gridShader = loadedShader;
         MS_ASSERT(gridShader.ID, "grid shader could not be set");
     }
 
     gridShader.Use();
 
-    Renderer::RendererCommand::EnableBlending();
-    Renderer::RendererCommand::DisableDepthMask();
+    Rendering::RenderingCommand::EnableBlending();
+    Rendering::RenderingCommand::DisableDepthMask();
 
-    Renderer::RendererCommand::BindVertexArray(m_VAO[0]);
-    Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "model", m_ActiveCamera->GetModel());
-    Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "view", m_ActiveCamera->GetViewMatrix());
-    Renderer::RendererCommand::SetUniformMat4(gridShader.ID, "projection", m_ActiveCamera->GetProjectionMatrix());
+    Rendering::RenderingCommand::BindVertexArray(m_VAO[0]);
+    Rendering::RenderingCommand::SetUniformMat4(gridShader.ID, "model", m_ActiveCamera->GetModel());
+    Rendering::RenderingCommand::SetUniformMat4(gridShader.ID, "view", m_ActiveCamera->GetViewMatrix());
+    Rendering::RenderingCommand::SetUniformMat4(gridShader.ID, "projection", m_ActiveCamera->GetProjectionMatrix());
 
-    Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles,
-                                                0,
-                                                Tools::BaseShapes::gridVerticesSize / 3 * sizeof(float));
+    Rendering::RenderingCommand::SubmitDrawArrays(Rendering::RenderingAPI::DrawMode::Triangles,
+                                                  0,
+                                                  Tools::BaseShapes::gridVerticesSize / 3 * sizeof(float));
 
-    Renderer::RendererCommand::DisableBlending();
-    Renderer::RendererCommand::EnableDepthMask();
-    Renderer::RendererCommand::EnableFaceCulling();
+    Rendering::RenderingCommand::DisableBlending();
+    Rendering::RenderingCommand::EnableDepthMask();
+    Rendering::RenderingCommand::EnableFaceCulling();
 }
 
 void Application::UpdateCustomBaseShapes()
@@ -75,12 +141,12 @@ void Application::UpdateCustomBaseShapes()
     {
         // Model
         m_Objects[i].shader.Use();
-        Renderer::RendererCommand::BindVertexArray(m_VAO[i + 1]);
-        Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", m_ActiveCamera->GetModel());
+        Rendering::RenderingCommand::BindVertexArray(m_VAO[i + 1]);
+        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", m_ActiveCamera->GetModel());
 
-        Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
-                                                  "model",
-                                                  glm::translate(m_ActiveCamera->GetModel(), m_Objects[i].position));
+        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID,
+                                                    "model",
+                                                    glm::translate(m_ActiveCamera->GetModel(), m_Objects[i].position));
 
         glm::mat4 modelTransformMatrix
             = glm::translate(glm::mat4(1.0f), m_Objects[i].position)
@@ -89,91 +155,35 @@ void Application::UpdateCustomBaseShapes()
               * glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.x), glm::vec3(1.0f, 0.0f, 0.0f))
               * glm::scale(glm::mat4(1.0f), m_Objects[i].scale);
 
-        Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", modelTransformMatrix);
+        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", modelTransformMatrix);
 
-        Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", m_ActiveCamera->GetViewMatrix());
-        Renderer::RendererCommand::SetUniformMat4(m_Objects[i].shader.ID,
-                                                  "projection",
-                                                  m_ActiveCamera->GetProjectionMatrix());
+        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", m_ActiveCamera->GetViewMatrix());
+        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID,
+                                                    "projection",
+                                                    m_ActiveCamera->GetProjectionMatrix());
 
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "objectColor", {1.0f, 0.0f, 1.0f});
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "objectColor", {1.0f, 0.0f, 1.0f});
 
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.diffuse", {0.6f, 0.6f, 0.6f});
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
-        Renderer::RendererCommand::SetUniformFloat(m_Objects[i].shader.ID, "material.shininess", 64.0f);
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.diffuse", {0.6f, 0.6f, 0.6f});
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
+        Rendering::RenderingCommand::SetUniformFloat(m_Objects[i].shader.ID, "material.shininess", 64.0f);
 
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "viewPos", m_ActiveCamera->GetPosition());
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "viewPos", m_ActiveCamera->GetPosition());
 
         // Directional Light
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.direction", m_TimeOfDay);
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.ambient", {0.3f, 0.3f, 0.3f});
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
-        Renderer::RendererCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
-        Renderer::RendererCommand::SetUniformBool(m_Objects[i].shader.ID, "dirLight.isActive", m_SunLight);
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.direction", m_TimeOfDay);
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.ambient", {0.3f, 0.3f, 0.3f});
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
+        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
+        Rendering::RenderingCommand::SetUniformBool(m_Objects[i].shader.ID, "dirLight.isActive", m_SunLight);
 
-        Renderer::RendererCommand::SubmitDrawArrays(Renderer::RendererAPI::DrawMode::Triangles, 0, m_Objects[i].size);
+        Rendering::RenderingCommand::SubmitDrawArrays(Rendering::RenderingAPI::DrawMode::Triangles,
+                                                      0,
+                                                      m_Objects[i].size);
     }
 }
 
-void Application::Run()
-{
-    m_Running = true;
-    m_Window  = std::shared_ptr<Window>(Window::CreateWindow());
-
-    InitializeFramebuffer();
-    InitializeCamera();
-    InitializeDefaultScene();
-    InitializeImGui();
-
-    std::string      framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
-    std::string      framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
-    Renderer::Shader framebShader(framebVert.c_str(), framebFrag.c_str());
-    m_FBShaderID   = framebShader.ID;
-    unsigned empty = 0;
-
-    Time&            time = Time::GetInstance();
-    Renderer::Shader gridShader;
-    Renderer::Shader meshShader;
-
-    while (m_Running)
-    {
-        float currentFrame = glfwGetTime();
-        time.Update(currentFrame);
-
-        Renderer::RendererCommand::BindFrameBuffer(m_FBO);
-        Renderer::RendererCommand::EnableDepthTesting();
-        Renderer::RendererCommand::EnableFaceCulling();
-        Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
-        Renderer::RendererCommand::Clear();
-
-        UpdateCamera();
-
-        if (m_DefaultGrid)
-        {
-            UpdateGrid(gridShader);
-        }
-
-        UpdateCustomBaseShapes();
-
-        //Renderer::RendererCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
-
-        Renderer::RendererCommand::BindFrameBuffer(empty);
-
-        RenderLayers();
-
-        Window::UpdateWindow(m_Window);
-
-        if (glfwWindowShouldClose(m_Window->m_Window))
-            m_Running = false;
-    }
-
-    for (int i = 0; i < m_Objects.size(); ++i)
-    {
-        Renderer::RendererCommand::Cleanup(m_VAO[i], m_VBO[i], m_ShaderProgram[i]);
-    }
-}
-
-void Application::RenderLayers()
+void Application::UpdateUILayers()
 {
     for (auto layer : m_LayerStack)
     {
@@ -215,11 +225,11 @@ void Application::InitializeImGui()
     PushLayer(entityLayer);
 
     transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
-                                      [this, entityLayer](Renderer::Scene::SceneObject& object)
+                                      [this, entityLayer](Rendering::SceneObject& object)
                                       {
                                           auto it = std::find_if(m_Objects.begin(),
                                                                  m_Objects.end(),
-                                                                 [&object](Renderer::Scene::SceneObject& obj)
+                                                                 [&object](Rendering::SceneObject& obj)
                                                                  { return obj.name == object.name; });
 
                                           if (it != m_Objects.end())
@@ -232,11 +242,11 @@ void Application::InitializeImGui()
                                       });
 
     transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::TransformGroup,
-                                         [this, entityLayer](Renderer::Scene::SceneObject& object)
+                                         [this, entityLayer](Rendering::SceneObject& object)
                                          {
                                              auto it = std::find_if(m_Objects.begin(),
                                                                     m_Objects.end(),
-                                                                    [&object](Renderer::Scene::SceneObject& obj)
+                                                                    [&object](Rendering::SceneObject& obj)
                                                                     { return obj.name == object.name; });
 
                                              if (it != m_Objects.end())
@@ -263,24 +273,25 @@ void Application::InitializeImGui()
                                       m_Window->m_WindowColor.a = color.w;
                                   });
 
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe,
-                                  [this]()
-                                  {
-                                      if (m_Window->m_PolygonMode == Renderer::RendererAPI::PolygonDataType::PolygonLine)
-                                      {
-                                          Renderer::RendererCommand::SetPolygonMode(
-                                              Renderer::RendererAPI::PolygonDataType::PolygonFill);
+    controlsLayer
+        ->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe,
+                         [this]()
+                         {
+                             if (m_Window->m_PolygonMode == Rendering::RenderingAPI::PolygonDataType::PolygonLine)
+                             {
+                                 Rendering::RenderingCommand::SetPolygonMode(
+                                     Rendering::RenderingAPI::PolygonDataType::PolygonFill);
 
-                                          m_Window->m_PolygonMode = Renderer::RendererAPI::PolygonDataType::PolygonFill;
-                                      }
-                                      else
-                                      {
-                                          Renderer::RendererCommand::SetPolygonMode(
-                                              Renderer::RendererAPI::PolygonDataType::PolygonLine);
+                                 m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonFill;
+                             }
+                             else
+                             {
+                                 Rendering::RenderingCommand::SetPolygonMode(
+                                     Rendering::RenderingAPI::PolygonDataType::PolygonLine);
 
-                                          m_Window->m_PolygonMode = Renderer::RendererAPI::PolygonDataType::PolygonLine;
-                                      }
-                                  });
+                                 m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonLine;
+                             }
+                         });
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyCameraSens,
                                   [this, controlsLayer]()
@@ -312,9 +323,7 @@ void Application::InitializeImGui()
                                   });
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
-                                  [this, controlsLayer, entityLayer]()
-                                  {
-                                      ToggleSunlight();
+                                  [this, controlsLayer, entityLayer]() { //ToggleSunlight();
                                   });
 
     controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay,
@@ -359,64 +368,64 @@ void Application::InitializeFramebuffer()
 {
     int width, height;
     glfwGetWindowSize(m_Window->m_Window, &width, &height);
-    Renderer::RendererCommand::InitFrameBuffer(width,
-                                               height,
-                                               m_FBOTextureMap,
-                                               m_FBODepthTexture,
-                                               m_FBO,
-                                               m_ScreenQuadVAO,
-                                               m_ScreenQuadVBO);
+    Rendering::RenderingCommand::InitFrameBuffer(width,
+                                                 height,
+                                                 m_FBOTextureMap,
+                                                 m_FBODepthTexture,
+                                                 m_FBO,
+                                                 m_ScreenQuadVAO,
+                                                 m_ScreenQuadVBO);
 }
-
+/*
 void Application::InitializeDefaultScene()
 {
     m_VAO.push_back(0);
     m_VBO.push_back(0);
 
-    Renderer::RendererCommand::InitVertexArray(m_VAO.back());
-    Renderer::RendererCommand::InitVertexBuffer(m_VBO.back(),
+    Rendering::RenderingCommand::InitVertexArray(m_VAO.back());
+    Rendering::RenderingCommand::InitVertexBuffer(m_VBO.back(),
                                                 Tools::BaseShapes::gridVertices,
                                                 Tools::BaseShapes::gridVerticesSize);
-    Renderer::RendererCommand::InitVertexAttributes(0,
+    Rendering::RenderingCommand::InitVertexAttributes(0,
                                                     3,
-                                                    Renderer::RendererAPI::NumericalDataType::Float,
-                                                    Renderer::RendererAPI::BooleanDataType::False,
+                                                    Rendering::RenderingAPI::NumericalDataType::Float,
+                                                    Rendering::RenderingAPI::BooleanDataType::False,
                                                     3 * sizeof(float),
                                                     0);
-}
+}*/
 
 void Application::AddCube()
 {
     m_VAO.push_back(0);
     m_VBO.push_back(0);
 
-    Renderer::RendererCommand::InitVertexArray(m_VAO.back());
-    Renderer::RendererCommand::InitVertexBuffer(m_VBO.back(),
-                                                Tools::BaseShapes::cubeVertices,
-                                                Tools::BaseShapes::cubeVerticesSize);
+    Rendering::RenderingCommand::InitVertexArray(m_VAO.back());
+    Rendering::RenderingCommand::InitVertexBuffer(m_VBO.back(),
+                                                  Tools::BaseShapes::cubeVertices,
+                                                  Tools::BaseShapes::cubeVerticesSize);
 
-    Renderer::RendererCommand::InitVertexAttributes(0,
-                                                    3,
-                                                    Renderer::RendererAPI::NumericalDataType::Float,
-                                                    Renderer::RendererAPI::BooleanDataType::False,
-                                                    6 * sizeof(float),
-                                                    0);
+    Rendering::RenderingCommand::InitVertexAttributes(0,
+                                                      3,
+                                                      Rendering::RenderingAPI::NumericalDataType::Float,
+                                                      Rendering::RenderingAPI::BooleanDataType::False,
+                                                      6 * sizeof(float),
+                                                      0);
 
-    Renderer::RendererCommand::InitVertexAttributes(1,
-                                                    3,
-                                                    Renderer::RendererAPI::NumericalDataType::Float,
-                                                    Renderer::RendererAPI::BooleanDataType::False,
-                                                    6 * sizeof(float),
-                                                    3 * sizeof(float));
+    Rendering::RenderingCommand::InitVertexAttributes(1,
+                                                      3,
+                                                      Rendering::RenderingAPI::NumericalDataType::Float,
+                                                      Rendering::RenderingAPI::BooleanDataType::False,
+                                                      6 * sizeof(float),
+                                                      3 * sizeof(float));
 
     std::string      cubeVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.vert";
     std::string      cubeFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.frag";
-    Renderer::Shader cubeShader(cubeVert.c_str(), cubeFrag.c_str());
+    Rendering::Shader cubeShader(cubeVert.c_str(), cubeFrag.c_str());
 
     std::stringstream ss;
     ss << "default_cube_" << m_Objects.size();
 
-    Renderer::Scene::SceneObject cube
+    Rendering::SceneObject cube
         = {true, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
 
     m_Objects.push_back(cube);

@@ -87,7 +87,7 @@ bool Window::InitializeWindow(const WindowProperties &windowProperties)
     SetupWindowCallbacks(m_Window);
     SetupInputCallbacks(m_Window);
 
-    m_GraphicsContext = Renderer::GraphicsContextRouter::GetContext(m_Window);
+    m_GraphicsContext = Rendering::GraphicsContextRouter::GetContext(m_Window);
 
     if (!m_GraphicsContext)
     {
@@ -400,7 +400,7 @@ void Window::SetupInitEvents()
                                      int  width       = resizeEvent->GetWidth();
                                      int  height      = resizeEvent->GetHeight();
 
-                                     Renderer::RendererCommand::SetViewport(width, height);
+                                     Rendering::RenderingCommand::SetViewport(width, height);
                                      MS_DEBUG("window resize event: {0}x{1}", width, height);
                                  });
 

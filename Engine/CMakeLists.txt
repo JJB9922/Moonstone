@@ -15,7 +15,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Prepare source files
 set(GLOBALS_DIR ${CMAKE_SOURCE_DIR}/src/)
 set(SRC_CORE_DIR ${CMAKE_SOURCE_DIR}/src/Core/)
-set(SRC_RENDERER_DIR ${CMAKE_SOURCE_DIR}/src/Renderer/)
+set(SRC_RENDERING_DIR ${CMAKE_SOURCE_DIR}/src/Rendering/)
 set(SRC_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/Tools/)
 set(SHADER_DIR ${CMAKE_SOURCE_DIR}/src/Shaders/)
 
@@ -36,14 +36,14 @@ file(GLOB_RECURSE SRC_CORE_FILES
     "${SRC_TOOLS_DIR}/*/*.cpp"
     "${SRC_TOOLS_DIR}/*/Include/*h"
 
-    "${SRC_RENDERER_DIR}/*.cpp"
-    "${SRC_RENDERER_DIR}/Include/*h"
+    "${SRC_RENDERING_DIR}/*.cpp"
+    "${SRC_RENDERING_DIR}/Include/*h"
 
-    "${SRC_RENDERER_DIR}/*/*.cpp"
-    "${SRC_RENDERER_DIR}/*/Include/*h"
+    "${SRC_RENDERING_DIR}/*/*.cpp"
+    "${SRC_RENDERING_DIR}/*/Include/*h"
 
-    "${SRC_RENDERER_DIR}/Platform/*/*.cpp"
-    "${SRC_RENDERER_DIR}/Platform/*/Include/*h"
+    "${SRC_RENDERING_DIR}/Platform/*/*.cpp"
+    "${SRC_RENDERING_DIR}/Platform/*/Include/*h"
 
     "${SHADER_DIR}/*.cpp"
     "${SHADER_DIR}/Include/*.h"
