@@ -15,22 +15,37 @@ Application::Application()
         MS_ASSERT(!s_ApplicationInstance, "application instance already exists");
     }
 
+    m_Window = std::shared_ptr<Window>(Window::CreateWindow());
+}
+
+void Application::InitializeEditor()
+{
+    // Scenes
     Rendering::SceneManager sceneManager;
     m_SceneManager = sceneManager;
     m_CurrentScene = m_SceneManager.LoadDefaultScene();
-}
 
-void Application::InitializeDefaultScene() { Rendering::SceneManager sceneManager; }
+    // UI
+    EditorUI editorUI;
+    editorUI.SetWindow(m_Window);
+    editorUI.Init();
+}
 
 void Application::Run()
 {
     m_Running = true;
-    m_Window  = std::shared_ptr<Window>(Window::CreateWindow());
+
+    InitializeEditor();
+
+    m_ImGuiLayer = new Tools::ImGuiLayer;
+    m_ImGuiLayer->SetWindow(m_Window->m_Window);
+    PushOverlay(m_ImGuiLayer);
+
+    auto menuLayer = new MenuLayer;
+    PushLayer(menuLayer);
 
     //  InitializeFramebuffer();
     //  InitializeCamera();
-    // InitializeDefaultScene();
-    //  InitializeImGui();
 
     // std::string      framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
     // std::string      framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
@@ -48,11 +63,6 @@ void Application::Run()
         time.Update(currentFrame);
 
         //Rendering::RenderingCommand::BindFrameBuffer(m_FBO);
-        Rendering::RenderingCommand::EnableDepthTesting();
-        Rendering::RenderingCommand::EnableFaceCulling();
-        Rendering::RenderingCommand::ClearColor(m_Window->m_WindowColor);
-        Rendering::RenderingCommand::Clear();
-
         m_SceneManager.RenderScene(m_CurrentScene);
 
         //UpdateCamera();
@@ -68,7 +78,7 @@ void Application::Run()
 
         //  Rendering::RenderingCommand::BindFrameBuffer(empty);
 
-        //  UpdateUILayers();
+        RenderUI();
 
         Window::UpdateWindow(m_Window);
 
@@ -183,186 +193,7 @@ void Application::UpdateCustomBaseShapes()
     }
 }
 
-void Application::UpdateUILayers()
-{
-    for (auto layer : m_LayerStack)
-    {
-        layer->OnUpdate();
-    }
-
-    m_ImGuiLayer->Start();
-    for (auto layer : m_LayerStack)
-    {
-        layer->OnImGuiRender();
-    }
-    m_ImGuiLayer->End();
-}
-
-void Application::InitializeImGui()
-{
-    m_ImGuiLayer = new Tools::ImGuiLayer;
-    m_ImGuiLayer->SetWindow(m_Window->m_Window);
-    PushOverlay(m_ImGuiLayer);
-
-    auto sceneLayer = new SceneLayer;
-    sceneLayer->SetWindow(m_Window->m_Window);
-    sceneLayer->SetTexMap(m_FBOTextureMap);
-    sceneLayer->SetFBParams(m_FBShaderID, m_ScreenQuadVAO, m_FBOTextureMap);
-    PushLayer(sceneLayer);
-
-    auto menuLayer = new MenuLayer;
-    PushLayer(menuLayer);
-
-    auto debugLayer = new DebugLayer;
-    PushLayer(debugLayer);
-
-    auto transformLayer = new TransformLayer();
-    auto entityLayer    = new EntityLayer;
-    entityLayer->SetWindow(m_Window->m_Window);
-    entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
-                                [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
-    entityLayer->SetTransformLayer(transformLayer);
-    PushLayer(entityLayer);
-
-    transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
-                                      [this, entityLayer](Rendering::SceneObject& object)
-                                      {
-                                          auto it = std::find_if(m_Objects.begin(),
-                                                                 m_Objects.end(),
-                                                                 [&object](Rendering::SceneObject& obj)
-                                                                 { return obj.name == object.name; });
-
-                                          if (it != m_Objects.end())
-                                          {
-                                              m_Objects.erase(it);
-                                          }
-
-                                          entityLayer->ClearEntitySelection();
-                                          entityLayer->RemoveObject(object);
-                                      });
-
-    transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::TransformGroup,
-                                         [this, entityLayer](Rendering::SceneObject& object)
-                                         {
-                                             auto it = std::find_if(m_Objects.begin(),
-                                                                    m_Objects.end(),
-                                                                    [&object](Rendering::SceneObject& obj)
-                                                                    { return obj.name == object.name; });
-
-                                             if (it != m_Objects.end())
-                                             {
-                                                 it->position = object.position;
-                                                 it->rotation = object.rotation;
-                                                 it->scale    = object.scale;
-                                             }
-
-                                             entityLayer->SetObjectVector(m_Objects);
-                                         });
-    PushLayer(transformLayer);
-
-    auto controlsLayer = new ControlsLayer;
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
-
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor,
-                                  [this, controlsLayer]()
-                                  {
-                                      auto color                = controlsLayer->GetBGColor();
-                                      m_Window->m_WindowColor.r = color.x;
-                                      m_Window->m_WindowColor.g = color.y;
-                                      m_Window->m_WindowColor.b = color.z;
-                                      m_Window->m_WindowColor.a = color.w;
-                                  });
-
-    controlsLayer
-        ->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe,
-                         [this]()
-                         {
-                             if (m_Window->m_PolygonMode == Rendering::RenderingAPI::PolygonDataType::PolygonLine)
-                             {
-                                 Rendering::RenderingCommand::SetPolygonMode(
-                                     Rendering::RenderingAPI::PolygonDataType::PolygonFill);
-
-                                 m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonFill;
-                             }
-                             else
-                             {
-                                 Rendering::RenderingCommand::SetPolygonMode(
-                                     Rendering::RenderingAPI::PolygonDataType::PolygonLine);
-
-                                 m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonLine;
-                             }
-                         });
-
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyCameraSens,
-                                  [this, controlsLayer]()
-                                  { m_Window->SetCameraSens(controlsLayer->GetCamSensitivity()); });
-
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleGrid,
-                                  [this]()
-                                  {
-                                      {
-                                          m_DefaultGrid = !m_DefaultGrid;
-                                      }
-                                  });
-
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddObject,
-                                  [this, controlsLayer, entityLayer, transformLayer]()
-                                  {
-                                      ControlsLayer::SceneObject obj = controlsLayer->GetAddObject();
-
-                                      switch (obj)
-                                      {
-                                          case ControlsLayer::SceneObject::Cube:
-                                              AddCube();
-                                              entityLayer->AddObject(m_Objects.back());
-                                              entityLayer->ClearEntitySelection();
-                                              entityLayer->SetSelectedEntity(m_Objects.size() - 1);
-                                              transformLayer->SetSelectedObject(m_Objects.back());
-                                              break;
-                                      }
-                                  });
-
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
-                                  [this, controlsLayer, entityLayer]() { //ToggleSunlight();
-                                  });
-
-    controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay,
-                                     [this, controlsLayer](float timeOfDayFloat)
-                                     {
-                                         float timeOfDay = timeOfDayFloat;
-
-                                         float angle = timeOfDay * 2.0f * 3.14159f;
-
-                                         float y = cos(angle);
-                                         float x = sin(angle);
-                                         float z = 0.0f;
-
-                                         glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
-
-                                         m_TimeOfDay = lightDirection;
-                                     });
-
-    m_Layers.push_back(*controlsLayer);
-    PushLayer(controlsLayer);
-}
-
 std::unique_ptr<Application> CreateApplicationInstance() { return std::make_unique<Application>(Application()); }
-
-void Application::PushLayer(Layer* layer)
-{
-    m_LayerStack.PushLayer(layer);
-    layer->OnAttach();
-}
-
-void Application::PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
-
-void Application::PushOverlay(Layer* layer)
-{
-    m_LayerStack.PushOverlay(layer);
-    layer->OnAttach();
-}
-
-void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
 
 void Application::InitializeFramebuffer()
 {
@@ -427,9 +258,39 @@ void Application::AddCube()
 
     Rendering::SceneObject cube
         = {true, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
-
     m_Objects.push_back(cube);
 }
+
+void Application::RenderUI()
+{
+    for (auto layer : m_LayerStack)
+    {
+        layer->OnUpdate();
+    }
+
+    m_ImGuiLayer->Start();
+    for (auto layer : m_LayerStack)
+    {
+        layer->OnImGuiRender();
+    }
+    m_ImGuiLayer->End();
+}
+
+void Application::PushOverlay(Layer* layer)
+{
+    m_LayerStack.PushOverlay(layer);
+    layer->OnAttach();
+}
+
+void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
+
+void Application::PushLayer(Layer* layer)
+{
+    m_LayerStack.PushLayer(layer);
+    layer->OnAttach();
+}
+
+void Application::PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
 
 } // namespace Core
 } // namespace Moonstone

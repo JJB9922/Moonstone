@@ -2,6 +2,7 @@
 #define APPLICATION_H
 
 #include "Core/Include/Core.h"
+#include "Core/Include/EditorUI.h"
 #include "Core/Include/Logger.h"
 #include "Core/Include/Window.h"
 #include "Rendering/Include/Camera.h"
@@ -30,17 +31,16 @@ class Application
         void Run();
 
         inline static std::unique_ptr<Application> &GetApplicationInstance() { return s_ApplicationInstance; }
+        // FIX inline void ToggleSunlight() { m_SunLight = !m_SunLight; }
+
+        void InitializeEditor();
 
         void PushLayer(Layer *layer);
         void PopLayer(Layer *layer);
         void PushOverlay(Layer *overlay);
         void PopOverlay(Layer *overlay);
 
-        // FIX inline void ToggleSunlight() { m_SunLight = !m_SunLight; }
-
     private:
-        void UpdateUILayers();
-
         void InitializeFramebuffer();
         void InitializeCamera();
         void UpdateCamera();
@@ -49,8 +49,7 @@ class Application
 
         void UpdateCustomBaseShapes();
 
-        void InitializeImGui();
-        void InitializeDefaultScene();
+        void RenderUI();
 
         void AddCube();
 
@@ -60,15 +59,17 @@ class Application
         std::shared_ptr<Rendering::Scene> m_CurrentScene;
         Rendering::SceneManager           m_SceneManager;
 
+        Tools::ImGuiLayer *m_ImGuiLayer;
+        EditorUI           m_EditorUI;
+        LayerStack         m_LayerStack;
+        std::vector<Layer> m_Layers;
+
         bool m_Running;
 
         //Rendering::Camera m_Camera;
-        LayerStack m_LayerStack;
 
         std::shared_ptr<Rendering::Camera>        m_ActiveCamera;
         std::shared_ptr<Window>  m_Window;
-        Tools::ImGuiLayer                        *m_ImGuiLayer;
-        std::vector<Layer>                        m_Layers;
         bool                     m_DefaultGrid = true;
         std::vector<Rendering::SceneObject>       m_Objects;
         bool                     m_SunLight  = false;

@@ -8,7 +8,13 @@ namespace Rendering
 
 Renderer::Renderer() {}
 
-void Renderer::RenderScene(std::shared_ptr<Scene> scene) { MS_INFO("soemthing idk {0}", scene->sceneID); }
+void Renderer::RenderScene(std::shared_ptr<Scene> scene)
+{
+    Rendering::RenderingCommand::EnableDepthTesting();
+    Rendering::RenderingCommand::EnableFaceCulling();
+    Rendering::RenderingCommand::ClearColor(scene->background);
+    Rendering::RenderingCommand::Clear();
+}
 
 } // namespace Rendering
 

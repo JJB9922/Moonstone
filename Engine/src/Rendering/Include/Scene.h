@@ -43,6 +43,7 @@ struct Scene
         std::vector<SceneObject> objects  = {};
         Lighting                 lighting = {};
 
+        glm::vec4 background    = {0.15f, 0.15f, 0.15f, 1.0f};
         bool isGridEnabled = true;
 
         Scene()  = default;
