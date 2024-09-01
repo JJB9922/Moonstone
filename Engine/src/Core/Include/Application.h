@@ -52,23 +52,9 @@ class Application
         void UpdateCustomBaseShapes();
 
         void InitializeImGui();
-        void InitializeDefaultScene(std::vector<unsigned> &shaderProgram,
-                                    std::vector<unsigned> &VBO,
-                                    std::vector<unsigned> &VAO,
-                                    std::vector<unsigned> &EBO,
-                                    std::vector<unsigned> &textures);
+        void InitializeDefaultScene();
 
-        void AddCube(std::vector<unsigned> &shaderProgram,
-                     std::vector<unsigned> &VBO,
-                     std::vector<unsigned> &VAO,
-                     std::vector<unsigned> &EBO,
-                     std::vector<unsigned> &textures);
-
-        void AddPyramid(std::vector<unsigned> &shaderProgram,
-                        std::vector<unsigned> &VBO,
-                        std::vector<unsigned> &VAO,
-                        std::vector<unsigned> &EBO,
-                        std::vector<unsigned> &textures);
+        void AddCube();
 
     private:
         bool                                      m_Running;

@@ -13,6 +13,8 @@ class RendererCommand
 {
     public:
         inline static void EnableDepthTesting() { s_RendererAPI->EnableDepthTesting(); }
+        inline static void EnableFaceCulling() { s_RendererAPI->EnableFaceCulling(); }
+        inline static void DisableFaceCulling() { s_RendererAPI->DisableFaceCulling(); }
         inline static void ClearColor(const glm::vec4 &color) { s_RendererAPI->ClearColor(color); }
         inline static void Clear() { s_RendererAPI->Clear(); }
 

@@ -15,6 +15,77 @@ namespace Moonstone
 namespace Core
 {
 
+class MenuLayer : public Layer
+{
+    public:
+        MenuLayer()
+            : Layer("Menu")
+        {
+        }
+
+        void OnUpdate() override {}
+
+        virtual void OnImGuiRender() override
+        {
+            if (ImGui::BeginMainMenuBar())
+            {
+                if (ImGui::BeginMenu("File"))
+                {
+                    if (ImGui::MenuItem("New", "NS")) {}
+                    if (ImGui::MenuItem("Open", "NS")) {}
+                    if (ImGui::MenuItem("Save", "NS")) {}
+                    if (ImGui::MenuItem("Save As...", "NS")) {}
+                    if (ImGui::BeginMenu("Recent Projects"))
+                    {
+                        ImGui::MenuItem("placeholder");
+                        ImGui::EndMenu();
+                    }
+                    ImGui::EndMenu();
+                }
+
+                if (ImGui::BeginMenu("Edit"))
+                {
+                    if (ImGui::MenuItem("Undo", "Ctrl+Z")) {}
+                    if (ImGui::MenuItem("Redo", "Ctrl+Y")) {}
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Cut", "Ctrl+X")) {}
+                    if (ImGui::MenuItem("Copy", "Ctrl+C")) {}
+                    if (ImGui::MenuItem("Paste", "Ctrl+V")) {}
+                    ImGui::EndMenu();
+                }
+
+                if (ImGui::BeginMenu("Tools"))
+                {
+                    if (ImGui::MenuItem("Transform", "NS")) {}
+                    if (ImGui::MenuItem("Rotate", "NS")) {}
+                    if (ImGui::MenuItem("Scale", "NS")) {}
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Animation Editor", "NS")) {}
+                    if (ImGui::MenuItem("Physics Editor", "NS")) {}
+                    if (ImGui::MenuItem("Lighting Editor", "NS")) {}
+                    ImGui::EndMenu();
+                }
+
+                if (ImGui::BeginMenu("Play"))
+                {
+                    if (ImGui::MenuItem("Play", "NS")) {}
+                    if (ImGui::MenuItem("Pause", "NS")) {}
+                    if (ImGui::MenuItem("Stop", "NS")) {}
+                    ImGui::EndMenu();
+                }
+
+                if (ImGui::BeginMenu("Help"))
+                {
+                    if (ImGui::MenuItem("Documentation", "NS")) {}
+                    if (ImGui::MenuItem("About", "NS")) {}
+                    ImGui::EndMenu();
+                }
+
+                ImGui::EndMainMenuBar();
+            }
+        }
+};
+
 class TransformLayer : public Layer
 {
     public:
@@ -90,7 +161,7 @@ class TransformLayer : public Layer
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({300, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowPos({300, 20}, ImGuiCond_FirstUseEver);
             ImGui::SetNextWindowSize({300, 150}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Transform");
@@ -516,7 +587,7 @@ class DebugLayer : public Layer
             style.FrameRounding  = 2;
             style.WindowRounding = 2;
 
-            ImGui::SetNextWindowPos({0, 0}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowPos({0, 20}, ImGuiCond_FirstUseEver);
             ImGui::SetNextWindowSize({300, 100}, ImGuiCond_FirstUseEver);
 
             ImGui::Begin("Debug");

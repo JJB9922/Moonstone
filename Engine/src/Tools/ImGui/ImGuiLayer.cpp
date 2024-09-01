@@ -33,11 +33,12 @@ void ImGuiLayer::OnAttach()
     ImGuiIO& io = ImGui::GetIO();
 
     // Todo: Delete
-    io.IniFilename = nullptr;
+    //io.IniFilename = nullptr;
 
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
     //ImGui::StyleColorsClassic();
     ImGui::StyleColorsDark();
@@ -61,11 +62,13 @@ void ImGuiLayer::Start()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+    ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 }
 
 void ImGuiLayer::End()
 {
     ImGui::Render();
+    ImGui::UpdatePlatformWindows();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 

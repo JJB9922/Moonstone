@@ -13,6 +13,8 @@ namespace Renderer
 {
 
 void OpenGLRendererAPI::EnableDepthTesting() { glEnable(GL_DEPTH_TEST); }
+void OpenGLRendererAPI::EnableFaceCulling() { glEnable(GL_CULL_FACE); }
+void OpenGLRendererAPI::DisableFaceCulling() { glDisable(GL_CULL_FACE); }
 
 void OpenGLRendererAPI::ClearColor(const glm::vec4 &color) { glClearColor(color.r, color.g, color.b, color.a); }
 
