@@ -42,9 +42,14 @@ float BaseShapes::cubeVertices[] = {
     1.0f,  -1.0f, 1.0f,  0.0f,  -1.0f, 0.0f,  1.0f,  -1.0f, 1.0f,  0.0f,  -1.0f, 0.0f,
     -1.0f, -1.0f, 1.0f,  0.0f,  -1.0f, 0.0f,  -1.0f, -1.0f, -1.0f, 0.0f,  -1.0f, 0.0f,
 };
-;
 
 const size_t BaseShapes::cubeVerticesSize = sizeof(cubeVertices);
+
+float BaseShapes::screenQuadVertices[] = {-1.0f, 1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f,
+
+                                          -1.0f, 1.0f, 0.0f, 1.0f, 1.0f,  -1.0f, 1.0f, 0.0f, 1.0f, 1.0f,  1.0f, 1.0f};
+
+const size_t BaseShapes::screenQuadVerticesSize = sizeof(screenQuadVertices);
 
 // Need to set up indices for this one 2 work
 float BaseShapes::pyramidVertices[] = {-0.5f, 0.0f, -0.5f, 0.0f, -1.0f, 0.0f,

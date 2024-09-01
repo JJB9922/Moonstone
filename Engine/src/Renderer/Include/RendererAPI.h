@@ -154,6 +154,17 @@ class RendererAPI
         virtual void EnableDepthMask()  = 0;
         virtual void DisableDepthMask() = 0;
 
+        virtual void BindFrameBuffer(unsigned &FBO)                                              = 0;
+        virtual void DrawFrameBuffer(unsigned &shaderID, unsigned &quadVAO, unsigned &FBOTexMap) = 0;
+        virtual void InitFrameBuffer(int      &width,
+                                     int      &height,
+                                     unsigned &FBOTextureMap,
+                                     unsigned &FBODepthTexture,
+                                     unsigned &FBO,
+                                     unsigned &ScreenQuadVAO,
+                                     unsigned &ScreenQuadVBO)
+            = 0;
+
     private:
         static API s_API;
 };

@@ -231,6 +231,81 @@ void OpenGLRendererAPI::EnableDepthMask() { glDepthMask(GL_TRUE); }
 
 void OpenGLRendererAPI::DisableDepthMask() { glDepthMask(GL_FALSE); }
 
+void OpenGLRendererAPI::BindFrameBuffer(unsigned &FBO) { glBindFramebuffer(GL_FRAMEBUFFER, FBO); }
+
+void OpenGLRendererAPI::DrawFrameBuffer(unsigned &shaderID, unsigned &quadVAO, unsigned &FBOTexMap)
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glDisable(GL_DEPTH_TEST);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    UseProgram(shaderID);
+    glBindVertexArray(quadVAO);
+
+    glBindTexture(GL_TEXTURE_2D, FBOTexMap);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+void OpenGLRendererAPI::InitFrameBuffer(int      &width,
+                                        int      &height,
+                                        unsigned &FBOTextureMap,
+                                        unsigned &FBODepthTexture,
+                                        unsigned &FBO,
+                                        unsigned &ScreenQuadVAO,
+                                        unsigned &ScreenQuadVBO)
+{
+    glViewport(0, 0, width, height);
+
+    glGenTextures(1, &FBOTextureMap);
+    glBindTexture(GL_TEXTURE_2D, FBOTextureMap);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glGenTextures(1, &FBODepthTexture);
+    glBindTexture(GL_TEXTURE_2D, FBODepthTexture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glGenFramebuffers(1, &FBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, (GLuint) FBO);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, FBOTextureMap, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, FBODepthTexture, 0);
+
+    // End
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+        MS_DEBUG("framebuffer initialised successfully");
+    else
+        MS_ERROR("framebuffer did not initialise successfully");
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glGenVertexArrays(1, &ScreenQuadVAO);
+    glGenBuffers(1, &ScreenQuadVBO);
+    glBindVertexArray(ScreenQuadVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, ScreenQuadVBO);
+    glBufferData(GL_ARRAY_BUFFER,
+                 Tools::BaseShapes::screenQuadVerticesSize,
+                 &Tools::BaseShapes::screenQuadVertices,
+                 GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) (2 * sizeof(float)));
+}
+
 } // namespace Renderer
 
 } // namespace Moonstone

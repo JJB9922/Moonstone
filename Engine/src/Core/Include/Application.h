@@ -43,6 +43,8 @@ class Application
     private:
         void RenderLayers();
 
+        void InitializeFramebuffer();
+
         void InitializeCamera();
         void UpdateCamera();
 
@@ -70,6 +72,7 @@ class Application
         glm::vec3                m_TimeOfDay = {-1.0f, -0.5f, 0};
 
         std::vector<unsigned> m_ShaderProgram, m_VBO, m_VAO, m_EBO, m_Texture;
+        unsigned              m_FBO, m_FBOTextureMap, m_FBODepthTexture, m_ScreenQuadVAO, m_ScreenQuadVBO;
 };
 
 std::unique_ptr<Application> CreateApplicationInstance();

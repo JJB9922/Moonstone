@@ -2,6 +2,7 @@
 #define OPENGLRENDERERAPI_H
 
 #include "Renderer/Include/RendererAPI.h"
+#include "Tools/Include/BaseShapes.h"
 #include <glad/glad.h>
 
 namespace Moonstone
@@ -71,6 +72,16 @@ class OpenGLRendererAPI : public RendererAPI
         virtual void DisableBlending() override;
         virtual void EnableDepthMask() override;
         virtual void DisableDepthMask() override;
+
+        virtual void BindFrameBuffer(unsigned& FBO) override;
+        virtual void DrawFrameBuffer(unsigned& shaderID, unsigned& quadVAO, unsigned& FBOTexMap) override;
+        virtual void InitFrameBuffer(int&      width,
+                                     int&      height,
+                                     unsigned& FBOTextureMap,
+                                     unsigned& FBODepthTexture,
+                                     unsigned& FBO,
+                                     unsigned& ScreenQuadVAO,
+                                     unsigned& ScreenQuadVBO) override;
 
     private:
         inline static GLuint ToOpenGLShaderType(NumericalDataType type)

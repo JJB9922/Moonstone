@@ -120,9 +120,14 @@ void Application::Run()
     m_Running = true;
     m_Window  = std::shared_ptr<Window>(Window::CreateWindow());
 
+    InitializeFramebuffer();
     InitializeCamera();
     InitializeDefaultScene();
     InitializeImGui();
+    std::string framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
+
+    std::string      framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
+    Renderer::Shader framebShader(framebVert.c_str(), framebFrag.c_str());
 
     Time&            time = Time::GetInstance();
     Renderer::Shader gridShader;
@@ -134,6 +139,7 @@ void Application::Run()
         time.Update(currentFrame);
         UpdateCamera();
 
+        Renderer::RendererCommand::BindFrameBuffer(m_FBO);
         Renderer::RendererCommand::EnableDepthTesting();
         Renderer::RendererCommand::EnableFaceCulling();
         Renderer::RendererCommand::ClearColor(m_Window->m_WindowColor);
@@ -145,6 +151,8 @@ void Application::Run()
         }
 
         UpdateCustomBaseShapes();
+
+        Renderer::RendererCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
 
         RenderLayers();
 
@@ -335,6 +343,19 @@ void Application::PushOverlay(Layer* layer)
 }
 
 void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
+
+void Application::InitializeFramebuffer()
+{
+    int width, height;
+    glfwGetWindowSize(m_Window->m_Window, &width, &height);
+    Renderer::RendererCommand::InitFrameBuffer(width,
+                                               height,
+                                               m_FBOTextureMap,
+                                               m_FBODepthTexture,
+                                               m_FBO,
+                                               m_ScreenQuadVAO,
+                                               m_ScreenQuadVBO);
+}
 
 void Application::InitializeDefaultScene()
 {

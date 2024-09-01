@@ -143,6 +143,25 @@ class RendererCommand
 
         inline static void DisableDepthMask() { s_RendererAPI->DisableDepthMask(); };
 
+        inline static void BindFrameBuffer(unsigned &FBO) { s_RendererAPI->BindFrameBuffer(FBO); }
+
+        inline static void DrawFrameBuffer(unsigned &shaderID, unsigned &quadVAO, unsigned &FBOTexMap)
+        {
+            s_RendererAPI->DrawFrameBuffer(shaderID, quadVAO, FBOTexMap);
+        };
+
+        inline static void InitFrameBuffer(int      &width,
+                                           int      &height,
+                                           unsigned &FBOTextureMap,
+                                           unsigned &FBODepthTexture,
+                                           unsigned &FBO,
+                                           unsigned &ScreenQuadVAO,
+                                           unsigned &ScreenQuadVBO)
+        {
+            s_RendererAPI
+                ->InitFrameBuffer(width, height, FBOTextureMap, FBODepthTexture, FBO, ScreenQuadVAO, ScreenQuadVBO);
+        };
+
     private:
         static std::unique_ptr<RendererAPI> s_RendererAPI;
 };
