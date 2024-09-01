@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['g_845',['g',['../structMoonstone_1_1Core_1_1GLColor.html#ae41bba161b204a601b70331da0f03c05',1,'Moonstone::Core::GLColor']]],
-  ['gridvertices_846',['gridVertices',['../classMoonstone_1_1Tools_1_1BaseShapes.html#ad69d59fbb243186b21a4e0d23cdc6922',1,'Moonstone::Tools::BaseShapes']]],
-  ['gridverticessize_847',['gridVerticesSize',['../classMoonstone_1_1Tools_1_1BaseShapes.html#a162520db6fdc7886b0b9f6cc5a5637af',1,'Moonstone::Tools::BaseShapes']]]
+  ['diffuse_912',['diffuse',['../structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html#a99093677c3a47f18ed86ad50ea914735',1,'Moonstone::Rendering::Lighting::Light']]],
+  ['direction_913',['direction',['../structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html#ad20e6af3ca0aa296c9b4ac9728caf228',1,'Moonstone::Rendering::Lighting::Light']]]
 ];

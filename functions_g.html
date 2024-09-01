@@ -75,7 +75,7 @@ $(function() {
 : <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a29857f9f848bc39cb02bc77398851ac0">Moonstone::Core::ControlsLayer</a>
 </li>
 <li>GetAPI()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1RendererAPI.html#ac8d63bea2724c2c12453d30ac91d1414">Moonstone::Renderer::RendererAPI</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1RenderingAPI.html#ae9b92b2d47d78fbbb7f0cd9587652a45">Moonstone::Rendering::RenderingAPI</a>
 </li>
 <li>GetApplicationInstance()
 : <a class="el" href="classMoonstone_1_1Core_1_1Application.html#a782e87111c21be9a613de59d62b46edb">Moonstone::Core::Application</a>
@@ -90,21 +90,21 @@ $(function() {
 : <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#ae801391f068acf9f4b2493e7372f214e">Moonstone::Core::ControlsLayer</a>
 </li>
 <li>GetConnected()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a23e8678da364b4edafe1b563ecc5b2bc">Moonstone::Renderer::Camera</a>
-, <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html#a73934a969e0114f1ecaeb7256d362947">Moonstone::Renderer::CameraController</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a5b480d30a6e978bd4b5909065be504bb">Moonstone::Rendering::Camera</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1CameraController.html#a94dce0934f1b3c3deb575eecdec2df6c">Moonstone::Rendering::CameraController</a>
 </li>
 <li>GetContext()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1GraphicsContextRouter.html#a0d774c0a0e0fd1f6ae8d4c5dcb706e50">Moonstone::Renderer::GraphicsContextRouter</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1GraphicsContextRouter.html#a24afcda65653304589ba3df6b9f79c1f">Moonstone::Rendering::GraphicsContextRouter</a>
 </li>
 <li>GetDefaultGridEnabled()
-: <a class="el" href="classMoonstone_1_1Core_1_1Application.html#a4e407624a5a9eefbc873261d9deefc11">Moonstone::Core::Application</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1SceneManager.html#ac5452576b7c6728579f3a82eb60a2629">Moonstone::Rendering::SceneManager</a>
 </li>
 <li>GetDeltaTime()
 : <a class="el" href="classMoonstone_1_1Core_1_1Time.html#a068f6dee79549120fcb3581bee02d4c9">Moonstone::Core::Time</a>
 </li>
 <li>GetDirection()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a0583181415f0bbf8e6a59bca40aa88c1">Moonstone::Renderer::Camera</a>
-, <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html#a7c6730789c2f2db0023f4a4b9051cdf1">Moonstone::Renderer::CameraController</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a446b828bbce5e95e017836625da6ea3b">Moonstone::Rendering::Camera</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1CameraController.html#aa523b01bdac22fb32687a0689a02bb36">Moonstone::Rendering::CameraController</a>
 </li>
 <li>GetEventDispatcherInstance()
 : <a class="el" href="classMoonstone_1_1Core_1_1EventDispatcher.html#a3b7f7f25808b98d37c94d7f7a25bd228">Moonstone::Core::EventDispatcher</a>
@@ -124,11 +124,11 @@ $(function() {
 , <a class="el" href="classMoonstone_1_1Core_1_1WindowResizeEvent.html#ac1facc9adf59800763872716b446701c">Moonstone::Core::WindowResizeEvent</a>
 </li>
 <li>GetFov()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a17bd5759f4be895d0f49579595a8381d">Moonstone::Renderer::Camera</a>
-, <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html#ae4ede661c26d9f9bdad7b3e65536d946">Moonstone::Renderer::CameraController</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#ade14e25d089dadad44a4518ea97ce597">Moonstone::Rendering::Camera</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1CameraController.html#a25964b86db7e3cfb628743ce245d673c">Moonstone::Rendering::CameraController</a>
 </li>
 <li>GetFront()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a74530cce5151a9fba10b972d44afa4b2">Moonstone::Renderer::Camera</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#af7691ad81502d76a07892e0c5d683a6b">Moonstone::Rendering::Camera</a>
 </li>
 <li>GetHeight()
 : <a class="el" href="classMoonstone_1_1Core_1_1Window.html#a70c1866d9f378df2127f3ed8153ceedf">Moonstone::Core::Window</a>
@@ -146,41 +146,44 @@ $(function() {
 <li>GetLayerName()
 : <a class="el" href="classMoonstone_1_1Core_1_1Layer.html#a92094cb7c0a1bc163232dfd443430f64">Moonstone::Core::Layer</a>
 </li>
+<li>GetLights()
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Lighting.html#a592606da1b6f8c733408eb3744e11e3d">Moonstone::Rendering::Lighting</a>
+</li>
 <li>GetLoggerInstance()
 : <a class="el" href="classMoonstone_1_1Core_1_1Logger.html#a076c884c91447885faf4693739d21919">Moonstone::Core::Logger</a>
 </li>
 <li>GetModel()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a0ee831cadc3642434d4e3f24e102798b">Moonstone::Renderer::Camera</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#aaa15ba37a12733602d93b3886ef06ce7">Moonstone::Rendering::Camera</a>
 </li>
 <li>GetMods()
 : <a class="el" href="classMoonstone_1_1Core_1_1KeyPressEvent.html#a907089445d77b0ff9f2ee0c52feff4ef">Moonstone::Core::KeyPressEvent</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1MouseButtonPressEvent.html#a55159b2881161666e545f098a354f15a">Moonstone::Core::MouseButtonPressEvent</a>
 </li>
 <li>GetObjects()
-: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a7b0188ae764a026b5088847da5ed34f9">Moonstone::Core::EntityLayer</a>
+: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a1d210b77844e813974a7b6d6101b0a3e">Moonstone::Core::EntityLayer</a>
 </li>
 <li>GetPitch()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ade256c5e55df1c3d8f808dacdf7484eb">Moonstone::Renderer::Camera</a>
-, <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html#a8110f619ed55c5eadb9b719718a3c5d7">Moonstone::Renderer::CameraController</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a848907d269c2dbc97f49a13f35715694">Moonstone::Rendering::Camera</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1CameraController.html#a27e36efbd6cdde37337a8b1ed948641f">Moonstone::Rendering::CameraController</a>
 </li>
 <li>GetPosition()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a89af991d97b9e5afc9015940dc3c67a8">Moonstone::Renderer::Camera</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#aaec3ef46712238672ce8d7660d913e85">Moonstone::Rendering::Camera</a>
 </li>
 <li>GetProjectionMatrix()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a49f1e0a6a49e60381eec1b72d27bc39c">Moonstone::Renderer::Camera</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#af9d5567065f506f78b407eec1b63b3d5">Moonstone::Rendering::Camera</a>
 </li>
 <li>GetSelectedEntity()
 : <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#ae5156b6bcb925116e2c902c1bf43a8f2">Moonstone::Core::EntityLayer</a>
 </li>
 <li>GetSpeed()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a3a353d2d35b7aa904cc848c36a8a8890">Moonstone::Renderer::Camera</a>
-, <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html#a60a76c7dbdd7ec38b66de8ac2f8eb4e3">Moonstone::Renderer::CameraController</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a9356a4b347b79ddc347c2d4fa04ff99e">Moonstone::Rendering::Camera</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1CameraController.html#aba53dc11ecf3d4a8278d46c6839d7893">Moonstone::Rendering::CameraController</a>
 </li>
 <li>GetUp()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#abc21ce60cef0e3bd1a5d53acc1c7ae65">Moonstone::Renderer::Camera</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a58b5b0ef9591a8b8090169fe98e0022a">Moonstone::Rendering::Camera</a>
 </li>
 <li>GetViewMatrix()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#a69829e3cbad1bbaa623d5a73122922e9">Moonstone::Renderer::Camera</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a4790837f801bb098063b0789b00f5403">Moonstone::Rendering::Camera</a>
 </li>
 <li>GetWidth()
 : <a class="el" href="classMoonstone_1_1Core_1_1Window.html#af1ec8b1989fcef34191ddcbf62ae4476">Moonstone::Core::Window</a>
@@ -193,8 +196,8 @@ $(function() {
 : <a class="el" href="classMoonstone_1_1Core_1_1MouseMoveEvent.html#a6beb78397555d48afcd6a499fae82d7a">Moonstone::Core::MouseMoveEvent</a>
 </li>
 <li>GetYaw()
-: <a class="el" href="classMoonstone_1_1Renderer_1_1Camera.html#ab0a6f6765954fc1bd4a62ef98887f597">Moonstone::Renderer::Camera</a>
-, <a class="el" href="classMoonstone_1_1Renderer_1_1CameraController.html#acafbf7cd82d8a157cb893f912b53a788">Moonstone::Renderer::CameraController</a>
+: <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a2defa9c6d1a1a2fda35b9b3c3f08261e">Moonstone::Rendering::Camera</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1CameraController.html#a590b6039808d520933bee1e86332bca2">Moonstone::Rendering::CameraController</a>
 </li>
 <li>GetYOffset()
 : <a class="el" href="classMoonstone_1_1Core_1_1MouseScrollEvent.html#a44856ee1b599362af2706b8689c5c9a6">Moonstone::Core::MouseScrollEvent</a>

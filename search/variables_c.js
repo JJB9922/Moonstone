@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vertices_974',['vertices',['../classMoonstone_1_1Renderer_1_1Mesh.html#a006e8bb1b79fa226edfab0edf2165b10',1,'Moonstone::Renderer::Mesh']]],
-  ['vsync_975',['VSync',['../structMoonstone_1_1Core_1_1WindowData.html#adae5ded476e612677607a3689ea2b6f1',1,'Moonstone::Core::WindowData']]]
+  ['r_1031',['r',['../structMoonstone_1_1Core_1_1GLColor.html#a6f7c84c657ffb9dedc16987218eff3de',1,'Moonstone::Core::GLColor']]],
+  ['rotation_1032',['rotation',['../structMoonstone_1_1Rendering_1_1SceneObject.html#a86e3c9a37b09dec3f443e9285378c5d4',1,'Moonstone::Rendering::SceneObject']]]
 ];

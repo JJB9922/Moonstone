@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['numericaldatatype_988',['NumericalDataType',['../classMoonstone_1_1Renderer_1_1RendererAPI.html#a48638d315a289ea9200d445579f161d4',1,'Moonstone::Renderer::RendererAPI']]]
+  ['lighttype_1067',['LightType',['../classMoonstone_1_1Rendering_1_1Lighting.html#abdaefff0f45ab52727e3e1ee916a6f4e',1,'Moonstone::Rendering::Lighting']]]
 ];

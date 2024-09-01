@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['tangent_968',['Tangent',['../structMoonstone_1_1Renderer_1_1Mesh_1_1Vertex.html#ae4e9dba240ec04d8f358371d28d45dad',1,'Moonstone::Renderer::Mesh::Vertex']]],
-  ['texcoords_969',['TexCoords',['../structMoonstone_1_1Renderer_1_1Mesh_1_1Vertex.html#a5e71b13796a0f05a4cdb19c47484c4c8',1,'Moonstone::Renderer::Mesh::Vertex']]],
-  ['textures_970',['textures',['../classMoonstone_1_1Renderer_1_1Mesh.html#a0410e11c31d3a303253d9e7613c18e7b',1,'Moonstone::Renderer::Mesh']]],
-  ['time_971',['time',['../classMoonstone_1_1Renderer_1_1Camera.html#a17d5f7730d1faae0c27976071fc51eb6',1,'Moonstone::Renderer::Camera']]],
-  ['title_972',['Title',['../structMoonstone_1_1Core_1_1WindowProperties.html#afe231425811efd6e1389c6effbaf2f06',1,'Moonstone::Core::WindowProperties']]],
-  ['type_973',['type',['../structMoonstone_1_1Renderer_1_1Mesh_1_1Texture.html#ae2ae224617915ae360ea083cb331d428',1,'Moonstone::Renderer::Mesh::Texture']]]
+  ['path_1026',['path',['../structMoonstone_1_1Rendering_1_1Mesh_1_1Texture.html#a129cb5f37d7831f111605282cc41b2c1',1,'Moonstone::Rendering::Mesh::Texture']]],
+  ['position_1027',['position',['../structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html#a0feaa0307e0b97141c50b9f645294000',1,'Moonstone::Rendering::Lighting::Light::position()'],['../structMoonstone_1_1Rendering_1_1SceneObject.html#a3db6351120d742cd109f3b60bc99bef6',1,'Moonstone::Rendering::SceneObject::position()']]],
+  ['position_1028',['Position',['../structMoonstone_1_1Rendering_1_1Mesh_1_1Vertex.html#af021a45dbab8ef08583c2ce547b5704f',1,'Moonstone::Rendering::Mesh::Vertex']]],
+  ['pyramidvertices_1029',['pyramidVertices',['../classMoonstone_1_1Tools_1_1BaseShapes.html#a9f9f6a6261ca8a3907a30e7cbf8c5fdc',1,'Moonstone::Tools::BaseShapes']]],
+  ['pyramidverticessize_1030',['pyramidVerticesSize',['../classMoonstone_1_1Tools_1_1BaseShapes.html#a8c3c3710c0a41ce09f06a1d4f33aefc4',1,'Moonstone::Tools::BaseShapes']]]
 ];

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['addcube_618',['AddCube',['../classMoonstone_1_1Core_1_1Application.html#a2483118fe7d4ce23fd52b32cb5c493b4',1,'Moonstone::Core::Application']]],
-  ['addobject_619',['AddObject',['../classMoonstone_1_1Core_1_1EntityLayer.html#ac70b759675b2057d84fdf3c5656aa639',1,'Moonstone::Core::EntityLayer']]],
-  ['application_620',['Application',['../classMoonstone_1_1Core_1_1Application.html#ab231b845e6f3f330cf8d0a8b6bd7035a',1,'Moonstone::Core::Application']]]
+  ['addcube_669',['AddCube',['../classMoonstone_1_1Core_1_1Application.html#a2483118fe7d4ce23fd52b32cb5c493b4',1,'Moonstone::Core::Application']]],
+  ['addlight_670',['AddLight',['../classMoonstone_1_1Rendering_1_1Lighting.html#a3beac38f2a6198fb184c0afb39d74fd3',1,'Moonstone::Rendering::Lighting']]],
+  ['addobject_671',['AddObject',['../classMoonstone_1_1Core_1_1EntityLayer.html#a1ca5bb61804bf93f14609fb302b7ae7a',1,'Moonstone::Core::EntityLayer']]],
+  ['application_672',['Application',['../classMoonstone_1_1Core_1_1Application.html#ab231b845e6f3f330cf8d0a8b6bd7035a',1,'Moonstone::Core::Application']]]
 ];
