@@ -89,8 +89,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a05da6c0d0361860e48ecfc670affdabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48247b6314ed1240e4ba92e06a2bd16c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Shader.html">Shader</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html#a48247b6314ed1240e4ba92e06a2bd16c">shaders</a> = {}</td></tr>
 <tr class="separator:a48247b6314ed1240e4ba92e06a2bd16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a937f728028a55d98be2825e255bc1e2e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html#a937f728028a55d98be2825e255bc1e2e">cameras</a> = {}</td></tr>
-<tr class="separator:a937f728028a55d98be2825e255bc1e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adecb908c840f58dcf9a1cf5a13550d00"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html#adecb908c840f58dcf9a1cf5a13550d00">cameras</a> = {}</td></tr>
+<tr class="separator:adecb908c840f58dcf9a1cf5a13550d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36def02041a9a9975bdea7ac2bff90f"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html#ab36def02041a9a9975bdea7ac2bff90f">activeCamera</a> = nullptr</td></tr>
+<tr class="separator:ab36def02041a9a9975bdea7ac2bff90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73325f734e30fcb9cc96e6ffd88b8120"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structMoonstone_1_1Rendering_1_1SceneObject.html">SceneObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html#a73325f734e30fcb9cc96e6ffd88b8120">objects</a> = {}</td></tr>
 <tr class="separator:a73325f734e30fcb9cc96e6ffd88b8120"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb8baa162befa8241f3d3191cef04c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Rendering_1_1Lighting.html">Lighting</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html#a4bb8baa162befa8241f3d3191cef04c2">lighting</a> = {}</td></tr>
@@ -152,6 +154,20 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab36def02041a9a9975bdea7ac2bff90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36def02041a9a9975bdea7ac2bff90f">&#9670;&nbsp;</a></span>activeCamera</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a>&gt; Moonstone::Rendering::Scene::activeCamera = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a61be344676c24a8e82adf571fcaa5295"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a61be344676c24a8e82adf571fcaa5295">&#9670;&nbsp;</a></span>background</h2>
 
@@ -166,14 +182,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a937f728028a55d98be2825e255bc1e2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a937f728028a55d98be2825e255bc1e2e">&#9670;&nbsp;</a></span>cameras</h2>
+<a id="adecb908c840f58dcf9a1cf5a13550d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adecb908c840f58dcf9a1cf5a13550d00">&#9670;&nbsp;</a></span>cameras</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a>&gt; Moonstone::Rendering::Scene::cameras = {}</td>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a>&gt; &gt; Moonstone::Rendering::Scene::cameras = {}</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -87,8 +87,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aed841439c8663499a613d1386ee7e2aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691b36e37c8b428f4e5754d78f6bd9fe"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html">Scene</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1SceneManager.html#a691b36e37c8b428f4e5754d78f6bd9fe">LoadScene</a> ()</td></tr>
 <tr class="separator:a691b36e37c8b428f4e5754d78f6bd9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d4581d0a294b898a135baa609e4e8cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1SceneManager.html#a0d4581d0a294b898a135baa609e4e8cc">RenderScene</a> (std::shared_ptr&lt; <a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html">Scene</a> &gt; scene)</td></tr>
-<tr class="separator:a0d4581d0a294b898a135baa609e4e8cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5efac206b89db2ec67a429d30092dc55"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html">Renderer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1SceneManager.html#a5efac206b89db2ec67a429d30092dc55">InitializeSceneRenderer</a> (std::shared_ptr&lt; <a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html">Scene</a> &gt; scene)</td></tr>
+<tr class="separator:a5efac206b89db2ec67a429d30092dc55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -181,6 +181,24 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5efac206b89db2ec67a429d30092dc55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5efac206b89db2ec67a429d30092dc55">&#9670;&nbsp;</a></span>InitializeSceneRenderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html">Renderer</a> &gt; Moonstone::Rendering::SceneManager::InitializeSceneRenderer </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html">Scene</a> &gt;&#160;</td>
+          <td class="paramname"><em>scene</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aed841439c8663499a613d1386ee7e2aa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed841439c8663499a613d1386ee7e2aa">&#9670;&nbsp;</a></span>LoadDefaultScene()</h2>
 
@@ -208,24 +226,6 @@ Private Attributes</h2></td></tr>
           <td class="memname">std::shared_ptr&lt;<a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html">Scene</a>&gt; Moonstone::Rendering::SceneManager::LoadScene </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0d4581d0a294b898a135baa609e4e8cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d4581d0a294b898a135baa609e4e8cc">&#9670;&nbsp;</a></span>RenderScene()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Moonstone::Rendering::SceneManager::RenderScene </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structMoonstone_1_1Rendering_1_1Scene.html">Scene</a> &gt;&#160;</td>
-          <td class="paramname"><em>scene</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

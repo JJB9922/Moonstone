@@ -92,6 +92,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac5f51c837edbed85d31365f4976eda13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a546ff69969bf2863d97aa0c1c790bd3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a546ff69969bf2863d97aa0c1c790bd3e">SetWindow</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Core_1_1Window.html">Window</a> &gt; window)</td></tr>
 <tr class="separator:a546ff69969bf2863d97aa0c1c790bd3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a941b467bad16f6c2f2a34de0b9eb8d08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a941b467bad16f6c2f2a34de0b9eb8d08">SetFramebufferParams</a> (unsigned &amp;FBOTexMap, unsigned &amp;FBShaderID, unsigned &amp;screenQuadVAO)</td></tr>
+<tr class="separator:a941b467bad16f6c2f2a34de0b9eb8d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74b635d932962ed2315ffab871d8c7c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a74b635d932962ed2315ffab871d8c7c2">Init</a> ()</td></tr>
 <tr class="separator:a74b635d932962ed2315ffab871d8c7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e7dc4e752cdeee1770b8acf956bb1a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a2e7dc4e752cdeee1770b8acf956bb1a5">Shutdown</a> ()</td></tr>
@@ -113,6 +115,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a704c64cf40147c51ee2294c222d10344"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06b8414d9153bfccc9b3c93c6ab85412"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Tools_1_1ImGuiLayer.html">Tools::ImGuiLayer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a06b8414d9153bfccc9b3c93c6ab85412">m_ImGuiLayer</a></td></tr>
 <tr class="separator:a06b8414d9153bfccc9b3c93c6ab85412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada0f422442446d26e5099c8772420f4"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#aada0f422442446d26e5099c8772420f4">m_FBOTextureMap</a></td></tr>
+<tr class="separator:aada0f422442446d26e5099c8772420f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aebbf33e69c47839cb20bb1154c12d9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a6aebbf33e69c47839cb20bb1154c12d9">m_FBShaderID</a></td></tr>
+<tr class="separator:a6aebbf33e69c47839cb20bb1154c12d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa60a11e6c68842313a3424d187455531"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#aa60a11e6c68842313a3424d187455531">m_ScreenQuadVAO</a></td></tr>
+<tr class="separator:aa60a11e6c68842313a3424d187455531"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa40214da09bf1168d0e5f77e3fadccd4"></a>
@@ -314,6 +322,48 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a941b467bad16f6c2f2a34de0b9eb8d08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a941b467bad16f6c2f2a34de0b9eb8d08">&#9670;&nbsp;</a></span>SetFramebufferParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::EditorUI::SetFramebufferParams </td>
+          <td>(</td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBOTexMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>FBShaderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramname"><em>screenQuadVAO</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a546ff69969bf2863d97aa0c1c790bd3e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a546ff69969bf2863d97aa0c1c790bd3e">&#9670;&nbsp;</a></span>SetWindow()</h2>
 
@@ -358,6 +408,50 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aada0f422442446d26e5099c8772420f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada0f422442446d26e5099c8772420f4">&#9670;&nbsp;</a></span>m_FBOTextureMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Moonstone::Core::EditorUI::m_FBOTextureMap</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6aebbf33e69c47839cb20bb1154c12d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aebbf33e69c47839cb20bb1154c12d9">&#9670;&nbsp;</a></span>m_FBShaderID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Moonstone::Core::EditorUI::m_FBShaderID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a06b8414d9153bfccc9b3c93c6ab85412"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06b8414d9153bfccc9b3c93c6ab85412">&#9670;&nbsp;</a></span>m_ImGuiLayer</h2>
 
@@ -413,6 +507,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classMoonstone_1_1Core_1_1LayerStack.html">LayerStack</a> Moonstone::Core::EditorUI::m_LayerStack</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa60a11e6c68842313a3424d187455531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa60a11e6c68842313a3424d187455531">&#9670;&nbsp;</a></span>m_ScreenQuadVAO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Moonstone::Core::EditorUI::m_ScreenQuadVAO</td>
         </tr>
       </table>
   </td>
