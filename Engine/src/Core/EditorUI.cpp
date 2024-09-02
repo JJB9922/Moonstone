@@ -1,4 +1,5 @@
 #include "Include/EditorUI.h"
+#include "Layers/Include/BaseLayers.h"
 #include <memory>
 
 namespace Moonstone
@@ -29,56 +30,45 @@ void EditorUI::Init()
 
     auto debugLayer = std::make_shared<DebugLayer>();
     PushLayer(debugLayer);
-
     /*
-    auto transformLayer = new TransformLayer();
-    auto entityLayer    = new EntityLayer;
-    entityLayer->SetWindow(m_Window->m_Window);
-    entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
-                                [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
-    entityLayer->SetTransformLayer(transformLayer);
-    PushLayer(entityLayer);
+        auto transformLayer = std::make_shared<TransformLayer>();
+        auto entityLayer = std::make_shared<EntityLayer>();
+        entityLayer->SetWindow(m_Window->m_Window);
+        entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
+                                    [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
+        entityLayer->SetTransformLayer(transformLayer);
+        PushLayer(entityLayer);
 
-    transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
-                                      [this, entityLayer](Rendering::SceneObject& object)
-                                      {
+        transformLayer->SetBtnCallbackObj(
+            TransformLayer::ButtonID::RemoveObject, [this, entityLayer](Rendering::SceneObject &object) {
+            auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
+                                   [&object](Rendering::SceneObject &obj) { return obj.name == object.name; });
 
+            if (it != m_Objects.end())
+            {
+                m_Objects.erase(it);
+            }
 
-                                          auto it = std::find_if(m_Objects.begin(),
-                                                                 m_Objects.end(),
-                                                                 [&object](Rendering::SceneObject& obj)
-                                                                 { return obj.name == object.name; });
+            entityLayer->ClearEntitySelection();
+            entityLayer->RemoveObject(object);
+            });
 
-                                          if (it != m_Objects.end())
-                                          {
-                                              m_Objects.erase(it);
-                                          }
+        transformLayer->SetSliderCallbackObj(
+            TransformLayer::SliderID::TransformGroup, [this, entityLayer](Rendering::SceneObject &object) {
+            auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
+                                   [&object](Rendering::SceneObject &obj) { return obj.name == object.name; });
 
-                                          entityLayer->ClearEntitySelection();
-                                          entityLayer->RemoveObject(object);
+            if (it != m_Objects.end())
+            {
+                it->position = object.position;
+                it->rotation = object.rotation;
+                it->scale = object.scale;
+            }
 
-                                      });
-
-    transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::TransformGroup,
-                                         [this, entityLayer](Rendering::SceneObject& object)
-                                         {
-                                             auto it = std::find_if(m_Objects.begin(),
-                                                                    m_Objects.end(),
-                                                                    [&object](Rendering::SceneObject& obj)
-                                                                    { return obj.name == object.name; });
-
-                                             if (it != m_Objects.end())
-                                             {
-                                                 it->position = object.position;
-                                                 it->rotation = object.rotation;
-                                                 it->scale    = object.scale;
-                                             }
-
-                                             entityLayer->SetObjectVector(m_Objects);
-                                         });
-    PushLayer(transformLayer);
-*/
-
+            entityLayer->SetObjectVector(m_Objects);
+            });
+        PushLayer(transformLayer);
+    */
     auto controlsLayer = std::make_shared<ControlsLayer>();
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
 

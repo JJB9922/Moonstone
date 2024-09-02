@@ -56,11 +56,9 @@ class Application
 
     bool m_Running;
 
-    // Rendering::Camera m_Camera;
-
     std::shared_ptr<Rendering::Camera> m_ActiveCamera;
     std::shared_ptr<Window> m_Window;
-    bool m_DefaultGrid = true;
+
     std::vector<Rendering::SceneObject> m_Objects;
     bool m_SunLight = false;
     glm::vec3 m_TimeOfDay = {-1.0f, -0.5f, 0};

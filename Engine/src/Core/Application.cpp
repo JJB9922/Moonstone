@@ -47,8 +47,6 @@ void Application::Run()
     m_Running = true;
 
     Time &time = Time::GetInstance();
-    Rendering::Shader gridShader;
-    Rendering::Shader meshShader;
 
     while (m_Running)
     {
@@ -61,7 +59,6 @@ void Application::Run()
 
         m_EditorUI->Render();
 
-        // Rendering::RenderingCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
         Window::UpdateWindow(m_Window);
 
         if (glfwWindowShouldClose(m_Window->m_Window))
