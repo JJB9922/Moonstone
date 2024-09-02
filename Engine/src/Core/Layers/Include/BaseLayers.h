@@ -42,9 +42,7 @@ class SceneLayer : public Layer
     }
 
     virtual void OnImGuiRender() override
-
     {
-
         ImGui::Begin("Scene");
 
         auto size = ImGui::GetContentRegionAvail();
@@ -56,13 +54,13 @@ class SceneLayer : public Layer
 
         if (winWidth / winHeight > aspectRatio)
         {
-            targetHeight = winHeight;
-            targetWidth = targetHeight * aspectRatio;
+            targetHeight = static_cast<int>(winHeight);
+            targetWidth = static_cast<int>(targetHeight * aspectRatio);
         }
         else
         {
-            targetWidth = winWidth;
-            targetHeight = targetWidth / aspectRatio;
+            targetWidth = static_cast<int>(winWidth);
+            targetHeight = static_cast<int>(targetWidth / aspectRatio);
         }
 
         float xOffset = (winWidth - targetWidth) * 0.5f;
@@ -76,8 +74,6 @@ class SceneLayer : public Layer
         ImVec2 p1(p0.x + targetWidth, p0.y + targetHeight);
 
         ImGui::GetWindowDrawList()->AddImage(reinterpret_cast<void *>(m_TexMap), p0, p1, ImVec2(0, 1), ImVec2(1, 0));
-
-        Rendering::RenderingCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
 
         ImGui::End();
     }
