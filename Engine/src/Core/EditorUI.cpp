@@ -10,18 +10,23 @@ EditorUI::~EditorUI() { Shutdown(); }
 
 void EditorUI::Init()
 {
+    m_ImGuiLayer = std::make_shared<Tools::ImGuiLayer>();
+    m_ImGuiLayer->SetWindow(m_Window->m_Window);
+    PushOverlay(m_ImGuiLayer);
+
     // auto sceneLayer = new SceneLayer;
     // sceneLayer->SetWindow(m_Window.m_Window);
     //   sceneLayer->SetTexMap(m_FBOTextureMap);
     //  sceneLayer->SetFBParams(m_FBShaderID, m_ScreenQuadVAO, m_FBOTextureMap);
     // PushLayer(sceneLayer);
 
-    auto menuLayer = new MenuLayer;
+    auto menuLayer = std::make_shared<MenuLayer>();
     PushLayer(menuLayer);
 
-    auto debugLayer = new DebugLayer;
+    auto debugLayer = std::make_shared<DebugLayer>();
     PushLayer(debugLayer);
 
+    /*
     auto transformLayer = new TransformLayer();
     auto entityLayer    = new EntityLayer;
     entityLayer->SetWindow(m_Window->m_Window);
@@ -33,7 +38,7 @@ void EditorUI::Init()
     transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
                                       [this, entityLayer](Rendering::SceneObject& object)
                                       {
-                                          /*
+                                         
                                             
                                           auto it = std::find_if(m_Objects.begin(),
                                                                  m_Objects.end(),
@@ -47,13 +52,12 @@ void EditorUI::Init()
 
                                           entityLayer->ClearEntitySelection();
                                           entityLayer->RemoveObject(object);
-*/
+                                            
                                       });
 
     transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::TransformGroup,
                                          [this, entityLayer](Rendering::SceneObject& object)
                                          {
-                                             /*
                                              auto it = std::find_if(m_Objects.begin(),
                                                                     m_Objects.end(),
                                                                     [&object](Rendering::SceneObject& obj)
@@ -66,11 +70,12 @@ void EditorUI::Init()
                                                  it->scale    = object.scale;
                                              }
 
-                                             entityLayer->SetObjectVector(m_Objects);*/
+                                             entityLayer->SetObjectVector(m_Objects);
                                          });
     PushLayer(transformLayer);
+*/
 
-    auto controlsLayer = new ControlsLayer;
+    auto controlsLayer = std::make_shared<ControlsLayer>();
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor,
@@ -114,7 +119,7 @@ void EditorUI::Init()
                                           //m_DefaultGrid = !m_DefaultGrid;
                                       }
                                   });
-
+    /*
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddObject,
                                   [this, controlsLayer, entityLayer, transformLayer]()
                                   {
@@ -131,10 +136,11 @@ void EditorUI::Init()
                                               break;
                                       }
                                   });
-
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
+  
+  controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
                                   [this, controlsLayer, entityLayer]() { //ToggleSunlight();
                                   });
+*/
 
     controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay,
                                      [this, controlsLayer](float timeOfDayFloat)
@@ -161,21 +167,36 @@ void EditorUI::Shutdown()
     // Clean up ImGui resources here
 }
 
-void EditorUI::PushLayer(Layer* layer)
+void EditorUI::Render()
+{
+    for (auto layer : m_LayerStack)
+    {
+        layer->OnUpdate();
+    }
+
+    m_ImGuiLayer->Start();
+    for (auto layer : m_LayerStack)
+    {
+        layer->OnImGuiRender();
+    }
+    m_ImGuiLayer->End();
+}
+
+void EditorUI::PushLayer(std::shared_ptr<Layer> layer)
 {
     m_LayerStack.PushLayer(layer);
     layer->OnAttach();
 }
 
-void EditorUI::PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
+void EditorUI::PopLayer(std::shared_ptr<Layer> layer) { m_LayerStack.PopLayer(layer); }
 
-void EditorUI::PushOverlay(Layer* layer)
+void EditorUI::PushOverlay(std::shared_ptr<Layer> layer)
 {
     m_LayerStack.PushOverlay(layer);
     layer->OnAttach();
 }
 
-void EditorUI::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
+void EditorUI::PopOverlay(std::shared_ptr<Layer> overlay) { m_LayerStack.PopOverlay(overlay); }
 
 } // namespace Core
 

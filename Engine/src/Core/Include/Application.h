@@ -35,11 +35,6 @@ class Application
 
         void InitializeEditor();
 
-        void PushLayer(Layer *layer);
-        void PopLayer(Layer *layer);
-        void PushOverlay(Layer *overlay);
-        void PopOverlay(Layer *overlay);
-
     private:
         void InitializeFramebuffer();
         void InitializeCamera();
@@ -49,8 +44,6 @@ class Application
 
         void UpdateCustomBaseShapes();
 
-        void RenderUI();
-
         void AddCube();
 
     private:
@@ -59,11 +52,7 @@ class Application
         std::shared_ptr<Rendering::Scene> m_CurrentScene;
         Rendering::SceneManager           m_SceneManager;
 
-        Tools::ImGuiLayer *m_ImGuiLayer;
-        EditorUI           m_EditorUI;
-        LayerStack         m_LayerStack;
-        std::vector<Layer> m_Layers;
-
+        EditorUI m_EditorUI;
         bool m_Running;
 
         //Rendering::Camera m_Camera;

@@ -383,7 +383,7 @@ class EntityLayer : public Layer
 
         inline std::vector<Rendering::SceneObject> GetObjects() { return GetObjects(); }
 
-        void SetTransformLayer(TransformLayer* transformLayer) { m_TransformLayer = transformLayer; }
+        void SetTransformLayer(TransformLayer transformLayer) { m_TransformLayer = transformLayer; }
 
         void SetBtnCallback(ButtonID buttonID, ButtonCallback callback) { m_BtnCallbacks[buttonID] = callback; }
 
@@ -415,16 +415,14 @@ class EntityLayer : public Layer
                 if (ImGui::Selectable(m_Objects[i].name.c_str(), GetSelectedEntity() == i))
                 {
                     SetSelectedEntity(i);
-                    if (m_TransformLayer)
-                    {
-                        m_TransformLayer->SetSelectedObject(m_Objects[i]);
-                    }
+
+                    m_TransformLayer.SetSelectedObject(m_Objects[i]);
                 }
             }
 
-            if (GetSelectedEntity() == -1 && m_TransformLayer)
+            if (GetSelectedEntity() == -1)
             {
-                m_TransformLayer->ClearSelectedObject();
+                m_TransformLayer.ClearSelectedObject();
             }
 
             ImGui::End();
@@ -435,7 +433,7 @@ class EntityLayer : public Layer
         GLFWwindow*                                  m_Window;
         std::vector<Rendering::SceneObject>           m_Objects;
         std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
-        TransformLayer*                              m_TransformLayer;
+        TransformLayer                                m_TransformLayer;
 };
 
 class ControlsLayer : public Layer

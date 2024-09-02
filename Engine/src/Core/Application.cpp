@@ -16,6 +16,7 @@ Application::Application()
     }
 
     m_Window = std::shared_ptr<Window>(Window::CreateWindow());
+    InitializeEditor();
 }
 
 void Application::InitializeEditor()
@@ -27,22 +28,14 @@ void Application::InitializeEditor()
 
     // UI
     EditorUI editorUI;
-    editorUI.SetWindow(m_Window);
-    editorUI.Init();
+    m_EditorUI = editorUI;
+    m_EditorUI.SetWindow(m_Window);
+    m_EditorUI.Init();
 }
 
 void Application::Run()
 {
     m_Running = true;
-
-    InitializeEditor();
-
-    m_ImGuiLayer = new Tools::ImGuiLayer;
-    m_ImGuiLayer->SetWindow(m_Window->m_Window);
-    PushOverlay(m_ImGuiLayer);
-
-    auto menuLayer = new MenuLayer;
-    PushLayer(menuLayer);
 
     //  InitializeFramebuffer();
     //  InitializeCamera();
@@ -78,7 +71,7 @@ void Application::Run()
 
         //  Rendering::RenderingCommand::BindFrameBuffer(empty);
 
-        RenderUI();
+        m_EditorUI.Render();
 
         Window::UpdateWindow(m_Window);
 
@@ -260,37 +253,6 @@ void Application::AddCube()
         = {true, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
     m_Objects.push_back(cube);
 }
-
-void Application::RenderUI()
-{
-    for (auto layer : m_LayerStack)
-    {
-        layer->OnUpdate();
-    }
-
-    m_ImGuiLayer->Start();
-    for (auto layer : m_LayerStack)
-    {
-        layer->OnImGuiRender();
-    }
-    m_ImGuiLayer->End();
-}
-
-void Application::PushOverlay(Layer* layer)
-{
-    m_LayerStack.PushOverlay(layer);
-    layer->OnAttach();
-}
-
-void Application::PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
-
-void Application::PushLayer(Layer* layer)
-{
-    m_LayerStack.PushLayer(layer);
-    layer->OnAttach();
-}
-
-void Application::PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
 
 } // namespace Core
 } // namespace Moonstone

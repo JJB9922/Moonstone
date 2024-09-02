@@ -20,22 +20,24 @@ class EditorUI
 
         ~EditorUI();
 
-        void PushLayer(Layer *layer);
-        void PopLayer(Layer *layer);
-        void PushOverlay(Layer *overlay);
-        void PopOverlay(Layer *overlay);
+        void PushLayer(std::shared_ptr<Layer> layer);
+        void PopLayer(std::shared_ptr<Layer> layer);
+        void PushOverlay(std::shared_ptr<Layer> overlay);
+        void PopOverlay(std::shared_ptr<Layer> overlay);
 
         inline void SetWindow(std::shared_ptr<Window> window) { m_Window = window; }
         void        Init();
         void        Shutdown();
+        void        Render();
 
-        inline LayerStack        &GetLayerStack() { return m_LayerStack; }
+        inline LayerStack         GetLayerStack() { return m_LayerStack; }
         inline std::vector<Layer> GetLayers() { return m_Layers; }
 
     private:
-        LayerStack              m_LayerStack;
-        std::vector<Layer>      m_Layers;
-        std::shared_ptr<Window> m_Window;
+        LayerStack                         m_LayerStack;
+        std::vector<Layer>                 m_Layers;
+        std::shared_ptr<Window>            m_Window;
+        std::shared_ptr<Tools::ImGuiLayer> m_ImGuiLayer;
 };
 
 } // namespace Core

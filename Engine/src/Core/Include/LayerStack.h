@@ -15,17 +15,17 @@ class LayerStack
         LayerStack();
         ~LayerStack();
 
-        void PushLayer(Layer *layer);
-        void PopLayer(Layer *layer);
+        void PushLayer(std::shared_ptr<Layer> layer);
+        void PopLayer(std::shared_ptr<Layer> layer);
 
-        void PushOverlay(Layer *overlay);
-        void PopOverlay(Layer *overlay);
+        void PushOverlay(std::shared_ptr<Layer> overlay);
+        void PopOverlay(std::shared_ptr<Layer> overlay);
 
-        std::vector<Layer *>::iterator begin() { return m_Layers.begin(); }
-        std::vector<Layer *>::iterator end() { return m_Layers.end(); }
+        std::vector<std::shared_ptr<Layer>>::iterator begin() { return m_Layers.begin(); }
+        std::vector<std::shared_ptr<Layer>>::iterator end() { return m_Layers.end(); }
 
     private:
-        std::vector<Layer *> m_Layers;
+        std::vector<std::shared_ptr<Layer>> m_Layers;
         unsigned             m_LayerIndex = 0;
 };
 
