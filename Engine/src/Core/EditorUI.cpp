@@ -1,4 +1,5 @@
 #include "Include/EditorUI.h"
+#include <memory>
 
 namespace Moonstone
 {
@@ -6,7 +7,10 @@ namespace Moonstone
 namespace Core
 {
 
-EditorUI::~EditorUI() { Shutdown(); }
+EditorUI::~EditorUI()
+{
+    Shutdown();
+}
 
 void EditorUI::Init()
 {
@@ -14,11 +18,11 @@ void EditorUI::Init()
     m_ImGuiLayer->SetWindow(m_Window->m_Window);
     PushOverlay(m_ImGuiLayer);
 
-    // auto sceneLayer = new SceneLayer;
-    // sceneLayer->SetWindow(m_Window.m_Window);
-    //   sceneLayer->SetTexMap(m_FBOTextureMap);
-    //  sceneLayer->SetFBParams(m_FBShaderID, m_ScreenQuadVAO, m_FBOTextureMap);
-    // PushLayer(sceneLayer);
+    auto sceneLayer = std::make_shared<SceneLayer>();
+    sceneLayer->SetWindow(m_Window->m_Window);
+    sceneLayer->SetTexMap(m_FBOTextureMap);
+    sceneLayer->SetFBParams(m_FBShaderID, m_ScreenQuadVAO, m_FBOTextureMap);
+    PushLayer(sceneLayer);
 
     auto menuLayer = std::make_shared<MenuLayer>();
     PushLayer(menuLayer);
@@ -38,8 +42,8 @@ void EditorUI::Init()
     transformLayer->SetBtnCallbackObj(TransformLayer::ButtonID::RemoveObject,
                                       [this, entityLayer](Rendering::SceneObject& object)
                                       {
-                                         
-                                            
+
+
                                           auto it = std::find_if(m_Objects.begin(),
                                                                  m_Objects.end(),
                                                                  [&object](Rendering::SceneObject& obj)
@@ -52,7 +56,7 @@ void EditorUI::Init()
 
                                           entityLayer->ClearEntitySelection();
                                           entityLayer->RemoveObject(object);
-                                            
+
                                       });
 
     transformLayer->SetSliderCallbackObj(TransformLayer::SliderID::TransformGroup,
@@ -78,47 +82,38 @@ void EditorUI::Init()
     auto controlsLayer = std::make_shared<ControlsLayer>();
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
 
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor,
-                                  [this, controlsLayer]()
-                                  {
-                                      auto color                = controlsLayer->GetBGColor();
-                                      m_Window->m_WindowColor.r = color.x;
-                                      m_Window->m_WindowColor.g = color.y;
-                                      m_Window->m_WindowColor.b = color.z;
-                                      m_Window->m_WindowColor.a = color.w;
-                                  });
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor, [this, controlsLayer]() {
+        auto color = controlsLayer->GetBGColor();
+        m_Window->m_WindowColor.r = color.x;
+        m_Window->m_WindowColor.g = color.y;
+        m_Window->m_WindowColor.b = color.z;
+        m_Window->m_WindowColor.a = color.w;
+    });
 
-    controlsLayer
-        ->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe,
-                         [this]()
-                         {
-                             if (m_Window->m_PolygonMode == Rendering::RenderingAPI::PolygonDataType::PolygonLine)
-                             {
-                                 Rendering::RenderingCommand::SetPolygonMode(
-                                     Rendering::RenderingAPI::PolygonDataType::PolygonFill);
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe, [this]() {
+        if (m_Window->m_PolygonMode == Rendering::RenderingAPI::PolygonDataType::PolygonLine)
+        {
+            Rendering::RenderingCommand::SetPolygonMode(Rendering::RenderingAPI::PolygonDataType::PolygonFill);
 
-                                 m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonFill;
-                             }
-                             else
-                             {
-                                 Rendering::RenderingCommand::SetPolygonMode(
-                                     Rendering::RenderingAPI::PolygonDataType::PolygonLine);
+            m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonFill;
+        }
+        else
+        {
+            Rendering::RenderingCommand::SetPolygonMode(Rendering::RenderingAPI::PolygonDataType::PolygonLine);
 
-                                 m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonLine;
-                             }
-                         });
+            m_Window->m_PolygonMode = Rendering::RenderingAPI::PolygonDataType::PolygonLine;
+        }
+    });
 
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyCameraSens,
-                                  [this, controlsLayer]()
-                                  { m_Window->SetCameraSens(controlsLayer->GetCamSensitivity()); });
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyCameraSens, [this, controlsLayer]() {
+        m_Window->SetCameraSens(controlsLayer->GetCamSensitivity());
+    });
 
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleGrid,
-                                  [this]()
-                                  {
-                                      {
-                                          //m_DefaultGrid = !m_DefaultGrid;
-                                      }
-                                  });
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleGrid, [this]() {
+        {
+            // m_DefaultGrid = !m_DefaultGrid;
+        }
+    });
     /*
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddObject,
                                   [this, controlsLayer, entityLayer, transformLayer]()
@@ -136,27 +131,25 @@ void EditorUI::Init()
                                               break;
                                       }
                                   });
-  
+
   controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
                                   [this, controlsLayer, entityLayer]() { //ToggleSunlight();
                                   });
 */
 
-    controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay,
-                                     [this, controlsLayer](float timeOfDayFloat)
-                                     {
-                                         float timeOfDay = timeOfDayFloat;
+    controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay, [this, controlsLayer](float timeOfDayFloat) {
+        float timeOfDay = timeOfDayFloat;
 
-                                         float angle = timeOfDay * 2.0f * 3.14159f;
+        float angle = timeOfDay * 2.0f * 3.14159f;
 
-                                         float y = cos(angle);
-                                         float x = sin(angle);
-                                         float z = 0.0f;
+        float y = cos(angle);
+        float x = sin(angle);
+        float z = 0.0f;
 
-                                         glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
+        glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
 
-                                         //m_TimeOfDay = lightDirection;
-                                     });
+        // m_TimeOfDay = lightDirection;
+    });
 
     m_Layers.push_back(*controlsLayer);
     PushLayer(controlsLayer);
@@ -188,7 +181,10 @@ void EditorUI::PushLayer(std::shared_ptr<Layer> layer)
     layer->OnAttach();
 }
 
-void EditorUI::PopLayer(std::shared_ptr<Layer> layer) { m_LayerStack.PopLayer(layer); }
+void EditorUI::PopLayer(std::shared_ptr<Layer> layer)
+{
+    m_LayerStack.PopLayer(layer);
+}
 
 void EditorUI::PushOverlay(std::shared_ptr<Layer> layer)
 {
@@ -196,7 +192,10 @@ void EditorUI::PushOverlay(std::shared_ptr<Layer> layer)
     layer->OnAttach();
 }
 
-void EditorUI::PopOverlay(std::shared_ptr<Layer> overlay) { m_LayerStack.PopOverlay(overlay); }
+void EditorUI::PopOverlay(std::shared_ptr<Layer> overlay)
+{
+    m_LayerStack.PopOverlay(overlay);
+}
 
 } // namespace Core
 

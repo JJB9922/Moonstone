@@ -44,44 +44,42 @@ class SceneLayer : public Layer
     virtual void OnImGuiRender() override
 
     {
-        /*
-            ImGui::Begin("Scene");
 
-            auto size = ImGui::GetContentRegionAvail();
-            float winWidth = size.x;
-            float winHeight = size.y;
+        ImGui::Begin("Scene");
 
-            float aspectRatio = 16.0f / 9.0f;
-            int targetWidth, targetHeight;
+        auto size = ImGui::GetContentRegionAvail();
+        float winWidth = size.x;
+        float winHeight = size.y;
 
-            if (winWidth / winHeight > aspectRatio)
-            {
-                targetHeight = winHeight;
-                targetWidth = targetHeight * aspectRatio;
-            }
-            else
-            {
-                targetWidth = winWidth;
-                targetHeight = targetWidth / aspectRatio;
-            }
+        float aspectRatio = 16.0f / 9.0f;
+        int targetWidth, targetHeight;
 
-            float xOffset = (winWidth - targetWidth) * 0.5f;
-            float yOffset = (winHeight - targetHeight) * 0.5f;
+        if (winWidth / winHeight > aspectRatio)
+        {
+            targetHeight = winHeight;
+            targetWidth = targetHeight * aspectRatio;
+        }
+        else
+        {
+            targetWidth = winWidth;
+            targetHeight = targetWidth / aspectRatio;
+        }
 
-            Rendering::RenderingCommand::RescaleFramebuffer(m_TexMap, targetWidth, targetHeight);
-            Rendering::RenderingCommand::SetViewport(targetWidth, targetHeight);
+        float xOffset = (winWidth - targetWidth) * 0.5f;
+        float yOffset = (winHeight - targetHeight) * 0.5f;
 
-            ImVec2 pos = ImGui::GetCursorScreenPos();
-            ImVec2 p0(pos.x + xOffset, pos.y + yOffset);
-            ImVec2 p1(p0.x + targetWidth, p0.y + targetHeight);
+        Rendering::RenderingCommand::RescaleFramebuffer(m_TexMap, targetWidth, targetHeight);
+        Rendering::RenderingCommand::SetViewport(targetWidth, targetHeight);
 
-            ImGui::GetWindowDrawList()->AddImage(reinterpret_cast<void *>(m_TexMap), p0, p1, ImVec2(0, 1), ImVec2(1,
-           0));
+        ImVec2 pos = ImGui::GetCursorScreenPos();
+        ImVec2 p0(pos.x + xOffset, pos.y + yOffset);
+        ImVec2 p1(p0.x + targetWidth, p0.y + targetHeight);
 
-            Rendering::RenderingCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
+        ImGui::GetWindowDrawList()->AddImage(reinterpret_cast<void *>(m_TexMap), p0, p1, ImVec2(0, 1), ImVec2(1, 0));
 
-            ImGui::End();
-        */
+        Rendering::RenderingCommand::DrawFrameBuffer(m_FBShaderID, m_ScreenQuadVAO, m_FBOTexMap);
+
+        ImGui::End();
     }
 
   private:

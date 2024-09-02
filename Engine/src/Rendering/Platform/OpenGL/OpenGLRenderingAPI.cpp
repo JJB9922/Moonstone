@@ -12,13 +12,28 @@ namespace Moonstone
 namespace Rendering
 {
 
-void OpenGLRenderingAPI::EnableDepthTesting() { glEnable(GL_DEPTH_TEST); }
-void OpenGLRenderingAPI::EnableFaceCulling() { glEnable(GL_CULL_FACE); }
-void OpenGLRenderingAPI::DisableFaceCulling() { glDisable(GL_CULL_FACE); }
+void OpenGLRenderingAPI::EnableDepthTesting()
+{
+    glEnable(GL_DEPTH_TEST);
+}
+void OpenGLRenderingAPI::EnableFaceCulling()
+{
+    glEnable(GL_CULL_FACE);
+}
+void OpenGLRenderingAPI::DisableFaceCulling()
+{
+    glDisable(GL_CULL_FACE);
+}
 
-void OpenGLRenderingAPI::ClearColor(const glm::vec4 &color) { glClearColor(color.r, color.g, color.b, color.a); }
+void OpenGLRenderingAPI::ClearColor(const glm::vec4 &color)
+{
+    glClearColor(color.r, color.g, color.b, color.a);
+}
 
-void OpenGLRenderingAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+void OpenGLRenderingAPI::Clear()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
 void OpenGLRenderingAPI::InitVertexShader(unsigned &vertexShader, const char *vertexShaderSrc)
 {
@@ -27,7 +42,7 @@ void OpenGLRenderingAPI::InitVertexShader(unsigned &vertexShader, const char *ve
     glShaderSource(vertexShader, 1, &vertexShaderSrc, NULL);
     glCompileShader(vertexShader);
 
-    int  success;
+    int success;
     char infoLog[512];
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if (!success)
@@ -45,7 +60,7 @@ void OpenGLRenderingAPI::InitFragmentShader(unsigned &fragmentShader, const char
     glShaderSource(fragmentShader, 1, &fragmentShaderSrc, NULL);
     glCompileShader(fragmentShader);
 
-    int  success;
+    int success;
     char infoLog[512];
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if (!success)
@@ -64,7 +79,7 @@ void OpenGLRenderingAPI::InitShaderProgram(unsigned &shaderProgram, unsigned &ve
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
 
-    int  success;
+    int success;
     char infoLog[512];
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success)
@@ -91,9 +106,15 @@ void OpenGLRenderingAPI::InitVertexBuffer(unsigned &VBO, float *vertices, size_t
     glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 };
 
-void OpenGLRenderingAPI::BindVertexBuffer(unsigned &VBO) { glBindBuffer(GL_ARRAY_BUFFER, VBO); }
+void OpenGLRenderingAPI::BindVertexBuffer(unsigned &VBO)
+{
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+}
 
-void OpenGLRenderingAPI::BindVertexArray(unsigned &VAO) { glBindVertexArray(VAO); }
+void OpenGLRenderingAPI::BindVertexArray(unsigned &VAO)
+{
+    glBindVertexArray(VAO);
+}
 
 void OpenGLRenderingAPI::InitElementBuffer(unsigned &EBO, unsigned *indices, size_t size)
 {
@@ -106,24 +127,28 @@ void OpenGLRenderingAPI::SetPolygonMode(PolygonDataType polygonMode)
 {
     switch (polygonMode)
     {
-        case PolygonDataType::PolygonLine:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            break;
-        case PolygonDataType::PolygonFill:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            break;
-        default:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            break;
+    case PolygonDataType::PolygonLine:
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        break;
+    case PolygonDataType::PolygonFill:
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        break;
+    default:
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        break;
     }
 };
 
-void OpenGLRenderingAPI::SetViewport(int width, int height) { glViewport(0, 0, width, height); }
-
-void OpenGLRenderingAPI::InitVertexAttributes(
-    int index, int size, NumericalDataType type, BooleanDataType normalize, size_t stride, size_t offset)
+void OpenGLRenderingAPI::SetViewport(int width, int height)
 {
-    glVertexAttribPointer(index, size, ToOpenGLShaderType(type), ToOpenGLBooleanType(normalize), stride, (void *) offset);
+    glViewport(0, 0, width, height);
+}
+
+void OpenGLRenderingAPI::InitVertexAttributes(int index, int size, NumericalDataType type, BooleanDataType normalize,
+                                              size_t stride, size_t offset)
+{
+    glVertexAttribPointer(index, size, ToOpenGLShaderType(type), ToOpenGLBooleanType(normalize), stride,
+                          (void *)offset);
     glEnableVertexAttribArray(index);
 };
 
@@ -146,11 +171,14 @@ void OpenGLRenderingAPI::Cleanup(unsigned &VAO, unsigned &VBO, unsigned &shaderP
     glDeleteBuffers(1, &VBO);
 }
 
-void OpenGLRenderingAPI::UseProgram(unsigned &ID) { glUseProgram(ID); }
+void OpenGLRenderingAPI::UseProgram(unsigned &ID)
+{
+    glUseProgram(ID);
+}
 
 void OpenGLRenderingAPI::SetUniformBool(const unsigned &ID, const std::string &name, bool value)
 {
-    glUniform1i(glad_glGetUniformLocation(ID, name.c_str()), (int) value);
+    glUniform1i(glad_glGetUniformLocation(ID, name.c_str()), (int)value);
 };
 
 void OpenGLRenderingAPI::SetUniformInt(const unsigned &ID, const std::string &name, bool value)
@@ -165,10 +193,8 @@ void OpenGLRenderingAPI::SetUniformFloat(const unsigned &ID, const std::string &
 
 void OpenGLRenderingAPI::SetUniformMat4(const unsigned &ID, const std::string &name, glm::mat4 value)
 {
-    glad_glUniformMatrix4fv(glad_glGetUniformLocation(ID, name.c_str()),
-                            1,
-                            ToOpenGLBooleanType(RenderingAPI::BooleanDataType::False),
-                            glm::value_ptr(value));
+    glad_glUniformMatrix4fv(glad_glGetUniformLocation(ID, name.c_str()), 1,
+                            ToOpenGLBooleanType(RenderingAPI::BooleanDataType::False), glm::value_ptr(value));
 }
 
 void OpenGLRenderingAPI::SetUniformVec3(const unsigned &ID, const std::string &name, glm::vec3 value)
@@ -182,33 +208,18 @@ void OpenGLRenderingAPI::CreateTexture(unsigned &texture)
     glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-void OpenGLRenderingAPI::SetTextureParameters(TextureTarget        target,
-                                              TextureParameterName paramName,
-                                              TextureParameter     param)
+void OpenGLRenderingAPI::SetTextureParameters(TextureTarget target, TextureParameterName paramName,
+                                              TextureParameter param)
 {
-    glTexParameteri(ToOpenGLTextureTarget(target),
-                    ToOpenGLTextureParameterName(paramName),
+    glTexParameteri(ToOpenGLTextureTarget(target), ToOpenGLTextureParameterName(paramName),
                     ToOpenGLTextureParameter(param));
 }
 
-void OpenGLRenderingAPI::UploadTexture(TextureTarget     target,
-                                       int               mipmapLevel,
-                                       TextureFormat     texFormat,
-                                       int               x,
-                                       int               y,
-                                       TextureFormat     imageDataType,
-                                       NumericalDataType dataType,
-                                       unsigned char    *texData)
+void OpenGLRenderingAPI::UploadTexture(TextureTarget target, int mipmapLevel, TextureFormat texFormat, int x, int y,
+                                       TextureFormat imageDataType, NumericalDataType dataType, unsigned char *texData)
 {
-    glTexImage2D(ToOpenGLTextureTarget(target),
-                 mipmapLevel,
-                 ToOpenGLTextureFormat(texFormat),
-                 x,
-                 y,
-                 0,
-                 ToOpenGLTextureFormat(imageDataType),
-                 ToOpenGLShaderType(dataType),
-                 texData);
+    glTexImage2D(ToOpenGLTextureTarget(target), mipmapLevel, ToOpenGLTextureFormat(texFormat), x, y, 0,
+                 ToOpenGLTextureFormat(imageDataType), ToOpenGLShaderType(dataType), texData);
 
     glGenerateMipmap(ToOpenGLTextureTarget(target));
 }
@@ -225,13 +236,25 @@ void OpenGLRenderingAPI::EnableBlending()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void OpenGLRenderingAPI::DisableBlending() { glDisable(GL_BLEND); }
+void OpenGLRenderingAPI::DisableBlending()
+{
+    glDisable(GL_BLEND);
+}
 
-void OpenGLRenderingAPI::EnableDepthMask() { glDepthMask(GL_TRUE); }
+void OpenGLRenderingAPI::EnableDepthMask()
+{
+    glDepthMask(GL_TRUE);
+}
 
-void OpenGLRenderingAPI::DisableDepthMask() { glDepthMask(GL_FALSE); }
+void OpenGLRenderingAPI::DisableDepthMask()
+{
+    glDepthMask(GL_FALSE);
+}
 
-void OpenGLRenderingAPI::BindFrameBuffer(unsigned &FBO) { glBindFramebuffer(GL_FRAMEBUFFER, FBO); }
+void OpenGLRenderingAPI::BindFrameBuffer(unsigned int &FBO)
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+}
 
 void OpenGLRenderingAPI::DrawFrameBuffer(unsigned &shaderID, unsigned &quadVAO, unsigned &FBOTexMap)
 {
@@ -247,13 +270,8 @@ void OpenGLRenderingAPI::DrawFrameBuffer(unsigned &shaderID, unsigned &quadVAO, 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-void OpenGLRenderingAPI::InitFrameBuffer(int      &width,
-                                         int      &height,
-                                         unsigned &FBOTextureMap,
-                                         unsigned &FBODepthTexture,
-                                         unsigned &FBO,
-                                         unsigned &ScreenQuadVAO,
-                                         unsigned &ScreenQuadVBO)
+void OpenGLRenderingAPI::InitFrameBuffer(int &width, int &height, unsigned &FBOTextureMap, unsigned &FBODepthTexture,
+                                         unsigned &FBO, unsigned &ScreenQuadVAO, unsigned &ScreenQuadVBO)
 {
     glViewport(0, 0, width, height);
 
@@ -280,7 +298,7 @@ void OpenGLRenderingAPI::InitFrameBuffer(int      &width,
     glBindTexture(GL_TEXTURE_2D, 0);
 
     glGenFramebuffers(1, &FBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, (GLuint) FBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, (GLuint)FBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, FBOTextureMap, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, FBODepthTexture, 0);
 
@@ -296,14 +314,12 @@ void OpenGLRenderingAPI::InitFrameBuffer(int      &width,
     glGenBuffers(1, &ScreenQuadVBO);
     glBindVertexArray(ScreenQuadVAO);
     glBindBuffer(GL_ARRAY_BUFFER, ScreenQuadVBO);
-    glBufferData(GL_ARRAY_BUFFER,
-                 Tools::BaseShapes::screenQuadVerticesSize,
-                 &Tools::BaseShapes::screenQuadVertices,
+    glBufferData(GL_ARRAY_BUFFER, Tools::BaseShapes::screenQuadVerticesSize, &Tools::BaseShapes::screenQuadVertices,
                  GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) (2 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)(2 * sizeof(float)));
 }
 
 void OpenGLRenderingAPI::RescaleFramebuffer(unsigned &texMap, int &width, int &height)

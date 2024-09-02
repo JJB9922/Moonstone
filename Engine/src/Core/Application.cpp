@@ -1,5 +1,7 @@
 #include "Include/Application.h"
+#include "Include/EditorUI.h"
 #include "mspch.h"
+#include <memory>
 
 namespace Moonstone
 {
@@ -21,33 +23,28 @@ Application::Application()
 
 void Application::InitializeEditor()
 {
+    // UI
+    std::shared_ptr<EditorUI> editorUI = std::make_shared<EditorUI>();
+    m_EditorUI = editorUI;
+    m_EditorUI->SetWindow(m_Window);
+
     // Scenes
     Rendering::SceneManager sceneManager;
     m_SceneManager = sceneManager;
     auto currentScene = m_SceneManager.LoadDefaultScene();
     m_SceneRenderer = sceneManager.InitializeSceneRenderer(currentScene);
     m_SceneRenderer->SetWindow(m_Window);
+    m_SceneRenderer->InitializeActiveCamera();
+    m_SceneRenderer->SetSceneRenderTarget(m_EditorUI);
+    m_SceneRenderer->InitializeFramebuffer();
 
-    // UI
-    EditorUI editorUI;
-    m_EditorUI = editorUI;
-    m_EditorUI.SetWindow(m_Window);
-    m_EditorUI.Init();
+    // Init UI with Scene in place
+    m_EditorUI->Init();
 }
 
 void Application::Run()
 {
     m_Running = true;
-
-    // InitializeFramebuffer();
-
-    /*
-      std::string framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
-      std::string framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
-      Rendering::Shader framebShader(framebVert.c_str(), framebFrag.c_str());
-      m_FBShaderID = framebShader.ID;
-      unsigned empty = 0;
-  */
 
     Time &time = Time::GetInstance();
     Rendering::Shader gridShader;
@@ -58,17 +55,11 @@ void Application::Run()
         float currentFrame = glfwGetTime();
         time.Update(currentFrame);
 
-        // Rendering::RenderingCommand::BindFrameBuffer(m_FBO);
         m_SceneRenderer->RenderScene();
-
-        // UpdateCamera();
 
         // UpdateCustomBaseShapes();
 
-        // Rendering::RenderingCommand::DrawFrameBuffer(framebShader.ID, m_ScreenQuadVAO, m_FBOTextureMap);
-        //   Rendering::RenderingCommand::BindFrameBuffer(empty);
-
-        m_EditorUI.Render();
+        m_EditorUI->Render();
 
         Window::UpdateWindow(m_Window);
 
@@ -77,37 +68,6 @@ void Application::Run()
     }
 
     m_SceneRenderer->CleanupScene();
-}
-
-void Application::UpdateGrid(Rendering::Shader &gridShader)
-{
-    Rendering::RenderingCommand::DisableFaceCulling();
-
-    if (!gridShader.ID)
-    {
-        std::string gridVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.vert";
-        std::string gridFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultgrid.frag";
-        Rendering::Shader loadedShader(gridVert.c_str(), gridFrag.c_str());
-        gridShader = loadedShader;
-        MS_ASSERT(gridShader.ID, "grid shader could not be set");
-    }
-
-    gridShader.Use();
-
-    Rendering::RenderingCommand::EnableBlending();
-    Rendering::RenderingCommand::DisableDepthMask();
-
-    Rendering::RenderingCommand::BindVertexArray(m_VAO[0]);
-    Rendering::RenderingCommand::SetUniformMat4(gridShader.ID, "model", m_ActiveCamera->GetModel());
-    Rendering::RenderingCommand::SetUniformMat4(gridShader.ID, "view", m_ActiveCamera->GetViewMatrix());
-    Rendering::RenderingCommand::SetUniformMat4(gridShader.ID, "projection", m_ActiveCamera->GetProjectionMatrix());
-
-    Rendering::RenderingCommand::SubmitDrawArrays(Rendering::RenderingAPI::DrawMode::Triangles, 0,
-                                                  Tools::BaseShapes::gridVerticesSize / 3 * sizeof(float));
-
-    Rendering::RenderingCommand::DisableBlending();
-    Rendering::RenderingCommand::EnableDepthMask();
-    Rendering::RenderingCommand::EnableFaceCulling();
 }
 
 void Application::UpdateCustomBaseShapes()
@@ -159,31 +119,6 @@ std::unique_ptr<Application> CreateApplicationInstance()
 {
     return std::make_unique<Application>(Application());
 }
-
-void Application::InitializeFramebuffer()
-{
-    int width, height;
-    glfwGetWindowSize(m_Window->m_Window, &width, &height);
-    Rendering::RenderingCommand::InitFrameBuffer(width, height, m_FBOTextureMap, m_FBODepthTexture, m_FBO,
-                                                 m_ScreenQuadVAO, m_ScreenQuadVBO);
-}
-/*
-void Application::InitializeDefaultScene()
-{
-    m_VAO.push_back(0);
-    m_VBO.push_back(0);
-
-    Rendering::RenderingCommand::InitVertexArray(m_VAO.back());
-    Rendering::RenderingCommand::InitVertexBuffer(m_VBO.back(),
-                                                Tools::BaseShapes::gridVertices,
-                                                Tools::BaseShapes::gridVerticesSize);
-    Rendering::RenderingCommand::InitVertexAttributes(0,
-                                                    3,
-                                                    Rendering::RenderingAPI::NumericalDataType::Float,
-                                                    Rendering::RenderingAPI::BooleanDataType::False,
-                                                    3 * sizeof(float),
-                                                    0);
-}*/
 
 void Application::AddCube()
 {

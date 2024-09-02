@@ -32,11 +32,24 @@ void Renderer::InitializeScene()
                                                       3 * sizeof(float), 0);
 }
 
+void Renderer::InitializeFramebuffer()
+{
+    int width, height;
+    glfwGetWindowSize(m_Window->m_Window, &width, &height);
+    Rendering::RenderingCommand::InitFrameBuffer(width, height, m_FBOTextureMap, m_FBODepthTexture, m_FBO,
+                                                 m_ScreenQuadVAO, m_ScreenQuadVBO);
+
+    std::string framebVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.vert";
+    std::string framebFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultfbo.frag";
+    Rendering::Shader framebShader(framebVert.c_str(), framebFrag.c_str());
+    m_FBShaderID = framebShader.ID;
+
+    m_SceneRenderTarget->SetFramebufferParams(m_FBOTextureMap, m_FBShaderID, m_ScreenQuadVAO);
+}
+
 void Renderer::RenderScene()
 {
-    if (m_Window->GetCamera() == nullptr)
-        InitializeActiveCamera();
-
+    Rendering::RenderingCommand::BindFrameBuffer(m_FBO);
     Rendering::RenderingCommand::EnableDepthTesting();
     Rendering::RenderingCommand::EnableFaceCulling();
     Rendering::RenderingCommand::ClearColor(m_Scene->background);
@@ -48,6 +61,9 @@ void Renderer::RenderScene()
     {
         RenderEditorGrid();
     }
+
+    unsigned int empty = 0;
+    Rendering::RenderingCommand::BindFrameBuffer(empty);
 }
 
 void Renderer::RenderCamera()

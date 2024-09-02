@@ -2,6 +2,7 @@
 #define RENDERING_H
 
 #include "Core/Include/Window.h"
+#include "Include/EditorUI.h"
 #include "Rendering/Include/Camera.h"
 #include "Rendering/Include/RenderingCommand.h"
 #include "Rendering/Include/Scene.h"
@@ -23,18 +24,33 @@ class Renderer
         m_Window = window;
     }
 
+    inline void SetSceneRenderTarget(std::shared_ptr<Core::EditorUI> editorUI)
+    {
+        m_SceneRenderTarget = editorUI;
+    }
+
     void InitializeActiveCamera();
     void InitializeScene();
+    void InitializeFramebuffer();
+
     void RenderScene();
     void RenderCamera();
     void RenderEditorGrid();
+
     void CleanupScene();
 
   private:
+    // Scene
     std::shared_ptr<Scene> m_Scene;
     std::vector<std::pair<std::string, Shader>> m_Shaders;
     std::shared_ptr<Core::Window> m_Window;
+
+    // Objects
     unsigned m_VAO, m_VBO;
+
+    // Frame Buffer
+    std::shared_ptr<Core::EditorUI> m_SceneRenderTarget;
+    unsigned m_FBShaderID, m_FBO, m_FBOTextureMap, m_FBODepthTexture, m_ScreenQuadVAO, m_ScreenQuadVBO;
 };
 
 } // namespace Rendering

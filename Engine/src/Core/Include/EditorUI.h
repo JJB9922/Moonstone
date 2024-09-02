@@ -15,29 +15,48 @@ namespace Core
 
 class EditorUI
 {
-    public:
-        EditorUI() = default;
+  public:
+    EditorUI() = default;
 
-        ~EditorUI();
+    ~EditorUI();
 
-        void PushLayer(std::shared_ptr<Layer> layer);
-        void PopLayer(std::shared_ptr<Layer> layer);
-        void PushOverlay(std::shared_ptr<Layer> overlay);
-        void PopOverlay(std::shared_ptr<Layer> overlay);
+    void PushLayer(std::shared_ptr<Layer> layer);
+    void PopLayer(std::shared_ptr<Layer> layer);
+    void PushOverlay(std::shared_ptr<Layer> overlay);
+    void PopOverlay(std::shared_ptr<Layer> overlay);
 
-        inline void SetWindow(std::shared_ptr<Window> window) { m_Window = window; }
-        void        Init();
-        void        Shutdown();
-        void        Render();
+    inline void SetWindow(std::shared_ptr<Window> window)
+    {
+        m_Window = window;
+    }
 
-        inline LayerStack         GetLayerStack() { return m_LayerStack; }
-        inline std::vector<Layer> GetLayers() { return m_Layers; }
+    inline void SetFramebufferParams(unsigned &FBOTexMap, unsigned &FBShaderID, unsigned &screenQuadVAO)
+    {
+        m_FBOTextureMap = FBOTexMap;
+        m_FBShaderID = FBShaderID;
+        m_ScreenQuadVAO = screenQuadVAO;
+    }
 
-    private:
-        LayerStack                         m_LayerStack;
-        std::vector<Layer>                 m_Layers;
-        std::shared_ptr<Window>            m_Window;
-        std::shared_ptr<Tools::ImGuiLayer> m_ImGuiLayer;
+    void Init();
+    void Shutdown();
+    void Render();
+
+    inline LayerStack GetLayerStack()
+    {
+        return m_LayerStack;
+    }
+    inline std::vector<Layer> GetLayers()
+    {
+        return m_Layers;
+    }
+
+  private:
+    LayerStack m_LayerStack;
+    std::vector<Layer> m_Layers;
+    std::shared_ptr<Window> m_Window;
+    std::shared_ptr<Tools::ImGuiLayer> m_ImGuiLayer;
+
+    unsigned m_FBOTextureMap, m_FBShaderID, m_ScreenQuadVAO;
 };
 
 } // namespace Core

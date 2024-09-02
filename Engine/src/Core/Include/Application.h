@@ -40,9 +40,6 @@ class Application
     void InitializeEditor();
 
   private:
-    void InitializeFramebuffer();
-    void InitializeCamera();
-    void UpdateGrid(Rendering::Shader &gridShader);
     void UpdateModels(Rendering::Shader &meshShader, Rendering::Model &model);
 
     void UpdateCustomBaseShapes();
@@ -55,7 +52,8 @@ class Application
     std::shared_ptr<Rendering::Renderer> m_SceneRenderer;
     Rendering::SceneManager m_SceneManager;
 
-    EditorUI m_EditorUI;
+    std::shared_ptr<EditorUI> m_EditorUI;
+
     bool m_Running;
 
     // Rendering::Camera m_Camera;
