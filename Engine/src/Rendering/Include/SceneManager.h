@@ -8,7 +8,9 @@
 #include "Rendering/Include/Shader.h"
 #include "Tools/Include/BaseShapes.h"
 #include "mspch.h"
+#include <algorithm>
 #include <glm/glm.hpp>
+#include <memory>
 
 namespace Moonstone
 {
@@ -18,25 +20,31 @@ namespace Rendering
 
 class SceneManager
 {
-    public:
-        SceneManager()  = default;
-        ~SceneManager() = default;
+  public:
+    SceneManager() = default;
+    ~SceneManager() = default;
 
-        // Scene
-        std::shared_ptr<Scene> LoadDefaultScene();
-        std::shared_ptr<Scene> LoadScene();
+    // Scene
+    std::shared_ptr<Scene> LoadDefaultScene();
+    std::shared_ptr<Scene> LoadScene();
 
-        void RenderScene(std::shared_ptr<Scene> scene);
+    std::unique_ptr<Renderer> InitializeSceneRenderer(std::shared_ptr<Scene> scene);
 
-    private:
-        // Grid
-        void        SetupEditorGrid();
-        inline bool GetDefaultGridEnabled() { return m_IsEditorGridEnabled; }
-        inline void SetDefaultGridEnabled(bool enabled) { m_IsEditorGridEnabled = enabled; }
+  private:
+    // Grid
+    void SetupEditorGrid();
+    inline bool GetDefaultGridEnabled()
+    {
+        return m_IsEditorGridEnabled;
+    }
+    inline void SetDefaultGridEnabled(bool enabled)
+    {
+        m_IsEditorGridEnabled = enabled;
+    }
 
-    private:
-        // Grid
-        bool m_IsEditorGridEnabled;
+  private:
+    // Grid
+    bool m_IsEditorGridEnabled;
 };
 
 } // namespace Rendering
