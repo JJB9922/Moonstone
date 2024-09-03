@@ -1,5 +1,6 @@
 #include "Include/Renderer.h"
 #include "Include/BaseShapes.h"
+#include "Include/Logger.h"
 #include "Rendering/Include/RenderingCommand.h"
 #include "ext/matrix_transform.hpp"
 #include "trigonometric.hpp"
@@ -101,6 +102,9 @@ void Renderer::RenderEditorGrid()
 
             RenderingCommand::SubmitDrawArrays(RenderingAPI::DrawMode::Triangles, 0,
                                                Tools::BaseShapes::gridVerticesSize / 3 * sizeof(float));
+
+            unsigned int empty = 0;
+            RenderingCommand::BindVertexArray(empty);
         }
         else
         {
@@ -122,8 +126,7 @@ void Renderer::RenderVisibleObjects()
     for (auto object : m_Scene->objects)
     {
         object.shader.Use();
-        RenderingCommand::BindVertexArray(m_VAO);
-        RenderingCommand::SetUniformMat4(object.shader.ID, "model", m_Scene->activeCamera->GetModel());
+        RenderingCommand::BindVertexArray(object.vao);
 
         // User applied transformations
         glm::mat4 modelTransformationMatrix =
@@ -158,6 +161,9 @@ void Renderer::RenderVisibleObjects()
 
         // TODO Fix for a clean blend between cubes and models
         RenderingCommand::SubmitDrawArrays(RenderingAPI::DrawMode::Triangles, 0, object.size);
+
+        unsigned int empty = 0;
+        RenderingCommand::BindVertexArray(empty);
     }
 }
 

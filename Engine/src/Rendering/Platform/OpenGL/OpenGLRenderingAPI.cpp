@@ -111,7 +111,7 @@ void OpenGLRenderingAPI::BindVertexBuffer(unsigned &VBO)
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 }
 
-void OpenGLRenderingAPI::BindVertexArray(unsigned &VAO)
+void OpenGLRenderingAPI::BindVertexArray(unsigned int &VAO)
 {
     glBindVertexArray(VAO);
 }

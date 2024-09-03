@@ -62,7 +62,7 @@ class RenderingCommand
     {
         s_RenderingAPI->BindVertexBuffer(VBO);
     }
-    inline static void BindVertexArray(unsigned &VAO)
+    inline static void BindVertexArray(unsigned int &VAO)
     {
         s_RenderingAPI->BindVertexArray(VAO);
     }

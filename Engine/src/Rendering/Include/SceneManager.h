@@ -42,6 +42,8 @@ class SceneManager
         m_IsEditorGridEnabled = enabled;
     }
 
+    void AddModelToScene(std::shared_ptr<Scene> scene);
+
   private:
     // Grid
     bool m_IsEditorGridEnabled;

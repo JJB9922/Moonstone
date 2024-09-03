@@ -71,34 +71,6 @@ std::unique_ptr<Application> CreateApplicationInstance()
     return std::make_unique<Application>(Application());
 }
 
-void Application::AddCube()
-{
-    m_VAO.push_back(0);
-    m_VBO.push_back(0);
-
-    Rendering::RenderingCommand::InitVertexArray(m_VAO.back());
-    Rendering::RenderingCommand::InitVertexBuffer(m_VBO.back(), Tools::BaseShapes::cubeVertices,
-                                                  Tools::BaseShapes::cubeVerticesSize);
-
-    Rendering::RenderingCommand::InitVertexAttributes(0, 3, Rendering::RenderingAPI::NumericalDataType::Float,
-                                                      Rendering::RenderingAPI::BooleanDataType::False,
-                                                      6 * sizeof(float), 0);
-
-    Rendering::RenderingCommand::InitVertexAttributes(1, 3, Rendering::RenderingAPI::NumericalDataType::Float,
-                                                      Rendering::RenderingAPI::BooleanDataType::False,
-                                                      6 * sizeof(float), 3 * sizeof(float));
-
-    std::string cubeVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.vert";
-    std::string cubeFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultcube.frag";
-    Rendering::Shader cubeShader(cubeVert.c_str(), cubeFrag.c_str());
-
-    std::stringstream ss;
-    ss << "default_cube_" << m_Objects.size();
-
-    Rendering::SceneObject cube = {
-        true, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
-    m_Objects.push_back(cube);
-}
-
 } // namespace Core
+//
 } // namespace Moonstone

@@ -16,6 +16,8 @@ struct SceneObject
 {
     bool isActive;
 
+    unsigned vao = 0, vbo = 0;
+
     glm::vec3 position = {0.0f, 0.0f, 0.0f};
     glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
     glm::vec3 scale = {1.0f, 1.0f, 1.0f};
@@ -27,6 +29,8 @@ struct SceneObject
     void Clear()
     {
         isActive = false;
+        vao = 0;
+        vbo = 0;
         position = {0, 0, 0};
         rotation = {0, 0, 0};
         scale = {1, 1, 1};

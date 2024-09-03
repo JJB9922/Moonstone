@@ -115,7 +115,7 @@ class RenderingAPI
     virtual void InitVertexArray(unsigned &VAO) = 0;
     virtual void InitVertexBuffer(unsigned &VBO, float *vertices, size_t size) = 0;
     virtual void BindVertexBuffer(unsigned &VBO) = 0;
-    virtual void BindVertexArray(unsigned &VAO) = 0;
+    virtual void BindVertexArray(unsigned int &VAO) = 0;
     virtual void InitElementBuffer(unsigned &EBO, unsigned *indices, size_t size) = 0;
     virtual void InitVertexAttributes(int index, int size, NumericalDataType type, BooleanDataType normalize,
                                       size_t stride, size_t offset) = 0;
