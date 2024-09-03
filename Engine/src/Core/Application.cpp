@@ -55,8 +55,6 @@ void Application::Run()
 
         m_SceneRenderer->RenderScene();
 
-        // UpdateCustomBaseShapes();
-
         m_EditorUI->Render();
 
         Window::UpdateWindow(m_Window);
@@ -66,51 +64,6 @@ void Application::Run()
     }
 
     m_SceneRenderer->CleanupScene();
-}
-
-void Application::UpdateCustomBaseShapes()
-{
-    for (int i = 0; i < m_Objects.size(); ++i)
-    {
-        // Model
-        m_Objects[i].shader.Use();
-        Rendering::RenderingCommand::BindVertexArray(m_VAO[i + 1]);
-        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", m_ActiveCamera->GetModel());
-
-        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "model",
-                                                    glm::translate(m_ActiveCamera->GetModel(), m_Objects[i].position));
-
-        glm::mat4 modelTransformMatrix =
-            glm::translate(glm::mat4(1.0f), m_Objects[i].position) *
-            glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.z), glm::vec3(0.0f, 0.0f, 1.0f)) *
-            glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
-            glm::rotate(glm::mat4(1.0f), glm::radians(m_Objects[i].rotation.x), glm::vec3(1.0f, 0.0f, 0.0f)) *
-            glm::scale(glm::mat4(1.0f), m_Objects[i].scale);
-
-        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "model", modelTransformMatrix);
-
-        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "view", m_ActiveCamera->GetViewMatrix());
-        Rendering::RenderingCommand::SetUniformMat4(m_Objects[i].shader.ID, "projection",
-                                                    m_ActiveCamera->GetProjectionMatrix());
-
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "objectColor", {1.0f, 0.0f, 1.0f});
-
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.diffuse", {0.6f, 0.6f, 0.6f});
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
-        Rendering::RenderingCommand::SetUniformFloat(m_Objects[i].shader.ID, "material.shininess", 64.0f);
-
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "viewPos", m_ActiveCamera->GetPosition());
-
-        // Directional Light
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.direction", m_TimeOfDay);
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.ambient", {0.3f, 0.3f, 0.3f});
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
-        Rendering::RenderingCommand::SetUniformVec3(m_Objects[i].shader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
-        Rendering::RenderingCommand::SetUniformBool(m_Objects[i].shader.ID, "dirLight.isActive", m_SunLight);
-
-        Rendering::RenderingCommand::SubmitDrawArrays(Rendering::RenderingAPI::DrawMode::Triangles, 0,
-                                                      m_Objects[i].size);
-    }
 }
 
 std::unique_ptr<Application> CreateApplicationInstance()

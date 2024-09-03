@@ -96,8 +96,8 @@ class Window
     std::vector<std::type_index> m_SubscribedWindowEvents;
     std::unique_ptr<Rendering::GraphicsContext> m_GraphicsContext;
     std::shared_ptr<Rendering::CameraController> m_CameraController = nullptr;
-    float m_LastX = m_WindowData.windowProperties.Width / 2;
-    float m_LastY = m_WindowData.windowProperties.Height / 2;
+    float m_LastX = m_WindowData.windowProperties.Width;
+    float m_LastY = m_WindowData.windowProperties.Height;
     bool m_FirstMouse = true;
     float m_CamSensitivity = 0.2f;
 
