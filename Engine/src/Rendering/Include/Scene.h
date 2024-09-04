@@ -3,6 +3,7 @@
 
 #include "Rendering/Include/Camera.h"
 #include "Rendering/Include/Lighting.h"
+#include "Rendering/Include/Material.h"
 #include "Rendering/Include/Shader.h"
 #include <memory>
 
@@ -21,6 +22,7 @@ struct SceneObject
     glm::vec3 position = {0.0f, 0.0f, 0.0f};
     glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
     glm::vec3 scale = {1.0f, 1.0f, 1.0f};
+    Material::Mat material;
 
     std::string name;
     Rendering::Shader shader;

@@ -8,9 +8,7 @@
 #include "Rendering/Include/Shader.h"
 #include "Tools/Include/BaseShapes.h"
 #include "mspch.h"
-#include <algorithm>
-#include <glm/glm.hpp>
-#include <memory>
+// #include <glm/glm.hpp>
 
 namespace Moonstone
 {

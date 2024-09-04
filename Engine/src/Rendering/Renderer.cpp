@@ -1,7 +1,9 @@
 #include "Include/Renderer.h"
 #include "Include/BaseShapes.h"
 #include "Include/Logger.h"
+#include "Rendering/Include/Lighting.h"
 #include "Rendering/Include/RenderingCommand.h"
+#include "Rendering/Include/Scene.h"
 #include "ext/matrix_transform.hpp"
 #include "trigonometric.hpp"
 #include <memory>
@@ -142,28 +144,81 @@ void Renderer::RenderVisibleObjects()
         RenderingCommand::SetUniformMat4(object.shader.ID, "projection", m_Scene->activeCamera->GetProjectionMatrix());
 
         // If an object doesn't have a material or texture, make it the ugliest pink u can possibly imagine
-        RenderingCommand::SetUniformVec3(object.shader.ID, "objectColor", {1.0f, 0.0f, 1.0f});
-
-        // TODO: Set this up to take in different mat types
-        RenderingCommand::SetUniformVec3(object.shader.ID, "material.diffuse", {0.6f, 0.6f, 0.6f});
-        RenderingCommand::SetUniformVec3(object.shader.ID, "material.specular", {0.5f, 0.5f, 0.5f});
-        RenderingCommand::SetUniformFloat(object.shader.ID, "material.shininess", 64.0f);
+        RenderingCommand::SetUniformVec3(object.shader.ID, "material.baseColour", object.material.baseColour);
+        RenderingCommand::SetUniformVec3(object.shader.ID, "material.diffuse", object.material.diffuse);
+        RenderingCommand::SetUniformVec3(object.shader.ID, "material.specular", object.material.specular);
+        RenderingCommand::SetUniformFloat(object.shader.ID, "material.shininess", object.material.shininess);
 
         RenderingCommand::SetUniformVec3(object.shader.ID, "viewPos", m_Scene->activeCamera->GetPosition());
 
-        // Directional Light
-        // TODO Set to time of day or user set dirlight
-        RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.direction", {0.5f, 0.5f, 0.5f});
-        RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.ambient", {0.3f, 0.3f, 0.3f});
-        RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.diffuse", {1.0f, 0.8f, 0.6f});
-        RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.specular", {1.2f, 1.2f, 1.2f});
-        RenderingCommand::SetUniformBool(object.shader.ID, "dirLight.isActive", true);
+        RenderLighting(object);
 
+        // TODO Set to time of day or user set dirlight
         // TODO Fix for a clean blend between cubes and models
         RenderingCommand::SubmitDrawArrays(RenderingAPI::DrawMode::Triangles, 0, object.size);
 
         unsigned int empty = 0;
         RenderingCommand::BindVertexArray(empty);
+    }
+}
+
+void Renderer::RenderLighting(SceneObject &object)
+{
+
+    auto lights = m_Scene->lighting.GetLights();
+    std::vector<Lighting::Light> pointLights;
+
+    for (auto light : lights)
+    {
+        if (light.type == Lighting::LightType::Directional)
+        {
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.direction", light.direction);
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.ambient", light.ambient);
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.diffuse", light.diffuse);
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.specular", light.specular);
+        }
+        else if (light.type == Lighting::LightType::Point)
+        {
+            pointLights.push_back(light);
+        }
+    }
+
+    // TODO SSBO
+    for (unsigned i = 0; i < pointLights.size(); ++i)
+    {
+        std::stringstream ss;
+        ss << "pointLights[" << i << "].position";
+        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].position);
+
+        ss.str("");
+        ss.clear(); // Clear the stringstream for reuse
+        ss << "pointLights[" << i << "].ambient";
+        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].ambient);
+
+        ss.str("");
+        ss.clear();
+        ss << "pointLights[" << i << "].diffuse";
+        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].diffuse);
+
+        ss.str("");
+        ss.clear();
+        ss << "pointLights[" << i << "].specular";
+        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].specular);
+
+        ss.str("");
+        ss.clear();
+        ss << "pointLights[" << i << "].constant";
+        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].constant);
+
+        ss.str("");
+        ss.clear();
+        ss << "pointLights[" << i << "].linear";
+        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].linear);
+
+        ss.str("");
+        ss.clear();
+        ss << "pointLights[" << i << "].quadratic";
+        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].quadratic);
     }
 }
 

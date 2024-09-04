@@ -37,6 +37,7 @@ class Renderer
     void RenderCamera();
     void RenderEditorGrid();
     void RenderVisibleObjects();
+    void RenderLighting(SceneObject &object);
 
     void CleanupScene();
 
