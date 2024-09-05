@@ -37,6 +37,11 @@ class EditorUI
         m_ScreenQuadVAO = screenQuadVAO;
     }
 
+    inline void SetActiveScene(std::shared_ptr<Rendering::Scene> scene)
+    {
+        m_ActiveScene = scene;
+    }
+
     void Init();
     void Shutdown();
     void Render();
@@ -55,6 +60,7 @@ class EditorUI
     std::vector<Layer> m_Layers;
     std::shared_ptr<Window> m_Window;
     std::shared_ptr<Tools::ImGuiLayer> m_ImGuiLayer;
+    std::shared_ptr<Rendering::Scene> m_ActiveScene;
 
     unsigned m_FBOTextureMap, m_FBShaderID, m_ScreenQuadVAO;
 };

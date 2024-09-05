@@ -529,13 +529,13 @@ class ControlsLayer : public Layer
         ApplyCameraSens,
         ToggleGrid,
         AddObject,
-        ToggleSunlight,
-        ApplyTimeOfDay,
+        AddDirectionalLight,
+        AddPointLight
     };
 
     enum class SliderID
     {
-        TimeOfDay,
+        DirectionalLightAngle,
     };
 
     enum class SceneObject
@@ -663,29 +663,23 @@ class ControlsLayer : public Layer
 
         ImGui::Text("Lighting");
 
-        if (ImGui::Button("Toggle Sun Light", btnSize) && m_BtnCallbacks[ButtonID::ToggleSunlight])
+        if (ImGui::Button("Add Directional Light", btnSize) && m_BtnCallbacks[ButtonID::AddDirectionalLight])
         {
-            m_SunOn = !m_SunOn;
-            m_BtnCallbacks[ButtonID::ToggleSunlight]();
+            m_BtnCallbacks[ButtonID::AddDirectionalLight]();
         }
-        if (m_SunOn)
+
+        ImGui::Text("Time of Day");
+
+        ImGui::SliderFloat("Time of Day", &m_TimeOfDay, 0.0f, 1.0f, "%.3f");
+
+        if (m_SliderCallbacks[SliderID::DirectionalLightAngle])
         {
-            ImGui::SameLine();
-            ImGui::Text("Sunlight is On");
-
-            ImGui::Text("Time of Day");
-
-            ImGui::SliderFloat("Time of Day", &m_TimeOfDay, 0.0f, 1.0f, "%.3f");
-
-            if (m_SliderCallbacks[SliderID::TimeOfDay])
-            {
-                m_SliderCallbacks[SliderID::TimeOfDay](m_TimeOfDay);
-            }
+            m_SliderCallbacks[SliderID::DirectionalLightAngle](m_TimeOfDay);
         }
-        else
+
+        if (ImGui::Button("Add Point Light", btnSize) && m_BtnCallbacks[ButtonID::AddPointLight])
         {
-            ImGui::SameLine();
-            ImGui::Text("Sunlight is Off");
+            m_BtnCallbacks[ButtonID::AddPointLight]();
         }
 
         ImGui::Text("Objects");

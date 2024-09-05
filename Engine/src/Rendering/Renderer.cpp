@@ -7,6 +7,7 @@
 #include "ext/matrix_transform.hpp"
 #include "trigonometric.hpp"
 #include <memory>
+#include <string>
 
 namespace Moonstone
 {
@@ -58,7 +59,7 @@ void Renderer::RenderScene()
     RenderingCommand::ClearColor(m_Scene->background);
     RenderingCommand::Clear();
 
-    RenderCamera();
+    SetupCamera();
 
     if (m_Scene->isGridEnabled)
     {
@@ -71,15 +72,14 @@ void Renderer::RenderScene()
     RenderingCommand::BindFrameBuffer(empty);
 }
 
-void Renderer::RenderCamera()
+void Renderer::SetupCamera()
 {
     float nearClip = 0.1f;
     float farClip = 100.0f;
 
-    m_Scene->activeCamera->SetProjectionMatrix(m_Scene->activeCamera, m_Window->GetWidth(), m_Window->GetHeight(),
-                                               nearClip, farClip);
+    m_Scene->activeCamera->SetProjectionMatrix(m_Window->GetWidth(), m_Window->GetHeight(), nearClip, farClip);
 
-    m_Scene->activeCamera->SetViewMatrix(m_Scene->activeCamera);
+    m_Scene->activeCamera->SetViewMatrix();
     m_Scene->activeCamera->SetModel({0, 0, 0});
 }
 
@@ -125,9 +125,18 @@ void Renderer::RenderEditorGrid()
 
 void Renderer::RenderVisibleObjects()
 {
+    unsigned currentShaderID = 0;
+
     for (auto object : m_Scene->objects)
     {
-        object.shader.Use();
+        if (object.shader.ID != currentShaderID)
+        {
+            object.shader.Use();
+            currentShaderID = object.shader.ID;
+
+            RenderLighting(object);
+        }
+
         RenderingCommand::BindVertexArray(object.vao);
 
         // User applied transformations
@@ -139,7 +148,6 @@ void Renderer::RenderVisibleObjects()
             glm::scale(glm::mat4(1.0f), object.scale);
 
         RenderingCommand::SetUniformMat4(object.shader.ID, "model", modelTransformationMatrix);
-
         RenderingCommand::SetUniformMat4(object.shader.ID, "view", m_Scene->activeCamera->GetViewMatrix());
         RenderingCommand::SetUniformMat4(object.shader.ID, "projection", m_Scene->activeCamera->GetProjectionMatrix());
 
@@ -150,8 +158,6 @@ void Renderer::RenderVisibleObjects()
         RenderingCommand::SetUniformFloat(object.shader.ID, "material.shininess", object.material.shininess);
 
         RenderingCommand::SetUniformVec3(object.shader.ID, "viewPos", m_Scene->activeCamera->GetPosition());
-
-        RenderLighting(object);
 
         // TODO Set to time of day or user set dirlight
         // TODO Fix for a clean blend between cubes and models

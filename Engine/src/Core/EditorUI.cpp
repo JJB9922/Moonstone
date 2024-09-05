@@ -1,6 +1,9 @@
 #include "Include/EditorUI.h"
 #include "Layers/Include/BaseLayers.h"
+#include "Rendering/Include/Lighting.h"
+#include "Rendering/Include/SceneManager.h"
 #include <memory>
+#include <sstream>
 
 namespace Moonstone
 {
@@ -30,15 +33,16 @@ void EditorUI::Init()
 
     auto debugLayer = std::make_shared<DebugLayer>();
     PushLayer(debugLayer);
-    /*
-        auto transformLayer = std::make_shared<TransformLayer>();
-        auto entityLayer = std::make_shared<EntityLayer>();
-        entityLayer->SetWindow(m_Window->m_Window);
-        entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
-                                    [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
-        entityLayer->SetTransformLayer(transformLayer);
-        PushLayer(entityLayer);
 
+    // auto transformLayer = std::make_shared<TransformLayer>();
+    auto entityLayer = std::make_shared<EntityLayer>();
+    entityLayer->SetWindow(m_Window->m_Window);
+    entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
+                                [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
+    // entityLayer->SetTransformLayer(transformLayer);
+    PushLayer(entityLayer);
+
+    /*
         transformLayer->SetBtnCallbackObj(
             TransformLayer::ButtonID::RemoveObject, [this, entityLayer](Rendering::SceneObject &object) {
             auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
@@ -74,10 +78,10 @@ void EditorUI::Init()
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ApplyBGColor, [this, controlsLayer]() {
         auto color = controlsLayer->GetBGColor();
-        m_Window->m_WindowColor.r = color.x;
-        m_Window->m_WindowColor.g = color.y;
-        m_Window->m_WindowColor.b = color.z;
-        m_Window->m_WindowColor.a = color.w;
+        m_ActiveScene->background.r = color.x;
+        m_ActiveScene->background.g = color.y;
+        m_ActiveScene->background.b = color.z;
+        m_ActiveScene->background.a = color.w;
     });
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleWireframe, [this]() {
@@ -101,7 +105,7 @@ void EditorUI::Init()
 
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleGrid, [this]() {
         {
-            // m_DefaultGrid = !m_DefaultGrid;
+            m_ActiveScene->isGridEnabled = !m_ActiveScene->isGridEnabled;
         }
     });
     /*
@@ -121,25 +125,39 @@ void EditorUI::Init()
                                               break;
                                       }
                                   });
+ */
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddDirectionalLight, [this, controlsLayer, entityLayer]() {
+        // TODO not string...
+        std::stringstream ss;
+        ss << "DirLight_" << m_ActiveScene->lighting.GetLights().size();
 
-  controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::ToggleSunlight,
-                                  [this, controlsLayer, entityLayer]() { //ToggleSunlight();
-                                  });
-*/
-
-    controlsLayer->SetSliderCallback(ControlsLayer::SliderID::TimeOfDay, [this, controlsLayer](float timeOfDayFloat) {
-        float timeOfDay = timeOfDayFloat;
-
-        float angle = timeOfDay * 2.0f * 3.14159f;
-
-        float y = cos(angle);
-        float x = sin(angle);
-        float z = 0.0f;
-
-        glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
-
-        // m_TimeOfDay = lightDirection;
+        auto dirLight = Rendering::Lighting::Light(ss.str(), {0.5f, -1.0f, 0.5f}, {0.1f, 0.1f, 0.1f},
+                                                   {0.8f, 0.8f, 0.8f}, {0.5f, 0.5f, 0.5f}, true);
+        Rendering::SceneManager sceneManager;
+        sceneManager.AddLightToScene(m_ActiveScene, dirLight);
     });
+
+    controlsLayer->SetSliderCallback(ControlsLayer::SliderID::DirectionalLightAngle,
+                                     [this, controlsLayer](float dirLightFloat) {
+                                         float sliderFloat = dirLightFloat;
+
+                                         float angle = sliderFloat * 2.0f * 3.14159f;
+
+                                         float y = cos(angle);
+                                         float x = sin(angle);
+                                         float z = 0.0f;
+
+                                         glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
+
+                                         for (auto light : m_ActiveScene->lighting.GetLights())
+                                         {
+                                             if (light.type == Rendering::Lighting::LightType::Directional)
+                                             {
+                                                 light.direction = lightDirection;
+                                                 m_ActiveScene->lighting.SetLight(light.id, light);
+                                             }
+                                         }
+                                     });
 
     m_Layers.push_back(*controlsLayer);
     PushLayer(controlsLayer);

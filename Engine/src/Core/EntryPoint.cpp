@@ -1,5 +1,3 @@
-#include "mspch.h"
-
 #include "Core/Include/Application.h"
 
 int main()
@@ -11,5 +9,6 @@ int main()
     MS_INFO("application initialised successfully");
 
     auto app = Moonstone::Core::CreateApplicationInstance();
+    app->InitializeEditor();
     app->Run();
 }

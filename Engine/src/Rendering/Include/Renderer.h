@@ -34,7 +34,7 @@ class Renderer
     void InitializeFramebuffer();
 
     void RenderScene();
-    void RenderCamera();
+    void SetupCamera();
     void RenderEditorGrid();
     void RenderVisibleObjects();
     void RenderLighting(SceneObject &object);

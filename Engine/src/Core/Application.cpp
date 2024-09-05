@@ -1,6 +1,6 @@
 #include "Include/Application.h"
-#include "Include/EditorUI.h"
 #include "mspch.h"
+#include <exception>
 #include <memory>
 
 namespace Moonstone
@@ -16,13 +16,12 @@ Application::Application()
     {
         MS_ASSERT(!s_ApplicationInstance, "application instance already exists");
     }
-
-    m_Window = std::shared_ptr<Window>(Window::CreateWindow());
-    InitializeEditor();
 }
 
 void Application::InitializeEditor()
 {
+    m_Window = std::shared_ptr<Window>(Window::CreateWindow());
+
     // UI
     std::shared_ptr<EditorUI> editorUI = std::make_shared<EditorUI>();
     m_EditorUI = editorUI;
@@ -39,6 +38,7 @@ void Application::InitializeEditor()
     m_SceneRenderer->InitializeFramebuffer();
 
     // Init UI with Scene in place
+    m_EditorUI->SetActiveScene(currentScene);
     m_EditorUI->Init();
 }
 

@@ -1,4 +1,6 @@
 #include "Include/SceneManager.h"
+#include "Include/Logger.h"
+#include <string>
 
 namespace Moonstone
 {
@@ -23,28 +25,14 @@ std::shared_ptr<Scene> SceneManager::LoadDefaultScene()
     std::shared_ptr<Camera> defaultCamera = std::make_shared<Camera>(cameraPos, cameraFront, cameraUp);
 
     // Lighting Setup
-    Lighting defaultLighting;
-    glm::vec3 direction = {0.3f, 0.3f, 0.3f};
-    glm::vec3 ambient = {0.3f, 0.3f, 0.3f};
-    glm::vec3 diffuse = {0.3f, 0.3f, 0.3f};
-    glm::vec3 specular = {0.3f, 0.3f, 0.3f};
-    bool isActive = false;
-
-    auto dirLight = Lighting::Light(direction, ambient, diffuse, specular, isActive);
-    // defaultLighting.AddLight(dirLight);
-
-    glm::vec3 position = {3.3f, 1.3f, 0.3f};
-
-    auto pointLight = Lighting::Light(position, {0.2f, 0.2f, 0.2f}, {2.0f, 2.0f, 2.0f}, {2.0f, 2.0f, 2.0f}, true, 0.1f,
-                                      0.09f, 0.032f);
-    defaultLighting.AddLight(pointLight);
+    Lighting lighting;
 
     // Build scene struct
     scene->sceneID = 0;
     scene->shaders.push_back(defaultGridShader);
     scene->cameras.push_back(defaultCamera);
     scene->activeCamera = defaultCamera;
-    scene->lighting = defaultLighting;
+    scene->lighting = lighting;
     scene->isGridEnabled = true;
 
     AddModelToScene(scene);
@@ -57,6 +45,27 @@ std::unique_ptr<Renderer> SceneManager::InitializeSceneRenderer(std::shared_ptr<
     auto renderer = std::make_unique<Renderer>(scene);
     renderer->InitializeScene();
     return renderer;
+}
+
+void SceneManager::AddLightToScene(std::shared_ptr<Scene> &scene, Lighting::Light &light)
+{
+
+    if (light.type == Lighting::LightType::Point)
+    {
+        auto pointLight = Lighting::Light(light.id, light.position, light.ambient, light.diffuse, light.specular,
+                                          light.isActive, light.constant, light.linear, light.quadratic);
+
+        scene->lighting.AddLight(pointLight);
+        MS_INFO("addded a point light");
+    }
+    else if (light.type == Lighting::LightType::Directional)
+    {
+        auto dirLight =
+            Lighting::Light(light.id, light.direction, light.ambient, light.diffuse, light.specular, light.isActive);
+
+        scene->lighting.AddLight(dirLight);
+        MS_INFO("added a directional light");
+    }
 }
 
 void SceneManager::AddModelToScene(std::shared_ptr<Scene> scene)

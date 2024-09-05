@@ -28,6 +28,9 @@ class SceneManager
 
     std::unique_ptr<Renderer> InitializeSceneRenderer(std::shared_ptr<Scene> scene);
 
+    void AddLightToScene(std::shared_ptr<Scene> &scene, Lighting::Light &light);
+    void AddModelToScene(std::shared_ptr<Scene> scene);
+
   private:
     // Grid
     void SetupEditorGrid();
@@ -39,8 +42,6 @@ class SceneManager
     {
         m_IsEditorGridEnabled = enabled;
     }
-
-    void AddModelToScene(std::shared_ptr<Scene> scene);
 
   private:
     // Grid

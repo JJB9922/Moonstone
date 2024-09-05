@@ -6,23 +6,19 @@ namespace Moonstone
 namespace Rendering
 {
 
-void Camera::SetProjectionMatrix(
-    std::shared_ptr<Camera> camera, int winWidth, int winHeight, float nearClip, float farClip)
+void Camera::SetProjectionMatrix(int winWidth, int winHeight, float nearClip, float farClip)
 {
     glm::mat4 projection = glm::mat4(1.0);
 
-    projection = glm::perspective(glm::radians(camera->GetFov()),
-                                  (float) winWidth / (float) winHeight,
-                                  nearClip,
-                                  farClip);
+    projection = glm::perspective(glm::radians(GetFov()), (float)winWidth / (float)winHeight, nearClip, farClip);
 
     m_ProjectionMatrix = projection;
 }
 
-void Camera::SetViewMatrix(std::shared_ptr<Camera> camera)
+void Camera::SetViewMatrix()
 {
     glm::mat4 view;
-    view = glm::lookAt(camera->GetPosition(), camera->GetPosition() + camera->GetFront(), camera->GetUp());
+    view = glm::lookAt(GetPosition(), GetPosition() + GetFront(), GetUp());
 
     m_ViewMatrix = view;
 }
@@ -30,7 +26,7 @@ void Camera::SetViewMatrix(std::shared_ptr<Camera> camera)
 void Camera::SetModel(glm::vec3 model)
 {
     glm::mat4 m = glm::mat4(1.0f);
-    m           = glm::translate(m, model);
+    m = glm::translate(m, model);
 
     m_Model = m;
 }
