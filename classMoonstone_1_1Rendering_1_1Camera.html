@@ -121,10 +121,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a446b828bbce5e95e017836625da6ea3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b480d30a6e978bd4b5909065be504bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a5b480d30a6e978bd4b5909065be504bb">GetConnected</a> () const override</td></tr>
 <tr class="separator:a5b480d30a6e978bd4b5909065be504bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52185b88314638105e3bd873705b89dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a52185b88314638105e3bd873705b89dd">SetProjectionMatrix</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt; camera, int winWidth, int winHeight, float nearClip, float farClip)</td></tr>
-<tr class="separator:a52185b88314638105e3bd873705b89dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad98ba950538030515bb8b69e7d8e1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a0ad98ba950538030515bb8b69e7d8e1e">SetViewMatrix</a> (std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt; camera)</td></tr>
-<tr class="separator:a0ad98ba950538030515bb8b69e7d8e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4600b05c99bbc43d0587015ce8275b4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a4600b05c99bbc43d0587015ce8275b4a">SetProjectionMatrix</a> (int winWidth, int winHeight, float nearClip, float farClip)</td></tr>
+<tr class="separator:a4600b05c99bbc43d0587015ce8275b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d2d9249b56578c65f9be4665b83bd5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a1d2d9249b56578c65f9be4665b83bd5a">SetViewMatrix</a> ()</td></tr>
+<tr class="separator:a1d2d9249b56578c65f9be4665b83bd5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae429ab2f63db67a554b0b1a1fd74eded"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#ae429ab2f63db67a554b0b1a1fd74eded">SetModel</a> (glm::vec3 model)</td></tr>
 <tr class="separator:ae429ab2f63db67a554b0b1a1fd74eded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a269aa94d53f9405e37ad865cb70b275f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html#a269aa94d53f9405e37ad865cb70b275f">SetModelTransform</a> (unsigned shaderID, glm::mat4 model)</td></tr>
@@ -856,8 +856,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a52185b88314638105e3bd873705b89dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52185b88314638105e3bd873705b89dd">&#9670;&nbsp;</a></span>SetProjectionMatrix()</h2>
+<a id="a4600b05c99bbc43d0587015ce8275b4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4600b05c99bbc43d0587015ce8275b4a">&#9670;&nbsp;</a></span>SetProjectionMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -865,12 +865,6 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Moonstone::Rendering::Camera::SetProjectionMatrix </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt;&#160;</td>
-          <td class="paramname"><em>camera</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>winWidth</em>, </td>
         </tr>
@@ -956,8 +950,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0ad98ba950538030515bb8b69e7d8e1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ad98ba950538030515bb8b69e7d8e1e">&#9670;&nbsp;</a></span>SetViewMatrix()</h2>
+<a id="a1d2d9249b56578c65f9be4665b83bd5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d2d9249b56578c65f9be4665b83bd5a">&#9670;&nbsp;</a></span>SetViewMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -965,8 +959,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Moonstone::Rendering::Camera::SetViewMatrix </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classMoonstone_1_1Rendering_1_1Camera.html">Camera</a> &gt;&#160;</td>
-          <td class="paramname"><em>camera</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
