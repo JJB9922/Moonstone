@@ -16,7 +16,6 @@ Assimp requires a bit of custom setup since it builds custom config files per sy
 `cd assimp`
 `cmake .`
 
-Good luck working out the rest, I didn't want to
 
 # Build - Linux
 
@@ -49,3 +48,6 @@ cd into the `build` folder
 run `cmake ..`
 run `cmake --build .`
 run the resulting MoonstoneApp executable.
+
+Good luck working out the rest, I didn't want to
+
