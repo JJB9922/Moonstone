@@ -88,6 +88,9 @@ $(function() {
 , <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a9b794724da68a2d04d2c8281a2e91c05">Moonstone::Core::EntityLayer</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7310e9dac6d55a21020e56175233f2e4">Moonstone::Core::TransformLayer</a>
 </li>
+<li>m_BtnCallbacksLight
+: <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a64d3f85a84ef0ef9b17a7363559a72b7">Moonstone::Core::TransformLayer</a>
+</li>
 <li>m_BtnCallbacksObj
 : <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ab5d1a89c20abb9abb54b1389fdafcd8e">Moonstone::Core::TransformLayer</a>
 </li>
@@ -219,7 +222,17 @@ $(function() {
 : <a class="el" href="classMoonstone_1_1Core_1_1EditorUI.html#a7b785e4f67556e41a3ddc96cdac7ccdc">Moonstone::Core::EditorUI</a>
 </li>
 <li>m_Lights
-: <a class="el" href="classMoonstone_1_1Rendering_1_1Lighting.html#ae32fdc09be8c4ea60ac98aa0e39dcc12">Moonstone::Rendering::Lighting</a>
+: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a54da4ba4476325eb433cc4158b235a89">Moonstone::Core::EntityLayer</a>
+, <a class="el" href="classMoonstone_1_1Rendering_1_1Lighting.html#ae32fdc09be8c4ea60ac98aa0e39dcc12">Moonstone::Rendering::Lighting</a>
+</li>
+<li>m_LightXPos
+: <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a8f56f76e86b89723fa931eb6f9621397">Moonstone::Core::TransformLayer</a>
+</li>
+<li>m_LightYPos
+: <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a5f9dbfd6f6350056125696fb1f2e6550">Moonstone::Core::TransformLayer</a>
+</li>
+<li>m_LightZPos
+: <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7834baab1cd584bbc92c2813bf6b9ce4">Moonstone::Core::TransformLayer</a>
 </li>
 <li>m_LinkedScale
 : <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a35009cf9647aed69a56627ab3b8dad20">Moonstone::Core::TransformLayer</a>
@@ -278,11 +291,17 @@ $(function() {
 : <a class="el" href="classMoonstone_1_1Core_1_1Application.html#a15487ffca64695a494d7b4113586abc9">Moonstone::Core::Application</a>
 , <a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#a62292c901ffad2336b201c9884af974f">Moonstone::Rendering::Renderer</a>
 </li>
-<li>m_SelectedEntity
-: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a819b65042224bd10fbbae82e88edba14">Moonstone::Core::EntityLayer</a>
+<li>m_SelectedLight
+: <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a9b8cc60bd5e25c494b5e95862a535da1">Moonstone::Core::TransformLayer</a>
+</li>
+<li>m_SelectedLightEntity
+: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a712a81f66ad45d388dfb23067bd085d5">Moonstone::Core::EntityLayer</a>
 </li>
 <li>m_SelectedObject
 : <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a5f9e288621c5af05bb979a7b0cdce380">Moonstone::Core::TransformLayer</a>
+</li>
+<li>m_SelectedObjectEntity
+: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a2ccfaf28b00f15e47f573a85e33fdf01">Moonstone::Core::EntityLayer</a>
 </li>
 <li>m_ShaderProgram
 : <a class="el" href="classMoonstone_1_1Core_1_1Application.html#a5a259613d04d20325757d498b4875e7a">Moonstone::Core::Application</a>
@@ -293,6 +312,9 @@ $(function() {
 <li>m_SliderCallbacks
 : <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#a285096bb1a46bfbb1687b76c98568cd5">Moonstone::Core::ControlsLayer</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a65440215aea8dd13352ce6ea75bc934a">Moonstone::Core::TransformLayer</a>
+</li>
+<li>m_SliderCallbacksLight
+: <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a90681b9cc512d512ed6cc349acd79ae7">Moonstone::Core::TransformLayer</a>
 </li>
 <li>m_SliderCallbacksObj
 : <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a19e54b217ed2610d868d04e4206a1c33">Moonstone::Core::TransformLayer</a>
@@ -329,7 +351,7 @@ $(function() {
 , <a class="el" href="classMoonstone_1_1Core_1_1ControlsLayer.html#af8f4020eedda0a663aeffd781b69fa08">Moonstone::Core::ControlsLayer</a>
 </li>
 <li>m_TransformLayer
-: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#a11fd5a3746f36ed16fa969d72b714cd2">Moonstone::Core::EntityLayer</a>
+: <a class="el" href="classMoonstone_1_1Core_1_1EntityLayer.html#ac16faf1333201776c10038b8302cc3c8">Moonstone::Core::EntityLayer</a>
 </li>
 <li>m_VAO
 : <a class="el" href="classMoonstone_1_1Core_1_1Application.html#a09d11057344d6591bed838a4848379e1">Moonstone::Core::Application</a>
