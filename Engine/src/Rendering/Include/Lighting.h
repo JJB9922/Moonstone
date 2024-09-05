@@ -32,6 +32,10 @@ class Lighting
         glm::vec3 position;
         bool isActive;
 
+        Light()
+        {
+        }
+
         Light(const std::string &id, const glm::vec3 &dir, const glm::vec3 &amb, const glm::vec3 &diff,
               const glm::vec3 &spec, bool active)
             : id(id), type(LightType::Directional), direction(dir), ambient(amb), diffuse(diff), specular(spec),
@@ -45,6 +49,11 @@ class Lighting
             : id(id), type(LightType::Point), position(pos), ambient(amb), diffuse(diff), specular(spec),
               isActive(active), constant(constant), linear(linear), quadratic(quadratic)
         {
+        }
+
+        void Clear()
+        {
+            id.clear();
         }
     };
 

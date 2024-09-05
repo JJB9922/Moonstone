@@ -4,11 +4,13 @@
 #include "Core/Include/Layer.h"
 #include "Core/Include/Time.h"
 // #include "Rendering/Include/SceneManager.h"
+#include "Rendering/Include/Lighting.h"
 #include "Rendering/Include/Scene.h"
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
+#include <memory>
 
 namespace Moonstone
 {
@@ -201,19 +203,23 @@ class TransformLayer : public Layer
   public:
     enum class ButtonID
     {
-        RemoveObject
+        RemoveObject,
+        RemoveLight
     };
 
     enum class SliderID
     {
-        TransformGroup
+        ObjectTransformGroup,
+        LightTransformGroup
     };
 
     using ButtonCallback = std::function<void()>;
     using ButtonCallbackObj = std::function<void(Rendering::SceneObject &)>;
+    using ButtonCallbackLight = std::function<void(Rendering::Lighting::Light &)>;
     using SliderCallback = std::function<void(float)>;
     using SliderCallbackVec3 = std::function<void(glm::vec3)>;
     using SliderCallbackObj = std::function<void(Rendering::SceneObject &)>;
+    using SliderCallbackLight = std::function<void(Rendering::Lighting::Light &)>;
 
     TransformLayer() : Layer("Transform")
     {
@@ -225,6 +231,7 @@ class TransformLayer : public Layer
 
     inline void SetSelectedObject(Rendering::SceneObject &obj)
     {
+        ClearSelectedLight();
         m_SelectedObject = obj;
 
         m_XPos = m_SelectedObject.position.x;
@@ -240,6 +247,16 @@ class TransformLayer : public Layer
         m_ZScale = m_SelectedObject.scale.z;
     }
 
+    inline void SetSelectedLight(Rendering::Lighting::Light &light)
+    {
+        ClearSelectedObject();
+        m_SelectedLight = light;
+
+        m_LightXPos = m_SelectedLight.position.x;
+        m_LightYPos = m_SelectedLight.position.y;
+        m_LightZPos = m_SelectedLight.position.z;
+    }
+
     inline void ClearSelectedObject()
     {
         m_SelectedObject.Clear();
@@ -249,10 +266,18 @@ class TransformLayer : public Layer
         m_XScale = m_YScale = m_ZScale = 1.0f;
     }
 
+    inline void ClearSelectedLight()
+    {
+        m_SelectedLight.Clear();
+
+        m_LightXPos = m_LightYPos = m_LightZPos = 0.0f;
+    }
+
     void SetBtnCallback(ButtonID buttonID, ButtonCallback callback)
     {
         m_BtnCallbacks[buttonID] = callback;
     }
+
     void SetBtnCallbackObj(ButtonID buttonID, ButtonCallbackObj callback)
     {
         m_BtnCallbacksObj[buttonID] = callback;
@@ -262,18 +287,25 @@ class TransformLayer : public Layer
     {
         m_SliderCallbacks[sliderID] = callback;
     }
+
     void SetSliderCallbackVec3(SliderID sliderID, SliderCallbackVec3 callback)
     {
         m_SliderCallbacksVec3[sliderID] = callback;
     }
+
     void SetSliderCallbackObj(SliderID sliderID, SliderCallbackObj callback)
     {
         m_SliderCallbacksObj[sliderID] = callback;
     }
 
+    void SetSliderCallbackLight(SliderID sliderID, SliderCallbackLight callback)
+    {
+        m_SliderCallbacksLight[sliderID] = callback;
+    }
+
     virtual void OnImGuiRender() override
     {
-        ImVec2 btnSize = ImVec2(150, 20);
+        ImVec2 btnSize = ImVec2(180, 20);
         ImGuiStyle &style = ImGui::GetStyle();
         style.FrameRounding = 2;
         style.WindowRounding = 2;
@@ -290,6 +322,11 @@ class TransformLayer : public Layer
             if (ImGui::Button("Remove Object", btnSize) && m_BtnCallbacksObj[ButtonID::RemoveObject])
             {
                 m_BtnCallbacksObj[ButtonID::RemoveObject](m_SelectedObject);
+            }
+
+            if (ImGui::Button("Remove Light", btnSize) && m_BtnCallbacksLight[ButtonID::RemoveLight])
+            {
+                m_BtnCallbacksLight[ButtonID::RemoveLight](m_SelectedLight);
             }
 
             ImGui::Text("Position");
@@ -374,9 +411,51 @@ class TransformLayer : public Layer
             m_SelectedObject.rotation = {m_XRot, m_YRot, m_ZRot};
             m_SelectedObject.scale = {m_XScale, m_YScale, m_ZScale};
 
-            if (m_SliderCallbacksObj[SliderID::TransformGroup])
+            if (m_SliderCallbacksObj[SliderID::ObjectTransformGroup])
             {
-                m_SliderCallbacksObj[SliderID::TransformGroup](m_SelectedObject);
+                m_SliderCallbacksObj[SliderID::ObjectTransformGroup](m_SelectedObject);
+            }
+        }
+
+        if (!m_SelectedLight.id.empty())
+        {
+
+            ImGui::SeparatorText(m_SelectedLight.id.c_str());
+
+            if (ImGui::Button("Remove Light", btnSize) && m_BtnCallbacksObj[ButtonID::RemoveObject])
+            {
+                m_BtnCallbacksObj[ButtonID::RemoveObject](m_SelectedObject);
+            }
+
+            if (m_SelectedLight.type == Rendering::Lighting::LightType::Directional)
+                return;
+
+            ImGui::Text("Position");
+
+            ImGui::Text("X: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##LightXPos", &m_LightXPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+            ImGui::SameLine();
+            ImGui::Text("Y: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##LightYPos", &m_LightYPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+            ImGui::SameLine();
+            ImGui::Text("Z: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##LightZPos", &m_LightZPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+            // TODO setup intensity and stuff
+
+            m_SelectedLight.position = {m_LightXPos, m_LightYPos, m_LightZPos};
+
+            if (m_SliderCallbacksLight[SliderID::LightTransformGroup])
+            {
+                m_SliderCallbacksLight[SliderID::LightTransformGroup](m_SelectedLight);
             }
         }
 
@@ -384,17 +463,22 @@ class TransformLayer : public Layer
     }
 
   private:
+    float m_LightXPos, m_LightYPos, m_LightZPos;
+
     float m_XPos, m_YPos, m_ZPos;
     float m_XRot, m_YRot, m_ZRot;
     float m_XScale = 1.0f, m_YScale = 1.0f, m_ZScale = 1.0f;
     bool m_LinkedScale;
 
     Rendering::SceneObject m_SelectedObject;
+    Rendering::Lighting::Light m_SelectedLight;
     std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
     std::unordered_map<ButtonID, ButtonCallbackObj> m_BtnCallbacksObj;
+    std::unordered_map<ButtonID, ButtonCallbackLight> m_BtnCallbacksLight;
     std::unordered_map<SliderID, SliderCallback> m_SliderCallbacks;
     std::unordered_map<SliderID, SliderCallbackVec3> m_SliderCallbacksVec3;
     std::unordered_map<SliderID, SliderCallbackObj> m_SliderCallbacksObj;
+    std::unordered_map<SliderID, SliderCallbackLight> m_SliderCallbacksLight;
 };
 
 class EntityLayer : public Layer
@@ -410,6 +494,7 @@ class EntityLayer : public Layer
     EntityLayer() : Layer("Entity")
     {
     }
+
     void OnUpdate() override
     {
     }
@@ -418,10 +503,17 @@ class EntityLayer : public Layer
     {
         m_Window = window;
     };
+
     void AddObject(Rendering::SceneObject &object)
     {
         m_Objects.push_back(object);
     };
+
+    void AddLight(Rendering::Lighting::Light &light)
+    {
+        m_Lights.push_back(light);
+    };
+
     void RemoveObject(const Rendering::SceneObject &object)
     {
         auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
@@ -432,26 +524,56 @@ class EntityLayer : public Layer
             m_Objects.erase(it);
         }
     }
+
+    void RemoveLight(const Rendering::Lighting::Light &light)
+    {
+        auto it = std::find_if(m_Lights.begin(), m_Lights.end(),
+                               [&light](const Rendering::Lighting::Light &lt) { return lt.id == light.id; });
+
+        if (it != m_Lights.end())
+        {
+            m_Lights.erase(it);
+        }
+    }
+
     void SetObjectVector(std::vector<Rendering::SceneObject> objects)
     {
         m_Objects = objects;
     }
 
-    void OverwriteObject(Rendering::SceneObject &object)
+    void SetLightVector(std::vector<Rendering::Lighting::Light> lights)
     {
+        m_Lights = lights;
     }
 
-    static inline void SetSelectedEntity(int selection)
+    static inline void SetSelectedObjectEntity(int selection)
     {
-        m_SelectedEntity = selection;
+        m_SelectedObjectEntity = selection;
     }
-    static inline int GetSelectedEntity()
+
+    static inline void SetSelectedLightEntity(int selection)
     {
-        return m_SelectedEntity;
+        m_SelectedLightEntity = selection;
     }
-    static inline void ClearEntitySelection()
+
+    static inline int GetSelectedObjectEntity()
     {
-        m_SelectedEntity = -1;
+        return m_SelectedObjectEntity;
+    }
+
+    static inline int GetSelectedLightEntity()
+    {
+        return m_SelectedLightEntity;
+    }
+
+    static inline void ClearObjectEntitySelection()
+    {
+        m_SelectedObjectEntity = -1;
+    }
+
+    static inline void ClearLightEntitySelection()
+    {
+        m_SelectedLightEntity = -1;
     }
 
     inline std::vector<Rendering::SceneObject> GetObjects()
@@ -459,7 +581,7 @@ class EntityLayer : public Layer
         return GetObjects();
     }
 
-    void SetTransformLayer(TransformLayer transformLayer)
+    void SetTransformLayer(std::shared_ptr<TransformLayer> transformLayer)
     {
         m_TransformLayer = transformLayer;
     }
@@ -473,7 +595,7 @@ class EntityLayer : public Layer
     {
         Time &time = Time::GetInstance();
 
-        ImVec2 btnSize = ImVec2(150, 20);
+        ImVec2 btnSize = ImVec2(180, 20);
         ImGuiStyle &style = ImGui::GetStyle();
         style.FrameRounding = 2;
         style.WindowRounding = 2;
@@ -491,31 +613,53 @@ class EntityLayer : public Layer
             m_BtnCallbacks[ButtonID::ClearSelection]();
         }
 
+        ImGui::Text("Objects");
         // Raw loop :/
         for (int i = 0; i < m_Objects.size(); ++i)
         {
-            if (ImGui::Selectable(m_Objects[i].name.c_str(), GetSelectedEntity() == i))
+            if (ImGui::Selectable(m_Objects[i].name.c_str(), GetSelectedObjectEntity() == i))
             {
-                SetSelectedEntity(i);
+                ClearLightEntitySelection();
+                SetSelectedObjectEntity(i);
 
-                m_TransformLayer.SetSelectedObject(m_Objects[i]);
+                m_TransformLayer->SetSelectedObject(m_Objects[i]);
             }
         }
 
-        if (GetSelectedEntity() == -1)
+        ImGui::Separator();
+        ImGui::Text("Lights");
+        for (int i = 0; i < m_Lights.size(); ++i)
         {
-            m_TransformLayer.ClearSelectedObject();
+            if (ImGui::Selectable(m_Lights[i].id.c_str(), GetSelectedLightEntity() == i))
+            {
+                ClearObjectEntitySelection();
+                SetSelectedLightEntity(i);
+
+                m_TransformLayer->SetSelectedLight(m_Lights[i]);
+            }
+        }
+
+        if (GetSelectedObjectEntity() == -1)
+        {
+            m_TransformLayer->ClearSelectedObject();
+        }
+
+        if (GetSelectedLightEntity() == -1)
+        {
+            m_TransformLayer->ClearSelectedLight();
         }
 
         ImGui::End();
     };
 
   private:
-    static int m_SelectedEntity;
+    static int m_SelectedObjectEntity;
+    static int m_SelectedLightEntity;
     GLFWwindow *m_Window;
     std::vector<Rendering::SceneObject> m_Objects;
+    std::vector<Rendering::Lighting::Light> m_Lights;
     std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
-    TransformLayer m_TransformLayer;
+    std::shared_ptr<TransformLayer> m_TransformLayer;
 };
 
 class ControlsLayer : public Layer
@@ -585,7 +729,7 @@ class ControlsLayer : public Layer
 
     virtual void OnImGuiRender() override
     {
-        ImVec2 btnSize = ImVec2(150, 20);
+        ImVec2 btnSize = ImVec2(180, 20);
         ImGuiStyle &style = ImGui::GetStyle();
         style.FrameRounding = 2;
         style.WindowRounding = 2;
@@ -738,7 +882,7 @@ class DebugLayer : public Layer
     {
         Time &time = Time::GetInstance();
 
-        ImVec2 btnSize = ImVec2(150, 20);
+        ImVec2 btnSize = ImVec2(180, 20);
         ImGuiStyle &style = ImGui::GetStyle();
         style.FrameRounding = 2;
         style.WindowRounding = 2;

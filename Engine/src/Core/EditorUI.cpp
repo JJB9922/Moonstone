@@ -4,6 +4,7 @@
 #include "Rendering/Include/SceneManager.h"
 #include <memory>
 #include <sstream>
+#include <string>
 
 namespace Moonstone
 {
@@ -34,45 +35,65 @@ void EditorUI::Init()
     auto debugLayer = std::make_shared<DebugLayer>();
     PushLayer(debugLayer);
 
-    // auto transformLayer = std::make_shared<TransformLayer>();
+    auto transformLayer = std::make_shared<TransformLayer>();
     auto entityLayer = std::make_shared<EntityLayer>();
     entityLayer->SetWindow(m_Window->m_Window);
-    entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection,
-                                [this, entityLayer]() { entityLayer->ClearEntitySelection(); });
-    // entityLayer->SetTransformLayer(transformLayer);
+    entityLayer->SetBtnCallback(EntityLayer::ButtonID::ClearSelection, [this, entityLayer]() {
+        entityLayer->ClearObjectEntitySelection();
+        entityLayer->ClearLightEntitySelection();
+    });
+
+    entityLayer->SetTransformLayer(transformLayer);
     PushLayer(entityLayer);
 
-    /*
-        transformLayer->SetBtnCallbackObj(
-            TransformLayer::ButtonID::RemoveObject, [this, entityLayer](Rendering::SceneObject &object) {
-            auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
+    transformLayer->SetBtnCallbackObj(
+        TransformLayer::ButtonID::RemoveObject, [this, entityLayer](Rendering::SceneObject &object) {
+            auto it = std::find_if(m_ActiveScene->objects.begin(), m_ActiveScene->objects.end(),
                                    [&object](Rendering::SceneObject &obj) { return obj.name == object.name; });
 
-            if (it != m_Objects.end())
+            if (it != m_ActiveScene->objects.end())
             {
-                m_Objects.erase(it);
+                m_ActiveScene->objects.erase(it);
             }
 
-            entityLayer->ClearEntitySelection();
+            entityLayer->ClearObjectEntitySelection();
             entityLayer->RemoveObject(object);
-            });
+        });
 
-        transformLayer->SetSliderCallbackObj(
-            TransformLayer::SliderID::TransformGroup, [this, entityLayer](Rendering::SceneObject &object) {
-            auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
+    transformLayer->SetSliderCallbackObj(
+        TransformLayer::SliderID::ObjectTransformGroup, [this, entityLayer](Rendering::SceneObject &object) {
+            auto it = std::find_if(m_ActiveScene->objects.begin(), m_ActiveScene->objects.end(),
                                    [&object](Rendering::SceneObject &obj) { return obj.name == object.name; });
 
-            if (it != m_Objects.end())
+            if (it != m_ActiveScene->objects.end())
             {
                 it->position = object.position;
                 it->rotation = object.rotation;
                 it->scale = object.scale;
             }
 
-            entityLayer->SetObjectVector(m_Objects);
-            });
-        PushLayer(transformLayer);
-    */
+            entityLayer->SetObjectVector(m_ActiveScene->objects);
+        });
+
+    transformLayer->SetSliderCallbackLight(
+        TransformLayer::SliderID::LightTransformGroup, [this, entityLayer](Rendering::Lighting::Light &light) {
+            auto it = std::find_if(m_ActiveScene->lights.begin(), m_ActiveScene->lights.end(),
+                                   [&light](Rendering::Lighting::Light &lt) { return lt.id == light.id; });
+
+            if (it != m_ActiveScene->lights.end())
+            {
+                it->position = light.position;
+            }
+            else
+            {
+                MS_ERROR("light for transform could not be found");
+            }
+
+            entityLayer->SetLightVector(m_ActiveScene->lights);
+        });
+
+    PushLayer(transformLayer);
+
     auto controlsLayer = std::make_shared<ControlsLayer>();
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::Exit, [this]() { m_Window->TerminateWindow(); });
 
@@ -108,31 +129,50 @@ void EditorUI::Init()
             m_ActiveScene->isGridEnabled = !m_ActiveScene->isGridEnabled;
         }
     });
-    /*
+
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddObject,
-                                  [this, controlsLayer, entityLayer, transformLayer]()
-                                  {
+                                  [this, controlsLayer, entityLayer, transformLayer]() {
                                       ControlsLayer::SceneObject obj = controlsLayer->GetAddObject();
 
                                       switch (obj)
                                       {
-                                          case ControlsLayer::SceneObject::Cube:
-                                              //AddCube();
-                                              //entityLayer->AddObject(m_Objects.back());
-                                              entityLayer->ClearEntitySelection();
-                                              //entityLayer->SetSelectedEntity(m_Objects.size() - 1);
-                                              //transformLayer->SetSelectedObject(m_Objects.back());
-                                              break;
+                                      case ControlsLayer::SceneObject::Cube:
+                                          Rendering::SceneManager sceneManager;
+                                          sceneManager.AddModelToScene(m_ActiveScene);
+                                          entityLayer->AddObject(m_ActiveScene->objects.back());
+
+                                          entityLayer->ClearObjectEntitySelection();
+                                          entityLayer->ClearLightEntitySelection();
+
+                                          entityLayer->SetSelectedObjectEntity(m_ActiveScene->objects.size() - 1);
+                                          transformLayer->SetSelectedObject(m_ActiveScene->objects.back());
+                                          break;
                                       }
                                   });
- */
+
     controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddDirectionalLight, [this, controlsLayer, entityLayer]() {
+        bool dirLightExists = false;
+
+        for (auto light : m_ActiveScene->lights)
+        {
+            if (light.type == Rendering::Lighting::LightType::Directional)
+            {
+                dirLightExists = true;
+            }
+        }
+
+        if (dirLightExists == true)
+        {
+            MS_INFO("cannot add directional light as one already exists");
+            return;
+        }
+
         // TODO not string...
         std::stringstream ss;
-        ss << "DirLight_" << m_ActiveScene->lighting.GetLights().size();
+        ss << "DirLight_" << m_ActiveScene->lights.size() + 1;
 
         auto dirLight = Rendering::Lighting::Light(ss.str(), {0.5f, -1.0f, 0.5f}, {0.1f, 0.1f, 0.1f},
-                                                   {0.8f, 0.8f, 0.8f}, {0.5f, 0.5f, 0.5f}, true);
+                                                   {0.5f, 0.5f, 0.5f}, {0.2f, 0.2f, 0.2f}, true);
         Rendering::SceneManager sceneManager;
         sceneManager.AddLightToScene(m_ActiveScene, dirLight);
     });
@@ -149,15 +189,36 @@ void EditorUI::Init()
 
                                          glm::vec3 lightDirection = normalize(glm::vec3(x, y, z));
 
-                                         for (auto light : m_ActiveScene->lighting.GetLights())
+                                         for (auto light : m_ActiveScene->lights)
                                          {
                                              if (light.type == Rendering::Lighting::LightType::Directional)
                                              {
                                                  light.direction = lightDirection;
-                                                 m_ActiveScene->lighting.SetLight(light.id, light);
+                                                 m_ActiveScene->lights.back() = light;
                                              }
                                          }
                                      });
+
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddPointLight, [this, controlsLayer, entityLayer,
+                                                                           transformLayer]() {
+        Rendering::SceneManager sceneManager;
+
+        std::stringstream ss;
+        ss << "PointLight_" << m_ActiveScene->lights.size();
+
+        // TODO do some serious stuff w this not nonense
+        auto ptLight = Rendering::Lighting::Light(ss.str(), {0.5f, 0.5f, 0.5f}, {0.1f, 0.1f, 0.1f}, {0.5f, 0.5f, 0.5f},
+                                                  {0.2f, 0.2f, 0.2f}, true, 1.0f, 0.09f, 0.0032f);
+
+        sceneManager.AddLightToScene(m_ActiveScene, ptLight);
+        entityLayer->AddLight(m_ActiveScene->lights.back());
+
+        entityLayer->ClearObjectEntitySelection();
+        entityLayer->ClearLightEntitySelection();
+
+        entityLayer->SetSelectedLightEntity(m_ActiveScene->lights.size() - 1);
+        transformLayer->SetSelectedLight(m_ActiveScene->lights.back());
+    });
 
     m_Layers.push_back(*controlsLayer);
     PushLayer(controlsLayer);

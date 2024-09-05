@@ -49,7 +49,7 @@ struct Scene
     std::vector<std::shared_ptr<Camera>> cameras = {};
     std::shared_ptr<Camera> activeCamera = nullptr;
     std::vector<SceneObject> objects = {};
-    Lighting lighting = {};
+    std::vector<Lighting::Light> lights = {};
 
     glm::vec4 background = {0.15f, 0.15f, 0.15f, 1.0f};
     bool isGridEnabled = true;

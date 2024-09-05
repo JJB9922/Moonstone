@@ -171,7 +171,7 @@ void Renderer::RenderVisibleObjects()
 void Renderer::RenderLighting(SceneObject &object)
 {
 
-    auto lights = m_Scene->lighting.GetLights();
+    auto lights = m_Scene->lights;
     std::vector<Lighting::Light> pointLights;
 
     for (auto light : lights)
