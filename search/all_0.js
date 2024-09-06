@@ -5,7 +5,7 @@ var searchData=
   ['addcube_2',['AddCube',['../classMoonstone_1_1Core_1_1Application.html#a2483118fe7d4ce23fd52b32cb5c493b4',1,'Moonstone::Core::Application']]],
   ['adddirectionallight_3',['AddDirectionalLight',['../classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca739cbd8538a228460dadc2c7e24c1352',1,'Moonstone::Core::ControlsLayer']]],
   ['addlight_4',['AddLight',['../classMoonstone_1_1Core_1_1EntityLayer.html#a1254f0a6904f7f3d432deef2b10013c6',1,'Moonstone::Core::EntityLayer::AddLight()'],['../classMoonstone_1_1Rendering_1_1Lighting.html#a3beac38f2a6198fb184c0afb39d74fd3',1,'Moonstone::Rendering::Lighting::AddLight()']]],
-  ['addlighttoscene_5',['AddLightToScene',['../classMoonstone_1_1Rendering_1_1SceneManager.html#a29bddf8e053ee0dfe1b1a75a08a29c5e',1,'Moonstone::Rendering::SceneManager']]],
+  ['addlighttoscene_5',['AddLightToScene',['../classMoonstone_1_1Rendering_1_1SceneManager.html#aaabaae0fe10df32573f30574aabd6b70',1,'Moonstone::Rendering::SceneManager']]],
   ['addmodeltoscene_6',['AddModelToScene',['../classMoonstone_1_1Rendering_1_1SceneManager.html#a40a2ffea5ec3f92860577f05357f393e',1,'Moonstone::Rendering::SceneManager']]],
   ['addobject_7',['AddObject',['../classMoonstone_1_1Core_1_1EntityLayer.html#a1ca5bb61804bf93f14609fb302b7ae7a',1,'Moonstone::Core::EntityLayer::AddObject()'],['../classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca650a024818e022f05f44766109a5f846',1,'Moonstone::Core::ControlsLayer::AddObject()']]],
   ['addpointlight_8',['AddPointLight',['../classMoonstone_1_1Core_1_1ControlsLayer.html#a1ba876227b45d86479ee7d67ac06555ca9eb393968be19b4b8a0b449da5c9aeec',1,'Moonstone::Core::ControlsLayer']]],
