@@ -41,22 +41,17 @@ std::unique_ptr<Renderer> SceneManager::InitializeSceneRenderer(std::shared_ptr<
     return renderer;
 }
 
-void SceneManager::AddLightToScene(std::shared_ptr<Scene> &scene, Lighting::Light &light)
+void SceneManager::AddLightToScene(std::shared_ptr<Scene> scene, Lighting::Light &light)
 {
-
     if (light.type == Lighting::LightType::Point)
     {
-        auto pointLight = Lighting::Light(light.id, light.position, light.ambient, light.diffuse, light.specular,
-                                          light.isActive, light.constant, light.linear, light.quadratic);
-
-        scene->lights.push_back(pointLight);
+        scene->lights.emplace_back(light.id, light.position, light.ambient, light.diffuse, light.specular,
+                                   light.isActive, light.constant, light.linear, light.quadratic);
     }
     else if (light.type == Lighting::LightType::Directional)
     {
-        auto dirLight =
-            Lighting::Light(light.id, light.direction, light.ambient, light.diffuse, light.specular, light.isActive);
-
-        scene->lights.push_back(dirLight);
+        scene->lights.emplace_back(light.id, light.direction, light.ambient, light.diffuse, light.specular,
+                                   light.isActive);
     }
 }
 

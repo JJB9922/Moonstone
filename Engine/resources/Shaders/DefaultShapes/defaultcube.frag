@@ -15,6 +15,8 @@ struct DirLight {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
+    bool isActive;
 };
 
 struct PointLight {
@@ -27,9 +29,11 @@ struct PointLight {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
+    bool isActive;
 };
 
-#define NR_POINT_LIGHTS 1
+#define NR_POINT_LIGHTS 16
 
 in vec3 FragPos;
 in vec3 Normal;
@@ -50,7 +54,9 @@ void main()
     
     vec3 result = CalcDirLight(dirLight, norm, viewDir);
     for(int i = 0; i < NR_POINT_LIGHTS; i++)
+        if(pointLights[i].isActive){ 
         result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);    
+        }
     
     FragColor = vec4(result, 1.0);
 }

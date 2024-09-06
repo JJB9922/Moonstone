@@ -283,6 +283,11 @@ class TransformLayer : public Layer
         m_BtnCallbacksObj[buttonID] = callback;
     }
 
+    void SetBtnCallbackLight(ButtonID buttonID, ButtonCallbackLight callback)
+    {
+        m_BtnCallbacksLight[buttonID] = callback;
+    }
+
     void SetSliderCallback(SliderID sliderID, SliderCallback callback)
     {
         m_SliderCallbacks[sliderID] = callback;
@@ -322,11 +327,6 @@ class TransformLayer : public Layer
             if (ImGui::Button("Remove Object", btnSize) && m_BtnCallbacksObj[ButtonID::RemoveObject])
             {
                 m_BtnCallbacksObj[ButtonID::RemoveObject](m_SelectedObject);
-            }
-
-            if (ImGui::Button("Remove Light", btnSize) && m_BtnCallbacksLight[ButtonID::RemoveLight])
-            {
-                m_BtnCallbacksLight[ButtonID::RemoveLight](m_SelectedLight);
             }
 
             ImGui::Text("Position");
@@ -422,9 +422,9 @@ class TransformLayer : public Layer
 
             ImGui::SeparatorText(m_SelectedLight.id.c_str());
 
-            if (ImGui::Button("Remove Light", btnSize) && m_BtnCallbacksObj[ButtonID::RemoveObject])
+            if (ImGui::Button("Remove Light", btnSize) && m_BtnCallbacksLight[ButtonID::RemoveLight])
             {
-                m_BtnCallbacksObj[ButtonID::RemoveObject](m_SelectedObject);
+                m_BtnCallbacksLight[ButtonID::RemoveLight](m_SelectedLight);
             }
 
             if (m_SelectedLight.type == Rendering::Lighting::LightType::Directional)
@@ -527,6 +527,11 @@ class EntityLayer : public Layer
 
     void RemoveLight(const Rendering::Lighting::Light &light)
     {
+        for (auto i : m_Lights)
+        {
+            MS_INFO(i.id);
+        }
+
         auto it = std::find_if(m_Lights.begin(), m_Lights.end(),
                                [&light](const Rendering::Lighting::Light &lt) { return lt.id == light.id; });
 
@@ -541,7 +546,7 @@ class EntityLayer : public Layer
         m_Objects = objects;
     }
 
-    void SetLightVector(std::vector<Rendering::Lighting::Light> lights)
+    void SetLightVector(std::vector<Rendering::Lighting::Light> &lights)
     {
         m_Lights = lights;
     }
@@ -628,6 +633,7 @@ class EntityLayer : public Layer
 
         ImGui::Separator();
         ImGui::Text("Lights");
+
         for (int i = 0; i < m_Lights.size(); ++i)
         {
             if (ImGui::Selectable(m_Lights[i].id.c_str(), GetSelectedLightEntity() == i))
@@ -827,26 +833,6 @@ class ControlsLayer : public Layer
         }
 
         ImGui::Text("Objects");
-
-        static int selected_object = -1;
-        const char *names[] = {"Cube", "Sphere", "Pyramid"};
-
-        if (ImGui::Button("Select Object"))
-            ImGui::OpenPopup("shape_popup");
-        ImGui::SameLine();
-        ImGui::TextUnformatted(selected_object == -1 ? "<No Object Selected>" : names[selected_object]);
-        if (ImGui::BeginPopup("shape_popup"))
-        {
-            ImGui::SeparatorText("Base Shapes");
-            for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-                if (ImGui::Selectable(names[i]))
-                {
-                    selected_object = i;
-                }
-            ImGui::EndPopup();
-
-            m_AddObject = static_cast<SceneObject>(selected_object + 1);
-        }
 
         if (ImGui::Button("Add Object", btnSize) && m_BtnCallbacks[ButtonID::AddObject])
         {

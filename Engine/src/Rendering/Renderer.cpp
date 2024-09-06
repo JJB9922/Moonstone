@@ -182,6 +182,7 @@ void Renderer::RenderLighting(SceneObject &object)
             RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.ambient", light.ambient);
             RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.diffuse", light.diffuse);
             RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.specular", light.specular);
+            RenderingCommand::SetUniformBool(object.shader.ID, "dirLight.isActive", light.isActive);
         }
         else if (light.type == Lighting::LightType::Point)
         {
@@ -225,6 +226,11 @@ void Renderer::RenderLighting(SceneObject &object)
         ss.clear();
         ss << "pointLights[" << i << "].quadratic";
         RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].quadratic);
+
+        ss.str("");
+        ss.clear();
+        ss << "pointLights[" << i << "].isActive";
+        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].isActive);
     }
 }
 
