@@ -1,4 +1,5 @@
 #include "Include/Model.h"
+#include "assimp/postprocess.h"
 
 namespace Moonstone
 {
@@ -6,18 +7,19 @@ namespace Moonstone
 namespace Rendering
 {
 
-void Model::Draw(Rendering::Shader& shader)
+void Model::Draw(Rendering::Shader &shader)
 {
-    for (auto& mesh : m_Meshes)
+    for (auto &mesh : m_Meshes)
     {
         mesh.Draw(shader);
     }
 }
 
-void Model::LoadModel(std::string& path)
+void Model::LoadModel(std::string &path)
 {
     Assimp::Importer import;
-    const aiScene*   scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs |
+                                                     aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
@@ -30,14 +32,14 @@ void Model::LoadModel(std::string& path)
     ProcessNode(scene->mRootNode, scene);
 }
 
-void Model::ProcessNode(aiNode* node, const aiScene* scene)
+void Model::ProcessNode(aiNode *node, const aiScene *scene)
 {
     if (!node || !scene)
         return;
 
     for (unsigned i = 0; i < node->mNumMeshes; i++)
     {
-        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+        aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
         if (mesh)
             m_Meshes.push_back(ProcessMesh(mesh, scene));
     }
@@ -51,10 +53,10 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene)
     }
 }
 
-Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+Mesh Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 {
-    std::vector<Mesh::Vertex>  vertices;
-    std::vector<unsigned>      indices;
+    std::vector<Mesh::Vertex> vertices;
+    std::vector<unsigned> indices;
     std::vector<Mesh::Texture> textures;
 
     for (unsigned i = 0; i < mesh->mNumVertices; i++)
@@ -63,22 +65,36 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
         glm::vec3 vector;
         // Pos
-        vector.x        = mesh->mVertices[i].x;
-        vector.y        = mesh->mVertices[i].y;
-        vector.z        = mesh->mVertices[i].z;
+        vector.x = mesh->mVertices[i].x;
+        vector.y = mesh->mVertices[i].y;
+        vector.z = mesh->mVertices[i].z;
         vertex.Position = vector;
         // Norm
-        vector.x      = mesh->mNormals[i].x;
-        vector.y      = mesh->mNormals[i].y;
-        vector.z      = mesh->mNormals[i].z;
-        vertex.Normal = vector;
+        if (mesh->HasNormals())
+        {
+            vector.x = mesh->mNormals[i].x;
+            vector.y = mesh->mNormals[i].y;
+            vector.z = mesh->mNormals[i].z;
+            vertex.Normal = vector;
+        }
+
         // Tex
         if (mesh->mTextureCoords[0])
         {
-            glm::vec2 vector;
-            vector.x         = mesh->mTextureCoords[0][i].x;
-            vector.y         = mesh->mTextureCoords[0][i].y;
+            glm::vec3 vector;
+            vector.x = mesh->mTextureCoords[0][i].x;
+            vector.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vector;
+
+            vector.x = mesh->mTangents[i].x;
+            vector.y = mesh->mTangents[i].y;
+            vector.z = mesh->mTangents[i].z;
+            vertex.Tangent = vector;
+
+            vector.x = mesh->mBitangents[i].x;
+            vector.y = mesh->mBitangents[i].y;
+            vector.z = mesh->mBitangents[i].z;
+            vertex.Bitangent = vector;
         }
         else
         {
@@ -91,6 +107,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     for (unsigned i = 0; i < mesh->mNumFaces; i++)
     {
         aiFace face = mesh->mFaces[i];
+
         for (unsigned j = 0; j < face.mNumIndices; j++)
         {
             indices.push_back(face.mIndices[j]);
@@ -99,22 +116,27 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
     if (mesh->mMaterialIndex >= 0)
     {
-        aiMaterial*                material    = scene->mMaterials[mesh->mMaterialIndex];
-        std::vector<Mesh::Texture> diffuseMaps = LoadMaterialTextures(material,
-                                                                      aiTextureType_DIFFUSE,
-                                                                      "texture_diffuse");
+        aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+
+        std::vector<Mesh::Texture> diffuseMaps =
+            LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
-        std::vector<Mesh::Texture> specularMaps = LoadMaterialTextures(material,
-                                                                       aiTextureType_SPECULAR,
-                                                                       "texture_specular");
+        std::vector<Mesh::Texture> specularMaps =
+            LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+
+        std::vector<Mesh::Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+        textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+
+        std::vector<Mesh::Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+        textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
     }
 
     return Mesh(vertices, indices, textures);
 }
 
-std::vector<Mesh::Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+std::vector<Mesh::Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
 {
     std::vector<Mesh::Texture> textures;
     for (unsigned i = 0; i < mat->GetTextureCount(type); i++)
@@ -134,26 +156,27 @@ std::vector<Mesh::Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextur
         if (!skip)
         {
             Mesh::Texture texture;
-            texture.id   = TextureFromFile(str.C_Str(), m_Directory);
+            texture.id = TextureFromFile(str.C_Str(), m_Directory);
             texture.type = typeName;
             texture.path = str.C_Str();
             textures.push_back(texture);
+            m_TexturesLoaded.push_back(texture);
         }
     }
 
     return textures;
 }
 
-unsigned Model::TextureFromFile(const std::string& path, const std::string& directory, bool gamma)
+unsigned Model::TextureFromFile(const std::string &path, const std::string &directory, bool gamma)
 {
     std::string filename = path;
-    filename             = directory + '/' + filename;
+    filename = directory + '/' + filename;
 
     unsigned textureID;
     Rendering::RenderingCommand::CreateTexture(textureID);
 
-    int            width, height, nrComponents;
-    unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+    int width, height, nrComponents;
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {
         RenderingAPI::TextureFormat format;
@@ -170,14 +193,8 @@ unsigned Model::TextureFromFile(const std::string& path, const std::string& dire
             format = RenderingAPI::TextureFormat::RGBA;
         }
 
-        Rendering::RenderingCommand::UploadTexture(Rendering::RenderingAPI::TextureTarget::Texture2D,
-                                                   0,
-                                                   format,
-                                                   width,
-                                                   height,
-                                                   format,
-                                                   RenderingAPI::NumericalDataType::UnsignedByte,
-                                                   data);
+        Rendering::RenderingCommand::UploadTexture(Rendering::RenderingAPI::TextureTarget::Texture2D, 0, format, width,
+                                                   height, format, RenderingAPI::NumericalDataType::UnsignedByte, data);
 
         RenderingCommand::SetTextureParameters(RenderingAPI::TextureTarget::Texture2D,
                                                RenderingAPI::TextureParameterName::TextureWrapS,
@@ -193,6 +210,7 @@ unsigned Model::TextureFromFile(const std::string& path, const std::string& dire
                                                RenderingAPI::TextureParameter::Linear);
 
         stbi_image_free(data);
+        MS_DEBUG("Loaded texture: width={0}, height={1}, components={2}", width, height, nrComponents);
     }
     else
     {

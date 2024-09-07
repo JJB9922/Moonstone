@@ -5,6 +5,7 @@
 #include "Core/Include/Time.h"
 // #include "Rendering/Include/SceneManager.h"
 #include "Rendering/Include/Lighting.h"
+#include "Rendering/Include/Model.h"
 #include "Rendering/Include/Scene.h"
 #include "imgui.h"
 #include <GLFW/glfw3.h>
@@ -204,22 +205,26 @@ class TransformLayer : public Layer
     enum class ButtonID
     {
         RemoveObject,
-        RemoveLight
+        RemoveLight,
+        RemoveModel
     };
 
     enum class SliderID
     {
         ObjectTransformGroup,
-        LightTransformGroup
+        LightTransformGroup,
+        ModelTransformGroup
     };
 
     using ButtonCallback = std::function<void()>;
     using ButtonCallbackObj = std::function<void(Rendering::SceneObject &)>;
     using ButtonCallbackLight = std::function<void(Rendering::Lighting::Light &)>;
+    using ButtonCallbackModel = std::function<void(Rendering::Model &)>;
     using SliderCallback = std::function<void(float)>;
     using SliderCallbackVec3 = std::function<void(glm::vec3)>;
     using SliderCallbackObj = std::function<void(Rendering::SceneObject &)>;
     using SliderCallbackLight = std::function<void(Rendering::Lighting::Light &)>;
+    using SliderCallbackModel = std::function<void(Rendering::Model &)>;
 
     TransformLayer() : Layer("Transform")
     {
@@ -231,6 +236,7 @@ class TransformLayer : public Layer
 
     inline void SetSelectedObject(Rendering::SceneObject &obj)
     {
+        ClearSelectedModel();
         ClearSelectedLight();
         m_SelectedObject = obj;
 
@@ -249,12 +255,32 @@ class TransformLayer : public Layer
 
     inline void SetSelectedLight(Rendering::Lighting::Light &light)
     {
+        ClearSelectedModel();
         ClearSelectedObject();
         m_SelectedLight = light;
 
         m_LightXPos = m_SelectedLight.position.x;
         m_LightYPos = m_SelectedLight.position.y;
         m_LightZPos = m_SelectedLight.position.z;
+    }
+
+    inline void SetSelectedModel(Rendering::Model &model)
+    {
+        ClearSelectedObject();
+        ClearSelectedLight();
+        m_SelectedModel = model;
+
+        m_ModelXPos = m_SelectedModel.position.x;
+        m_ModelYPos = m_SelectedModel.position.y;
+        m_ModelZPos = m_SelectedModel.position.z;
+
+        m_ModelXRot = m_SelectedModel.rotation.x;
+        m_ModelYRot = m_SelectedModel.rotation.y;
+        m_ModelZRot = m_SelectedModel.rotation.z;
+
+        m_ModelXScale = m_SelectedModel.scale.x;
+        m_ModelYScale = m_SelectedModel.scale.y;
+        m_ModelZScale = m_SelectedModel.scale.z;
     }
 
     inline void ClearSelectedObject()
@@ -273,6 +299,15 @@ class TransformLayer : public Layer
         m_LightXPos = m_LightYPos = m_LightZPos = 0.0f;
     }
 
+    inline void ClearSelectedModel()
+    {
+        m_SelectedModel.Clear();
+
+        m_ModelXPos = m_ModelYPos = m_ModelZPos = 0.0f;
+        m_ModelXRot = m_ModelYRot = m_ModelZRot = 0.0f;
+        m_ModelXScale = m_ModelYScale = m_ModelZScale = 1.0f;
+    }
+
     void SetBtnCallback(ButtonID buttonID, ButtonCallback callback)
     {
         m_BtnCallbacks[buttonID] = callback;
@@ -286,6 +321,11 @@ class TransformLayer : public Layer
     void SetBtnCallbackLight(ButtonID buttonID, ButtonCallbackLight callback)
     {
         m_BtnCallbacksLight[buttonID] = callback;
+    }
+
+    void SetBtnCallbackModel(ButtonID buttonID, ButtonCallbackModel callback)
+    {
+        m_BtnCallbacksModel[buttonID] = callback;
     }
 
     void SetSliderCallback(SliderID sliderID, SliderCallback callback)
@@ -306,6 +346,11 @@ class TransformLayer : public Layer
     void SetSliderCallbackLight(SliderID sliderID, SliderCallbackLight callback)
     {
         m_SliderCallbacksLight[sliderID] = callback;
+    }
+
+    void SetSliderCallbackModel(SliderID sliderID, SliderCallbackModel callback)
+    {
+        m_SliderCallbacksModel[sliderID] = callback;
     }
 
     virtual void OnImGuiRender() override
@@ -465,6 +510,104 @@ class TransformLayer : public Layer
             }
         }
 
+        if (!m_SelectedModel.id.empty())
+        {
+            ImGui::SeparatorText(m_SelectedModel.id.c_str());
+
+            if (ImGui::Button("Remove Model", btnSize) && m_BtnCallbacksModel[ButtonID::RemoveModel])
+            {
+                m_BtnCallbacksModel[ButtonID::RemoveModel](m_SelectedModel);
+            }
+
+            ImGui::Text("Position");
+
+            ImGui::Text("X: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##ModelXPos", &m_ModelXPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+            ImGui::SameLine();
+            ImGui::Text("Y: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##ModelYPos", &m_ModelYPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+            ImGui::SameLine();
+            ImGui::Text("Z: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##ModelZPos", &m_ModelZPos, 0.1f, -50.0f, 50.0f, "%.3f");
+
+            ImGui::Text("Rotation");
+
+            ImGui::Text("X: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##ModelXRot", &m_ModelXRot, 0.1f, 0.0f, 360.0f, "%.3f");
+
+            ImGui::SameLine();
+            ImGui::Text("Y: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##ModelYRot", &m_ModelYRot, 0.1f, 0.0f, 360.0f, "%.3f");
+
+            ImGui::SameLine();
+            ImGui::Text("Z: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+            ImGui::DragFloat("##ModelZRot", &m_ModelZRot, 0.1f, 0.0f, 360.0f, "%.3f");
+
+            ImGui::Text("Scale");
+
+            ImGui::Text("X: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+
+            if (ImGui::DragFloat("##ModelXScale", &m_ModelXScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_ModelLinkedScale)
+            {
+                m_ModelYScale = m_ModelZScale = m_ModelXScale;
+            }
+
+            ImGui::SameLine();
+            ImGui::Text("Y: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+
+            if (ImGui::DragFloat("##ModelYScale", &m_ModelYScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_ModelLinkedScale)
+            {
+                m_XScale = m_ZScale = m_YScale;
+            }
+
+            ImGui::SameLine();
+            ImGui::Text("Z: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(50);
+
+            if (ImGui::DragFloat("##ModelZScale", &m_ModelZScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_ModelLinkedScale)
+            {
+                m_ModelXScale = m_ModelYScale = m_ModelZScale;
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Link", &m_ModelLinkedScale))
+            {
+                if (m_ModelLinkedScale)
+                {
+                    m_ModelYScale = m_ModelZScale = m_ModelXScale;
+                }
+            }
+
+            m_SelectedModel.position = {m_ModelXPos, m_ModelYPos, m_ModelZPos};
+            m_SelectedModel.rotation = {m_ModelXRot, m_ModelYRot, m_ModelZRot};
+            m_SelectedModel.scale = {m_ModelXScale, m_ModelYScale, m_ModelZScale};
+
+            if (m_SliderCallbacksModel[SliderID::ModelTransformGroup])
+            {
+
+                m_SliderCallbacksModel[SliderID::ModelTransformGroup](m_SelectedModel);
+            }
+        }
+
         ImGui::End();
     }
 
@@ -476,15 +619,23 @@ class TransformLayer : public Layer
     float m_XScale = 1.0f, m_YScale = 1.0f, m_ZScale = 1.0f;
     bool m_LinkedScale;
 
+    float m_ModelXPos, m_ModelYPos, m_ModelZPos;
+    float m_ModelXRot, m_ModelYRot, m_ModelZRot;
+    float m_ModelXScale = 1.0f, m_ModelYScale = 1.0f, m_ModelZScale = 1.0f;
+    bool m_ModelLinkedScale;
+
     Rendering::SceneObject m_SelectedObject;
     Rendering::Lighting::Light m_SelectedLight;
+    Rendering::Model m_SelectedModel;
     std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
     std::unordered_map<ButtonID, ButtonCallbackObj> m_BtnCallbacksObj;
     std::unordered_map<ButtonID, ButtonCallbackLight> m_BtnCallbacksLight;
+    std::unordered_map<ButtonID, ButtonCallbackModel> m_BtnCallbacksModel;
     std::unordered_map<SliderID, SliderCallback> m_SliderCallbacks;
     std::unordered_map<SliderID, SliderCallbackVec3> m_SliderCallbacksVec3;
     std::unordered_map<SliderID, SliderCallbackObj> m_SliderCallbacksObj;
     std::unordered_map<SliderID, SliderCallbackLight> m_SliderCallbacksLight;
+    std::unordered_map<SliderID, SliderCallbackModel> m_SliderCallbacksModel;
 };
 
 class EntityLayer : public Layer
@@ -520,6 +671,11 @@ class EntityLayer : public Layer
         m_Lights.push_back(light);
     };
 
+    void AddModel(Rendering::Model &model)
+    {
+        m_Models.push_back(model);
+    };
+
     void RemoveObject(const Rendering::SceneObject &object)
     {
         auto it = std::find_if(m_Objects.begin(), m_Objects.end(),
@@ -542,6 +698,17 @@ class EntityLayer : public Layer
         }
     }
 
+    void RemoveModel(const Rendering::Model &model)
+    {
+        auto it = std::find_if(m_Models.begin(), m_Models.end(),
+                               [&model](const Rendering::Model &ml) { return ml.id == model.id; });
+
+        if (it != m_Models.end())
+        {
+            m_Models.erase(it);
+        }
+    }
+
     void SetObjectVector(std::vector<Rendering::SceneObject> objects)
     {
         m_Objects = objects;
@@ -550,6 +717,11 @@ class EntityLayer : public Layer
     void SetLightVector(std::vector<Rendering::Lighting::Light> &lights)
     {
         m_Lights = lights;
+    }
+
+    void SetModelVector(std::vector<Rendering::Model> &models)
+    {
+        m_Models = models;
     }
 
     static inline void SetSelectedObjectEntity(int selection)
@@ -562,6 +734,11 @@ class EntityLayer : public Layer
         m_SelectedLightEntity = selection;
     }
 
+    static inline void SetSelectedModelEntity(int selection)
+    {
+        m_SelectedModelEntity = selection;
+    }
+
     static inline int GetSelectedObjectEntity()
     {
         return m_SelectedObjectEntity;
@@ -572,6 +749,11 @@ class EntityLayer : public Layer
         return m_SelectedLightEntity;
     }
 
+    static inline int GetSelectedModelEntity()
+    {
+        return m_SelectedModelEntity;
+    }
+
     static inline void ClearObjectEntitySelection()
     {
         m_SelectedObjectEntity = -1;
@@ -580,6 +762,11 @@ class EntityLayer : public Layer
     static inline void ClearLightEntitySelection()
     {
         m_SelectedLightEntity = -1;
+    }
+
+    static inline void ClearModelEntitySelection()
+    {
+        m_SelectedModelEntity = -1;
     }
 
     inline std::vector<Rendering::SceneObject> GetObjects()
@@ -619,6 +806,7 @@ class EntityLayer : public Layer
             m_BtnCallbacks[ButtonID::ClearSelection]();
         }
 
+        ImGui::Separator();
         ImGui::Text("Objects");
         // Raw loop :/
         for (int i = 0; i < m_Objects.size(); ++i)
@@ -626,9 +814,24 @@ class EntityLayer : public Layer
             if (ImGui::Selectable(m_Objects[i].name.c_str(), GetSelectedObjectEntity() == i))
             {
                 ClearLightEntitySelection();
+                ClearModelEntitySelection();
                 SetSelectedObjectEntity(i);
 
                 m_TransformLayer->SetSelectedObject(m_Objects[i]);
+            }
+        }
+
+        ImGui::Separator();
+        ImGui::Text("Models");
+        for (int i = 0; i < m_Models.size(); ++i)
+        {
+            if (ImGui::Selectable(m_Models[i].id.c_str(), GetSelectedModelEntity() == i))
+            {
+                ClearLightEntitySelection();
+                ClearObjectEntitySelection();
+                SetSelectedModelEntity(i);
+
+                m_TransformLayer->SetSelectedModel(m_Models[i]);
             }
         }
 
@@ -640,6 +843,7 @@ class EntityLayer : public Layer
             if (ImGui::Selectable(m_Lights[i].id.c_str(), GetSelectedLightEntity() == i))
             {
                 ClearObjectEntitySelection();
+                ClearModelEntitySelection();
                 SetSelectedLightEntity(i);
 
                 m_TransformLayer->SetSelectedLight(m_Lights[i]);
@@ -662,9 +866,11 @@ class EntityLayer : public Layer
   private:
     static int m_SelectedObjectEntity;
     static int m_SelectedLightEntity;
+    static int m_SelectedModelEntity;
     GLFWwindow *m_Window;
     std::vector<Rendering::SceneObject> m_Objects;
     std::vector<Rendering::Lighting::Light> m_Lights;
+    std::vector<Rendering::Model> m_Models;
     std::unordered_map<ButtonID, ButtonCallback> m_BtnCallbacks;
     std::shared_ptr<TransformLayer> m_TransformLayer;
 };
@@ -681,7 +887,8 @@ class ControlsLayer : public Layer
         ToggleGrid,
         AddObject,
         AddDirectionalLight,
-        AddPointLight
+        AddPointLight,
+        AddModel
     };
 
     enum class SliderID
@@ -693,8 +900,6 @@ class ControlsLayer : public Layer
     {
         None,
         Cube,
-        Sphere,
-        Pyramid
     };
 
     using SliderCallback = std::function<void(float)>;
@@ -838,6 +1043,13 @@ class ControlsLayer : public Layer
         if (ImGui::Button("Add Object", btnSize) && m_BtnCallbacks[ButtonID::AddObject])
         {
             m_BtnCallbacks[ButtonID::AddObject]();
+        }
+
+        ImGui::Text("Models");
+
+        if (ImGui::Button("Add Test Model", btnSize) && m_BtnCallbacks[ButtonID::AddModel])
+        {
+            m_BtnCallbacks[ButtonID::AddModel]();
         }
 
         ImGui::End();

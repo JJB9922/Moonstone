@@ -4,6 +4,7 @@
 #include "Rendering/Include/Camera.h"
 #include "Rendering/Include/Lighting.h"
 #include "Rendering/Include/Material.h"
+#include "Rendering/Include/Model.h"
 #include "Rendering/Include/Shader.h"
 #include <memory>
 
@@ -48,7 +49,10 @@ struct Scene
     std::vector<Shader> shaders = {};
     std::vector<std::shared_ptr<Camera>> cameras = {};
     std::shared_ptr<Camera> activeCamera = nullptr;
+
     std::vector<SceneObject> objects = {};
+    std::vector<Model> models = {};
+
     std::vector<Lighting::Light> lights = {};
 
     glm::vec4 background = {0.15f, 0.15f, 0.15f, 1.0f};

@@ -37,7 +37,9 @@ class Renderer
     void SetupCamera();
     void RenderEditorGrid();
     void RenderVisibleObjects();
-    void RenderLighting(SceneObject &object);
+    void RenderVisibleModels();
+
+    template <typename T> void RenderLighting(T &object);
 
     void CleanupScene();
     void DeactivateDirectionalLight();

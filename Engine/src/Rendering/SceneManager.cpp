@@ -1,5 +1,6 @@
 #include "Include/SceneManager.h"
 #include "Include/Logger.h"
+#include "Rendering/Include/Model.h"
 #include <string>
 
 namespace Moonstone
@@ -55,7 +56,7 @@ void SceneManager::AddLightToScene(std::shared_ptr<Scene> scene, Lighting::Light
     }
 }
 
-void SceneManager::AddModelToScene(std::shared_ptr<Scene> scene)
+void SceneManager::AddObjectToScene(std::shared_ptr<Scene> scene)
 {
     // TODO fix this so it isnt just ugly cubes
     // TODO look at whether a vao/vbo for each object is necessary, extra memory waste ig
@@ -85,6 +86,23 @@ void SceneManager::AddModelToScene(std::shared_ptr<Scene> scene)
                                    {1, 1, 1}, cubeMat, ss.str(), cubeShader, Tools::BaseShapes::cubeVerticesSize};
 
     scene->objects.push_back(cube);
+}
+
+void SceneManager::AddModelToScene(std::shared_ptr<Scene> scene)
+{
+    stbi_set_flip_vertically_on_load(true);
+    std::string modelVert = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultmesh.vert";
+    std::string modelFrag = std::string(RESOURCE_DIR) + "/Shaders/DefaultShapes/defaultmesh.frag";
+    Rendering::Shader modelShader(modelVert.c_str(), modelFrag.c_str());
+
+    std::stringstream ss;
+    ss << "model_" << scene->models.size();
+
+    //  TODO NO
+    auto defM = std::string(RESOURCE_DIR) + "/Models/backpack/backpack.obj";
+    Model model(ss.str(), modelShader, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, defM);
+
+    scene->models.push_back(model);
 }
 
 } // namespace Rendering

@@ -67,6 +67,7 @@ void Renderer::RenderScene()
     }
 
     RenderVisibleObjects();
+    RenderVisibleModels();
 
     unsigned int empty = 0;
     RenderingCommand::BindFrameBuffer(empty);
@@ -120,6 +121,38 @@ void Renderer::RenderEditorGrid()
     else
     {
         MS_ERROR("shader is not loaded or empty");
+    }
+}
+
+void Renderer::RenderVisibleModels()
+{
+    unsigned currentShaderID = 0;
+
+    for (auto &model : m_Scene->models)
+    {
+        if (model.shader.ID != currentShaderID)
+        {
+            model.shader.Use();
+            currentShaderID = model.shader.ID;
+
+            RenderLighting(model);
+        }
+
+        // User applied transformations
+        glm::mat4 modelTransformationMatrix =
+            glm::translate(glm::mat4(1.0f), model.position) *
+            glm::rotate(glm::mat4(1.0f), glm::radians(model.rotation.z), glm::vec3(0.0f, 0.0f, 1.0f)) *
+            glm::rotate(glm::mat4(1.0f), glm::radians(model.rotation.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
+            glm::rotate(glm::mat4(1.0f), glm::radians(model.rotation.x), glm::vec3(1.0f, 0.0f, 0.0f)) *
+            glm::scale(glm::mat4(1.0f), model.scale);
+
+        RenderingCommand::SetUniformMat4(model.shader.ID, "model", modelTransformationMatrix);
+        RenderingCommand::SetUniformMat4(model.shader.ID, "view", m_Scene->activeCamera->GetViewMatrix());
+        RenderingCommand::SetUniformMat4(model.shader.ID, "projection", m_Scene->activeCamera->GetProjectionMatrix());
+
+        RenderingCommand::SetUniformVec3(model.shader.ID, "viewPos", m_Scene->activeCamera->GetPosition());
+
+        model.Draw(model.shader);
     }
 }
 
@@ -198,7 +231,7 @@ void Renderer::DeactivatePointLight(Lighting::Light &lightToDeactivate)
     }
 }
 
-void Renderer::RenderLighting(SceneObject &object)
+template <typename T> void Renderer::RenderLighting(T &object)
 {
     int pointLightIndex = 0;
     for (int i = 0; i < m_Scene->lights.size(); ++i)
