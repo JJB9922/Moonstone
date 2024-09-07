@@ -16,6 +16,7 @@ class Lighting
   public:
     enum class LightType
     {
+        None = 0,
         Directional,
         Point,
     };
@@ -53,7 +54,11 @@ class Lighting
 
         void Clear()
         {
-            id.clear();
+            id = "";
+            type = LightType::None;
+            direction = ambient = position = diffuse = specular = glm::vec3(0);
+            isActive = false;
+            constant = linear = quadratic = 0.0f;
         }
     };
 
@@ -65,12 +70,12 @@ class Lighting
         m_Lights.push_back(light);
     }
 
-    inline std::vector<Light> GetLights()
+    inline std::vector<Light> &GetLights()
     {
         return m_Lights;
     }
 
-    inline void SetLight(std::string &id, Light updatedLight)
+    inline void SetLight(const std::string &id, Light updatedLight)
     {
         for (auto &light : m_Lights)
         {

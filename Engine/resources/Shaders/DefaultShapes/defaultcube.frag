@@ -51,13 +51,16 @@ void main()
 {    
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - FragPos);
-    
-    vec3 result = CalcDirLight(dirLight, norm, viewDir);
+    vec3 result = vec3(0.0f);
+
+    if(dirLight.isActive) {
+        result = CalcDirLight(dirLight, norm, viewDir);
+    }
     for(int i = 0; i < NR_POINT_LIGHTS; i++)
         if(pointLights[i].isActive){ 
-        result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);    
-        }
-    
+            result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);    
+        } 
+
     FragColor = vec4(result, 1.0);
 }
 

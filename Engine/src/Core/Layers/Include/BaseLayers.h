@@ -413,6 +413,7 @@ class TransformLayer : public Layer
 
             if (m_SliderCallbacksObj[SliderID::ObjectTransformGroup])
             {
+
                 m_SliderCallbacksObj[SliderID::ObjectTransformGroup](m_SelectedObject);
             }
         }
@@ -425,10 +426,15 @@ class TransformLayer : public Layer
             if (ImGui::Button("Remove Light", btnSize) && m_BtnCallbacksLight[ButtonID::RemoveLight])
             {
                 m_BtnCallbacksLight[ButtonID::RemoveLight](m_SelectedLight);
+                ImGui::End();
+                return;
             }
 
             if (m_SelectedLight.type == Rendering::Lighting::LightType::Directional)
+            {
+                ImGui::End();
                 return;
+            }
 
             ImGui::Text("Position");
 
@@ -527,11 +533,6 @@ class EntityLayer : public Layer
 
     void RemoveLight(const Rendering::Lighting::Light &light)
     {
-        for (auto i : m_Lights)
-        {
-            MS_INFO(i.id);
-        }
-
         auto it = std::find_if(m_Lights.begin(), m_Lights.end(),
                                [&light](const Rendering::Lighting::Light &lt) { return lt.id == light.id; });
 

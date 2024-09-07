@@ -127,7 +127,7 @@ void Renderer::RenderVisibleObjects()
 {
     unsigned currentShaderID = 0;
 
-    for (auto object : m_Scene->objects)
+    for (auto &object : m_Scene->objects)
     {
         if (object.shader.ID != currentShaderID)
         {
@@ -168,69 +168,95 @@ void Renderer::RenderVisibleObjects()
     }
 }
 
-void Renderer::RenderLighting(SceneObject &object)
+void Renderer::DeactivateDirectionalLight()
 {
-
-    auto lights = m_Scene->lights;
-    std::vector<Lighting::Light> pointLights;
-
-    for (auto light : lights)
+    for (auto object : m_Scene->objects)
     {
-        if (light.type == Lighting::LightType::Directional)
+        RenderingCommand::SetUniformBool(object.shader.ID, "dirLight.isActive", false);
+    }
+}
+
+void Renderer::DeactivatePointLight(Lighting::Light &lightToDeactivate)
+{
+    auto it =
+        std::find_if(m_Scene->lights.begin(), m_Scene->lights.end(), [&lightToDeactivate](Lighting::Light &sceneLight) {
+            return sceneLight.id == lightToDeactivate.id;
+        });
+
+    if (it != m_Scene->lights.end())
+    {
+        it->isActive = false;
+
+        int lightIndex = std::distance(m_Scene->lights.begin(), it);
+
+        for (auto &object : m_Scene->objects)
         {
-            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.direction", light.direction);
-            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.ambient", light.ambient);
-            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.diffuse", light.diffuse);
-            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.specular", light.specular);
-            RenderingCommand::SetUniformBool(object.shader.ID, "dirLight.isActive", light.isActive);
-        }
-        else if (light.type == Lighting::LightType::Point)
-        {
-            pointLights.push_back(light);
+            MS_INFO("uh {0}", lightIndex);
+            std::string uniformName = "pointLights[" + std::to_string(lightIndex) + "].isActive";
+            RenderingCommand::SetUniformBool(object.shader.ID, uniformName, false);
         }
     }
+}
 
-    // TODO SSBO
-    for (unsigned i = 0; i < pointLights.size(); ++i)
+void Renderer::RenderLighting(SceneObject &object)
+{
+    int pointLightIndex = 0;
+    for (int i = 0; i < m_Scene->lights.size(); ++i)
     {
-        std::stringstream ss;
-        ss << "pointLights[" << i << "].position";
-        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].position);
+        if (m_Scene->lights[i].type == Lighting::LightType::Directional)
+        {
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.direction", m_Scene->lights[i].direction);
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.ambient", m_Scene->lights[i].ambient);
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.diffuse", m_Scene->lights[i].diffuse);
+            RenderingCommand::SetUniformVec3(object.shader.ID, "dirLight.specular", m_Scene->lights[i].specular);
+            RenderingCommand::SetUniformBool(object.shader.ID, "dirLight.isActive", m_Scene->lights[i].isActive);
+        }
+        else if (m_Scene->lights[i].type == Lighting::LightType::Point)
+        {
+            std::stringstream ss;
 
-        ss.str("");
-        ss.clear(); // Clear the stringstream for reuse
-        ss << "pointLights[" << i << "].ambient";
-        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].ambient);
+            ss << "pointLights[" << pointLightIndex << "].position";
+            RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), m_Scene->lights[i].position);
+            ss.str("");
+            ss.clear();
 
-        ss.str("");
-        ss.clear();
-        ss << "pointLights[" << i << "].diffuse";
-        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].diffuse);
+            ss << "pointLights[" << pointLightIndex << "].ambient";
+            RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), m_Scene->lights[i].ambient);
+            ss.str("");
+            ss.clear();
 
-        ss.str("");
-        ss.clear();
-        ss << "pointLights[" << i << "].specular";
-        RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), pointLights[i].specular);
+            ss << "pointLights[" << pointLightIndex << "].diffuse";
+            RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), m_Scene->lights[i].diffuse);
+            ss.str("");
+            ss.clear();
 
-        ss.str("");
-        ss.clear();
-        ss << "pointLights[" << i << "].constant";
-        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].constant);
+            ss << "pointLights[" << pointLightIndex << "].specular";
+            RenderingCommand::SetUniformVec3(object.shader.ID, ss.str(), m_Scene->lights[i].specular);
+            ss.str("");
+            ss.clear();
 
-        ss.str("");
-        ss.clear();
-        ss << "pointLights[" << i << "].linear";
-        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].linear);
+            ss << "pointLights[" << pointLightIndex << "].constant";
+            RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), m_Scene->lights[i].constant);
+            ss.str("");
+            ss.clear();
 
-        ss.str("");
-        ss.clear();
-        ss << "pointLights[" << i << "].quadratic";
-        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].quadratic);
+            ss << "pointLights[" << pointLightIndex << "].linear";
+            RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), m_Scene->lights[i].linear);
+            ss.str("");
+            ss.clear();
 
-        ss.str("");
-        ss.clear();
-        ss << "pointLights[" << i << "].isActive";
-        RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), pointLights[i].isActive);
+            ss << "pointLights[" << pointLightIndex << "].quadratic";
+            RenderingCommand::SetUniformFloat(object.shader.ID, ss.str(), m_Scene->lights[i].quadratic);
+            ss.str("");
+            ss.clear();
+
+            ss << "pointLights[" << pointLightIndex << "].isActive";
+            RenderingCommand::SetUniformBool(object.shader.ID, ss.str(), m_Scene->lights[i].isActive);
+            ss.str("");
+            ss.clear();
+
+            ++pointLightIndex;
+        }
     }
 }
 

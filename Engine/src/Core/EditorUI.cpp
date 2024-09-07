@@ -2,6 +2,7 @@
 #include "Include/Logger.h"
 #include "Layers/Include/BaseLayers.h"
 #include "Rendering/Include/Lighting.h"
+#include "Rendering/Include/Renderer.h"
 #include "Rendering/Include/SceneManager.h"
 #include <memory>
 #include <sstream>
@@ -68,6 +69,17 @@ void EditorUI::Init()
 
             if (it != m_ActiveScene->lights.end())
             {
+                Rendering::Renderer renderer(m_ActiveScene);
+
+                if (light.type == Rendering::Lighting::LightType::Directional)
+                {
+                    renderer.DeactivateDirectionalLight();
+                }
+                else if (light.type == Rendering::Lighting::LightType::Point)
+                {
+                    renderer.DeactivatePointLight(light);
+                }
+
                 m_ActiveScene->lights.erase(it);
             }
 
@@ -97,11 +109,8 @@ void EditorUI::Init()
 
             if (it != m_ActiveScene->lights.end())
             {
+                it->id = light.id;
                 it->position = light.position;
-            }
-            else
-            {
-                MS_ERROR("light for transform could not be found");
             }
 
             entityLayer->SetLightVector(m_ActiveScene->lights);
@@ -160,47 +169,51 @@ void EditorUI::Init()
                                       transformLayer->SetSelectedObject(m_ActiveScene->objects.back());
                                   });
 
-    controlsLayer->SetBtnCallback(
-        ControlsLayer::ButtonID::AddDirectionalLight, [this, controlsLayer, entityLayer, transformLayer]() {
-            bool dirLightExists = false;
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddDirectionalLight,
+                                  [this, controlsLayer, entityLayer, transformLayer]()
+                                  {
+                                      bool dirLightExists = false;
 
-            for (auto light : m_ActiveScene->lights)
-            {
-                if (light.type == Rendering::Lighting::LightType::Directional)
-                {
-                    dirLightExists = true;
-                }
-            }
+                                      for (auto &light : m_ActiveScene->lights)
+                                      {
+                                          if (light.type == Rendering::Lighting::LightType::Directional)
+                                          {
+                                              dirLightExists = true;
+                                          }
+                                      }
 
-            if (dirLightExists == true)
-            {
-                MS_INFO("cannot add directional light as one already exists");
-                return;
-            }
+                                      if (dirLightExists == true)
+                                      {
+                                          MS_INFO("cannot add directional light as one already exists");
+                                          return;
+                                      }
 
-            Rendering::SceneManager sceneManager;
+                                      Rendering::SceneManager sceneManager;
 
-            // TODO not string...
-            std::stringstream ss;
-            ss << "DirLight_" << m_ActiveScene->lights.size();
+                                      // TODO not string...
+                                      std::stringstream ss;
+                                      ss << "DirLight_" << m_ActiveScene->lights.size();
 
-            auto dirLight = Rendering::Lighting::Light(ss.str(), {0.5f, -1.0f, 0.5f}, {0.1f, 0.1f, 0.1f},
-                                                       {0.5f, 0.5f, 0.5f}, {0.2f, 0.2f, 0.2f}, true);
+                                      auto dirLight = Rendering::Lighting::Light(ss.str(),
+                                                                                 {0.5f, -1.0f, 0.5f},
+                                                                                 {0.1f, 0.1f, 0.1f},
+                                                                                 {0.5f, 0.5f, 0.5f},
+                                                                                 {0.2f, 0.2f, 0.2f},
+                                                                                 true);
 
-            sceneManager.AddLightToScene(m_ActiveScene, dirLight);
-            entityLayer->AddLight(m_ActiveScene->lights.back());
+                                      sceneManager.AddLightToScene(m_ActiveScene, dirLight);
+                                      entityLayer->AddLight(m_ActiveScene->lights.back());
 
-            entityLayer->ClearObjectEntitySelection();
-            entityLayer->ClearLightEntitySelection();
+                                      entityLayer->ClearObjectEntitySelection();
+                                      entityLayer->ClearLightEntitySelection();
 
-            entityLayer->SetSelectedLightEntity(m_ActiveScene->lights.size() - 1);
-            transformLayer->SetSelectedLight(m_ActiveScene->lights.back());
-
-            MS_INFO("Light Size {0}", m_ActiveScene->lights.size());
-        });
+                                      entityLayer->SetSelectedLightEntity(m_ActiveScene->lights.size() - 1);
+                                      transformLayer->SetSelectedLight(m_ActiveScene->lights.back());
+                                  });
 
     controlsLayer->SetSliderCallback(ControlsLayer::SliderID::DirectionalLightAngle,
-                                     [this, controlsLayer](float dirLightFloat) {
+                                     [this, controlsLayer](float dirLightFloat)
+                                     {
                                          float sliderFloat = dirLightFloat;
 
                                          float angle = sliderFloat * 2.0f * 3.14159f;
@@ -216,31 +229,40 @@ void EditorUI::Init()
                                              if (light.type == Rendering::Lighting::LightType::Directional)
                                              {
                                                  light.direction = lightDirection;
-                                                 m_ActiveScene->lights.back() = light;
+
+                                                 break;
                                              }
                                          }
                                      });
 
-    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddPointLight, [this, controlsLayer, entityLayer,
-                                                                           transformLayer]() {
-        Rendering::SceneManager sceneManager;
+    controlsLayer->SetBtnCallback(ControlsLayer::ButtonID::AddPointLight,
+                                  [this, controlsLayer, entityLayer, transformLayer]()
+                                  {
+                                      Rendering::SceneManager sceneManager;
 
-        std::stringstream ss;
-        ss << "PointLight_" << m_ActiveScene->lights.size();
+                                      std::stringstream ss;
+                                      ss << "PointLight_" << m_ActiveScene->lights.size();
 
-        // TODO do some serious stuff w this not nonense
-        auto ptLight = Rendering::Lighting::Light(ss.str(), {0.5f, 0.5f, 0.5f}, {0.1f, 0.1f, 0.1f}, {0.5f, 0.5f, 0.5f},
-                                                  {0.2f, 0.2f, 0.2f}, true, 1.0f, 0.09f, 0.0032f);
+                                      // TODO do some serious stuff w this not nonense
+                                      auto ptLight = Rendering::Lighting::Light(ss.str(),
+                                                                                {0.5f, 0.5f, 0.5f},
+                                                                                {0.1f, 0.1f, 0.1f},
+                                                                                {0.5f, 0.5f, 0.5f},
+                                                                                {0.2f, 0.2f, 0.2f},
+                                                                                true,
+                                                                                1.0f,
+                                                                                0.09f,
+                                                                                0.0032f);
 
-        sceneManager.AddLightToScene(m_ActiveScene, ptLight);
-        entityLayer->AddLight(m_ActiveScene->lights.back());
+                                      sceneManager.AddLightToScene(m_ActiveScene, ptLight);
+                                      entityLayer->AddLight(m_ActiveScene->lights.back());
 
-        entityLayer->ClearObjectEntitySelection();
-        entityLayer->ClearLightEntitySelection();
+                                      entityLayer->ClearObjectEntitySelection();
+                                      entityLayer->ClearLightEntitySelection();
 
-        entityLayer->SetSelectedLightEntity(m_ActiveScene->lights.size() - 1);
-        transformLayer->SetSelectedLight(m_ActiveScene->lights.back());
-    });
+                                      entityLayer->SetSelectedLightEntity(m_ActiveScene->lights.size() - 1);
+                                      transformLayer->SetSelectedLight(m_ActiveScene->lights.back());
+                                  });
 
     m_Layers.push_back(*controlsLayer);
     PushLayer(controlsLayer);

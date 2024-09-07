@@ -40,6 +40,8 @@ class Renderer
     void RenderLighting(SceneObject &object);
 
     void CleanupScene();
+    void DeactivateDirectionalLight();
+    void DeactivatePointLight(Lighting::Light &light);
 
   private:
     // Scene
