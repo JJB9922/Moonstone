@@ -90,10 +90,12 @@ Inheritance diagram for Moonstone::Core::TransformLayer:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:af858a823d11af1192569280c63997ec8"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> { <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8af0c405ca8e7eb2c3fa3d102bb69b75a9">RemoveObject</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8a6f495c9c305c97d58c06e4d8f18dae3a">RemoveLight</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8a767484f0315e4e9c2cd4b48e4de09f32">RemoveModel</a>
  }</td></tr>
 <tr class="separator:af858a823d11af1192569280c63997ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaa83a7cc8c500319242d80e392c3e84"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a> { <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84a2948ef09482cfef9b6da09721d7a0dcd">ObjectTransformGroup</a>
 , <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84a5f2aae06486a2885d8976184c475f89a">LightTransformGroup</a>
+, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84a4d76919bd183ffe10abc32fe46604242">ModelTransformGroup</a>
  }</td></tr>
 <tr class="separator:aaaa83a7cc8c500319242d80e392c3e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad08119cea88bf1a6aeb5db48d4d98fc7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a> = std::function&lt; void()&gt;</td></tr>
@@ -102,6 +104,8 @@ Public Types</h2></td></tr>
 <tr class="separator:a0555c3b7c2a7712aa3b746f9f5d81b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2f420c46a7ea7a22e2350179e8096e7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae2f420c46a7ea7a22e2350179e8096e7">ButtonCallbackLight</a> = std::function&lt; void(<a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> &amp;)&gt;</td></tr>
 <tr class="separator:ae2f420c46a7ea7a22e2350179e8096e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4466cc33736285d71c58e641835bc429"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4466cc33736285d71c58e641835bc429">ButtonCallbackModel</a> = std::function&lt; void(<a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> &amp;)&gt;</td></tr>
+<tr class="separator:a4466cc33736285d71c58e641835bc429"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f2dec2d7fc7030dd3dfc398788e094c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7f2dec2d7fc7030dd3dfc398788e094c">SliderCallback</a> = std::function&lt; void(float)&gt;</td></tr>
 <tr class="separator:a7f2dec2d7fc7030dd3dfc398788e094c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf8db781b939094bbdf4b3a483ba4546"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaf8db781b939094bbdf4b3a483ba4546">SliderCallbackVec3</a> = std::function&lt; void(glm::vec3)&gt;</td></tr>
@@ -110,6 +114,8 @@ Public Types</h2></td></tr>
 <tr class="separator:a683f571f4c0fdfb44771b72aac669ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a550d94248459dba2e2a0fae332d1d475"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a550d94248459dba2e2a0fae332d1d475">SliderCallbackLight</a> = std::function&lt; void(<a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> &amp;)&gt;</td></tr>
 <tr class="separator:a550d94248459dba2e2a0fae332d1d475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda5b728e0c628cd71255279856ec8ee"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#abda5b728e0c628cd71255279856ec8ee">SliderCallbackModel</a> = std::function&lt; void(<a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> &amp;)&gt;</td></tr>
+<tr class="separator:abda5b728e0c628cd71255279856ec8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -121,16 +127,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad6b1758fe994c523d323e8a7e65ac3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dfecb2b33d4eacf123a40b6392e9d79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a6dfecb2b33d4eacf123a40b6392e9d79">SetSelectedLight</a> (<a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> &amp;light)</td></tr>
 <tr class="separator:a6dfecb2b33d4eacf123a40b6392e9d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af219b1e338b25b49f68e61369d5ac878"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af219b1e338b25b49f68e61369d5ac878">SetSelectedModel</a> (<a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> &amp;model)</td></tr>
+<tr class="separator:af219b1e338b25b49f68e61369d5ac878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58a142074ca39b89150106bb13b8d87d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a58a142074ca39b89150106bb13b8d87d">ClearSelectedObject</a> ()</td></tr>
 <tr class="separator:a58a142074ca39b89150106bb13b8d87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65e62d2b36fffd7f671ce7e938be7b7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a65e62d2b36fffd7f671ce7e938be7b7c">ClearSelectedLight</a> ()</td></tr>
 <tr class="separator:a65e62d2b36fffd7f671ce7e938be7b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9dd37310072128bafce4315da1e75af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aa9dd37310072128bafce4315da1e75af">ClearSelectedModel</a> ()</td></tr>
+<tr class="separator:aa9dd37310072128bafce4315da1e75af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e68c2cf1a06ef3532382e8099c3ec8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a0e68c2cf1a06ef3532382e8099c3ec8d">SetBtnCallback</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a> callback)</td></tr>
 <tr class="separator:a0e68c2cf1a06ef3532382e8099c3ec8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58a04bfd4af5abed661f81cde965fc17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a58a04bfd4af5abed661f81cde965fc17">SetBtnCallbackObj</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a0555c3b7c2a7712aa3b746f9f5d81b09">ButtonCallbackObj</a> callback)</td></tr>
 <tr class="separator:a58a04bfd4af5abed661f81cde965fc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a030fc9d4b789f032d8888fdbfd080841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a030fc9d4b789f032d8888fdbfd080841">SetBtnCallbackLight</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae2f420c46a7ea7a22e2350179e8096e7">ButtonCallbackLight</a> callback)</td></tr>
 <tr class="separator:a030fc9d4b789f032d8888fdbfd080841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eb9d0235cf38972d9c950d983a99f4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4eb9d0235cf38972d9c950d983a99f4a">SetBtnCallbackModel</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a> buttonID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4466cc33736285d71c58e641835bc429">ButtonCallbackModel</a> callback)</td></tr>
+<tr class="separator:a4eb9d0235cf38972d9c950d983a99f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec9a05509b43ccaa8456137447e8eec2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aec9a05509b43ccaa8456137447e8eec2">SetSliderCallback</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a> sliderID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7f2dec2d7fc7030dd3dfc398788e094c">SliderCallback</a> callback)</td></tr>
 <tr class="separator:aec9a05509b43ccaa8456137447e8eec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c74ff303478809efe78d786862f7815"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a8c74ff303478809efe78d786862f7815">SetSliderCallbackVec3</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a> sliderID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaf8db781b939094bbdf4b3a483ba4546">SliderCallbackVec3</a> callback)</td></tr>
@@ -139,6 +151,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0e3b13a4578644934aa1284a797f9174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e7e6d5ddf042ae1b364ebf1bfad51e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7e7e6d5ddf042ae1b364ebf1bfad51e9">SetSliderCallbackLight</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a> sliderID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a550d94248459dba2e2a0fae332d1d475">SliderCallbackLight</a> callback)</td></tr>
 <tr class="separator:a7e7e6d5ddf042ae1b364ebf1bfad51e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbe837f55202b672186d55af02da651"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7cbe837f55202b672186d55af02da651">SetSliderCallbackModel</a> (<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a> sliderID, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#abda5b728e0c628cd71255279856ec8ee">SliderCallbackModel</a> callback)</td></tr>
+<tr class="separator:a7cbe837f55202b672186d55af02da651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa07f0605e124cca697413c0126bdd46"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#afa07f0605e124cca697413c0126bdd46">OnImGuiRender</a> () override</td></tr>
 <tr class="separator:afa07f0605e124cca697413c0126bdd46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMoonstone_1_1Core_1_1Layer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMoonstone_1_1Core_1_1Layer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMoonstone_1_1Core_1_1Layer.html">Moonstone::Core::Layer</a></td></tr>
@@ -181,16 +195,40 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a328f7ab5bfb1260a3586ecadc517d804"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35009cf9647aed69a56627ab3b8dad20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a35009cf9647aed69a56627ab3b8dad20">m_LinkedScale</a></td></tr>
 <tr class="separator:a35009cf9647aed69a56627ab3b8dad20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3ad64df1a40b3ed6fb0c9e6c1e965ea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af3ad64df1a40b3ed6fb0c9e6c1e965ea">m_ModelXPos</a></td></tr>
+<tr class="separator:af3ad64df1a40b3ed6fb0c9e6c1e965ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48fd72caf03bdf17bc98e32332bb0ec9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a48fd72caf03bdf17bc98e32332bb0ec9">m_ModelYPos</a></td></tr>
+<tr class="separator:a48fd72caf03bdf17bc98e32332bb0ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a5580bb417d47ba1da4041bf64a969f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a3a5580bb417d47ba1da4041bf64a969f">m_ModelZPos</a></td></tr>
+<tr class="separator:a3a5580bb417d47ba1da4041bf64a969f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d52a06f19d53e85f83bf0d9b767d1d7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a6d52a06f19d53e85f83bf0d9b767d1d7">m_ModelXRot</a></td></tr>
+<tr class="separator:a6d52a06f19d53e85f83bf0d9b767d1d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7939295f4d8f97b342829b065fcb76ab"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7939295f4d8f97b342829b065fcb76ab">m_ModelYRot</a></td></tr>
+<tr class="separator:a7939295f4d8f97b342829b065fcb76ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae17646c21ffd9332616abc10d007586d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae17646c21ffd9332616abc10d007586d">m_ModelZRot</a></td></tr>
+<tr class="separator:ae17646c21ffd9332616abc10d007586d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a359285d6dfeeaa5eca1928b049935274"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a359285d6dfeeaa5eca1928b049935274">m_ModelXScale</a> = 1.0f</td></tr>
+<tr class="separator:a359285d6dfeeaa5eca1928b049935274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a970fa8f67b1db70f214da24673a63e1b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a970fa8f67b1db70f214da24673a63e1b">m_ModelYScale</a> = 1.0f</td></tr>
+<tr class="separator:a970fa8f67b1db70f214da24673a63e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902d07e585aaa102c3d16663acc31dfc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a902d07e585aaa102c3d16663acc31dfc">m_ModelZScale</a> = 1.0f</td></tr>
+<tr class="separator:a902d07e585aaa102c3d16663acc31dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa54a0218e2e96483d15ee70001fa5761"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aa54a0218e2e96483d15ee70001fa5761">m_ModelLinkedScale</a></td></tr>
+<tr class="separator:aa54a0218e2e96483d15ee70001fa5761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f9e288621c5af05bb979a7b0cdce380"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMoonstone_1_1Rendering_1_1SceneObject.html">Rendering::SceneObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a5f9e288621c5af05bb979a7b0cdce380">m_SelectedObject</a></td></tr>
 <tr class="separator:a5f9e288621c5af05bb979a7b0cdce380"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b8cc60bd5e25c494b5e95862a535da1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a9b8cc60bd5e25c494b5e95862a535da1">m_SelectedLight</a></td></tr>
 <tr class="separator:a9b8cc60bd5e25c494b5e95862a535da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1877911125a9b650f112719adb1e283b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a1877911125a9b650f112719adb1e283b">m_SelectedModel</a></td></tr>
+<tr class="separator:a1877911125a9b650f112719adb1e283b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7310e9dac6d55a21020e56175233f2e4"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ad08119cea88bf1a6aeb5db48d4d98fc7">ButtonCallback</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7310e9dac6d55a21020e56175233f2e4">m_BtnCallbacks</a></td></tr>
 <tr class="separator:a7310e9dac6d55a21020e56175233f2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5d1a89c20abb9abb54b1389fdafcd8e"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a0555c3b7c2a7712aa3b746f9f5d81b09">ButtonCallbackObj</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ab5d1a89c20abb9abb54b1389fdafcd8e">m_BtnCallbacksObj</a></td></tr>
 <tr class="separator:ab5d1a89c20abb9abb54b1389fdafcd8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64d3f85a84ef0ef9b17a7363559a72b7"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae2f420c46a7ea7a22e2350179e8096e7">ButtonCallbackLight</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a64d3f85a84ef0ef9b17a7363559a72b7">m_BtnCallbacksLight</a></td></tr>
 <tr class="separator:a64d3f85a84ef0ef9b17a7363559a72b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa521967e0232922ad736e79de3286bbc"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4466cc33736285d71c58e641835bc429">ButtonCallbackModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aa521967e0232922ad736e79de3286bbc">m_BtnCallbacksModel</a></td></tr>
+<tr class="separator:aa521967e0232922ad736e79de3286bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65440215aea8dd13352ce6ea75bc934a"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a7f2dec2d7fc7030dd3dfc398788e094c">SliderCallback</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a65440215aea8dd13352ce6ea75bc934a">m_SliderCallbacks</a></td></tr>
 <tr class="separator:a65440215aea8dd13352ce6ea75bc934a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a188a980cba289e7909964b081e7b3754"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaf8db781b939094bbdf4b3a483ba4546">SliderCallbackVec3</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a188a980cba289e7909964b081e7b3754">m_SliderCallbacksVec3</a></td></tr>
@@ -199,6 +237,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a19e54b217ed2610d868d04e4206a1c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90681b9cc512d512ed6cc349acd79ae7"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a550d94248459dba2e2a0fae332d1d475">SliderCallbackLight</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a90681b9cc512d512ed6cc349acd79ae7">m_SliderCallbacksLight</a></td></tr>
 <tr class="separator:a90681b9cc512d512ed6cc349acd79ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d15eb83bf89bfae564459c617a7735"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#abda5b728e0c628cd71255279856ec8ee">SliderCallbackModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ac1d15eb83bf89bfae564459c617a7735">m_SliderCallbacksModel</a></td></tr>
+<tr class="separator:ac1d15eb83bf89bfae564459c617a7735"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad08119cea88bf1a6aeb5db48d4d98fc7"></a>
@@ -223,6 +263,20 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#ae2f420c46a7ea7a22e2350179e8096e7">Moonstone::Core::TransformLayer::ButtonCallbackLight</a> =  std::function&lt;void(<a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> &amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4466cc33736285d71c58e641835bc429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4466cc33736285d71c58e641835bc429">&#9670;&nbsp;</a></span>ButtonCallbackModel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4466cc33736285d71c58e641835bc429">Moonstone::Core::TransformLayer::ButtonCallbackModel</a> =  std::function&lt;void(<a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> &amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -265,6 +319,20 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a550d94248459dba2e2a0fae332d1d475">Moonstone::Core::TransformLayer::SliderCallbackLight</a> =  std::function&lt;void(<a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> &amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abda5b728e0c628cd71255279856ec8ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abda5b728e0c628cd71255279856ec8ee">&#9670;&nbsp;</a></span>SliderCallbackModel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#abda5b728e0c628cd71255279856ec8ee">Moonstone::Core::TransformLayer::SliderCallbackModel</a> =  std::function&lt;void(<a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> &amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -322,6 +390,7 @@ Private Attributes</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af858a823d11af1192569280c63997ec8af0c405ca8e7eb2c3fa3d102bb69b75a9"></a>RemoveObject&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="af858a823d11af1192569280c63997ec8a6f495c9c305c97d58c06e4d8f18dae3a"></a>RemoveLight&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af858a823d11af1192569280c63997ec8a767484f0315e4e9c2cd4b48e4de09f32"></a>RemoveModel&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -348,6 +417,7 @@ Private Attributes</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaaa83a7cc8c500319242d80e392c3e84a2948ef09482cfef9b6da09721d7a0dcd"></a>ObjectTransformGroup&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaaa83a7cc8c500319242d80e392c3e84a5f2aae06486a2885d8976184c475f89a"></a>LightTransformGroup&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaaa83a7cc8c500319242d80e392c3e84a4d76919bd183ffe10abc32fe46604242"></a>ModelTransformGroup&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -390,6 +460,31 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void Moonstone::Core::TransformLayer::ClearSelectedLight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9dd37310072128bafce4315da1e75af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9dd37310072128bafce4315da1e75af">&#9670;&nbsp;</a></span>ClearSelectedModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::TransformLayer::ClearSelectedModel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -555,6 +650,42 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4eb9d0235cf38972d9c950d983a99f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eb9d0235cf38972d9c950d983a99f4a">&#9670;&nbsp;</a></span>SetBtnCallbackModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::TransformLayer::SetBtnCallbackModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>&#160;</td>
+          <td class="paramname"><em>buttonID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4466cc33736285d71c58e641835bc429">ButtonCallbackModel</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a58a04bfd4af5abed661f81cde965fc17"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58a04bfd4af5abed661f81cde965fc17">&#9670;&nbsp;</a></span>SetBtnCallbackObj()</h2>
 
@@ -605,6 +736,32 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> &amp;&#160;</td>
           <td class="paramname"><em>light</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af219b1e338b25b49f68e61369d5ac878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af219b1e338b25b49f68e61369d5ac878">&#9670;&nbsp;</a></span>SetSelectedModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::TransformLayer::SetSelectedModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> &amp;&#160;</td>
+          <td class="paramname"><em>model</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -698,6 +855,42 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a550d94248459dba2e2a0fae332d1d475">SliderCallbackLight</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cbe837f55202b672186d55af02da651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cbe837f55202b672186d55af02da651">&#9670;&nbsp;</a></span>SetSliderCallbackModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Core::TransformLayer::SetSliderCallbackModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>&#160;</td>
+          <td class="paramname"><em>sliderID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#abda5b728e0c628cd71255279856ec8ee">SliderCallbackModel</a>&#160;</td>
           <td class="paramname"><em>callback</em>&#160;</td>
         </tr>
         <tr>
@@ -832,6 +1025,28 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa521967e0232922ad736e79de3286bbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa521967e0232922ad736e79de3286bbc">&#9670;&nbsp;</a></span>m_BtnCallbacksModel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#af858a823d11af1192569280c63997ec8">ButtonID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a4466cc33736285d71c58e641835bc429">ButtonCallbackModel</a>&gt; Moonstone::Core::TransformLayer::m_BtnCallbacksModel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab5d1a89c20abb9abb54b1389fdafcd8e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab5d1a89c20abb9abb54b1389fdafcd8e">&#9670;&nbsp;</a></span>m_BtnCallbacksObj</h2>
 
@@ -942,6 +1157,226 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa54a0218e2e96483d15ee70001fa5761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa54a0218e2e96483d15ee70001fa5761">&#9670;&nbsp;</a></span>m_ModelLinkedScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Moonstone::Core::TransformLayer::m_ModelLinkedScale</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3ad64df1a40b3ed6fb0c9e6c1e965ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3ad64df1a40b3ed6fb0c9e6c1e965ea">&#9670;&nbsp;</a></span>m_ModelXPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelXPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6d52a06f19d53e85f83bf0d9b767d1d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d52a06f19d53e85f83bf0d9b767d1d7">&#9670;&nbsp;</a></span>m_ModelXRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelXRot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a359285d6dfeeaa5eca1928b049935274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a359285d6dfeeaa5eca1928b049935274">&#9670;&nbsp;</a></span>m_ModelXScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelXScale = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48fd72caf03bdf17bc98e32332bb0ec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48fd72caf03bdf17bc98e32332bb0ec9">&#9670;&nbsp;</a></span>m_ModelYPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelYPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7939295f4d8f97b342829b065fcb76ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7939295f4d8f97b342829b065fcb76ab">&#9670;&nbsp;</a></span>m_ModelYRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelYRot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a970fa8f67b1db70f214da24673a63e1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a970fa8f67b1db70f214da24673a63e1b">&#9670;&nbsp;</a></span>m_ModelYScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelYScale = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a5580bb417d47ba1da4041bf64a969f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a5580bb417d47ba1da4041bf64a969f">&#9670;&nbsp;</a></span>m_ModelZPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelZPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae17646c21ffd9332616abc10d007586d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae17646c21ffd9332616abc10d007586d">&#9670;&nbsp;</a></span>m_ModelZRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelZRot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a902d07e585aaa102c3d16663acc31dfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902d07e585aaa102c3d16663acc31dfc">&#9670;&nbsp;</a></span>m_ModelZScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Moonstone::Core::TransformLayer::m_ModelZScale = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9b8cc60bd5e25c494b5e95862a535da1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b8cc60bd5e25c494b5e95862a535da1">&#9670;&nbsp;</a></span>m_SelectedLight</h2>
 
@@ -953,6 +1388,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structMoonstone_1_1Rendering_1_1Lighting_1_1Light.html">Rendering::Lighting::Light</a> Moonstone::Core::TransformLayer::m_SelectedLight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1877911125a9b650f112719adb1e283b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1877911125a9b650f112719adb1e283b">&#9670;&nbsp;</a></span>m_SelectedModel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMoonstone_1_1Rendering_1_1Model.html">Rendering::Model</a> Moonstone::Core::TransformLayer::m_SelectedModel</td>
         </tr>
       </table>
   </td>
@@ -1019,6 +1476,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::unordered_map&lt;<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#a550d94248459dba2e2a0fae332d1d475">SliderCallbackLight</a>&gt; Moonstone::Core::TransformLayer::m_SliderCallbacksLight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac1d15eb83bf89bfae564459c617a7735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1d15eb83bf89bfae564459c617a7735">&#9670;&nbsp;</a></span>m_SliderCallbacksModel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84">SliderID</a>, <a class="el" href="classMoonstone_1_1Core_1_1TransformLayer.html#abda5b728e0c628cd71255279856ec8ee">SliderCallbackModel</a>&gt; Moonstone::Core::TransformLayer::m_SliderCallbacksModel</td>
         </tr>
       </table>
   </td>

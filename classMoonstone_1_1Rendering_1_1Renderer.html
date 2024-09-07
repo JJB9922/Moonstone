@@ -98,8 +98,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a126776fcfe9f4fcb5405316bb59027ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65d6763ed585162eab7ca1ece880b6f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#a65d6763ed585162eab7ca1ece880b6f2">RenderVisibleObjects</a> ()</td></tr>
 <tr class="separator:a65d6763ed585162eab7ca1ece880b6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b0d8f019bf6df9e2597d010eaa16734"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#a6b0d8f019bf6df9e2597d010eaa16734">RenderLighting</a> (<a class="el" href="structMoonstone_1_1Rendering_1_1SceneObject.html">SceneObject</a> &amp;object)</td></tr>
-<tr class="separator:a6b0d8f019bf6df9e2597d010eaa16734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15dfa2db906f7bba4c5dfaa1337c12d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#a15dfa2db906f7bba4c5dfaa1337c12d4">RenderVisibleModels</a> ()</td></tr>
+<tr class="separator:a15dfa2db906f7bba4c5dfaa1337c12d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e8d99d56fd178c87c05396824f3d3e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a72e8d99d56fd178c87c05396824f3d3e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#a72e8d99d56fd178c87c05396824f3d3e">RenderLighting</a> (T &amp;object)</td></tr>
+<tr class="separator:a72e8d99d56fd178c87c05396824f3d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa23ec277b5777d0cd801ecfb41070685"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#aa23ec277b5777d0cd801ecfb41070685">CleanupScene</a> ()</td></tr>
 <tr class="separator:aa23ec277b5777d0cd801ecfb41070685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae37f1b5182f404f85fb043276560b853"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMoonstone_1_1Rendering_1_1Renderer.html#ae37f1b5182f404f85fb043276560b853">DeactivateDirectionalLight</a> ()</td></tr>
@@ -274,16 +277,18 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6b0d8f019bf6df9e2597d010eaa16734"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b0d8f019bf6df9e2597d010eaa16734">&#9670;&nbsp;</a></span>RenderLighting()</h2>
+<a id="a72e8d99d56fd178c87c05396824f3d3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e8d99d56fd178c87c05396824f3d3e">&#9670;&nbsp;</a></span>RenderLighting()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void Moonstone::Rendering::Renderer::RenderLighting </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structMoonstone_1_1Rendering_1_1SceneObject.html">SceneObject</a> &amp;&#160;</td>
+          <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>object</em></td><td>)</td>
           <td></td>
         </tr>
@@ -300,6 +305,23 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void Moonstone::Rendering::Renderer::RenderScene </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15dfa2db906f7bba4c5dfaa1337c12d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15dfa2db906f7bba4c5dfaa1337c12d4">&#9670;&nbsp;</a></span>RenderVisibleModels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Moonstone::Rendering::Renderer::RenderVisibleModels </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

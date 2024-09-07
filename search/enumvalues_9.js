@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['point_1206',['Point',['../classMoonstone_1_1Rendering_1_1Lighting.html#abdaefff0f45ab52727e3e1ee916a6f4ea2a3cd5946cfd317eb99c3d32e35e2d4c',1,'Moonstone::Rendering::Lighting']]],
-  ['polygonfill_1207',['PolygonFill',['../classMoonstone_1_1Rendering_1_1RenderingAPI.html#abe1412cb8d5590806cba2ecc49dda242a6d4a26410d669946e8e4ccfc96c95d39',1,'Moonstone::Rendering::RenderingAPI']]],
-  ['polygonline_1208',['PolygonLine',['../classMoonstone_1_1Rendering_1_1RenderingAPI.html#abe1412cb8d5590806cba2ecc49dda242a35c22dd3365e6f5370d5a59d94d02142',1,'Moonstone::Rendering::RenderingAPI']]],
-  ['polygons_1209',['Polygons',['../classMoonstone_1_1Rendering_1_1RenderingAPI.html#a387e40ad8bf1791054ef4d7293b3b6ebaa7a7e14b2a005870ba134e6c92bb7b51',1,'Moonstone::Rendering::RenderingAPI']]],
-  ['pyramid_1210',['Pyramid',['../classMoonstone_1_1Core_1_1ControlsLayer.html#a10dbc02076b3070cbd4ec0b401b70867a5e5b0d93bab61584149905b5e5dc71a0',1,'Moonstone::Core::ControlsLayer']]]
+  ['objecttransformgroup_1267',['ObjectTransformGroup',['../classMoonstone_1_1Core_1_1TransformLayer.html#aaaa83a7cc8c500319242d80e392c3e84a2948ef09482cfef9b6da09721d7a0dcd',1,'Moonstone::Core::TransformLayer']]],
+  ['opengl_1268',['OpenGL',['../classMoonstone_1_1Rendering_1_1RenderingAPI.html#aadec55bc636582ba326a389d79368f7ca760716b590ee7c0adc25f434f577d8be',1,'Moonstone::Rendering::RenderingAPI']]]
 ];
