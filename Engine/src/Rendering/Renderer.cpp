@@ -203,9 +203,14 @@ void Renderer::RenderVisibleObjects()
 
 void Renderer::DeactivateDirectionalLight()
 {
-    for (auto object : m_Scene->objects)
+    for (auto &object : m_Scene->objects)
     {
         RenderingCommand::SetUniformBool(object.shader.ID, "dirLight.isActive", false);
+    }
+
+    for (auto &model : m_Scene->models)
+    {
+        RenderingCommand::SetUniformBool(model.shader.ID, "dirLight.isActive", false);
     }
 }
 
@@ -222,11 +227,32 @@ void Renderer::DeactivatePointLight(Lighting::Light &lightToDeactivate)
 
         int lightIndex = std::distance(m_Scene->lights.begin(), it);
 
+        bool hasDirLight = false;
+        for (int i = 0; i < lightIndex; ++i)
+        {
+            if (m_Scene->lights[i].type == Lighting::LightType::Directional)
+            {
+                hasDirLight = true;
+                break;
+            }
+        }
+
+        if (hasDirLight)
+        {
+            lightIndex -= 1;
+        }
+
+        MS_INFO(lightIndex);
         for (auto &object : m_Scene->objects)
         {
-            MS_INFO("uh {0}", lightIndex);
             std::string uniformName = "pointLights[" + std::to_string(lightIndex) + "].isActive";
             RenderingCommand::SetUniformBool(object.shader.ID, uniformName, false);
+        }
+
+        for (auto &model : m_Scene->models)
+        {
+            std::string uniformName = "pointLights[" + std::to_string(lightIndex) + "].isActive";
+            RenderingCommand::SetUniformBool(model.shader.ID, uniformName, false);
         }
     }
 }

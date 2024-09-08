@@ -14,10 +14,9 @@ namespace Rendering
 class Lighting
 {
   public:
-    enum class LightType
+    enum LightType
     {
-        None = 0,
-        Directional,
+        Directional = 0,
         Point,
     };
     struct Light
@@ -54,8 +53,7 @@ class Lighting
 
         void Clear()
         {
-            id = "";
-            type = LightType::None;
+            id.clear();
             direction = ambient = position = diffuse = specular = glm::vec3(0);
             isActive = false;
             constant = linear = quadratic = 0.0f;

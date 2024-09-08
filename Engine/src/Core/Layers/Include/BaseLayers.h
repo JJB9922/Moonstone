@@ -398,19 +398,19 @@ class TransformLayer : public Layer
             ImGui::Text("X: ");
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat("##XRot", &m_XRot, 0.1f, 0.0f, 360.0f, "%.3f");
+            ImGui::DragFloat("##XRot", &m_XRot, 0.1f, -360.0f, 360.0f, "%.3f");
 
             ImGui::SameLine();
             ImGui::Text("Y: ");
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat("##YRot", &m_YRot, 0.1f, 0.0f, 360.0f, "%.3f");
+            ImGui::DragFloat("##YRot", &m_YRot, 0.1f, -360.0f, 360.0f, "%.3f");
 
             ImGui::SameLine();
             ImGui::Text("Z: ");
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat("##ZRot", &m_ZRot, 0.1f, 0.0f, 360.0f, "%.3f");
+            ImGui::DragFloat("##ZRot", &m_ZRot, 0.1f, -360.0f, 360.0f, "%.3f");
 
             ImGui::Text("Scale");
 
@@ -543,19 +543,19 @@ class TransformLayer : public Layer
             ImGui::Text("X: ");
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat("##ModelXRot", &m_ModelXRot, 0.1f, 0.0f, 360.0f, "%.3f");
+            ImGui::DragFloat("##ModelXRot", &m_ModelXRot, 0.1f, -360.0f, 360.0f, "%.3f");
 
             ImGui::SameLine();
             ImGui::Text("Y: ");
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat("##ModelYRot", &m_ModelYRot, 0.1f, 0.0f, 360.0f, "%.3f");
+            ImGui::DragFloat("##ModelYRot", &m_ModelYRot, 0.1f, -360.0f, 360.0f, "%.3f");
 
             ImGui::SameLine();
             ImGui::Text("Z: ");
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat("##ModelZRot", &m_ModelZRot, 0.1f, 0.0f, 360.0f, "%.3f");
+            ImGui::DragFloat("##ModelZRot", &m_ModelZRot, 0.1f, -360.0f, 360.0f, "%.3f");
 
             ImGui::Text("Scale");
 

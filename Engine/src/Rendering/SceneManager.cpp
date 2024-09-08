@@ -99,7 +99,7 @@ void SceneManager::AddModelToScene(std::shared_ptr<Scene> scene)
     ss << "model_" << scene->models.size();
 
     //  TODO NO
-    auto defM = std::string(RESOURCE_DIR) + "/Models/backpack/backpack.obj";
+    auto defM = std::string(RESOURCE_DIR) + "/Models/sponza/sponza.obj";
     Model model(ss.str(), modelShader, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, defM);
 
     scene->models.push_back(model);
