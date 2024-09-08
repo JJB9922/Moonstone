@@ -575,7 +575,7 @@ class TransformLayer : public Layer
 
             if (ImGui::DragFloat("##ModelYScale", &m_ModelYScale, 0.1f, 0.0f, 20.0f, "%.3f") && m_ModelLinkedScale)
             {
-                m_XScale = m_ZScale = m_YScale;
+                m_ModelXScale = m_ModelZScale = m_ModelYScale;
             }
 
             ImGui::SameLine();

@@ -58,8 +58,6 @@ void SceneManager::AddLightToScene(std::shared_ptr<Scene> scene, Lighting::Light
 
 void SceneManager::AddObjectToScene(std::shared_ptr<Scene> scene)
 {
-    // TODO fix this so it isnt just ugly cubes
-    // TODO look at whether a vao/vbo for each object is necessary, extra memory waste ig
     unsigned vao = 0, vbo = 0;
     RenderingCommand::InitVertexArray(vao);
     RenderingCommand::InitVertexBuffer(vbo, Tools::BaseShapes::cubeVertices, Tools::BaseShapes::cubeVerticesSize);
@@ -99,7 +97,7 @@ void SceneManager::AddModelToScene(std::shared_ptr<Scene> scene)
     ss << "model_" << scene->models.size();
 
     //  TODO NO
-    auto defM = std::string(RESOURCE_DIR) + "/Models/sponza/sponza.obj";
+    auto  defM = std::string(RESOURCE_DIR) + "/Models/backpack/backpack.obj";
     Model model(ss.str(), modelShader, {0, 0, 0}, {0, 0, 0}, {1, 1, 1}, defM);
 
     scene->models.push_back(model);
